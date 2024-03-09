@@ -1,0 +1,156 @@
+.AssCard.container .Card {
+  background-color: rgba(238, 238, 238, 0.3411764706);
+  border-radius: 10px;
+  margin: 20px auto;
+  display: grid;
+  grid-template-columns: auto 1fr;
+}
+@media (max-width: 480px) {
+  .AssCard.container .Card {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 960px) {
+  .AssCard.container .Card {
+    grid-template-columns: 1fr;
+  }
+}
+.AssCard.container .Card .Images {
+  display: flex;
+  flex-direction: column;
+  width: -moz-fit-content;
+  width: fit-content;
+  position: relative;
+}
+@media (max-width: 480px) {
+  .AssCard.container .Card .Images {
+    margin: auto;
+  }
+}
+@media (max-width: 960px) {
+  .AssCard.container .Card .Images {
+    margin: auto;
+  }
+}
+.AssCard.container .Card .Images .singleImage {
+  position: relative;
+}
+.AssCard.container .Card .Images .singleImage img {
+  width: 250px;
+  height: 250px;
+}
+@media (max-width: 1200px) {
+  .AssCard.container .Card .Images .singleImage img {
+    width: 200px;
+    height: 200px;
+  }
+}
+.AssCard.container .Card .Images .singleImage .left-Arrow {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  left: -20px;
+  font-size: 25px;
+}
+.AssCard.container .Card .Images .singleImage .right-Arrow {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  right: -25px;
+  font-size: 25px;
+  transform: rotateY(180deg); /* Rotate horizontally */
+}
+.AssCard.container .Card .Images .status {
+  padding: 2px 5px;
+  display: flex;
+  justify-content: space-between;
+}
+.AssCard.container .Card .Images .status .AssName, .AssCard.container .Card .Images .status .Slider {
+  font-weight: bold;
+  color: #2485f0;
+}
+.AssCard.container .attrs {
+  margin-left: 30px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  padding-left: 20px;
+  padding-top: 5px;
+  gap: 40px;
+}
+@media (max-width: 480px) {
+  .AssCard.container .attrs {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    padding-left: 5px;
+  }
+}
+@media (max-width: 960px) {
+  .AssCard.container .attrs {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    padding-left: 5px;
+  }
+}
+@media (max-width: 1200px) {
+  .AssCard.container .attrs {
+    margin-left: 20px;
+    gap: 20px;
+    padding-left: 10px;
+  }
+}
+.AssCard.container .attrs .Key {
+  text-transform: capitalize;
+  font-weight: bold;
+  font-size: 25px;
+  color: white;
+  background-color: #2485F0;
+  border-radius: 6px;
+  padding: 5px;
+  margin: 20px 5px 20px 0px;
+}
+@media (max-width: 480px) {
+  .AssCard.container .attrs .Key {
+    font-size: 16px;
+    font-weight: 600;
+    margin: 5px;
+  }
+}
+@media (max-width: 960px) {
+  .AssCard.container .attrs .Key {
+    font-size: 20px;
+    font-weight: bold;
+  }
+}
+@media (max-width: 1200px) {
+  .AssCard.container .attrs .Key {
+    font-size: 20px;
+  }
+}
+.AssCard.container .attrs .Value {
+  font-weight: bold;
+  font-size: 18px;
+  color: #2485F0;
+  background-color: #DFECFC;
+  border-radius: 6px;
+  padding: 5px;
+  margin: 20px 5px 20px 0px;
+}
+@media (max-width: 480px) {
+  .AssCard.container .attrs .Value {
+    font-size: 12px;
+    margin: 5px;
+    font-weight: bold;
+  }
+}
+@media (max-width: 960px) {
+  .AssCard.container .attrs .Value {
+    font-size: 14px;
+    margin: 5px;
+    font-weight: bold;
+  }
+}
+@media (max-width: 1200px) {
+  .AssCard.container .attrs .Value {
+    font-size: 16px;
+  }
+}/*# sourceMappingURL=Card.css.map */
