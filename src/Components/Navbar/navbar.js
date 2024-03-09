@@ -55,9 +55,9 @@ function Navbar() {
               </a>
             </div>
           </div>
-          <a href="contact.html" className="nav-item nav-link">
-            Contact
-          </a>
+          <Link to="/AddProf" className="nav-item nav-link">
+            Add Prof
+          </Link>
         </div>
         <a
           href="#None" // Edit this !!!

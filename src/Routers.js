@@ -4,6 +4,8 @@ import OverViewAssignmentsPage from "./Pages/OverViewAssignmentsPage";
 import NotFound from "./Pages/NotFound";
 import SecondPage from "./Pages/SecondPage";
 import SubmitAssignmentPage from "./Pages/SubmitAssignmentPage";
+// import AddProf from "./Pages/AddProf/Add-professor";
+import AddProf from "./Pages/AddProf";
 
 const routes = [
   {
@@ -24,6 +26,11 @@ const routes = [
   {
     path: "/submit",
     element: <SubmitAssignmentPage />,
+    errorElement: <NotFound />,
+  },
+  {
+    path: "/AddProf",
+    element: <AddProf />,
     errorElement: <NotFound />,
   },
 ];
