@@ -59,12 +59,12 @@ function Navbar() {
             Add Prof
           </Link>
         </div>
-        <a
-          href="#None" // Edit this !!!
+        <Link
+          to="/Login" // Edit this !!!
           className="btn btn-primary py-4 px-lg-5 d-none d-lg-block"
         >
-          Join Now<i className="fa fa-arrow-right ms-3"></i>
-        </a>
+          LOGIN<i className="fa fa-arrow-right ms-3"></i>
+        </Link>
       </div>
     </nav>
   );

@@ -1,0 +1,53 @@
+[
+  {
+    "name": "username",
+    "text": "Username (MSA ID)",
+    "placeholder": "Username",
+    "edit": false,
+    "require": true
+  },
+  {
+    "name": "firstName",
+    "text": "First Name",
+    "placeholder": "Enter First Name",
+    "edit": false,
+    "require": true
+  },
+  {
+    "name": "lastName",
+    "text": "Last Name",
+    "placeholder": "Enter Last Name",
+    "edit": false,
+    "require": true
+  },
+  {
+    "name": "Email",
+    "text": "Email (MSA Email)",
+    "placeholder": "Enter MSA Email",
+    "edit": false,
+    "require": true,
+    "type": "Email"
+  },
+  {
+    "name": "Group",
+    "text": "Group",
+    "placeholder": "Group Name",
+    "edit": false,
+    "require": false
+  },
+  {
+    "name": "phone",
+    "text": "Phone Number",
+    "placeholder": "Enter Phone Number",
+    "edit": true,
+    "require": false
+  },
+  {
+    "name": "DOB",
+    "text": "Birth Day",
+    "placeholder": "Enter Birth Day",
+    "edit": false,
+    "require": false,
+    "type": "Date"
+  }
+]
