@@ -6,7 +6,7 @@ import SecondPage from "./Pages/SecondPage";
 import SubmitAssignmentPage from "./Pages/SubmitAssignmentPage";
 // import AddProf from "./Pages/AddProf/Add-professor";
 import AddProf from "./Pages/AddProf";
-
+import Delete from "./Pages/Delete/Delete";
 const routes = [
   {
     path: "/",
@@ -31,6 +31,11 @@ const routes = [
   {
     path: "/AddProf",
     element: <AddProf />,
+    errorElement: <NotFound />,
+  },
+  {
+    path: "/Del",
+    element: <Delete />,
     errorElement: <NotFound />,
   },
 ];
