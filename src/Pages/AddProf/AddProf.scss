@@ -1,18 +1,11 @@
-/* styles.scss */
 
-// * {
-//   margin: 0;
-//   padding: 0;
-//   box-sizing: border-box;
-// }
-
-// body {
-//   font-family: Arial, sans-serif;
-//   background-color: #f4f4f4;
-// }
 .PageBody {
   font-family: Arial, sans-serif;
-  background: linear-gradient(135deg, #71b7e6, #9b59b6);
+  // background: linear-gradient(135deg, #71b7e6, #9b59b6);
+  background-image: url("./images/profile.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+
 }
 
 .container.AddProf {

@@ -6,6 +6,8 @@ import SecondPage from "./Pages/SecondPage";
 import SubmitAssignmentPage from "./Pages/SubmitAssignmentPage";
 // import AddProf from "./Pages/AddProf/Add-professor";
 import AddProf from "./Pages/AddProf";
+// import Login from "./Pages/Login/Login";
+import Profile from "./Pages/Profile/Profile";
 
 const routes = [
   {
@@ -31,6 +33,11 @@ const routes = [
   {
     path: "/AddProf",
     element: <AddProf />,
+    errorElement: <NotFound />,
+  },
+  {
+    path: "/Profile",
+    element: <Profile />,
     errorElement: <NotFound />,
   },
 ];

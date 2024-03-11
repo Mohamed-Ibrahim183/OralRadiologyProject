@@ -1,7 +1,8 @@
-/* styles.scss */
 .PageBody {
   font-family: Arial, sans-serif;
-  background: linear-gradient(135deg, #71b7e6, #9b59b6);
+  background-image: url("./images/profile.png");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .container.AddProf {

@@ -44,9 +44,9 @@ function Navbar() {
               Pages
             </a>
             <div className="dropdown-menu fade-down m-0">
-              <a href="team.html" className="dropdown-item">
-                Our Team
-              </a>
+              <Link to="/Profile" className="dropdown-item">
+                Profile
+              </Link>
               <a href="testimonial.html" className="dropdown-item">
                 Testimonial
               </a>
