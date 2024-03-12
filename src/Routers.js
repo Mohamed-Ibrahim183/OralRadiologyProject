@@ -8,7 +8,7 @@ import SubmitAssignmentPage from "./Pages/SubmitAssignmentPage";
 // import Profile2 from "./Pages/Profile/Profile2";
 import AddProf from "./Pages/AddProf";
 import Profile from "./Pages/Profile/Profile";
-
+import AssignmentSubmission from "./Pages/assignment_page/Assignment_submission_page";
 const routes = [
   {
     path: "/",
@@ -27,7 +27,7 @@ const routes = [
   },
   {
     path: "/submit",
-    element: <SubmitAssignmentPage />,
+    element: <AssignmentSubmission />,
     errorElement: <NotFound />,
   },
   {

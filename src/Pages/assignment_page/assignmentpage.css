@@ -1,0 +1,112 @@
+.App {
+  font-family: sans-serif;
+}
+/*** ASSIGNMENT SUBMISSION PAGE ***/
+.monemm.container {
+  width: 80%;
+  margin: auto;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+}
+.header {
+  text-align: center;
+  padding: 20px;
+  width: 35%;
+  float:left;
+}
+.monem{
+  display: flex;
+}
+.header p{
+  text-align: left;
+  margin-left: 8%;
+}
+.xray_iamge{
+  width:100%;
+  padding-top: 7%;
+  padding-bottom: 6%;
+}
+.assignment-info{
+  width: 60%;
+  float:right;
+  margin-left: 0;
+  padding: 20px;
+}
+.feedback {
+  padding: 20px;
+  border: 1px solid #ddd;
+  margin: 20px 0;
+}
+.assignment-info label, .feedback label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+.assignment-info input, .feedback input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+}
+.assignment-info h2{
+  width: 100%;
+  padding-bottom: 15px;
+  margin-bottom: 20px;
+}
+.button {
+  background-color: #5cb85c;
+  color: white;
+  padding: 10px 18px;
+  border: none;
+  cursor: pointer;
+  width: 49.5%;
+  font: 1em sans-serif;
+  font-weight: 600;
+}
+.btnA {
+  background-color: #DFECFC;
+  color:black;
+  margin-right: 0.5px;
+}
+.btnA:hover {
+  background-color: #dfe1ff;
+}
+.btnB{
+  background-color: #2485F1;
+}
+.btnB:hover{
+ background-color:  #2450f1;
+}
+.assignment-submission-text2{
+  display: none;
+}
+@media only screen and (max-width: 650px) {
+  .header{
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+  }
+  .xray_iamge{
+    
+    width: 70%;
+  }
+  .assignment-submission-text2{
+    display: block;
+    text-align: center;
+  }
+  .assignment-submission-text{
+    display: none;
+  }
+  .assignment-info{
+    width: 90%;
+    margin-left: 0;
+    padding: 20px;
+  }
+  .feedback h3{
+ text-align: center;
+  }
+
+}
