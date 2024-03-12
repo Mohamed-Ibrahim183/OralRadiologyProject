@@ -10,7 +10,7 @@
     margin: 20px auto;
     display: grid;
     grid-template-columns: auto 1fr;
-    // width: 85%;
+    width: 90%;
     @include sm(){
       grid-template-columns: 1fr;
     }

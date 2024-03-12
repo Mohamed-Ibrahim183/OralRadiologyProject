@@ -1,5 +1,6 @@
 import React from "react";
-import Navbar from "../../Components/Navbar/navbar";
+// import Navbar2 from "../../Components/Navbar/Navbar";
+import Navbar from "../../Components/Navbar/Navbar";
 import { useEffect } from "react";
 import "./Profile.css";
 import AccData from "./data.json";

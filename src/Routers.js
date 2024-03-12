@@ -5,8 +5,8 @@ import NotFound from "./Pages/NotFound";
 import SecondPage from "./Pages/SecondPage";
 import SubmitAssignmentPage from "./Pages/SubmitAssignmentPage";
 // import AddProf from "./Pages/AddProf/Add-professor";
-import AddProf from "./Pages/AddProf";
 // import Profile2 from "./Pages/Profile/Profile2";
+import AddProf from "./Pages/AddProf";
 import Profile from "./Pages/Profile/Profile";
 
 const routes = [

@@ -1,0 +1,18 @@
+[
+  {
+    "Text": "Home",
+    "link": "/"
+  },
+  {
+    "Text": "Assignments",
+    "link": "/Assignments"
+  },
+  {
+    "Text": "Upload",
+    "link": "/submit"
+  },
+  {
+    "Text": "Add Professor",
+    "link": "/AddProf"
+  }
+]
