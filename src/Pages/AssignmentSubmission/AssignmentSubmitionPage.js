@@ -1,12 +1,12 @@
 import React from "react";
 import image from "./imgs/Dental_Xray.jpg";
+import "./submitAss.css";
 
 const AssignmentSubmission = () => {
   return (
     <div className="container AssignmentSubmission">
+      <h2 className="assignment-submission-text2">ASSIGNMENT SUBMISSION</h2>
       <div className="monem">
-        <h2 className="assignment-submission-text2">ASSIGNMENT SUBMISSION</h2>
-
         <div className="header">
           <img src={image} alt="TeethImage" className="xray_iamge" />
           <p>The Maximum limit of photos is 5</p>
