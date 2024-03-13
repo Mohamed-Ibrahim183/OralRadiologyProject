@@ -1,3 +1,7 @@
+@import "../Global/_breakpoints.scss";
+
+
+
 %NavItem {
   font-size: 20px;
   text-transform: capitalize;
@@ -8,7 +12,7 @@
 
 .Nav {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: auto auto;
   padding: 0px 1%;
   align-items: center;
 
@@ -64,13 +68,20 @@ nav {
     // padding: 120px 0 0 0;
     text-align: center;
     font-size: 16px;
+    ul{
+      display: flex;
+      flex-wrap: wrap;
+      // @include md(){
+      //   display: block;
+      // }
+    }
 
     ul li {
       list-style: none;
       margin: 0 auto;
       border-left: 2px solid #3ca0e7;
       display: inline-block;
-      padding: 0 30px;
+      padding: 0 10px;
       position: relative;
       text-decoration: none;
       text-align: center;
@@ -78,6 +89,8 @@ nav {
     }
 
     li a {
+      font-size: 20px;
+      // font-weight: bold;
       color: black;
       transition: all 0.3s ease;
       -webkit-transition: all 0.3s ease;
@@ -88,6 +101,7 @@ nav {
 
     li a:hover {
       color: #3ca0e7;
+      font-weight: bold;
     }
 
     li:hover {

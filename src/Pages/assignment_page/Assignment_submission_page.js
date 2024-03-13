@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import image from "./Dental_Xray.jpg";
-import "./assignmentpage.css"
-import Navbar from '../../Components/Navbar/Navbar';
+import "./assignmentpage.css";
+import Navbar from "../../Components/Navbar/Navbar";
 // Header component
 const Header = () => {
   return (
     <div className="header">
-      <img src={image} alt="Teeth image" className="xray_iamge" /> 
-      <p>The Maximum limit of photos is 5</p><br />
+      <img src={image} alt="Teeth image" className="xray_iamge" />
+      <p>The Maximum limit of photos is 5</p>
+      <br />
       <p>The Grade of The Assignment Will Appear Here Once Evaluated</p>
     </div>
   );
@@ -31,34 +32,42 @@ const AssignmentInfo = () => {
   };
   return (
     <>
-    <Navbar />
-        <div className="assignment-info">
-      <h2 className="assignment-submission-text">ASSIGNMENT SUBMISSION</h2>
+      <div className="assignment-info">
+        <h2 className="assignment-submission-text">ASSIGNMENT SUBMISSION</h2>
 
-      <label htmlFor="submission-status">SUBMISSION STATUS</label>
-      <input type="text" id="submission-status" disabled />
+        <label htmlFor="submission-status">SUBMISSION STATUS</label>
+        <input type="text" id="submission-status" disabled />
 
-      <label htmlFor="grading-status">GRADING STATUS</label>
-      <input type="text" id="grading-status" disabled />
+        <label htmlFor="grading-status">GRADING STATUS</label>
+        <input type="text" id="grading-status" disabled />
 
-      <label htmlFor="time-remaining">TIME REMAINING</label>
-      <input type="text" id="time-remaining" disabled />
+        <label htmlFor="time-remaining">TIME REMAINING</label>
+        <input type="text" id="time-remaining" disabled />
 
-      <label htmlFor="file-upload">UPLOAD FILM</label>
-      <input type="file" id="file-upload" multiple onChange={handleFileChange}    />
-      <ul>
-        {files.map((file, index) => (
-          <li key={index}>
-            {file.name} <button onClick={() => deleteFile(index)}>Delete</button>
-          </li>
-        ))}
-      </ul>
+        <label htmlFor="file-upload">UPLOAD FILM</label>
+        <input
+          type="file"
+          id="file-upload"
+          multiple
+          onChange={handleFileChange}
+        />
+        <ul>
+          {files.map((file, index) => (
+            <li key={index}>
+              {file.name}{" "}
+              <button onClick={() => deleteFile(index)}>Delete</button>
+            </li>
+          ))}
+        </ul>
 
-      <button className="button btnA" type="button" onClick={deleteLastFile}>DELETE</button>
-      <button className="button btnB" type="button">CONFIRM</button>
-    </div>
+        <button className="button btnA" type="button" onClick={deleteLastFile}>
+          DELETE
+        </button>
+        <button className="button btnB" type="button">
+          CONFIRM
+        </button>
+      </div>
     </>
-
   );
 };
 
@@ -81,14 +90,17 @@ const Feedback = () => {
 // Assignment Submission component
 const AssignmentSubmission = () => {
   return (
-    <div className="container monemm">
-      <div className="monem">
-        <h2 className="assignment-submission-text2">ASSIGNMENT SUBMISSION</h2>
-        <Header />
-        <AssignmentInfo />
+    <>
+      <Navbar />
+      <div className="container monemm">
+        <div className="monem">
+          <h2 className="assignment-submission-text2">ASSIGNMENT SUBMISSION</h2>
+          <Header />
+          <AssignmentInfo />
+        </div>
+        <Feedback />
       </div>
-      <Feedback />
-    </div>
+    </>
   );
 };
 export default AssignmentSubmission;
