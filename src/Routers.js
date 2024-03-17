@@ -9,6 +9,7 @@ import SubmitAssignmentPage from "./Pages/SubmitAssignmentPage";
 import AddProf from "./Pages/AddProf";
 import Profile from "./Pages/Profile/Profile";
 import AssignmentSubmission from "./Pages/assignment_page/Assignment_submission_page";
+import ProfessorTable from "./Pages/All_professors/All_professors";
 const routes = [
   {
     path: "/",
@@ -40,6 +41,11 @@ const routes = [
     element: <Profile />,
     errorElement: <NotFound />,
   },
+  {
+    path: "/Allprof",
+    element: <ProfessorTable />,
+    errorElement: <NotFound />,
+  }
 ];
 
 export default routes;
