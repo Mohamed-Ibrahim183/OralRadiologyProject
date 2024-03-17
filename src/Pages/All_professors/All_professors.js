@@ -3,9 +3,12 @@ import "./All_professors.css";
 import TableHeader from './TableHeader';
 import TableRow from './TableRow';
 import monem from './Professors.json';
-
+import Navbar from '../../Components/Navbar/Navbar';
 function ProfessorTable() {
     return (
+
+        <>
+        <Navbar />
         <div className="monem_admin">
             <div className='oooo'>
                 <h2>All Professors</h2>
@@ -21,6 +24,9 @@ function ProfessorTable() {
 ))}
             </table>
         </div>
+        
+        </>
+
     );
 }
 export default ProfessorTable;

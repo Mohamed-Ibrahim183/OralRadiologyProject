@@ -1,0 +1,25 @@
+.stat-card {
+    border: 1px solid #eee;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 10px;
+    text-align: center;
+    color: white;
+      width: 100%;
+  }
+  .value {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  .percentage {
+    font-size: 20px;
+  }
+  .a{
+    background-color: #6a73fa;
+  }.b{
+background-color: #ffaa16;
+  }.c{
+background-color: #673bb7;
+  }.d{
+background-color: #ff1616;
+  }

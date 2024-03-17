@@ -10,6 +10,7 @@ import AddProf from "./Pages/AddProf";
 import Profile from "./Pages/Profile/Profile";
 import AssignmentSubmission from "./Pages/assignment_page/Assignment_submission_page";
 import ProfessorTable from "./Pages/All_professors/All_professors";
+import Admin_page from "./Pages/Admin/admin_page";
 const routes = [
   {
     path: "/",
@@ -44,6 +45,11 @@ const routes = [
   {
     path: "/Allprof",
     element: <ProfessorTable />,
+    errorElement: <NotFound />,
+  },
+  {
+    path: "/Admin_dashboard",
+    element: <Admin_page />,
     errorElement: <NotFound />,
   }
 ];

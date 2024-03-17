@@ -1,0 +1,22 @@
+/* src/App.css */
+.monemmm {
+    display: flex;
+    flex-direction: row;
+    background-color: #f1f1f2;
+  }
+  
+  .stats-row {
+    margin-bottom: 20px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    width: 60%;
+    gap: 10%;
+  }
+  
+  .chart-row {
+    width: 50%;
+    height: 100%;
+    margin: auto;
+    margin-left: 10%;
+    background-color: white;
+  }

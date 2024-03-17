@@ -6,5 +6,9 @@
   {
     "Text": "Allprof",
     "link": "/Allprof"
+  },
+  {
+    "Text": "Admin_dashboard",
+    "link": "/Admin_dashboard"
   }
 ]
