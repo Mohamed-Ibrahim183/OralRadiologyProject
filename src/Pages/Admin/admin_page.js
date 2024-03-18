@@ -3,6 +3,7 @@ import Chart from "./Chartt.js";
 import "./Admin_page.css";
 import Navbar from "../../Components/Navbar/Navbar.js";
 import AdminNav from "../../Components/AdminNav/AdminNav.js";
+import Mail from "./Maill.js";
 function Admin_page() {
   return (
     <>
@@ -45,6 +46,7 @@ function Admin_page() {
           </div>
         </div>
       </div>
+      <Mail />
     </>
     // {/* <h1>Non3eem</h1> */}
   );
