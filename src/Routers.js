@@ -3,7 +3,7 @@ import React from "react";
 import OverViewAssignmentsPage from "./Pages/OverViewAssignmentsPage";
 import NotFound from "./Pages/NotFound";
 import SecondPage from "./Pages/SecondPage";
-import SubmitAssignmentPage from "./Pages/SubmitAssignmentPage";
+// import SubmitAssignmentPage from "./Pages/SubmitAssignmentPage";
 // import AddProf from "./Pages/AddProf/Add-professor";
 // import Profile2 from "./Pages/Profile/Profile2";
 import AddProf from "./Pages/AddProf";
@@ -51,7 +51,7 @@ const routes = [
     path: "/Admin_dashboard",
     element: <Admin_page />,
     errorElement: <NotFound />,
-  }
+  },
 ];
 
 export default routes;
