@@ -12,6 +12,7 @@ import AssignmentSubmission from "./Pages/assignment_page/Assignment_submission_
 import ProfessorTable from "./Pages/All_professors/All_professors";
 import Admin_page from "./Pages/Admin/admin_page";
 import NavAdmin from "./Components/AdminNav2/NavAdmin";
+import LoginPage from "./Pages/Login/LoginPage";
 const routes = [
   {
     path: "/",
@@ -31,6 +32,11 @@ const routes = [
   {
     path: "/submit",
     element: <AssignmentSubmission />,
+    errorElement: <NotFound />,
+  },
+  {
+    path: "/LoginPage",
+    element: <LoginPage />,
     errorElement: <NotFound />,
   },
   {
