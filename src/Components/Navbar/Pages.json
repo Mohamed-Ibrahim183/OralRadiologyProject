@@ -10,5 +10,9 @@
   {
     "Text": "Admin_dashboard",
     "link": "/Admin_dashboard"
+  },
+  {
+    "Text": "Nav Admin",
+    "link": "/AdminNav"
   }
 ]

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./AdminNav.css";
 import { Link } from "react-router-dom";
 
@@ -20,9 +20,9 @@ const AdminNav = () => {
       logoClass: "bx bx-list-ul",
     },
   ];
-  const content = links.map(function (ele) {
+  const content = links.map(function (ele, index) {
     return (
-      <li>
+      <li key={index}>
         <Link to={ele.To}>
           <i className={ele.logoClass}></i>
           <span className="links_name">{ele.Text}</span>
@@ -30,8 +30,31 @@ const AdminNav = () => {
       </li>
     );
   });
+
+  const [scroll, setScroll] = useState(window.scrollY);
+  const [style, setStyle] = useState({ top: 0 });
+  const HeaderHeight = 90;
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > HeaderHeight) {
+        setScroll(window.scrollY - 100);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  useEffect(() => {
+    setStyle({ top: `${scroll}px` });
+  }, [scroll]);
+
   return (
-    <div className="sidebar">
+    <div className="sidebar" style={style}>
       <div className="logo-details">
         <i className="bx bxl-c-plus-plus"></i>
         <span className="logo_name">Admin</span>

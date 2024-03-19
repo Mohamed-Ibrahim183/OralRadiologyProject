@@ -1,29 +1,29 @@
 .mail-form form {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    width: 100%;
-    max-width: 500px;
-    margin-left: 20%;
-    margin-top: 4%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  max-width: 500px;
+  margin-left: 20%;
+  margin-top: 4%;
 }
 
 .mail-form input,
 .mail-form button {
-    padding: 10px;
+  padding: 10px;
 }
 
 .react-quill {
-    background-color: white;
+  background-color: white;
 }
-.messagearea {
-    height: 240px;
-    background-color: #e5e1e134;
-    max-height: 260px;
+.messageArea {
+  height: 240px;
+  background-color: #e5e1e134;
+  max-height: 260px;
 }
 
 .mail-form button {
-    background-color: blue;
-    color: white;
-    cursor: pointer;
+  background-color: blue;
+  color: white;
+  cursor: pointer;
 }

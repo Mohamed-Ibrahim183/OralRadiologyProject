@@ -11,6 +11,7 @@ import Profile from "./Pages/Profile/Profile";
 import AssignmentSubmission from "./Pages/assignment_page/Assignment_submission_page";
 import ProfessorTable from "./Pages/All_professors/All_professors";
 import Admin_page from "./Pages/Admin/admin_page";
+import NavAdmin from "./Components/AdminNav2/NavAdmin";
 const routes = [
   {
     path: "/",
@@ -50,6 +51,11 @@ const routes = [
   {
     path: "/Admin_dashboard",
     element: <Admin_page />,
+    errorElement: <NotFound />,
+  },
+  {
+    path: "/AdminNav",
+    element: <NavAdmin />,
     errorElement: <NotFound />,
   },
 ];
