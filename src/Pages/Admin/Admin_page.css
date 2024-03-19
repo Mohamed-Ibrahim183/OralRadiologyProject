@@ -1,10 +1,10 @@
 /* src/App.css */
-.AdminSection {
+.Charts {
   display: flex;
   flex-direction: row;
   background-color: #f1f1f2;
   padding: 10px 1%;
-  margin-left: 200px;
+  /* margin-left: 200px; */
 }
 
 .stats-row {
@@ -24,4 +24,12 @@
 }
 .MainPage {
   position: relative;
+}
+
+.AdminBody {
+  background-color: #f1f1f2;
+}
+.AdminSection {
+  padding: 10px 1%;
+  margin-left: 200px;
 }

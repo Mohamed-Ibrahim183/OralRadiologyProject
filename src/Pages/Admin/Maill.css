@@ -4,15 +4,30 @@
   gap: 10px;
   width: 100%;
   max-width: 500px;
-  margin-left: 20%;
-  margin-top: 4%;
+  /* margin-left: 20%;
+  margin-top: 4%; */
+  margin: 1%;
+  padding: 1%;
+  background: white;
+  border-radius: 10px;
 }
 
 .mail-form input,
 .mail-form button {
   padding: 10px;
+  outline: none;
+  border: none;
+  border: 3px solid #f1f1f1;
+  border-radius: 10px;
 }
-
+.mail-form button {
+  font-weight: bold;
+  font-size: 20px;
+  /* width: fit-content;
+  text-align: center;
+  margin: auto;
+  padding: 10px 20px; */
+}
 .react-quill {
   background-color: white;
 }
