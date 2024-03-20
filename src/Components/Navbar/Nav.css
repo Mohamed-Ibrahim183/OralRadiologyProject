@@ -1,52 +1,3 @@
-.Nav .rightLinks .PagesSection .Text, .Nav .rightLinks .NavLink a {
-  font-size: 20px;
-  text-transform: capitalize;
-  font-weight: bold;
-  text-decoration: none;
-  color: #2485f0;
-}
-
-.Nav {
-  display: grid;
-  display: none;
-  grid-template-columns: auto auto;
-  padding: 0px 1%;
-  align-items: center;
-}
-.Nav .leftLogo {
-  display: flex;
-  align-items: center;
-}
-.Nav .leftLogo img {
-  width: 100px;
-  height: 90px;
-}
-.Nav .leftLogo .logoName {
-  text-transform: uppercase;
-  font-size: 25px;
-  font-weight: bold;
-  color: #2485f0;
-}
-.Nav .rightLinks {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.Nav .rightLinks .NavLink a {
-  font-weight: bold;
-}
-.Nav .rightLinks .PagesSection:hover .Drop {
-  display: flex;
-  flex-direction: column;
-}
-.Nav .rightLinks .PagesSection .Text {
-  cursor: pointer;
-}
-.Nav .rightLinks .PagesSection .Drop {
-  display: none;
-  cursor: pointer;
-}
-
 nav.primary-navigation.primary-navigation {
   margin: 0 auto;
   display: block;
@@ -139,7 +90,7 @@ nav.secondary-Navigation label.logo {
   color: white;
   font-size: 35px;
   line-height: 80px;
-  padding: 0 100px;
+  padding-left: 20px;
   font-weight: bold;
 }
 nav.secondary-Navigation ul {
@@ -153,7 +104,7 @@ nav.secondary-Navigation ul li {
 }
 nav.secondary-Navigation ul li a {
   color: white;
-  font-size: 17px;
+  font-size: 16px;
   padding: 7px 13px;
   border-radius: 3px;
   text-transform: uppercase;
@@ -183,13 +134,13 @@ nav.secondary-Navigation #check {
     font-size: 16px;
   }
 }
-@media (max-width: 858px) {
+@media (max-width: 1070px) {
   nav.secondary-Navigation .checkbtn {
     display: block;
   }
   nav.secondary-Navigation ul {
     position: fixed;
-    width: 100%;
+    width: 30%;
     height: 100vh;
     background: #2c3e50;
     top: 80px;
@@ -208,6 +159,18 @@ nav.secondary-Navigation #check {
   nav.secondary-Navigation ul li a:hover, nav.secondary-Navigation ul li a.active {
     background: none;
     color: #0082e6;
+  }
+  nav.secondary-Navigation ul.dropDown {
+    margin-top: -50px;
+    left: 10px;
+  }
+  nav.secondary-Navigation ul.dropDown li {
+    color: white;
+    margin: 10px;
+  }
+  nav.secondary-Navigation ul.dropDown li:hover {
+    background-color: #1b9bff;
+    color: white;
   }
   nav.secondary-Navigation #check:checked ~ ul {
     left: 0;
