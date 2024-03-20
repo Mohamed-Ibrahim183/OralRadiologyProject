@@ -5,8 +5,8 @@ import "./Maill.css";
 
 function Mail() {
   const [to, setTo] = useState("");
-  const [subject, setSubject] = useState("Mon3em");
-  const [message, setMessage] = useState("متشلش كلام انا كاتبه يا محمد ياابراهيم");
+  const [subject, setSubject] = useState("");
+  const [message, setMessage] = useState(" ");
   const [file, setFile] = useState(null);
 
   const handleFileChange = (e) => {
