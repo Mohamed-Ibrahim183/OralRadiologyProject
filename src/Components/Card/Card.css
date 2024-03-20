@@ -5,6 +5,7 @@
   display: grid;
   grid-template-columns: auto 1fr;
   width: 90%;
+  margin-bottom: 50px;
 }
 @media (max-width: 480px) {
   .AssCard.container .Card {
@@ -76,82 +77,82 @@
   grid-template-columns: repeat(2, 1fr);
   padding-left: 20px;
   padding-top: 5px;
-  gap: 40px;
+  gap: 10px;
 }
 @media (max-width: 480px) {
   .AssCard.container .attrs {
     grid-template-columns: 1fr;
-    gap: 10px;
     padding-left: 5px;
   }
 }
 @media (max-width: 960px) {
   .AssCard.container .attrs {
     grid-template-columns: 1fr;
-    gap: 10px;
     padding-left: 5px;
   }
 }
 @media (max-width: 1200px) {
   .AssCard.container .attrs {
     margin-left: 20px;
-    gap: 20px;
     padding-left: 10px;
   }
+}
+.AssCard.container .attrs .Attribute {
+  display: flex;
+  flex-wrap: wrap;
 }
 .AssCard.container .attrs .Key {
   text-transform: capitalize;
   font-weight: bold;
-  font-size: 25px;
+  font-size: 22px;
   color: white;
   background-color: #2485F0;
   border-radius: 6px;
   padding: 5px;
-  margin: 20px 5px 20px 0px;
+  height: -moz-fit-content;
+  height: fit-content;
 }
 @media (max-width: 480px) {
   .AssCard.container .attrs .Key {
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 600;
-    margin: 5px;
   }
 }
 @media (max-width: 960px) {
   .AssCard.container .attrs .Key {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: bold;
   }
 }
 @media (max-width: 1200px) {
   .AssCard.container .attrs .Key {
-    font-size: 20px;
+    font-size: 18px;
   }
 }
 .AssCard.container .attrs .Value {
   font-weight: bold;
-  font-size: 18px;
+  font-size: 16px;
   color: #2485F0;
   background-color: #DFECFC;
   border-radius: 6px;
   padding: 5px;
-  margin: 20px 5px 20px 0px;
+  height: -moz-fit-content;
+  height: fit-content;
 }
 @media (max-width: 480px) {
   .AssCard.container .attrs .Value {
-    font-size: 12px;
-    margin: 5px;
+    font-size: 10px;
     font-weight: bold;
   }
 }
 @media (max-width: 960px) {
   .AssCard.container .attrs .Value {
     font-size: 14px;
-    margin: 5px;
     font-weight: bold;
   }
 }
 @media (max-width: 1200px) {
   .AssCard.container .attrs .Value {
-    font-size: 16px;
+    font-size: 14px;
   }
 }/*# sourceMappingURL=Card.css.map */

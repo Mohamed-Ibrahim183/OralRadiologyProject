@@ -11,6 +11,7 @@
     display: grid;
     grid-template-columns: auto 1fr;
     width: 90%;
+    margin-bottom: 50px;
     @include sm(){
       grid-template-columns: 1fr;
     }
@@ -79,67 +80,74 @@
       grid-template-columns: repeat(2, 1fr);
       padding-left: 20px;
       padding-top: 5px;
-      gap: 40px;
+      gap: 10px;
       @include sm(){
         grid-template-columns: 1fr;
-        gap: 10px;
+        // gap: 10px;
         padding-left: 5px;
       }
       @include lg(){
         grid-template-columns: 1fr;
-        gap: 10px;
+        // gap: 10px;
         padding-left: 5px;
       }
       @include xl(){
         margin-left: 20px;
-        gap: 20px;
+        // gap: 10px;
         padding-left: 10px;
+      }
+      .Attribute{
+        display: flex;
+        flex-wrap: wrap;
+
       }
 
       .Key {
         text-transform: capitalize;
         font-weight: bold;
-        font-size: 25px;
+        font-size: 22px;
         color: white;
         background-color: #2485F0;
         border-radius: 6px;
         padding: 5px;
-        margin: 20px 5px 20px 0px;
+        // margin: 20px 5px 20px 0px;
+        height: fit-content;
         @include sm(){
-          font-size: 16px;
+          font-size: 14px;
           font-weight: 600;
-          margin: 5px;
+          // margin: 5px;
         }
         @include lg(){
-          font-size: 20px;
+          font-size: 18px;
           font-weight: bold;
           // margin: 5px;
         }
         @include xl(){
-          font-size: 20px;
+          font-size: 18px;
         }
       }
 
       .Value {
         font-weight: bold;
-        font-size: 18px;
+        font-size: 16px;
         color: #2485F0;
         background-color: #DFECFC;
         border-radius: 6px;
         padding: 5px;
-        margin: 20px 5px 20px 0px;
+        // margin: 20px 5px 20px 0px;
+        height: fit-content;
         @include sm(){
-          font-size: 12px;
-          margin: 5px;
+          font-size: 10px;
+          // margin: 5px;
           font-weight: bold;
         }
         @include lg(){
           font-size: 14px;
-          margin: 5px;
+          // margin: 5px;
           font-weight: bold;
         }
         @include xl(){
-          font-size: 16px;
+          font-size: 14px;
 
         }
       }

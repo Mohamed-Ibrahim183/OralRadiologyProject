@@ -19,6 +19,13 @@ const Navbar = () => {
       </li>
     );
   });
+  const content3 = navLinks.map(function (ele) {
+    return (
+      <li>
+        <Link to={ele.link}>{ele.Text}</Link>
+      </li>
+    );
+  });
   const content2 = Pages.map(function (ele) {
     return (
       <li>
@@ -46,6 +53,24 @@ const Navbar = () => {
           </ul>
         </nav>
       </div>
+
+      <nav className="secondary-Navigation">
+        <input type="checkbox" id="check" />
+        <label for="check" class="checkbtn">
+          <i class="fas fa-bars"></i>
+        </label>
+        <label class="logo">Oral Radiology</label>
+        <ul>
+          {content3}
+          <li className="DropParent">
+            {/* two */}
+            <Link to="/">
+              Pages <i class="fa-solid fa-caret-down"></i>
+            </Link>
+            <ul className="dropDown">{content2}</ul>
+          </li>
+        </ul>
+      </nav>
     </>
   );
 };
