@@ -8,11 +8,12 @@ function TableHeader_grading_page() {
                 <th>Name</th>
                 <th>ID</th>
                 <th>Status</th>
-                <th>Graded by</th>
                 <th>Grade</th>
                 <th>Edit</th>
                 <th>File submissions</th>
                 <th>Last modified</th>
+                <th>FeedBaxk comments</th>
+
             </tr>
         </thead>
     );

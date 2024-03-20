@@ -35,6 +35,9 @@ border-radius: 50%;
 height: 40px;
 width: 40px;
 }
+.monem2_admin  .profile-pic:hover {
+    cursor: pointer;
+    }
 .monem2_admin  .icon {
 margin-left: 10px;
 display: inline-block;
@@ -65,4 +68,7 @@ height: 2rem;
 border: 1px solid #ddd;
 }.monem2_admin  #searchhh{
 color: #8d8d8d;
+}
+.monem2_admin .grade_num{
+    width: 50px;
 }

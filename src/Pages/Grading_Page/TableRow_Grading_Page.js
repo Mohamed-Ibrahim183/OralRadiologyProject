@@ -7,15 +7,13 @@ function TableRow_Grading_Page({ record }) {
                 <td><input type='Checkbox'></input></td>
                 <td><img className="profile-pic" src={record.profilePic} alt={record.name} /></td>
                 <td>{record.name}</td>
-                <td>{record.department}</td>
+                <td>{record.IDD}</td>
                 <td>{record.gender}</td>
-                <td>{record.education}</td>
+                <td><input type='number' className='grade_num'></input></td>
                 <td>{record.mobile}</td>
                 <td>{record.email}</td>
                 <td>{record.joiningDate}</td>
-                <td>
-
-                </td>
+                <td><input type='text'></input></td>
             </tr>
         </tbody>
     );
