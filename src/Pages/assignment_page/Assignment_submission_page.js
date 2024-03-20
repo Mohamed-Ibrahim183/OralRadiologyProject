@@ -92,7 +92,7 @@ const AssignmentSubmission = () => {
   return (
     <>
       <Navbar />
-      <div className="container monemm">
+      <div className="container_monemm">
         <div className="monem">
           <h2 className="assignment-submission-text2">ASSIGNMENT SUBMISSION</h2>
           <Header />
