@@ -61,9 +61,19 @@ const AdminNav = () => {
       </div>
       <ul className="nav-links">
         {content}
-        <li className="DropDown">
+        <li className="DropListItem">
+          <i className="bx bx-list-ul"></i>
+          <span className="link_name">Drops</span>
+          <ul className="DropDownList">
+            <li>hello</li>
+            <li>hello</li>
+            <li>hello</li>
+          </ul>
+        </li>
+        <li>
           <Link>
-            <span className="links_name">Drop</span>
+            <i className="bx bx-list-ul"></i>
+            <span className="links_name">Last</span>
           </Link>
         </li>
       </ul>

@@ -67,4 +67,72 @@
   position: absolute;
   bottom: 0;
   width: 100%;
+}
+.sidebar .DropListItem {
+  color: white;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  transition: all 0.4s ease;
+}
+.sidebar .DropListItem:hover {
+  cursor: pointer;
+}
+.sidebar .DropListItem:hover .DropDownList {
+  display: block;
+}
+.sidebar .DropListItem i {
+  min-width: 60px;
+  text-align: center;
+  font-size: 18px;
+  color: #fff;
+}
+.sidebar .DropListItem .DropDownList {
+  display: none;
+  transition: 0.5s;
+  -webkit-transition: 0.5s;
+  -moz-transition: 0.5s;
+  -ms-transition: 0.5s;
+  -o-transition: 0.5s;
+}
+
+.DropListItem {
+  color: white;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  transition: all 0.4s ease;
+}
+.DropListItem:hover {
+  cursor: pointer;
+}
+.DropListItem i {
+  min-width: 60px;
+  text-align: center;
+  font-size: 18px;
+  color: #fff;
+}
+.DropListItem .DropDownList {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #081d45;
+  padding: 10px;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  z-index: 1;
+  transition: opacity 0.3s ease;
+  -webkit-transition: opacity 0.3s ease;
+  -moz-transition: opacity 0.3s ease;
+  -ms-transition: opacity 0.3s ease;
+  -o-transition: opacity 0.3s ease;
+}
+.DropListItem:hover .DropDownList {
+  display: block;
+  opacity: 1; /* Show the dropdown list and change opacity smoothly */
 }/*# sourceMappingURL=AdminNav.css.map */
