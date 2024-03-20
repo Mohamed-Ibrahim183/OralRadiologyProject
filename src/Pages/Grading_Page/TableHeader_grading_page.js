@@ -7,6 +7,7 @@ function TableHeader_grading_page() {
                 <th>Profile</th>
                 <th>Name</th>
                 <th>ID</th>
+                <th>Email</th>
                 <th>Status</th>
                 <th>Grade</th>
                 <th>Edit</th>

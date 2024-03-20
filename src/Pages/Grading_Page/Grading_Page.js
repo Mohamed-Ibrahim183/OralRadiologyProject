@@ -13,7 +13,6 @@ function Grading_Page() {
             <div className='oooo'>
                 <h2>Submissions</h2>
             </div>
-            <hr></hr>
         <label htmlFor='searchh'id='searchhh'>Search: </label>
         <input type='search' id='searchh'></input>
             <table className="table">
