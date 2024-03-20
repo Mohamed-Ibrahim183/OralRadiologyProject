@@ -16,7 +16,7 @@ const Cards = () => {
     />
   ));
 
-  return <>{content}</>;
+  return <div className="Assignments">{content}</div>;
 };
 
 export default Cards;

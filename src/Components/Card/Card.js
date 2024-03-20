@@ -28,15 +28,23 @@ const Card = (props) => {
       <div className="Card">
         <div className="Images">
           <div className="singleImage">
-            <i
+            {/* <i
               className="fa-solid fa-circle-arrow-left left-Arrow"
+              onClick={previous}
+            ></i> */}
+            <i
+              className="fa-solid fa-caret-down left-Arrow"
               onClick={previous}
             ></i>
             <img className="image" src={AssImage} alt={props.Name} />
             <i
-              className="fa-solid fa-circle-arrow-left right-Arrow"
+              className="fa-solid fa-caret-down right-Arrow"
               onClick={next}
             ></i>
+            {/* <i
+              className="fa-solid fa-circle-arrow-left right-Arrow"
+              onClick={next}
+            ></i> */}
           </div>
           <div className="status">
             <span className="AssName">{props.Name}</span>

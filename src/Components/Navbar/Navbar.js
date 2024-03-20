@@ -17,9 +17,9 @@ const Navbar = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
 
-  const closeDropdown = () => {
-    setIsDropdownOpen(false);
-  };
+  // const closeDropdown = () => {
+  //   setIsDropdownOpen(false);
+  // };
 
   const content1 = navLinks.map(function (ele) {
     return (
@@ -59,13 +59,12 @@ const Navbar = () => {
           {content3}
           <li className="DropParent" onClick={toggleDropdown}>
             {/* two */}
-            <Link to="/">
+            <Link to="">
               Pages <i className="fa-solid fa-caret-down"></i>
             </Link>
             <ul
               className="dropDown"
               style={{ display: isDropdownOpen ? "block" : "none" }}
-              onMouseLeave={closeDropdown}
             >
               {content2}
             </ul>

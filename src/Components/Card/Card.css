@@ -14,7 +14,7 @@
 }
 @media (max-width: 960px) {
   .AssCard.container .Card {
-    grid-template-columns: 1fr;
+    grid-template-columns: auto 1fr;
   }
 }
 .AssCard.container .Card .Images {
@@ -38,36 +38,48 @@
   position: relative;
 }
 .AssCard.container .Card .Images .singleImage img {
-  width: 250px;
-  height: 250px;
-}
-@media (max-width: 1200px) {
-  .AssCard.container .Card .Images .singleImage img {
-    width: 200px;
-    height: 200px;
-  }
+  width: 200px;
+  height: 200px;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+  width: 200px;
+  height: 200px;
 }
 .AssCard.container .Card .Images .singleImage .left-Arrow {
   cursor: pointer;
   position: absolute;
   top: 50%;
   left: -20px;
-  font-size: 25px;
+  font-size: 30px;
+  transform: rotate(90deg);
+  -webkit-transform: rotate(90deg);
+  -moz-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  -o-transform: rotate(90deg);
+  color: #2485f0;
 }
 .AssCard.container .Card .Images .singleImage .right-Arrow {
   cursor: pointer;
   position: absolute;
   top: 50%;
-  right: -25px;
-  font-size: 25px;
-  transform: rotateY(180deg); /* Rotate horizontally */
+  font-size: 30px;
+  transform: rotate(-90deg);
+  -webkit-transform: rotate(-90deg);
+  -moz-transform: rotate(-90deg);
+  -ms-transform: rotate(-90deg);
+  -o-transform: rotate(-90deg);
+  color: #2485f0;
 }
 .AssCard.container .Card .Images .status {
   padding: 2px 5px;
   display: flex;
   justify-content: space-between;
 }
-.AssCard.container .Card .Images .status .AssName, .AssCard.container .Card .Images .status .Slider {
+.AssCard.container .Card .Images .status .AssName,
+.AssCard.container .Card .Images .status .Slider {
   font-weight: bold;
   color: #2485f0;
 }
@@ -78,22 +90,26 @@
   padding-left: 20px;
   padding-top: 5px;
   gap: 10px;
+  margin: auto;
 }
 @media (max-width: 480px) {
   .AssCard.container .attrs {
     grid-template-columns: 1fr;
     padding-left: 5px;
+    margin: auto;
   }
 }
 @media (max-width: 960px) {
   .AssCard.container .attrs {
     grid-template-columns: 1fr;
+    margin: auto;
     padding-left: 5px;
   }
 }
 @media (max-width: 1200px) {
   .AssCard.container .attrs {
     margin-left: 20px;
+    margin: auto;
     padding-left: 10px;
   }
 }
@@ -104,13 +120,15 @@
 .AssCard.container .attrs .Key {
   text-transform: capitalize;
   font-weight: bold;
-  font-size: 22px;
+  font-size: 20px;
   color: white;
-  background-color: #2485F0;
+  background-color: #2485f0;
   border-radius: 6px;
   padding: 5px;
   height: -moz-fit-content;
   height: fit-content;
+  width: 162px;
+  text-align: center;
 }
 @media (max-width: 480px) {
   .AssCard.container .attrs .Key {
@@ -132,8 +150,9 @@
 .AssCard.container .attrs .Value {
   font-weight: bold;
   font-size: 16px;
-  color: #2485F0;
-  background-color: #DFECFC;
+  color: #2485f0;
+  margin: 1px 3px;
+  border: 1px solid #2485f0;
   border-radius: 6px;
   padding: 5px;
   height: -moz-fit-content;

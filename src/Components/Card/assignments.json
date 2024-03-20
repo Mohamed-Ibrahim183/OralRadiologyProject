@@ -18,5 +18,25 @@
       "./Images/cardImages/download.jpeg",
       "./Images/cardImages/radyoloji.jpg"
     ]
+  },
+  "Ass2": {
+    "Name": "Assignment 1",
+    "Features": [
+      { "key": "Assignment Grade:", "value": "10/10" },
+      {
+        "key": "Doctor's Comment:",
+        "value": "Very Good,  Keep it up! "
+      },
+      { "key": "Uploaded Time:", "value": "23 March 2024 09:00" },
+      { "key": "Opened Time:", "value": "24 March 2024 09:00" },
+      { "key": "Due Date:", "value": "25 March 2024 09:00" },
+      { "key": "Grade By:", "value": "Dr. Mohamed Ibrahim " }
+    ],
+    "images": [
+      "./Images/cardImages/Dental_Xray-removebg-preview.jpg",
+      "./Images/cardImages/cbct.jpg",
+      "./Images/cardImages/download.jpeg",
+      "./Images/cardImages/radyoloji.jpg"
+    ]
   }
 }

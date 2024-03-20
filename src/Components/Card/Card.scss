@@ -1,8 +1,9 @@
 @import "./_breakpoints";
 
-
-
-
+// .Assignments{
+//   display: grid;
+//   grid-template-columns: repeat(2, 1fr);
+// }
 .AssCard.container {
   .Card {
     background-color: #eeeeee57;
@@ -12,145 +13,165 @@
     grid-template-columns: auto 1fr;
     width: 90%;
     margin-bottom: 50px;
-    @include sm(){
+    @include sm() {
       grid-template-columns: 1fr;
     }
-    @include lg(){
-      grid-template-columns: 1fr;
+    @include lg() {
+      grid-template-columns: auto 1fr;
     }
-    
+
     .Images {
       display: flex;
       flex-direction: column;
       width: fit-content;
       position: relative;
-      @include sm(){
+      @include sm() {
         margin: auto;
       }
-      @include lg(){
+      @include lg() {
         margin: auto;
       }
 
       .singleImage {
         position: relative;
-        img{
-          width: 250px;
-          height: 250px;
-          @include xl(){
+        img {
+          width: 200px;
+          height: 200px;
+          border-radius: 10px;
+          -webkit-border-radius: 10px;
+          -moz-border-radius: 10px;
+          -ms-border-radius: 10px;
+          -o-border-radius: 10px;
             width: 200px;
             height: 200px;
-            
           }
-        }
+        
         .left-Arrow {
           cursor: pointer;
           position: absolute;
           top: 50%;
           left: -20px;
-          font-size: 25px;
+          font-size: 30px;
+          transform: rotate(90deg);
+          -webkit-transform: rotate(90deg);
+          -moz-transform: rotate(90deg);
+          -ms-transform: rotate(90deg);
+          -o-transform: rotate(90deg);
+          color: #2485f0;
         }
-  
+
         .right-Arrow {
           cursor: pointer;
           position: absolute;
           top: 50%;
-          // left: 250px;
-          right: -25px;
-          font-size: 25px;
-          transform: rotateY(180deg); /* Rotate horizontally */
-          }
-        }
-
-        .status{
-          padding: 2px 5px;
-          display: flex;
-          justify-content: space-between;
-          .AssName, .Slider{
-            font-weight: bold;
-            color: #2485f0;
-          }
+          //left: 250px;
+          // right: -25px;
+          //transform: rotateY(180deg);
+          font-size: 30px;
+          transform: rotate(-90deg);
+          -webkit-transform: rotate(-90deg);
+          -moz-transform: rotate(-90deg);
+          -ms-transform: rotate(-90deg);
+          -o-transform: rotate(-90deg);
+          color: #2485f0;
         }
       }
 
-    }
-
-    .attrs {
-      margin-left: 30px;
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      padding-left: 20px;
-      padding-top: 5px;
-      gap: 10px;
-      @include sm(){
-        grid-template-columns: 1fr;
-        // gap: 10px;
-        padding-left: 5px;
-      }
-      @include lg(){
-        grid-template-columns: 1fr;
-        // gap: 10px;
-        padding-left: 5px;
-      }
-      @include xl(){
-        margin-left: 20px;
-        // gap: 10px;
-        padding-left: 10px;
-      }
-      .Attribute{
+      .status {
+        padding: 2px 5px;
         display: flex;
-        flex-wrap: wrap;
-
-      }
-
-      .Key {
-        text-transform: capitalize;
-        font-weight: bold;
-        font-size: 22px;
-        color: white;
-        background-color: #2485F0;
-        border-radius: 6px;
-        padding: 5px;
-        // margin: 20px 5px 20px 0px;
-        height: fit-content;
-        @include sm(){
-          font-size: 14px;
-          font-weight: 600;
-          // margin: 5px;
-        }
-        @include lg(){
-          font-size: 18px;
+        justify-content: space-between;
+        .AssName,
+        .Slider {
           font-weight: bold;
-          // margin: 5px;
-        }
-        @include xl(){
-          font-size: 18px;
-        }
-      }
-
-      .Value {
-        font-weight: bold;
-        font-size: 16px;
-        color: #2485F0;
-        background-color: #DFECFC;
-        border-radius: 6px;
-        padding: 5px;
-        // margin: 20px 5px 20px 0px;
-        height: fit-content;
-        @include sm(){
-          font-size: 10px;
-          // margin: 5px;
-          font-weight: bold;
-        }
-        @include lg(){
-          font-size: 14px;
-          // margin: 5px;
-          font-weight: bold;
-        }
-        @include xl(){
-          font-size: 14px;
-
+          color: #2485f0;
         }
       }
     }
-}
+  }
 
+  .attrs {
+    margin-left: 30px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    padding-left: 20px;
+    padding-top: 5px;
+    gap: 10px;
+    margin: auto;
+    @include sm() {
+      grid-template-columns: 1fr;
+      padding-left: 5px;
+      margin: auto;
+      // gap: 10px;
+    }
+    @include lg() {
+      grid-template-columns: 1fr;
+      margin: auto;
+      // gap: 10px;
+      padding-left: 5px;
+    }
+    @include xl() {
+      margin-left: 20px;
+      margin: auto;
+      // gap: 10px;
+      padding-left: 10px;
+    }
+    .Attribute {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    .Key {
+      text-transform: capitalize;
+      font-weight: bold;
+      font-size: 20px;
+      color: white;
+      background-color: #2485f0;
+      border-radius: 6px;
+      padding: 5px;
+      // margin: 20px 5px 20px 0px;
+      height: fit-content;
+      width: 162px;
+      text-align: center;
+      @include sm() {
+        font-size: 14px;
+        font-weight: 600;
+        // margin: 5px;
+      }
+      @include lg() {
+        font-size: 18px;
+        font-weight: bold;
+        // margin: 5px;
+      }
+      @include xl() {
+        font-size: 18px;
+      }
+    }
+
+    .Value {
+      font-weight: bold;
+      font-size: 16px;
+      color: #2485f0;
+      // background-color: #DFECFC;
+      margin: 1px 3px;
+      border: 1px solid #2485f0;
+      border-radius: 6px;
+      padding: 5px;
+      // margin: 20px 5px 20px 0px;
+      height: fit-content;
+      @include sm() {
+        font-size: 10px;
+        // margin: 5px;
+        font-weight: bold;
+      }
+      @include lg() {
+        font-size: 14px;
+        // margin: 5px;
+        font-weight: bold;
+      }
+      @include xl() {
+        font-size: 14px;
+      }
+    }
+  }
+}

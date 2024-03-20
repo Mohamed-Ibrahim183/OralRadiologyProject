@@ -61,12 +61,11 @@ const AdminNav = () => {
       </div>
       <ul className="nav-links">
         {content}
-        {/* <li className="log_out">
-          <Link to="/">
-            <i className="bx bx-log-out"></i>
-            <span className="links_name">Log out</span>
+        <li className="DropDown">
+          <Link>
+            <span className="links_name">Drop</span>
           </Link>
-        </li> */}
+        </li>
       </ul>
     </div>
   );
