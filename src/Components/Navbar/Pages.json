@@ -14,5 +14,9 @@
   {
     "Text": "Nav Admin",
     "link": "/AdminNav"
+  },
+  {
+    "Text": "Login Page",
+    "link": "/LoginPage"
   }
 ]
