@@ -13,6 +13,7 @@ import ProfessorTable from "./Pages/All_professors/All_professors";
 import Admin_page from "./Pages/Admin/admin_page";
 import NavAdmin from "./Components/AdminNav2/NavAdmin";
 import LoginPage from "./Pages/Login/LoginPage";
+import Grading_Page from "./Pages/Grading_Page/Grading_Page";
 const routes = [
   {
     path: "/",
@@ -64,6 +65,11 @@ const routes = [
     element: <NavAdmin />,
     errorElement: <NotFound />,
   },
+  {
+    path: "/Grading_Page",
+    element: <Grading_Page />,
+    errorElement: <NotFound />,
+  }
 ];
 
 export default routes;

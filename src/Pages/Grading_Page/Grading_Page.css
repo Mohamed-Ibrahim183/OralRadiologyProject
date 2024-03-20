@@ -1,0 +1,68 @@
+
+.monem2_admin   {
+width: 90%;
+margin: auto;
+overflow: hidden;
+}
+.monem2_admin  .table {
+width: 100%;
+border-collapse: collapse;
+margin: 25px 0;
+font-size: 0.9em;
+background: white;
+text-align: left;
+}
+.monem2_admin  .table thead tr {
+background-color: #431cde;
+color: white;
+text-align: left;
+}
+.monem2_admin  .table th,
+.monem2_admin  .table td {
+padding: 12px 15px;
+}
+.monem2_admin  .table tbody tr {
+border-bottom: 1px solid #dddddd;
+}
+.monem2_admin  .table tbody tr:nth-of-type(even) {
+background-color: #f3f3f3;
+}
+.monem2_admin  .table tbody tr:last-of-type {
+border-bottom: 2px solid #ddd;
+}
+.monem2_admin  .profile-pic {
+border-radius: 50%;
+height: 40px;
+width: 40px;
+}
+.monem2_admin  .icon {
+margin-left: 10px;
+display: inline-block;
+}
+.monem2_admin  .pen{
+width: 20px;
+height: 20px;
+background-color: #1c37d0;
+color: white;
+border-radius: 20%;
+}
+.monem2_admin  .basket{
+width: 20px;
+height: 20px;
+border-radius: 20%;
+background-color: red;
+color: white;
+}
+.monem2_admin  .oooo{
+display:flex;
+}
+.monem2_admin  .oooo h2{
+float: left;
+margin-right: 55rem;
+}
+.monem2_admin  #searchh{
+height: 2rem;
+border: 1px solid #ddd;
+}.monem2_admin  #searchhh{
+color: #8d8d8d;
+}

@@ -14,5 +14,9 @@
   {
     "Text": "Add Professor",
     "link": "/AddProf"
+  },
+  {
+    "Text": "Grading_Page",
+    "link": "/Grading_Page"
   }
 ]

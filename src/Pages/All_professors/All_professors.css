@@ -1,81 +1,83 @@
-.body
-{font-family: Arial, sans-serif;
-background: white;
+.body {
+    font-family: Arial, sans-serif;
+    background: white;
 }
 .monem_admin {
-width: 90%;
-margin: auto;
-overflow: hidden;
+    width: 90%;
+    margin: auto;
+    overflow: hidden;
 }
-.table {
-width: 100%;
-border-collapse: collapse;
-margin: 25px 0;
-font-size: 0.9em;
-background: white;
-text-align: left;
+
+.monem_admin .table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    background: white;
+    text-align: left;
 }
-.table thead tr {
-background-color: #431cde;
-color: white;
-text-align: left;
+.monem_admin .table thead tr {
+    background-color: #431cde;
+    color: white;
+    text-align: left;
 }
-.table th,
-.table td {
-padding: 12px 15px;
+.monem_admin .table th,
+.monem_admin .table td {
+    padding: 12px 15px;
 }
-.table tbody tr {
-border-bottom: 1px solid #dddddd;
+.monem_admin .table tbody tr {
+    border-bottom: 1px solid #dddddd;
 }
-.table tbody tr:nth-of-type(even) {
-background-color: #f3f3f3;
+.monem_admin .table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
 }
-.table tbody tr:last-of-type {
-border-bottom: 2px solid #ddd;
+.monem_admin .table tbody tr:last-of-type {
+    border-bottom: 2px solid #ddd;
 }
-.profile-pic {
-border-radius: 50%;
-height: 40px;
-width: 40px;
+.monem_admin .profile-pic {
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
 }
-.icon {
-margin-left: 10px;
-display: inline-block;
+.monem_admin .icon {
+    margin-left: 10px;
+    display: inline-block;
 }
-.pen{
-width: 20px;
-height: 20px;
-background-color: #1c37d0;
-color: white;
-border-radius: 20%;
+.monem_admin .pen {
+    width: 20px;
+    height: 20px;
+    background-color: #1c37d0;
+    color: white;
+    border-radius: 20%;
 }
-.basket{
-width: 20px;
-height: 20px;
-border-radius: 20%;
-background-color: red;
-color: white;
+.monem_admin .basket {
+    width: 20px;
+    height: 20px;
+    border-radius: 20%;
+    background-color: red;
+    color: white;
 }
-.oooo{
-display:flex;
+.monem_admin .oooo {
+    display: flex;
 }
-.oooo h2{
-float: left;
-margin-right: 55rem;
+.monem_admin .oooo h2 {
+    float: left;
+    margin-right: 55rem;
 }
-.addbutton{
-background-color: #1c37d0;
-color: white;
-float:right;
-width: 6.2rem;
-height:2.5rem;
-margin-top: 1rem;
-border-radius: 0.7rem;
-border: #1c37d0;
+.monem_admin .addbutton {
+    background-color: #1c37d0;
+    color: white;
+    float: right;
+    width: 6.2rem;
+    height: 2.5rem;
+    margin-top: 1rem;
+    border-radius: 0.7rem;
+    border: #1c37d0;
 }
-#searchh{
-height: 2rem;
-border: 1px solid #ddd;
-}#searchhh{
-color: #8d8d8d;
+.monem_admin #searchh {
+    height: 2rem;
+    border: 1px solid #ddd;
+}
+.monem_admin #searchhh {
+    color: #8d8d8d;
 }
