@@ -86,7 +86,17 @@
     float: right;
     margin-top: -8rem;
 }
+.monem2_admin .right button:hover {
+    background-color: #13008f;
+}
 .monem2_admin .grade_button {
     margin: 0;
     width: 60px;
+}
+.monem2_admin .grade_button:hover {
+    background-color: #13008f;
+    color: white;
+}
+.monem2_admin .grade_button:focus {
+    outline: none;
 }

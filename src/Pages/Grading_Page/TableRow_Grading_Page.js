@@ -1,6 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 function TableRow_Grading_Page({ record }) {
+    const [isHovered, setIsHovered] = useState(false);
+
+    const handleHover = () => {
+        setIsHovered(!isHovered);
+    };
+
     return (
         <tbody>
             <tr>
@@ -12,7 +18,14 @@ function TableRow_Grading_Page({ record }) {
                 <td>{record.status}</td>
                 <td className='grade_column'>
                     <input type='number' className='grade_num'/>
-                    <button type='submit' className='grade_button'>Grade</button>
+                    <button
+                        type='submit'
+                        className={`grade_button ${isHovered ? 'hovered' : ''}`}
+                        onMouseEnter={handleHover}
+                        onMouseLeave={handleHover}
+                    >
+                        Grade
+                    </button>
                 </td>
                 <td></td>
                 <td></td>
