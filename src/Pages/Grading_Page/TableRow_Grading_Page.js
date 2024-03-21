@@ -10,7 +10,10 @@ function TableRow_Grading_Page({ record }) {
                 <td>{record.IDD}</td>
                 <td>{record.email}</td>
                 <td>{record.status}</td>
-                <td><input type='number' className='grade_num'></input></td>
+                <td className='grade_column'>
+                    <input type='number' className='grade_num'/>
+                    <button type='submit' className='grade_button'>Grade</button>
+                </td>
                 <td></td>
                 <td></td>
                 <td>{record.joiningDate}</td>
