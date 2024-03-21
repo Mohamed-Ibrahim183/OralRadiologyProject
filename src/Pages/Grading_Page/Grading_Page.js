@@ -10,9 +10,16 @@ function Grading_Page() {
         <>
         <Navbar />
         <div className="monem2_admin">
-            <div className='oooo'>
-                <h2>Submissions</h2>
-            </div>
+            <h1>Assignment 1</h1>
+            <hr></hr>
+            <div>
+                <div className='oooo'>
+                    <h2>Submissions</h2>
+                </div>
+                <div className='right'>
+                    <button type='submit'>Download Report</button>
+                </div>
+             </div>
         <label htmlFor='searchh'id='searchhh'>Search: </label>
         <input type='search' id='searchh'></input>
             <table className="table">
