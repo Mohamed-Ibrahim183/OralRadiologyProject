@@ -1,5 +1,5 @@
 /* src/App.MainPage  .css */
-.MainPage  .Charts {
+.MainPage .Charts {
   display: flex;
   flex-direction: row;
   background-color: #f1f1f2;
@@ -7,7 +7,7 @@
   /* margin-left: 200px; */
 }
 
-.MainPage  .stats-row {
+.MainPage .stats-row {
   margin-bottom: 20px;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -15,21 +15,29 @@
   gap: 20px;
 }
 
-.MainPage  .chart-row {
+.MainPage .chart-row {
   width: 50%;
   height: 100%;
   margin: auto;
   margin-left: 10%;
   background-color: white;
 }
-.MainPage  .MainPage {
+.MainPage .MainPage {
   position: relative;
 }
 
-.MainPage  .AdminBody {
+.MainPage .AdminBody {
   background-color: #f1f1f2;
 }
-.MainPage  .AdminSection {
+.MainPage .AdminSection {
   padding: 10px 1%;
-  margin-left: 200px;
+  margin-left: 70px;
+  transition: 0.5s;
+  -webkit-transition: 0.5s;
+  -moz-transition: 0.5s;
+  -ms-transition: 0.5s;
+  -o-transition: 0.5s;
+}
+.openSideBar {
+  margin-left: 200px !important;
 }

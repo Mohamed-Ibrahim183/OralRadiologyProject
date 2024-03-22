@@ -1,5 +1,5 @@
 /*** ASSIGNMENT SUBMISSION PAGE ***/
-.AssignmentSubmission .container {
+.AssignmentSubmission.container {
   width: 80%;
   margin: auto;
   padding: 20px;
@@ -8,53 +8,53 @@
   display: flex;
   flex-direction: column;
 }
-.AssignmentSubmission .container .monem {
+.AssignmentSubmission.container .monem {
   display: flex;
 }
-.AssignmentSubmission .container .header {
+.AssignmentSubmission.container .header {
   text-align: center;
   padding: 20px;
   width: 35%;
   float: left;
 }
-.AssignmentSubmission .container .header p {
+.AssignmentSubmission.container .header p {
   text-align: left;
   margin-left: 8%;
 }
-.AssignmentSubmission .container .xray_iamge {
+.AssignmentSubmission.container .xray_iamge {
   width: 100%;
   padding-top: 7%;
   padding-bottom: 6%;
 }
-.AssignmentSubmission .container .assignment-info {
+.AssignmentSubmission.container .assignment-info {
   width: 60%;
   float: right;
   margin-left: 0;
   padding: 20px;
 }
-.AssignmentSubmission .container .assignment-info label,
-.AssignmentSubmission .container .assignment-info h2 {
+.AssignmentSubmission.container .assignment-info label,
+.AssignmentSubmission.container .assignment-info h2 {
   display: block;
   margin-bottom: 10px;
   font-weight: bold;
 }
-.AssignmentSubmission .container .assignment-info input {
+.AssignmentSubmission.container .assignment-info input {
   width: 100%;
   padding: 10px;
   margin-bottom: 20px;
   border: 1px solid #ddd;
 }
-.AssignmentSubmission .container .assignment-info h2 {
+.AssignmentSubmission.container .assignment-info h2 {
   width: 100%;
   padding-bottom: 15px;
   margin-bottom: 20px;
 }
-.AssignmentSubmission .container .feedback {
+.AssignmentSubmission.container .feedback {
   padding: 20px;
   border: 1px solid #ddd;
   margin: 20px 0;
 }
-.AssignmentSubmission .container .button {
+.AssignmentSubmission.container .button {
   background-color: #5cb85c;
   color: white;
   padding: 10px 18px;
@@ -64,45 +64,45 @@
   font: 1em sans-serif;
   font-weight: 600;
 }
-.AssignmentSubmission .container .btnA {
+.AssignmentSubmission.container .btnA {
   background-color: #dfecfc;
   color: black;
   margin-right: 0.5px;
 }
-.AssignmentSubmission .container .btnA:hover {
+.AssignmentSubmission.container .btnA:hover {
   background-color: #dfe1ff;
 }
-.AssignmentSubmission .container .btnB {
+.AssignmentSubmission.container .btnB {
   background-color: #2485f1;
 }
-.AssignmentSubmission .container .btnB:hover {
+.AssignmentSubmission.container .btnB:hover {
   background-color: #2450f1;
 }
-.AssignmentSubmission .container .assignment-submission-text2 {
+.AssignmentSubmission.container .assignment-submission-text2 {
   display: none;
 }
 @media only screen and (max-width: 650px) {
-  .AssignmentSubmission .container .header {
+  .AssignmentSubmission.container .header {
     width: 80%;
     margin-left: 10%;
     margin-right: 10%;
   }
-  .AssignmentSubmission .container .xray_iamge {
+  .AssignmentSubmission.container .xray_iamge {
     width: 70%;
   }
-  .AssignmentSubmission .container .assignment-submission-text2 {
+  .AssignmentSubmission.container .assignment-submission-text2 {
     display: block;
     text-align: center;
   }
-  .AssignmentSubmission .container .assignment-submission-text {
+  .AssignmentSubmission.container .assignment-submission-text {
     display: none;
   }
-  .AssignmentSubmission .container .assignment-info {
+  .AssignmentSubmission.container .assignment-info {
     width: 90%;
     margin-left: 0;
     padding: 20px;
   }
-  .AssignmentSubmission .container .feedback h3 {
+  .AssignmentSubmission.container .feedback h3 {
     text-align: center;
   }
-} /*# sourceMappingURL=submitAss.css.map */
+}/*# sourceMappingURL=submitAss.css.map */

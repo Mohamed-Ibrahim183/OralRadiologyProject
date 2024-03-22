@@ -54,7 +54,7 @@ const AdminNav = () => {
   }, [scroll]);
 
   return (
-    <div className="sidebar" style={style}>
+    <div className="aSidebar" style={style}>
       <div className="logo-details">
         <i className="bx bxl-c-plus-plus"></i>
         <span className="logo_name">Admin</span>
