@@ -61,6 +61,74 @@ const NavAdmin = () => {
     setStyle({ top: `${scroll}px` });
   }, [scroll]);
 
+  const links = [
+    {
+      Text: "Dashboard",
+      To: "/",
+      logoClass: "bx bx-grid-alt",
+    },
+    {
+      Text: "Professors",
+      To: "",
+      logoClass: "fa-solid fa-chalkboard-user",
+      Menu: [
+        {
+          Text: "Add Professor",
+          To: "/AddProf",
+          logoClass: "fa-solid fa-user-plus",
+        },
+        {
+          Text: "All Professor",
+          To: "/Allprof",
+          logoClass: "fa-solid fa-person-dots-from-line",
+        },
+      ],
+    },
+  ];
+  function fill(arr) {
+    return arr.map(function (ele) {
+      return (
+        <li>
+          <Link to={ele.To}>{ele.Text}</Link>
+        </li>
+      );
+      // return (
+      //   <li>
+      //     <Link to={ele.To}>
+      //       <i className={ele.logoClass}></i>
+      //       <span className="link_name">{ele.Text}</span>
+      //     </Link>
+      //   </li>
+      // );
+    });
+  }
+  const content = links.map(function (ele) {
+    // let Drop;
+    if (ele.Menu) {
+      return (
+        <li>
+          <div className="iocn-link">
+            <Link>
+              <i className={ele.logoClass}></i>
+              <span className="link_name">{ele.Text}</span>
+            </Link>
+            <i className="bx bxs-chevron-down arrow"></i>
+          </div>
+          <ul className="sub-menu">{fill(ele.Menu)}</ul>
+        </li>
+      );
+      // Drop = fill(ele.Menu);
+    }
+    return (
+      <li>
+        <Link to={ele.To}>
+          <i className={ele.logoClass}></i>
+          <span className="link_name">{ele.Text}</span>
+        </Link>
+      </li>
+    );
+  });
+
   return (
     <div>
       <div className="sidebar close" style={styles}>
@@ -70,32 +138,7 @@ const NavAdmin = () => {
           <span className="logo_name">Admin</span>
         </div>
         <ul className="nav-links">
-          <li>
-            <Link>
-              <i className="bx bx-grid-alt"></i>
-              <span className="link_name">Dashboard</span>
-            </Link>
-          </li>
-          <li>
-            <div className="iocn-link">
-              <Link>
-                <i className="bx bx-collection"></i>
-                <span className="link_name">Category</span>
-              </Link>
-              <i className="bx bxs-chevron-down arrow"></i>
-            </div>
-            <ul className="sub-menu">
-              <li>
-                <Link>HTML & CSS</Link>
-              </li>
-              <li>
-                <Link>JavaScript</Link>
-              </li>
-              <li>
-                <Link>PHP & MySQL</Link>
-              </li>
-            </ul>
-          </li>
+          {content}
           <li className="bx-menu">
             <Link>
               <i className="bx bx-menu"></i>
