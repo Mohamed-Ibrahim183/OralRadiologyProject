@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import "./Nav.css";
 import LinksFile from "./NavLinks.json";
 import PagesFiles from "./Pages.json";
+import DarkMode from "../DarkMode/DarkMode";
 
 const Navbar = () => {
   const [navLinks, setNavLinks] = useState([]);
@@ -49,28 +50,31 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="secondary-Navigation">
-        <input type="checkbox" id="check" />
-        <label htmlFor="check" className="checkbtn">
-          <i className="fas fa-bars"></i>
-        </label>
-        <label className="logo">Oral Radiology</label>
-        <ul>
-          {content3}
-          <li className="DropParent" onClick={toggleDropdown}>
-            {/* two */}
-            <Link to="">
-              Pages <i className="fa-solid fa-caret-down"></i>
-            </Link>
-            <ul
-              className="dropDown"
-              style={{ display: isDropdownOpen ? "block" : "none" }}
-            >
-              {content2}
-            </ul>
-          </li>
-        </ul>
-      </nav>
+      <div className="HEADER">
+        <nav className="secondary-Navigation">
+          <input type="checkbox" id="check" />
+          <label htmlFor="check" className="checkbtn">
+            <i className="fas fa-bars"></i>
+          </label>
+          <label className="logo">Oral Radiology</label>
+          <ul>
+            {content3}
+            <li className="DropParent" onClick={toggleDropdown}>
+              {/* two */}
+              <Link to="">
+                Pages <i className="fa-solid fa-caret-down"></i>
+              </Link>
+              <ul
+                className="dropDown"
+                style={{ display: isDropdownOpen ? "block" : "none" }}
+              >
+                {content2}
+              </ul>
+            </li>
+          </ul>
+        </nav>
+        <DarkMode />
+      </div>
     </>
   );
 };
