@@ -1,8 +1,12 @@
 /* src/App.MainPage  .css */
+.AdminBody {
+  background-color: #f1f1f2;
+}
+
 .MainPage .Charts {
   display: flex;
   flex-direction: row;
-  background-color: #f1f1f2;
+  /* background-color: #f1f1f2; */
   padding: 10px 1%;
   /* margin-left: 200px; */
 }
