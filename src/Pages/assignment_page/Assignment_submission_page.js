@@ -1,12 +1,15 @@
 import React, { useState } from "react";
-import image from "./Dental_Xray.jpg";
-import "./assignmentpage.css";
+import image from './Dental_Xray.png';
+import "./submit_page.css";
+//import "./assignmentpage.css"
 import Navbar from "../../Components/Navbar/Navbar";
 // Header component
 const Header = () => {
   return (
     <div className="header">
+      <div className="submit_images">
       <img src={image} alt="Teeth image" className="xray_iamge" />
+      </div>
       <p>The Maximum limit of photos is 5</p>
       <br />
       <p>The Grade of The Assignment Will Appear Here Once Evaluated</p>
