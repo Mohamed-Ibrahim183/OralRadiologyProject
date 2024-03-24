@@ -1,9 +1,10 @@
 import React from 'react';
-import "./All_professors.css";
+//import "./All_professors.css";
 import TableHeader from './TableHeader';
 import TableRow from './TableRow';
 import monem from './Professors.json';
 import Navbar from '../../Components/Navbar/Navbar';
+import "./AllProfessorPage.css";
 function ProfessorTable() {
     return (
 

@@ -1,0 +1,104 @@
+:root {
+  --mainBackGround: #F5FBF9;
+  --mainColor: #0082e6;
+  --secondText: #65b4f1;
+  --textColor: var(--mainColor);
+  --headerColor: #0082e6;
+  --text-monem:rgb(20, 19, 19);
+  --btnB:#2450f1;
+  --btnB-hover:#14319b;
+}
+
+[theme=Dark] {
+  --mainColor: #4d8ba8;
+  --mainBackGround: #1b343c;
+  --secondText: #65b4f1;
+  --textColor: #96bdcf;
+  --headerColor: #4d8ba8;
+  --text-monem:rgb(230, 230, 230);
+  --btnB:#4d8ba8;
+  --btnB-hover:#356981;
+}
+
+.body {
+  font-family: Arial, sans-serif;
+  background: var(--mainBackGround);
+}
+
+.monem_admin {
+  width: 90%;
+  margin: auto;
+  overflow: hidden;
+  color: #8d8d8d;
+}
+.monem_admin .table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 25px 0;
+  font-size: 0.9em;
+  background: var(--mainBackGround);
+  text-align: left;
+}
+.monem_admin .table thead tr {
+  background-color: var(--headerColor);
+  color: white;
+  text-align: left;
+}
+.monem_admin .table th, .monem_admin .table td {
+  padding: 12px 15px;
+}
+.monem_admin .table tbody tr {
+  border-bottom: 1px solid #dddddd;
+}
+.monem_admin .table tbody tr:nth-of-type(even) {
+  background-color: #f3f3f3;
+}
+.monem_admin .table tbody tr:last-of-type {
+  border-bottom: 2px solid #ddd;
+}
+.monem_admin .profile-pic {
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+}
+.monem_admin .icon {
+  margin-left: 10px;
+  display: inline-block;
+}
+.monem_admin .pen, .monem_admin .basket {
+  width: 20px;
+  height: 20px;
+  border-radius: 20%;
+  color: white;
+  background-color: #1c37d0;
+}
+.monem_admin .pen.basket, .monem_admin .basket.basket {
+  background-color: red;
+}
+.monem_admin .oooo {
+  display: flex;
+  margin-top: 40px;
+}
+.monem_admin .oooo h2 {
+  float: left;
+  margin-right: 55rem;
+  color: var(--headerColor);
+}
+.monem_admin .addbutton {
+  background-color: #1c37d0;
+  color: white;
+  float: right;
+  width: 6.2rem;
+  height: 2.5rem;
+  border-radius: 0.7rem;
+  border: 1px solid #1c37d0;
+  margin-bottom: 6px;
+}
+.monem_admin #searchh {
+  height: 2rem;
+  border: 1px solid #ddd;
+  margin-top: 20px;
+}
+.monem_admin #searchhh {
+  color: #8d8d8d;
+}/*# sourceMappingURL=AllProfessorPage.css.map */

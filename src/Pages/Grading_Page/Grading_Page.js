@@ -1,5 +1,6 @@
 import React from 'react';
-import "./Grading_Page.css";
+//import "./Grading_Page.css";
+import "./Grading.css";
 import TableHeader_grading_page from './TableHeader_grading_page';
 import TableRow_Grading_Page from './TableRow_Grading_Page';
 import monem from './Grading_Page.json'

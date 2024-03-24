@@ -1,3 +1,122 @@
-.monem{
-    color:white;
+@use '../../_Variables.scss' as *;
+$main-color: #b85b05; // Main color variable for easy changes
+$text-color: #8d8d8d;
+$hover-color: #13008f;
+$background-color: var(--mainBackGround);
+$border-color: #ddd;
+$header-background-color:var(--headerColor);
+$btn-color:var(--btnB);
+$btn-hover:var(--btnB-hover);
+.monem2_admin {
+    width: 90%;
+    margin: auto;
+    overflow: hidden;
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 25px 0;
+        font-size: 0.9em;
+        background: $background-color;
+        ;
+        text-align: left;
+        color:$text-color;
+        thead tr {
+            background-color: $header-background-color;
+            color: white;
+            text-align: left;
+        }
+
+        th, td {
+            padding: 12px 15px;
+        }
+
+        tbody tr {
+            border-bottom: 1px solid $border-color;
+
+            &:nth-of-type(even) {
+                background-color: $background-color;
+            }
+
+            &:last-of-type {
+                border-bottom: 2px solid $border-color;
+            }
+        }
+    }
+
+    .profile-pic {
+        border-radius: 50%;
+        height: 40px;
+        width: 40px;
+        &:hover {
+            cursor: pointer;
+        }
+    }
+    .icon {
+        margin-left: 10px;
+        display: inline-block;
+    }
+    .pen, .basket {
+        width: 20px;
+        height: 20px;
+        border-radius: 20%;
+        color: white;
+        &.pen {
+            background-color: #1c37d0;
+        }
+        &.basket {
+            background-color: red;
+        }
+    }
+    .oooo {
+        display: flex;
+
+        h2 {
+            float: left;
+            margin-right: 65rem;
+            margin-top: 3rem;
+            margin-bottom: 3rem;
+            color: $main-color;
+            font-size: 32px;
+        }
+    }
+    #searchh {
+        height: 2rem;
+        border: 1px solid $border-color;
+    }
+    #searchhh {
+        color: $text-color;
+    }
+    .grade_num {
+        width: 60px;
+        height: 40%;
+        margin-bottom: 3px;
+    }
+    h1 {
+        color: $main-color;
+    }
+    .right {
+        display: grid;
+        float: right;
+        margin-top: -8rem;
+        button{
+            background-color:$btn-color ;
+        }
+        button:hover {
+            background-color: $btn-hover;
+        }
+    }
+
+    .grade_button {
+        margin: 0;
+        width: 60px;
+        background-color:$btn-color ;
+
+        &:hover {
+            background-color: $btn-hover;
+            color: white;
+        }
+        &:focus {
+            outline: none;
+        }
+    }
 }
