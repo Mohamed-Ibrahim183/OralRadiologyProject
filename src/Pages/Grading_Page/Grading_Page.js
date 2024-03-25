@@ -24,12 +24,16 @@ function Grading_Page() {
           Search:{" "}
         </label>
         <input type="search" id="searchh"></input>
-        <table className="table">
-          <TableHeader_grading_page />
-          {monem.map((record) => (
-            <TableRow_Grading_Page key={record.id} record={record} />
-          ))}
-        </table>
+        <div className="table-responsive">
+          <table className="table">
+            <TableHeader_grading_page />
+            {monem.map((record) => (
+              <TableRow_Grading_Page key={record.id} record={record} />
+            ))}
+            </table>
+        </div>
+
+
       </div>
     </>
   );

@@ -14,7 +14,6 @@ function TableHeader_grading_page() {
                 <th>File submissions</th>
                 <th>Last modified</th>
                 <th>FeedBaxk comments</th>
-
             </tr>
         </thead>
     );

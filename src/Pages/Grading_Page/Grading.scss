@@ -1,4 +1,8 @@
 @use '../../_Variables.scss' as *;
+$breakpoint-mobile: 480px;
+$breakpoint-tablet: 768px;
+$breakpoint-desktop: 1024px;
+
 $main-color: #b85b05; // Main color variable for easy changes
 $text-color: #8d8d8d;
 $hover-color: #13008f;
@@ -24,6 +28,13 @@ $btn-hover:var(--btnB-hover);
         font-weight: bold;
         font-size: 25px;
     }
+    .table-responsive {
+        overflow-x: auto; // Allow horizontal scrolling
+        
+        @media (max-width: $breakpoint-mobile) {
+          -webkit-overflow-scrolling: touch; // Improve scrolling on mobile devices
+        }
+      }
     .table {
         // box-shadow: 3px 19px 133px 5px rgba(0,0,0,0.51);
         // -webkit-box-shadow: 3px 19px 133px 5px rgba(0,0,0,0.51);
@@ -37,6 +48,7 @@ $btn-hover:var(--btnB-hover);
         text-align: left;
         color:$text-color;
         color:var(--text-monem);
+        min-width: 600px;
         thead tr {
             background-color: $header-background-color;
             color: white;
@@ -58,8 +70,34 @@ $btn-hover:var(--btnB-hover);
                 border-bottom: 2px solid $border-color;
             }
         }
+        @media (max-width: $breakpoint-mobile) {
+            .thead {
+              display: none; // Hide table headers on small screens
+            }     
+            .table tbody, .table tr, .table td {
+              display: block;
+              width: 100%;
+            }   
+            .tr {
+              margin-bottom: 15px;
+            }
+            .td {
+              text-align: right;
+              padding-left: 50%; 
+              position: relative;
+              &::before {
+                content: attr(data-label); 
+                position: absolute;
+                left: 0;
+                width: 50%;
+                padding-left: 15px;
+                font-weight: bold;
+                text-align: left;
+              }
+            }
+          }
+          
     }
-
     .profile-pic {
         border-radius: 50%;
         height: 40px;
@@ -138,6 +176,39 @@ $btn-hover:var(--btnB-hover);
         }
         &:focus {
             outline: none;
+        }
+    }
+
+    @media(max-width: $breakpoint-mobile) {
+        h1, h2 {
+            font-size: 20px; 
+        }
+
+        .oooo h2 {
+            margin-right: 1rem;
+        }
+
+        .table, .right, #searchh {
+            width: 100%; 
+        }
+
+        .grade_num, .FeedBack {
+            width: 100%; 
+        }
+
+        .right {
+            margin-top: 1rem;
+            float: none;
+        }
+    }
+  
+    @media(min-width: $breakpoint-tablet) and (max-width: $breakpoint-desktop) {
+        h1, h2 {
+            font-size: 24px; 
+        }
+
+        .oooo h2 {
+            margin-right: 2rem; 
         }
     }
 }

@@ -10,7 +10,7 @@ function TableRow_Grading_Page({ record }) {
   return (
     <tbody>
       <tr>
-        <td>
+        <td data-label="Select">
           <input type="Checkbox"></input>
         </td>
         <td>
