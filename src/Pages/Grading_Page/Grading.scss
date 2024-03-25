@@ -11,7 +11,23 @@ $btn-hover:var(--btnB-hover);
     width: 90%;
     margin: auto;
     overflow: hidden;
+    h1, h2{
+        color: var(--textColor);
+    }
+    #searchh, .grade_num,.FeedBack{
+        background-color: var(--mainColor);
+        color: white;    
+    }
+    #searchhh{
+        color: var(--text-monem);
+        color: var(--text-monem);
+        font-weight: bold;
+        font-size: 25px;
+    }
     .table {
+        // box-shadow: 3px 19px 133px 5px rgba(0,0,0,0.51);
+        // -webkit-box-shadow: 3px 19px 133px 5px rgba(0,0,0,0.51);
+        // -moz-box-shadow: 3px 19px 133px 5px rgba(0,0,0,0.51);
         width: 100%;
         border-collapse: collapse;
         margin: 25px 0;
@@ -20,6 +36,7 @@ $btn-hover:var(--btnB-hover);
         ;
         text-align: left;
         color:$text-color;
+        color:var(--text-monem);
         thead tr {
             background-color: $header-background-color;
             color: white;
@@ -75,7 +92,7 @@ $btn-hover:var(--btnB-hover);
             margin-right: 65rem;
             margin-top: 3rem;
             margin-bottom: 3rem;
-            color: $main-color;
+            // color: $main-color;
             font-size: 32px;
         }
     }
@@ -83,17 +100,19 @@ $btn-hover:var(--btnB-hover);
         height: 2rem;
         border: 1px solid $border-color;
     }
-    #searchhh {
-        color: $text-color;
-    }
+    // #searchhh {
+    //     color: $text-color;
+    // }
     .grade_num {
         width: 60px;
         height: 40%;
-        margin-bottom: 3px;
+        margin-bottom: 5px;
+        margin-right: 10px;
+        
     }
-    h1 {
-        color: $main-color;
-    }
+    // h1 {
+    //     color: $main-color;
+    // }
     .right {
         display: grid;
         float: right;
@@ -108,8 +127,10 @@ $btn-hover:var(--btnB-hover);
 
     .grade_button {
         margin: 0;
+        // margin-left: 10px;
         width: 60px;
         background-color:$btn-color ;
+        font-weight: bold;
 
         &:hover {
             background-color: $btn-hover;

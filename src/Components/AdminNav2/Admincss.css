@@ -1,5 +1,31 @@
 /* Google Fonts Import Link */
+/* @import url("../../_Variables.scss"); */
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+
+/* Admin Home Section */
+:root {
+  --sidebar-expanded-margin: 200px;
+  --sidebar-default-margin: 80px;
+}
+.adminHomeSection {
+  /*margin-left: 80px;
+  */
+  margin-left: var(--sidebar-default-margin);
+  padding-left: 10px;
+  transition: all 0.5s !important;
+  -webkit-transition: all 0.5s !important;
+  -moz-transition: all 0.5s !important;
+  -ms-transition: all 0.5s !important;
+  -o-transition: all 0.5s !important;
+}
+.openSideBar {
+  transition: all 0.5s !important;
+  -webkit-transition: all 0.5s !important;
+  -moz-transition: all 0.5s !important;
+  -ms-transition: all 0.5s !important;
+  -o-transition: all 0.5s !important;
+  margin-left: var(--sidebar-expanded-margin) !important;
+}
 
 .sidebar {
   font-family: "Poppins", sans-serif;

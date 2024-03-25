@@ -7,6 +7,8 @@
   --text-monem:rgb(20, 19, 19);
   --btnB:#2450f1;
   --btnB-hover:#14319b;
+  --sidebar-expanded-margin: 200px;
+  --sidebar-default-margin: 70px;
 }
 
 [theme=Dark] {

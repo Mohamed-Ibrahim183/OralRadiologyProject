@@ -1,4 +1,4 @@
-@use '../../_Variables.scss' as *;
+@use "../../_Variables.scss" as *;
 // Defining color variables
 $background-color: var(--mainBackGround);
 $table-background-color: var(--mainBackGround);
@@ -30,31 +30,36 @@ $text-color: #8d8d8d;
     margin: 25px 0;
     font-size: 0.9em;
     background: $table-background-color;
+    color: var(--text-monem);
     text-align: left;
 
-    thead {
-      tr {
-        background-color: $header-background-color;
-        color: $header-text-color;
-        text-align: left;
+    // background-color: $header-background-color;
+    // color: $header-text-color;
+    text-align: left;
+  }
+
+  th,
+  td {
+    padding: 12px 15px;
+  }
+  thead{
+    tr{
+      background-color: var(--headerColor);
+      color: white;
+      text-align: left;
+    }
+  }
+
+  tbody {
+    tr {
+      border-bottom: 1px solid $border-color;
+
+      &:nth-of-type(even) {
+        background-color: $row-background-color;
       }
-    }
 
-    th, td {
-      padding: 12px 15px;
-    }
-
-    tbody {
-      tr {
-        border-bottom: 1px solid $border-color;
-
-        &:nth-of-type(even) {
-          background-color: $row-background-color;
-        }
-
-        &:last-of-type {
-          border-bottom: 2px solid $last-row-border-color;
-        }
+      &:last-of-type {
+        border-bottom: 2px solid $last-row-border-color;
       }
     }
   }
@@ -70,7 +75,8 @@ $text-color: #8d8d8d;
     display: inline-block;
   }
 
-  .pen, .basket {
+  .pen,
+  .basket {
     width: 20px;
     height: 20px;
     border-radius: 20%;
@@ -85,10 +91,11 @@ $text-color: #8d8d8d;
   .oooo {
     display: flex;
     margin-top: 40px;
+    justify-content: space-between;
     h2 {
-      float: left;
-      margin-right: 55rem; 
-      color:var(--headerColor);
+      // float: left;
+      // margin-right: 55rem;
+      color: var(--headerColor);
     }
   }
 
@@ -107,10 +114,12 @@ $text-color: #8d8d8d;
     height: 2rem;
     border: 1px solid $search-border-color;
     margin-top: 20px;
-
+    background-color: var(--mainColor);
   }
 
   #searchhh {
-    color: $text-color;
+    color: var(--text-monem);
+    font-weight: bold;
+    font-size: 25px;
   }
 }

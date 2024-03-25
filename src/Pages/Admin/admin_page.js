@@ -17,7 +17,7 @@ function Admin_page() {
       <Navbar />
       <div className="MainPage">
         <NavAdmin />
-        <div className="AdminSection">
+        <div className="AdminSection adminHomeSection">
           <div className="Charts">
             <div className="stats-row">
               <StatCard

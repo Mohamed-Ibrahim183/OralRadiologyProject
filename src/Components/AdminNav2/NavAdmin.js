@@ -3,8 +3,15 @@ import React, { useEffect, useState } from "react";
 import "./Admincss.css";
 import { Link } from "react-router-dom";
 
-const NavAdmin = () => {
+const NavAdmin = ({ open = true }) => {
   useEffect(() => {
+    async function setNav() {
+      setScroll(HeaderHeight - window.scrollY);
+    }
+    setTimeout(() => {
+      setNav();
+    }, 0.001);
+    // setNav();
     const arrowClickHandler = (e) => {
       let arrowParent = e.target.parentElement.parentElement;
       arrowParent.classList.toggle("showMenu");
@@ -13,10 +20,11 @@ const NavAdmin = () => {
     const sidebarBtnClickHandler = () => {
       const sidebar = document.querySelector(".sidebar");
       sidebar.classList.toggle("close");
-      document.querySelector(".AdminSection").classList.toggle("openSideBar");
-      // document.querySelector(
-      //   ".AdminSection"
-      // ).style.cssText = `margin-left: 200px`;
+      if (open) {
+        document
+          .querySelector(".adminHomeSection")
+          .classList.toggle("openSideBar");
+      }
     };
 
     const arrow = document.querySelectorAll(".arrow");

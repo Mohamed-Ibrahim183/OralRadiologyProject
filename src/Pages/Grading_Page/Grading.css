@@ -7,6 +7,8 @@
   --text-monem:rgb(20, 19, 19);
   --btnB:#2450f1;
   --btnB-hover:#14319b;
+  --sidebar-expanded-margin: 200px;
+  --sidebar-default-margin: 70px;
 }
 
 [theme=Dark] {
@@ -25,6 +27,19 @@
   margin: auto;
   overflow: hidden;
 }
+.monem2_admin h1, .monem2_admin h2 {
+  color: var(--textColor);
+}
+.monem2_admin #searchh, .monem2_admin .grade_num, .monem2_admin .FeedBack {
+  background-color: var(--mainColor);
+  color: white;
+}
+.monem2_admin #searchhh {
+  color: var(--text-monem);
+  color: var(--text-monem);
+  font-weight: bold;
+  font-size: 25px;
+}
 .monem2_admin .table {
   width: 100%;
   border-collapse: collapse;
@@ -33,6 +48,7 @@
   background: var(--mainBackGround);
   text-align: left;
   color: #8d8d8d;
+  color: var(--text-monem);
 }
 .monem2_admin .table thead tr {
   background-color: var(--headerColor);
@@ -83,23 +99,17 @@
   margin-right: 65rem;
   margin-top: 3rem;
   margin-bottom: 3rem;
-  color: #b85b05;
   font-size: 32px;
 }
 .monem2_admin #searchh {
   height: 2rem;
   border: 1px solid #ddd;
 }
-.monem2_admin #searchhh {
-  color: #8d8d8d;
-}
 .monem2_admin .grade_num {
   width: 60px;
   height: 40%;
-  margin-bottom: 3px;
-}
-.monem2_admin h1 {
-  color: #b85b05;
+  margin-bottom: 5px;
+  margin-right: 10px;
 }
 .monem2_admin .right {
   display: grid;
@@ -116,6 +126,7 @@
   margin: 0;
   width: 60px;
   background-color: var(--btnB);
+  font-weight: bold;
 }
 .monem2_admin .grade_button:hover {
   background-color: var(--btnB-hover);

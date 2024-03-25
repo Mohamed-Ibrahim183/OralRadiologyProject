@@ -1,75 +1,69 @@
 /* Google Fonts Import Link */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+/* @import url("../../_Variables.scss"); */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
 
-$sidebar-width: 210px;
-$sidebar-close-width: 78px;
+/* Admin Home Section */
 
-// * {
-//   margin: 0;
-//   padding: 0;
-//   box-sizing: border-box;
-//   font-family: 'Poppins', sans-serif;
-// }
-
-// body {
-//   overflow: hidden;
-// }
+.adminHomeSection {
+  margin-left: var(--default-margin);
+  .openSideBar {
+    margin-left: var(--sidebar-expanded-margin) !important;
+  }
+}
 
 .sidebar {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   overflow: hidden;
-
   position: fixed;
-  top: 0;
+  /* top: 0; */
   left: 0;
   height: 100%;
-  width: $sidebar-width;
+  width: 210px;
   background: #11101d;
   z-index: 100;
   transition: all 0.5s ease;
 
   &.close {
-    width: $sidebar-close-width;
-
+    width: 78px;
     .logo-details .logo_name {
       transition-delay: 0s;
       opacity: 0;
       pointer-events: none;
     }
-
     .nav-links {
       overflow: visible;
-
-      li .sub-menu {
-        position: absolute;
-        left: 100%;
-        top: -10px;
-        margin-top: 0;
-        padding: 10px 20px;
-        border-radius: 0 6px 6px 0;
+      li a .link_name {
         opacity: 0;
-        display: block;
         pointer-events: none;
-        transition: 0s;
-      }
-
-      li:hover .sub-menu {
-        top: 0;
-        opacity: 1;
-        pointer-events: auto;
-        transition: all 0.4s ease;
-      }
-
-      li .sub-menu .link_name {
-        font-size: 18px;
-        opacity: 1;
-        display: block;
       }
     }
-
+    .sub-menu {
+      position: absolute;
+      left: 100%;
+      top: -10px;
+      margin-top: 0;
+      padding: 10px 20px;
+      border-radius: 0 6px 6px 0;
+      opacity: 0;
+      display: block;
+      pointer-events: none;
+      transition: 0s;
+      &.blank {
+        opacity: 0;
+        pointer-events: none;
+      }
+    }
     .profile-details {
       background: none;
-      width: $sidebar-close-width;
+      width: 78px;
+      i,
+      .profile_name,
+      .job {
+        display: none;
+      }
+      img {
+        padding: 10px;
+      }
     }
   }
 
@@ -78,16 +72,14 @@ $sidebar-close-width: 78px;
     width: 100%;
     display: flex;
     align-items: center;
-
     i {
       font-size: 30px;
       color: #fff;
       height: 50px;
-      min-width: $sidebar-close-width;
+      min-width: 70px;
       text-align: center;
       line-height: 50px;
     }
-
     .logo_name {
       font-size: 22px;
       color: #fff;
@@ -101,26 +93,47 @@ $sidebar-close-width: 78px;
     height: 100%;
     padding: 30px 0 150px 0;
     overflow: auto;
-
     &::-webkit-scrollbar {
       display: none;
     }
-
     li {
       position: relative;
       list-style: none;
       transition: all 0.4s ease;
-
       &:hover {
         background: #1d1b31;
       }
-
+      .iocn-link {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      i {
+        height: 50px;
+        min-width: 70px;
+        text-align: center;
+        line-height: 50px;
+        color: #fff;
+        font-size: 20px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+      a {
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+        .link_name {
+          font-size: 18px;
+          font-weight: 400;
+          color: #fff;
+          transition: all 0.4s ease;
+        }
+      }
       .sub-menu {
         padding: 6px 6px 14px 80px;
         margin-top: -10px;
         background: #1d1b31;
         display: none;
-
         a {
           color: #fff;
           font-size: 15px;
@@ -128,73 +141,50 @@ $sidebar-close-width: 78px;
           white-space: nowrap;
           opacity: 0.6;
           transition: all 0.3s ease;
-
           &:hover {
             opacity: 1;
           }
         }
-
         &.blank {
-          opacity: 1;
-          pointer-events: auto;
           padding: 3px 20px 6px 16px;
-          opacity: 0;
-          pointer-events: none;
         }
       }
     }
-
-    li .iocn-link {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    li i {
-      height: 50px;
-      min-width: $sidebar-close-width;
-      text-align: center;
-      line-height: 50px;
-      color: #fff;
-      font-size: 20px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
     li.showMenu i.arrow {
       transform: rotate(-180deg);
     }
-
-    li a {
-      display: flex;
-      align-items: center;
-      text-decoration: none;
-
-      .link_name {
-        font-size: 18px;
-        font-weight: 400;
-        color: #fff;
-        transition: all 0.4s ease;
-      }
+    .sub-menu.blank {
+      top: 50%;
+      transform: translateY(-50%);
     }
   }
 
   .profile-details {
     position: fixed;
     bottom: 0;
-    width: $sidebar-width;
+    width: 260px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     background: #1d1b31;
     padding: 12px 0;
     transition: all 0.5s ease;
-
+    &.close {
+      background: none;
+      width: 78px;
+      i,
+      .profile_name,
+      .job {
+        display: none;
+      }
+      img {
+        padding: 10px;
+      }
+    }
     .profile-content {
       display: flex;
       align-items: center;
     }
-
     img {
       height: 52px;
       width: 52px;
@@ -204,7 +194,6 @@ $sidebar-close-width: 78px;
       background: #1d1b31;
       transition: all 0.5s ease;
     }
-
     .profile_name,
     .job {
       color: #fff;
@@ -212,7 +201,6 @@ $sidebar-close-width: 78px;
       font-weight: 500;
       white-space: nowrap;
     }
-
     .job {
       font-size: 12px;
     }
@@ -221,34 +209,25 @@ $sidebar-close-width: 78px;
 
 .home-section {
   position: relative;
-  // background: #e4e9f7;
+  background: #e4e9f7;
   height: 100vh;
-  left: $sidebar-width;
-  width: calc(100% - $sidebar-width);
+  left: 260px;
+  width: calc(100% - 260px);
   transition: all 0.5s ease;
   padding: 12px;
-
-  & ~ .home-section {
-    left: $sidebar-close-width;
-    width: calc(100% - $sidebar-close-width);
-  }
-
   .home-content {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-
     .bx-menu,
     .text {
       color: #11101d;
       font-size: 35px;
     }
-
     .bx-menu {
       cursor: pointer;
       margin-right: 10px;
     }
-
     .text {
       font-size: 26px;
       font-weight: 600;
@@ -257,27 +236,26 @@ $sidebar-close-width: 78px;
 }
 
 @media screen and (max-width: 400px) {
-  .sidebar,
-  .sidebar .profile-details {
+  .sidebar {
     width: 240px;
+    &.close {
+      width: 78px;
+      .profile-details {
+        background: none;
+        width: 78px;
+        i,
+        .profile_name,
+        .job {
+          display: none;
+        }
+        img {
+          padding: 10px;
+        }
+      }
+    }
   }
-
-  .sidebar.close {
-    width: $sidebar-close-width;
-  }
-
-  .sidebar.close .profile-details {
-    background: none;
-    width: $sidebar-close-width;
-  }
-
   .home-section {
     left: 240px;
     width: calc(100% - 240px);
-  }
-
-  .sidebar.close ~ .home-section {
-    left: $sidebar-close-width;
-    width: calc(100% - $sidebar-close-width);
   }
 }

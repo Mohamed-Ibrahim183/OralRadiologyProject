@@ -7,6 +7,8 @@
   --text-monem:rgb(20, 19, 19);
   --btnB:#2450f1;
   --btnB-hover:#14319b;
+  --sidebar-expanded-margin: 200px;
+  --sidebar-default-margin: 70px;
 }
 
 [theme=Dark] {
@@ -37,23 +39,26 @@
   margin: 25px 0;
   font-size: 0.9em;
   background: var(--mainBackGround);
+  color: var(--text-monem);
+  text-align: left;
   text-align: left;
 }
-.monem_admin .table thead tr {
+.monem_admin th,
+.monem_admin td {
+  padding: 12px 15px;
+}
+.monem_admin thead tr {
   background-color: var(--headerColor);
   color: white;
   text-align: left;
 }
-.monem_admin .table th, .monem_admin .table td {
-  padding: 12px 15px;
-}
-.monem_admin .table tbody tr {
+.monem_admin tbody tr {
   border-bottom: 1px solid #dddddd;
 }
-.monem_admin .table tbody tr:nth-of-type(even) {
+.monem_admin tbody tr:nth-of-type(even) {
   background-color: #f3f3f3;
 }
-.monem_admin .table tbody tr:last-of-type {
+.monem_admin tbody tr:last-of-type {
   border-bottom: 2px solid #ddd;
 }
 .monem_admin .profile-pic {
@@ -65,23 +70,24 @@
   margin-left: 10px;
   display: inline-block;
 }
-.monem_admin .pen, .monem_admin .basket {
+.monem_admin .pen,
+.monem_admin .basket {
   width: 20px;
   height: 20px;
   border-radius: 20%;
   color: white;
   background-color: #1c37d0;
 }
-.monem_admin .pen.basket, .monem_admin .basket.basket {
+.monem_admin .pen.basket,
+.monem_admin .basket.basket {
   background-color: red;
 }
 .monem_admin .oooo {
   display: flex;
   margin-top: 40px;
+  justify-content: space-between;
 }
 .monem_admin .oooo h2 {
-  float: left;
-  margin-right: 55rem;
   color: var(--headerColor);
 }
 .monem_admin .addbutton {
@@ -98,7 +104,10 @@
   height: 2rem;
   border: 1px solid #ddd;
   margin-top: 20px;
+  background-color: var(--mainColor);
 }
 .monem_admin #searchhh {
-  color: #8d8d8d;
+  color: var(--text-monem);
+  font-weight: bold;
+  font-size: 25px;
 }/*# sourceMappingURL=AllProfessorPage.css.map */

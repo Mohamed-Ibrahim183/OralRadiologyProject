@@ -7,6 +7,8 @@
   --text-monem:rgb(20, 19, 19);
   --btnB:#2450f1;
   --btnB-hover:#14319b;
+  --sidebar-expanded-margin: 200px;
+  --sidebar-default-margin: 70px;
 }
 
 [theme=Dark] {
@@ -32,7 +34,6 @@ ul li ul li a {
 }
 
 nav.secondary-Navigation {
-  box-shadow: -1px 4px 22px -1px rgba(0, 0, 0, 0.59);
   background: var(--headerColor);
   height: 80px;
   width: 100%;
@@ -133,6 +134,9 @@ nav.secondary-Navigation #check {
   display: flex;
   align-items: center;
   background: var(--headerColor);
+  box-shadow: 3px 19px 89px -13px rgba(0, 0, 0, 0.51);
+  -webkit-box-shadow: 3px 19px 89px -13px rgba(0, 0, 0, 0.51);
+  -moz-box-shadow: 3px 19px 89px -13px rgba(0, 0, 0, 0.51);
 }
 
 section {
