@@ -10,21 +10,17 @@
 .adminHomeSection {
   /*margin-left: 80px;
   */
-  margin-left: var(--sidebar-default-margin);
+
+  margin-left: var(--sidebar-default-margin) !important;
   padding-left: 10px;
-  transition: all 0.5s !important;
-  -webkit-transition: all 0.5s !important;
-  -moz-transition: all 0.5s !important;
-  -ms-transition: all 0.5s !important;
-  -o-transition: all 0.5s !important;
 }
 .openSideBar {
-  transition: all 0.5s !important;
-  -webkit-transition: all 0.5s !important;
-  -moz-transition: all 0.5s !important;
-  -ms-transition: all 0.5s !important;
-  -o-transition: all 0.5s !important;
   margin-left: var(--sidebar-expanded-margin) !important;
+}
+@media screen and (max-width: 400px) {
+  .adminHomeSection {
+    display: none;
+  }
 }
 
 .sidebar {

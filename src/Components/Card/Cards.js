@@ -28,7 +28,7 @@ const Cards = () => {
   // /////////////////////
 
   return (
-    <div className="Assignments">
+    <div className="Assignments ">
       {/* <button className="ToggleDarkMode">Toggle Dark Mode</button> */}
       {/* <DarkMode /> */}
       {content}

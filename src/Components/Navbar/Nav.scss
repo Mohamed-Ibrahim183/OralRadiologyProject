@@ -4,6 +4,7 @@
 
 
 
+
 a {
   text-decoration: none;
 
@@ -39,8 +40,12 @@ nav.secondary-Navigation {
     font-size: 30px;
     line-height: 80px;
     // padding: 0 100px;
-    padding-left: 20px;
+    padding-left: 10px;
     font-weight: bold;
+    @include sm(){
+      font-size: 8px;
+      line-height: 40px
+    }
   }
 
   ul {
@@ -66,8 +71,12 @@ nav.secondary-Navigation {
       }
     }
   }
+  .MainList{
+    max-height: 100vh;
+    overflow-y: scroll;
+  }
 
-  .checkbtn {
+  .checkBtn {
     font-size: 30px;
     color: white;
     float: right;
@@ -96,7 +105,7 @@ nav.secondary-Navigation {
 
   // @media (max-width: 858px) {
   @media (max-width: 1070px) {
-    .checkbtn {
+    .checkBtn {
       display: block;
     }
 
@@ -112,7 +121,7 @@ nav.secondary-Navigation {
 
       li {
         display: block;
-        margin: 50px 0;
+        margin: 30px 0;
         line-height: 30px;
         
         a {
@@ -137,9 +146,12 @@ nav.secondary-Navigation {
       }
     }
     #check:checked ~ ul {
+      width: fit-content;
+
       left: 0;
     }
   }
+  
 }
 
 .HEADER{
@@ -196,4 +208,10 @@ ul li {
       display: block;
     }
   }
+}
+ul.showDropList{
+  position: absolute !important;
+  z-index: 100;
+  color: red !important;
+  
 }
