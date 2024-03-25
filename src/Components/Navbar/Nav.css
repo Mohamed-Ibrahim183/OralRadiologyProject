@@ -72,10 +72,6 @@ nav.secondary-Navigation ul li a.active, nav.secondary-Navigation ul li a:hover 
   background: var(--secondText);
   transition: 0.5s;
 }
-nav.secondary-Navigation .MainList {
-  max-height: 100vh;
-  overflow-y: scroll;
-}
 nav.secondary-Navigation .checkBtn {
   font-size: 30px;
   color: white;
@@ -89,6 +85,10 @@ nav.secondary-Navigation #check {
   display: none;
 }
 @media (max-width: 952px) {
+  nav.secondary-Navigation .MainList {
+    max-height: 100vh;
+    overflow-y: scroll;
+  }
   nav.secondary-Navigation label.logo {
     font-size: 30px;
     padding-left: 50px;

@@ -71,10 +71,8 @@ nav.secondary-Navigation {
       }
     }
   }
-  .MainList{
-    max-height: 100vh;
-    overflow-y: scroll;
-  }
+  
+  
 
   .checkBtn {
     font-size: 30px;
@@ -91,6 +89,10 @@ nav.secondary-Navigation {
   }
 
   @media (max-width: 952px) {
+    .MainList{
+      max-height: 100vh;
+      overflow-y: scroll;
+    }
     label.logo {
       font-size: 30px;
       padding-left: 50px;
