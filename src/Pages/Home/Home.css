@@ -14,11 +14,11 @@
   box-sizing: border-box;
 }
 
-a,
-img,
-span,
-input,
-button,
+.HomePage a,
+.HomePage img,
+.HomePage span,
+.HomePage input,
+.HomePage button,
 ion-icon {
   display: block;
 }
