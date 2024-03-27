@@ -1,4 +1,4 @@
-html {
+.HomePage html {
   font-family: "Arial", sans-serif;
   font-size: 10px;
   scroll-behavior: smooth;
@@ -25,7 +25,7 @@ ion-icon {
 
 
 
-body {
+.HomePage body {
   color: hsl(0, 0%, 47%);
   font-size: 1.5rem;
 }
@@ -56,35 +56,35 @@ body {
   margin-top: 200px;
 }
 
-.scrollbar-item {
+.HomePage .scrollbar-item {
   min-width: calc(33.33% - 20px);
 }
 
-.bg-image {
+.HomePage .bg-image {
   background-color: #0E264F;
   padding-bottom: 30rem;
 }
 
-.video {
+.HomePage .video {
   background-image: url("https://www.google.com/url?sa=i&url=https%3A%2F%2Fthink3dimaging.com%2F&psig=AOvVaw2_jtiONyR1J7gepS23USfn&ust=1711284495415000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCKikp9a1ioUDFQAAAAAdAAAAABAE");
   padding-block: 0;
   margin-block-end: -250px;
   margin-top: 50px;
 }
 
-input,
-button {
+.HomePage input,
+.HomePage button {
   background: none;
   border: none;
   font: inherit;
 }
 
 
-address {
+.HomePage address {
   font-style: normal;
 }
 
-.section-subtitle {
+.HomePage .section-subtitle {
   color: hsl(225, 68%, 53%);
   font-family: "Arial", sans-serif;
   font-size: 1.8rem;
@@ -92,32 +92,32 @@ address {
   text-transform: uppercase;
 }
 
-.h1,
-.h2,
-.h3 {
+.HomePage .h1,
+.HomePage .h2,
+.HomePage .h3 {
   font-family: "Arial", sans-serif;
   line-height: 1.2;
 }
 
-.h1 {
+.HomePage .h1 {
   color: hsl(218, 70%, 18%);
   font-size: 3.6rem;
 }
 
-.h2,
-.h3 {
+.HomePage .h2,
+.HomePage .h3 {
   color: hsl(217, 100%, 12%);
 }
 
-.h2 {
+.HomePage .h2 {
   font-size: 4rem;
 }
 
-.h3 {
+.HomePage .h3 {
   font-size: 2.2rem;
 }
 
-.btn {
+.HomePage .btn {
   margin-top: 2rem;
   background-image: linear-gradient(90deg, hsl(201, 92%, 47%) 0%, hsl(225, 68%, 53%) 100%);
   color: white;
@@ -130,21 +130,21 @@ address {
   box-shadow: 0px 10px 30px hsla(0, 0%, 0%, 0.1);
 }
 
-.btn:is(:hover, :focus) {
+.HomePage .btn:is(:hover, :focus) {
   --deg: -90deg;
 }
 
-.w-100 {
+.HomePage .w-100 {
   width: 100%;
 }
 
-.text-center {
+.HomePage .text-center {
   text-align: center;
 }
 
-.card-text,
-.header-top,
-.header-bottom .btn {
+.HomePage .card-text,
+.HomePage .header-top,
+.HomePage .header-bottom .btn {
   display: none;
 }
 
@@ -159,7 +159,7 @@ address {
   }
 }
 
-.header-bottom > .container {
+.HomePage .header-bottom > .container {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -189,22 +189,22 @@ address {
   max-width: max-content;
 }
 
-.Human {
+.HomePage .Human {
   display: flex;
   align-items: center;
   margin-top: 20rem;
   gap: 15px;
 }
 
-.Human {
+.HomePage .Human {
   line-height: 1.6;
 }
 
-.hero-title {
+.HomePage .hero-title {
   font-size: 7rem;
 }
 
-.scroll-container {
+.HomePage .scroll-container {
   display: flex;
   background-color: #0D254F;
   overflow: auto;
@@ -213,7 +213,7 @@ address {
   padding: 10px;
 }
 
-.scroll-container img {
+.HomePage .scroll-container img {
   border-radius: 50px;
   padding: 2rem;
   width: 600px;
@@ -222,30 +222,30 @@ address {
   height: 400px;
 }
 
-.space {
+.HomePage .space {
   background-color: #0D254F;
   padding-top: 50px;
 }
 
-.scroll-container img:hover {
+.HomePage .scroll-container img:hover {
   transform: scale(1.1);
   transition: ease-in 0.24s;
 }
 
-.scroll-container::-webkit-scrollbar {
+.HomePage .scroll-container::-webkit-scrollbar {
   height: 1.5rem;
 }
 
-.scroll-container::-webkit-scrollbar-track,
-.scroll-container::-webkit-scrollbar-thumb {
+.HomePage .scroll-container::-webkit-scrollbar-track,
+.HomePage .scroll-container::-webkit-scrollbar-thumb {
   border-radius: 50px;
 }
 
-.scroll-container::-webkit-scrollbar-thumb:hover {
+.HomePage .scroll-container::-webkit-scrollbar-thumb:hover {
   background-color: hsl(209, 100%, 49%);
 }
 
-.scroll-container::-webkit-scrollbar-button {
+.HomePage .scroll-container::-webkit-scrollbar-button {
   width: calc(22% - 25px);
 }
 
@@ -265,12 +265,12 @@ address {
   background-color: hsl(210, 26%, 11%);
 }
 
-.mg-30 {
+.HomePage .mg-30 {
   margin-top: 30rem;
   margin-bottom: 30rem;
 }
 
-.Spline {
+.HomePage .Spline {
   padding-right: 50%;
   position: fixed;
   align-items: left;

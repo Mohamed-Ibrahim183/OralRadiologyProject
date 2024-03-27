@@ -41,6 +41,6 @@
   },
   "devDependencies": {
     "@splinetool/react-spline": "^2.2.6",
-    "@splinetool/runtime": "^1.0.82"
+    "@splinetool/runtime": "^1.0.85"
   }
 }
