@@ -1,23 +1,52 @@
+@use '../../_Variables.scss' as *;
 @import "./_breakpoints";
 
 // .Assignments{
 //   display: grid;
 //   grid-template-columns: repeat(2, 1fr);
 // }
+// $mainColor: #0082e6;
+// $mainBackGround: #e7fff7;
+
+// $mainColor: #4d8ba8;
+// $mainBackGround: #1b343c;
+// $textColor: #96bdcf;
+// $mainColor: #008080;
+// $mainBackGround: #1C445A;
+
+body{
+  background-color: var(--mainBackGround);
+  transition: 0.5s;
+  -webkit-transition: 0.5s;
+  -moz-transition: 0.5s;
+  -ms-transition: 0.5s;
+  -o-transition: 0.5s;
+}
 .AssCard.container {
   .Card {
-    background-color: #eeeeee57;
+    -webkit-box-shadow: 6px 2px 28px -9px rgba(0,0,0,0.47);
+    -moz-box-shadow: 6px 2px 28px -9px rgba(0,0,0,0.47);
+    box-shadow: 6px 2px 28px -9px rgba(0,0,0,0.47);
+    // background-color: #eeeeee57;
+    padding: 10px 0 10px 30px;
+    padding-left: 30px;
     border-radius: 10px;
     margin: 20px auto;
     display: grid;
     grid-template-columns: auto 1fr;
     width: 90%;
     margin-bottom: 50px;
-    @include sm() {
+    // grid-template-columns: 1fr;
+    @include breakpoint(400){
       grid-template-columns: 1fr;
     }
     @include lg() {
       grid-template-columns: auto 1fr;
+    }
+    @include xs(){
+    }
+    @include sm() {
+      grid-template-columns: 1fr;
     }
 
     .Images {
@@ -37,13 +66,13 @@
         img {
           width: 200px;
           height: 200px;
+          width: 200px;
+          height: 200px;
           border-radius: 10px;
           -webkit-border-radius: 10px;
           -moz-border-radius: 10px;
           -ms-border-radius: 10px;
           -o-border-radius: 10px;
-            width: 200px;
-            height: 200px;
           }
         
         .left-Arrow {
@@ -57,7 +86,7 @@
           -moz-transform: rotate(90deg);
           -ms-transform: rotate(90deg);
           -o-transform: rotate(90deg);
-          color: #2485f0;
+          color: var(--mainColor);
         }
 
         .right-Arrow {
@@ -73,7 +102,7 @@
           -moz-transform: rotate(-90deg);
           -ms-transform: rotate(-90deg);
           -o-transform: rotate(-90deg);
-          color: #2485f0;
+          color: var(--mainColor);
         }
       }
 
@@ -81,10 +110,15 @@
         padding: 2px 5px;
         display: flex;
         justify-content: space-between;
+        border: 1px solid #0082e6;
+        border: 3px solid var(--textColor);
+        border-top-left-radius: 12px;
+        border-bottom-right-radius: 12px;
         .AssName,
         .Slider {
           font-weight: bold;
-          color: #2485f0;
+          color: #36A3C4;
+          color: var(--textColor);
         }
       }
     }
@@ -98,11 +132,11 @@
     padding-top: 5px;
     gap: 10px;
     margin: auto;
-    @include sm() {
-      grid-template-columns: 1fr;
-      padding-left: 5px;
+    @include xl() {
+      margin-left: 20px;
       margin: auto;
       // gap: 10px;
+      padding-left: 10px;
     }
     @include lg() {
       grid-template-columns: 1fr;
@@ -110,15 +144,16 @@
       // gap: 10px;
       padding-left: 5px;
     }
-    @include xl() {
-      margin-left: 20px;
+    @include sm() {
+      grid-template-columns: 1fr;
+      padding-left: 5px;
       margin: auto;
       // gap: 10px;
-      padding-left: 10px;
     }
     .Attribute {
       display: flex;
       flex-wrap: wrap;
+      margin-right: auto;
     }
 
     .Key {
@@ -126,51 +161,52 @@
       font-weight: bold;
       font-size: 20px;
       color: white;
-      background-color: #2485f0;
+      background-color: var(--mainColor);
+      // background-color: #2485f0;
       border-radius: 6px;
       padding: 5px;
       // margin: 20px 5px 20px 0px;
       height: fit-content;
       width: 162px;
       text-align: center;
-      @include sm() {
-        font-size: 14px;
-        font-weight: 600;
-        // margin: 5px;
+      @include xl() {
+        font-size: 18px;
       }
       @include lg() {
         font-size: 18px;
         font-weight: bold;
         // margin: 5px;
       }
-      @include xl() {
-        font-size: 18px;
+      @include sm() {
+        font-size: 14px;
+        font-weight: 600;
+        // margin: 5px;
       }
     }
 
     .Value {
       font-weight: bold;
       font-size: 16px;
-      color: #2485f0;
+      color: var(--textColor);
       // background-color: #DFECFC;
       margin: 1px 3px;
-      border: 1px solid #2485f0;
+      border: 1px solid var(--mainColor);
       border-radius: 6px;
       padding: 5px;
       // margin: 20px 5px 20px 0px;
       height: fit-content;
+      @include xl() {
+        font-size: 14px;
+      }
+      @include lg() {
+        font-size: 12px;
+        // margin: 5px;
+        font-weight: bold;
+      }
       @include sm() {
         font-size: 10px;
         // margin: 5px;
         font-weight: bold;
-      }
-      @include lg() {
-        font-size: 14px;
-        // margin: 5px;
-        font-weight: bold;
-      }
-      @include xl() {
-        font-size: 14px;
       }
     }
   }

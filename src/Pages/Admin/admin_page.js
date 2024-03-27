@@ -1,8 +1,10 @@
 import StatCard from "./StatCard";
 import Chart from "./Chartt.js";
-import "./Admin_page.css";
+//import "./Admin_page.css";
+import "./Admin.css"
 import Navbar from "../../Components/Navbar/Navbar.js";
 import AdminNav from "../../Components/AdminNav/AdminNav.js";
+import NavAdmin from "../../Components/AdminNav2/NavAdmin.js";
 import Mail from "./Maill.js";
 import { useEffect } from "react";
 function Admin_page() {
@@ -14,8 +16,8 @@ function Admin_page() {
     <>
       <Navbar />
       <div className="MainPage">
-        <AdminNav />
-        <div className="AdminSection">
+        <NavAdmin />
+        <div className="AdminSection adminHomeSection">
           <div className="Charts">
             <div className="stats-row">
               <StatCard

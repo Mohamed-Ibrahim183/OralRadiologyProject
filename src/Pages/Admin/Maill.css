@@ -4,14 +4,11 @@
   gap: 10px;
   width: 100%;
   max-width: 500px;
-  /* margin-left: 20%;
-  margin-top: 4%; */
   margin: 1%;
   padding: 1%;
   background: white;
   border-radius: 10px;
 }
-
 .mail-form input,
 .mail-form button {
   padding: 10px;
@@ -23,10 +20,7 @@
 .mail-form button {
   font-weight: bold;
   font-size: 20px;
-  /* width: fit-content;
-  text-align: center;
-  margin: auto;
-  padding: 10px 20px; */
+  background-color: var(--btnB);
 }
 .react-quill {
   background-color: white;
@@ -38,7 +32,11 @@
 }
 
 .mail-form button {
-  background-color: blue;
+  background-color: var(--btnB);
   color: white;
   cursor: pointer;
+  background-color: var(--btnB);
+}
+.mail-form button:hover {
+  background-color: var(--btnB-hover);
 }

@@ -1,4 +1,4 @@
-
+@use "../../Variables" as *;
 .PageBody {
   font-family: Arial, sans-serif;
   // background: linear-gradient(135deg, #71b7e6, #9b59b6);
@@ -13,12 +13,16 @@
   width: 80%;
   max-width: 600px;
   margin: 50px auto;
-  background-color: #fff;
+  background-color: var(--mainBackGround);
+  color: var(--mainColor);
   padding: 20px;
   border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: -2px 0px 34px 3px rgba(0,0,0,0.75);
+  -webkit-box-shadow: -2px 0px 34px 3px rgba(0,0,0,0.75);
+  -moz-box-shadow: -2px 0px 34px 3px rgba(0,0,0,0.75);
   display: flex;
   flex-direction: column;
+  
   .form-title {
     font-size: 24px;
     font-weight: bold;
@@ -31,7 +35,12 @@
     background-color: #ccc;
     margin-bottom: 20px;
   }
-  
+  input, input::placeholder{
+    background-color: var(--mainColor);
+    // background-color: rgba(var(--mainColor),0.8);
+
+    color: white;
+  }
   .main-user-info {
     display: flex;
     flex-wrap: wrap;

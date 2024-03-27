@@ -1,71 +1,25 @@
-nav.primary-navigation.primary-navigation {
-  margin: 0 auto;
-  display: block;
-  text-align: center;
-  font-size: 16px;
+:root {
+  --mainBackGround: #F5FBF9;
+  --mainColor: #0082e6;
+  --secondText: #65b4f1;
+  --textColor: var(--mainColor);
+  --headerColor: #0082e6;
+  --text-monem:rgb(20, 19, 19);
+  --btnB:#2450f1;
+  --btnB-hover:#14319b;
+  --sidebar-expanded-margin: 200px;
+  --sidebar-default-margin: 70px;
 }
-nav.primary-navigation.primary-navigation ul {
-  display: flex;
-  flex-wrap: wrap;
-}
-nav.primary-navigation.primary-navigation ul li {
-  list-style: none;
-  margin: 0 auto;
-  border-left: 2px solid #3ca0e7;
-  display: inline-block;
-  padding: 0 10px;
-  position: relative;
-  text-decoration: none;
-  text-align: center;
-  font-family: arvo;
-  z-index: 10;
-}
-nav.primary-navigation.primary-navigation li a {
-  font-size: 20px;
-  color: black;
-  transition: all 0.3s ease;
-  -webkit-transition: all 0.3s ease;
-  -moz-transition: all 0.3s ease;
-  -ms-transition: all 0.3s ease;
-  -o-transition: all 0.3s ease;
-}
-nav.primary-navigation.primary-navigation li a:hover {
-  color: #3ca0e7;
-  font-weight: bold;
-}
-nav.primary-navigation.primary-navigation li:hover {
-  cursor: pointer;
-}
-nav.primary-navigation.primary-navigation ul li ul {
-  visibility: hidden;
-  opacity: 0;
-  position: absolute;
-  padding-left: 0;
-  left: 0;
-  display: none;
-  background: white;
-}
-nav.primary-navigation.primary-navigation ul li:hover > ul,
-nav.primary-navigation.primary-navigation ul li ul:hover {
-  visibility: visible;
-  opacity: 1;
-  display: block;
-  min-width: 250px;
-  text-align: left;
-  padding-top: 20px;
-  box-shadow: 0px 3px 5px -1px #ccc;
-}
-nav.primary-navigation.primary-navigation ul li ul li {
-  clear: both;
-  width: 100%;
-  text-align: left;
-  margin-bottom: 20px;
-  border-style: none;
-}
-nav.primary-navigation.primary-navigation ul li ul li a:hover {
-  padding-left: 10px;
-  border-left: 2px solid #3ca0e7;
-  transition: all 0.3s ease;
+
+[theme=Dark] {
+  --mainColor: #4d8ba8;
+  --mainBackGround: #1b343c;
+  --secondText: #65b4f1;
+  --textColor: #96bdcf;
+  --headerColor: #4d8ba8;
+  --text-monem:rgb(230, 230, 230);
+  --btnB:#4d8ba8;
+  --btnB-hover:#356981;
 }
 
 a {
@@ -80,7 +34,7 @@ ul li ul li a {
 }
 
 nav.secondary-Navigation {
-  background: #0082e6;
+  background: var(--headerColor);
   height: 80px;
   width: 100%;
   position: relative;
@@ -90,12 +44,17 @@ nav.secondary-Navigation label.logo {
   color: white;
   font-size: 30px;
   line-height: 80px;
-  padding-left: 20px;
+  padding-left: 10px;
   font-weight: bold;
+}
+@media (max-width: 480px) {
+  nav.secondary-Navigation label.logo {
+    font-size: 8px;
+    line-height: 40px;
+  }
 }
 nav.secondary-Navigation ul {
   float: right;
-  margin-right: 20px;
 }
 nav.secondary-Navigation ul li {
   display: inline-block;
@@ -110,10 +69,10 @@ nav.secondary-Navigation ul li a {
   text-transform: uppercase;
 }
 nav.secondary-Navigation ul li a.active, nav.secondary-Navigation ul li a:hover {
-  background: #1b9bff;
+  background: var(--secondText);
   transition: 0.5s;
 }
-nav.secondary-Navigation .checkbtn {
+nav.secondary-Navigation .checkBtn {
   font-size: 30px;
   color: white;
   float: right;
@@ -126,6 +85,10 @@ nav.secondary-Navigation #check {
   display: none;
 }
 @media (max-width: 952px) {
+  nav.secondary-Navigation .MainList {
+    max-height: 100vh;
+    overflow-y: scroll;
+  }
   nav.secondary-Navigation label.logo {
     font-size: 30px;
     padding-left: 50px;
@@ -135,7 +98,7 @@ nav.secondary-Navigation #check {
   }
 }
 @media (max-width: 1070px) {
-  nav.secondary-Navigation .checkbtn {
+  nav.secondary-Navigation .checkBtn {
     display: block;
   }
   nav.secondary-Navigation ul {
@@ -150,7 +113,7 @@ nav.secondary-Navigation #check {
   }
   nav.secondary-Navigation ul li {
     display: block;
-    margin: 50px 0;
+    margin: 30px 0;
     line-height: 30px;
   }
   nav.secondary-Navigation ul li a {
@@ -158,7 +121,7 @@ nav.secondary-Navigation #check {
   }
   nav.secondary-Navigation ul li a:hover, nav.secondary-Navigation ul li a.active {
     background: none;
-    color: #0082e6;
+    color: var(--headerColor);
   }
   nav.secondary-Navigation ul.dropDown {
     margin-top: -50px;
@@ -169,12 +132,23 @@ nav.secondary-Navigation #check {
     margin: 10px;
   }
   nav.secondary-Navigation ul.dropDown li:hover {
-    background-color: #1b9bff;
+    background-color: var(--secondText);
     color: white;
   }
   nav.secondary-Navigation #check:checked ~ ul {
+    width: -moz-fit-content;
+    width: fit-content;
     left: 0;
   }
+}
+
+.HEADER {
+  display: flex;
+  align-items: center;
+  background: var(--headerColor);
+  box-shadow: 3px 19px 89px -13px rgba(0, 0, 0, 0.51);
+  -webkit-box-shadow: 3px 19px 89px -13px rgba(0, 0, 0, 0.51);
+  -moz-box-shadow: 3px 19px 89px -13px rgba(0, 0, 0, 0.51);
 }
 
 section {
@@ -205,7 +179,7 @@ ul li ul.dropDown li {
 ul li ul.dropDown {
   width: -moz-fit-content;
   width: fit-content;
-  background-color: #0082e6;
+  background-color: var(--headerColor);
   position: absolute;
   left: -50px;
   z-index: 11;
@@ -218,4 +192,10 @@ ul li ul.dropDown {
 }
 ul li:hover ul.dropDown {
   display: block;
+}
+
+ul.showDropList {
+  position: absolute !important;
+  z-index: 100;
+  color: red !important;
 }/*# sourceMappingURL=Nav.css.map */

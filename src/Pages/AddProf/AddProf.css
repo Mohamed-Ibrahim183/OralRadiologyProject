@@ -1,3 +1,27 @@
+:root {
+  --mainBackGround: #F5FBF9;
+  --mainColor: #0082e6;
+  --secondText: #65b4f1;
+  --textColor: var(--mainColor);
+  --headerColor: #0082e6;
+  --text-monem:rgb(20, 19, 19);
+  --btnB:#2450f1;
+  --btnB-hover:#14319b;
+  --sidebar-expanded-margin: 200px;
+  --sidebar-default-margin: 70px;
+}
+
+[theme=Dark] {
+  --mainColor: #4d8ba8;
+  --mainBackGround: #1b343c;
+  --secondText: #65b4f1;
+  --textColor: #96bdcf;
+  --headerColor: #4d8ba8;
+  --text-monem:rgb(230, 230, 230);
+  --btnB:#4d8ba8;
+  --btnB-hover:#356981;
+}
+
 .PageBody {
   font-family: Arial, sans-serif;
   background-image: url("./images/profile.png");
@@ -10,10 +34,13 @@
   width: 80%;
   max-width: 600px;
   margin: 50px auto;
-  background-color: #fff;
+  background-color: var(--mainBackGround);
+  color: var(--mainColor);
   padding: 20px;
   border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: -2px 0px 34px 3px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: -2px 0px 34px 3px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: -2px 0px 34px 3px rgba(0, 0, 0, 0.75);
   display: flex;
   flex-direction: column;
 }
@@ -27,6 +54,14 @@
   height: 1px;
   background-color: #ccc;
   margin-bottom: 20px;
+}
+.container.AddProf input::-moz-placeholder {
+  background-color: var(--mainColor);
+  color: white;
+}
+.container.AddProf input, .container.AddProf input::placeholder {
+  background-color: var(--mainColor);
+  color: white;
 }
 .container.AddProf .main-user-info {
   display: flex;

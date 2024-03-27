@@ -1,0 +1,125 @@
+@use "../../_Variables.scss" as *;
+// Defining color variables
+$background-color: var(--mainBackGround);
+$table-background-color: var(--mainBackGround);
+$header-background-color: var(--headerColor);
+$header-text-color: white;
+$border-color: #dddddd;
+$row-background-color: #f3f3f3;
+$last-row-border-color: #ddd;
+$icon-background-color: #1c37d0;
+$delete-icon-background-color: red;
+$button-background-color: #1c37d0;
+$button-border-color: #1c37d0;
+$search-border-color: #ddd;
+$text-color: #8d8d8d;
+
+.body {
+  font-family: Arial, sans-serif;
+  background: $background-color;
+}
+
+.monem_admin {
+  width: 90%;
+  margin: auto;
+  overflow: hidden;
+  color: $text-color;
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    background: $table-background-color;
+    color: var(--text-monem);
+    text-align: left;
+
+    // background-color: $header-background-color;
+    // color: $header-text-color;
+    text-align: left;
+  }
+
+  th,
+  td {
+    padding: 12px 15px;
+  }
+  thead{
+    tr{
+      background-color: var(--headerColor);
+      color: white;
+      text-align: left;
+    }
+  }
+
+  tbody {
+    tr {
+      border-bottom: 1px solid $border-color;
+
+      &:nth-of-type(even) {
+        background-color: $row-background-color;
+      }
+
+      &:last-of-type {
+        border-bottom: 2px solid $last-row-border-color;
+      }
+    }
+  }
+
+  .profile-pic {
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+  }
+
+  .icon {
+    margin-left: 10px;
+    display: inline-block;
+  }
+
+  .pen,
+  .basket {
+    width: 20px;
+    height: 20px;
+    border-radius: 20%;
+    color: white;
+    background-color: $icon-background-color;
+
+    &.basket {
+      background-color: $delete-icon-background-color;
+    }
+  }
+
+  .oooo {
+    display: flex;
+    margin-top: 40px;
+    justify-content: space-between;
+    h2 {
+      // float: left;
+      // margin-right: 55rem;
+      color: var(--headerColor);
+    }
+  }
+
+  .addbutton {
+    background-color: $button-background-color;
+    color: white;
+    float: right;
+    width: 6.2rem;
+    height: 2.5rem;
+    border-radius: 0.7rem;
+    border: 1px solid $button-border-color;
+    margin-bottom: 6px;
+  }
+
+  #searchh {
+    height: 2rem;
+    border: 1px solid $search-border-color;
+    margin-top: 20px;
+    background-color: var(--mainColor);
+  }
+
+  #searchhh {
+    color: var(--text-monem);
+    font-weight: bold;
+    font-size: 25px;
+  }
+}
