@@ -8,6 +8,7 @@ import SecondPage from "./Pages/SecondPage";
 // import Profile2 from "./Pages/Profile/Profile2";
 import AddProf from "./Pages/AddProf";
 import Profile from "./Pages/Profile/Profile";
+import Home from "./Pages/Home/Home";
 import AssignmentSubmission from "./Pages/assignment_page/Assignment_submission_page";
 import ProfessorTable from "./Pages/All_professors/All_professors";
 import Admin_page from "./Pages/Admin/admin_page";
@@ -17,7 +18,7 @@ import Grading_Page from "./Pages/Grading_Page/Grading_Page";
 const routes = [
   {
     path: "/",
-    element: <OverViewAssignmentsPage />,
+    element: <Home />,
     errorElement: <NotFound />,
   },
   {
@@ -45,6 +46,7 @@ const routes = [
     element: <AddProf />,
     errorElement: <NotFound />,
   },
+
   {
     path: "/Profile",
     element: <Profile />,

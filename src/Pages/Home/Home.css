@@ -1,0 +1,277 @@
+html {
+  font-family: "Arial", sans-serif;
+  font-size: 10px;
+  scroll-behavior: smooth;
+}
+
+/* sets */
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+a,
+img,
+span,
+input,
+button,
+ion-icon {
+  display: block;
+}
+
+
+
+body {
+  color: hsl(0, 0%, 47%);
+  font-size: 1.5rem;
+}
+
+.HomePage .PageBody {
+  font-family: Arial, sans-serif;
+  background-position: static;
+  background-blend-mode: hue;
+  background-color: rgb(255, 255, 255);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.HomePage .parent {
+  margin: 1rem;
+  padding: 2rem 2rem;
+  text-align: center;
+}
+
+.HomePage .child {
+  display: inline-block;
+  padding: 1rem 1rem;
+  vertical-align: middle;
+  align-items: center;
+}
+
+.HomePage .title-line {
+  margin-top: 200px;
+}
+
+.scrollbar-item {
+  min-width: calc(33.33% - 20px);
+}
+
+.bg-image {
+  background-color: #0E264F;
+  padding-bottom: 30rem;
+}
+
+.video {
+  background-image: url("https://www.google.com/url?sa=i&url=https%3A%2F%2Fthink3dimaging.com%2F&psig=AOvVaw2_jtiONyR1J7gepS23USfn&ust=1711284495415000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCKikp9a1ioUDFQAAAAAdAAAAABAE");
+  padding-block: 0;
+  margin-block-end: -250px;
+  margin-top: 50px;
+}
+
+input,
+button {
+  background: none;
+  border: none;
+  font: inherit;
+}
+
+
+address {
+  font-style: normal;
+}
+
+.section-subtitle {
+  color: hsl(225, 68%, 53%);
+  font-family: "Arial", sans-serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.h1,
+.h2,
+.h3 {
+  font-family: "Arial", sans-serif;
+  line-height: 1.2;
+}
+
+.h1 {
+  color: hsl(218, 70%, 18%);
+  font-size: 3.6rem;
+}
+
+.h2,
+.h3 {
+  color: hsl(217, 100%, 12%);
+}
+
+.h2 {
+  font-size: 4rem;
+}
+
+.h3 {
+  font-size: 2.2rem;
+}
+
+.btn {
+  margin-top: 2rem;
+  background-image: linear-gradient(90deg, hsl(201, 92%, 47%) 0%, hsl(225, 68%, 53%) 100%);
+  color: white;
+  font-size: 1.6rem;
+  width: 300px;
+  text-transform: uppercase;
+  padding: 20px 30px;
+  text-align: center;
+  border-radius: 4px;
+  box-shadow: 0px 10px 30px hsla(0, 0%, 0%, 0.1);
+}
+
+.btn:is(:hover, :focus) {
+  --deg: -90deg;
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.card-text,
+.header-top,
+.header-bottom .btn {
+  display: none;
+}
+
+
+
+@keyframes slideIn {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+.header-bottom > .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.HomePage .doctor {
+  background-color: hsl(218, 70%, 18%);
+  margin-top: 500px;
+}
+
+.HomePage .doctor-banner {
+  margin-block-end: 50px;
+}
+
+.HomePage .doctor .section-subtitle {
+  text-transform: capitalize;
+}
+
+.HomePage .doctor .section-title {
+  color: white;
+  font-size: 3.2rem;
+  margin-block-end: 30px;
+}
+
+.HomePage .doctor .btn {
+  max-width: max-content;
+}
+
+.Human {
+  display: flex;
+  align-items: center;
+  margin-top: 20rem;
+  gap: 15px;
+}
+
+.Human {
+  line-height: 1.6;
+}
+
+.hero-title {
+  font-size: 7rem;
+}
+
+.scroll-container {
+  display: flex;
+  background-color: #0D254F;
+  overflow: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+  padding: 10px;
+}
+
+.scroll-container img {
+  border-radius: 50px;
+  padding: 2rem;
+  width: 600px;
+  margin-bottom: 50px;
+  white-space: var(--white);
+  height: 400px;
+}
+
+.space {
+  background-color: #0D254F;
+  padding-top: 50px;
+}
+
+.scroll-container img:hover {
+  transform: scale(1.1);
+  transition: ease-in 0.24s;
+}
+
+.scroll-container::-webkit-scrollbar {
+  height: 1.5rem;
+}
+
+.scroll-container::-webkit-scrollbar-track,
+.scroll-container::-webkit-scrollbar-thumb {
+  border-radius: 50px;
+}
+
+.scroll-container::-webkit-scrollbar-thumb:hover {
+  background-color: hsl(209, 100%, 49%);
+}
+
+.scroll-container::-webkit-scrollbar-button {
+  width: calc(22% - 25px);
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: hsl(0, 0%, 80%);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: hsl(209, 100%, 49%);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: hsl(210, 26%, 11%);
+}
+
+.mg-30 {
+  margin-top: 30rem;
+  margin-bottom: 30rem;
+}
+
+.Spline {
+  padding-right: 50%;
+  position: fixed;
+  align-items: left;
+}
