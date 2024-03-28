@@ -56,13 +56,13 @@
   text-align: center;
 }
 
-.video {
+.HomePage .video {
   background-image: url("https://www.google.com/url?sa=i&url=https%3A%2F%2Fthink3dimaging.com%2F&psig=AOvVaw2_jtiONyR1J7gepS23USfn&ust=1711284495415000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCKikp9a1ioUDFQAAAAAdAAAAABAE");
   padding-block: 0;
   margin-block-end: -250px;
 }
 
-.section-subtitle {
+.HomePage .section-subtitle {
   color: hsl(225, 68%, 53%);
   font-family: "Arial", sans-serif;
   font-size: 1.8rem;
@@ -70,25 +70,25 @@
   text-transform: uppercase;
 }
 
-.h1 {
+.HomePage .h1 {
   color: hsl(218, 70%, 18%);
   font-size: 3.6rem;
 }
 
-.h2,
-.h3 {
+.HomePage .h2,
+.HomePage .h3 {
   color: hsl(217, 100%, 12%);
 }
 
-.h2 {
+.HomePage .h2 {
   font-size: 4rem;
 }
 
-.h3 {
+.HomePage .h3 {
   font-size: 2.2rem;
 }
 
-.btn {
+.HomePage .btn {
   margin-top: 2rem;
   background-image: linear-gradient(90deg, hsl(201, 92%, 47%) 0%, hsl(225, 68%, 53%) 100%);
   color: white;
@@ -105,21 +105,21 @@
   -o-border-radius: 4px;
 }
 
-.btn:is(:hover, :focus) {
+.HomePage .btn:is(:hover, :focus) {
   --deg: -90deg;
 }
 
-.w-100 {
+.HomePage .w-100 {
   width: 100%;
 }
 
-.text-center {
+.HomePage .text-center {
   text-align: center;
 }
 
-.card-text,
-.header-top,
-.header-bottom .btn {
+.HomePage .card-text,
+.HomePage .header-top,
+.HomePage .header-bottom .btn {
   display: none;
 }
 
@@ -146,11 +146,11 @@
   line-height: 1.6;
 }
 
-.hero-title {
+.HomePage .hero-title {
   font-size: 7rem;
 }
 
-.scroll-container {
+.HomePage .scroll-container {
   display: flex;
   background-color: #0d254f;
   overflow: auto;
