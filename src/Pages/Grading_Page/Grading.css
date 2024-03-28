@@ -40,6 +40,14 @@
   font-weight: bold;
   font-size: 25px;
 }
+.monem2_admin .table-responsive {
+  overflow-x: auto;
+}
+@media (max-width: 480px) {
+  .monem2_admin .table-responsive {
+    -webkit-overflow-scrolling: touch;
+  }
+}
 .monem2_admin .table {
   width: 100%;
   border-collapse: collapse;
@@ -49,6 +57,7 @@
   text-align: left;
   color: #8d8d8d;
   color: var(--text-monem);
+  min-width: 600px;
 }
 .monem2_admin .table thead tr {
   background-color: var(--headerColor);
@@ -66,6 +75,32 @@
 }
 .monem2_admin .table tbody tr:last-of-type {
   border-bottom: 2px solid #ddd;
+}
+@media (max-width: 480px) {
+  .monem2_admin .table .thead {
+    display: none;
+  }
+  .monem2_admin .table .table tbody, .monem2_admin .table .table tr, .monem2_admin .table .table td {
+    display: block;
+    width: 100%;
+  }
+  .monem2_admin .table .tr {
+    margin-bottom: 15px;
+  }
+  .monem2_admin .table .td {
+    text-align: right;
+    padding-left: 50%;
+    position: relative;
+  }
+  .monem2_admin .table .td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 0;
+    width: 50%;
+    padding-left: 15px;
+    font-weight: bold;
+    text-align: left;
+  }
 }
 .monem2_admin .profile-pic {
   border-radius: 50%;
@@ -134,4 +169,30 @@
 }
 .monem2_admin .grade_button:focus {
   outline: none;
+}
+@media (max-width: 480px) {
+  .monem2_admin h1, .monem2_admin h2 {
+    font-size: 20px;
+  }
+  .monem2_admin .oooo h2 {
+    margin-right: 1rem;
+  }
+  .monem2_admin .table, .monem2_admin .right, .monem2_admin #searchh {
+    width: 100%;
+  }
+  .monem2_admin .grade_num, .monem2_admin .FeedBack {
+    width: 100%;
+  }
+  .monem2_admin .right {
+    margin-top: 1rem;
+    float: none;
+  }
+}
+@media (min-width: 768px) and (max-width: 1024px) {
+  .monem2_admin h1, .monem2_admin h2 {
+    font-size: 24px;
+  }
+  .monem2_admin .oooo h2 {
+    margin-right: 2rem;
+  }
 }/*# sourceMappingURL=Grading.css.map */
