@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
 import "./Home.css";
-
+import { useMediaQuery } from 'react-responsive'
 import File from "./data.json";
 import Navbar from "../../Components/Navbar/Navbar";
 import image1 from "./service-banner.png";
@@ -34,7 +34,7 @@ export default function App() {
       </div>
     <h2 className="title-line child section-subtitle" >Welcome to Oral Radiology</h2>
       <h1 className="h1 hero-title" >Oral Radiology</h1>
-      <img src={image1} alt="" className="img1 child "/>
+      <img src={image1} alt="" className="img1 child"/>
     </section>
     <div class=" bg-image">
     <center>
@@ -55,7 +55,7 @@ export default function App() {
   
       
       <figure class="doctor-banner">
-            <img src={image2} width="1056" height="1076" loading="lazy" alt="doctor banner"
+            <img src={image2} className="img2" width="1056" height="1076" loading="lazy" alt="doctor banner"
               class="w-100"/>
           </figure>
 
@@ -64,8 +64,10 @@ export default function App() {
             <p class="section-subtitle">MSA Oral Radiology</p>
 
             <h2 class="h2 section-title">Oral Radiology Film Assignments</h2>
-
+          
+          <div className="center1">
             <a href="#" class="btn">Sign in</a>
+            </div>
 
           </div>
       </div>
@@ -92,6 +94,8 @@ export default function App() {
 
 </div>
 <div className="space"></div>
+
+
 </div>    
     
 

@@ -40,7 +40,7 @@ body {
 }
 
 .HomePage .parent {
-  margin: 1rem;
+  margin: -2rem  1rem   30rem   1rem  ;
   padding: 2rem 2rem;
   text-align: center;
 }
@@ -135,7 +135,8 @@ address {
 }
 
 .w-100 {
-  width: 100%;
+  width: 80%;
+  height: 80%;
 }
 
 .text-center {
@@ -144,7 +145,7 @@ address {
 
 .card-text,
 .header-top,
-.header-bottom .btn {
+.header-bottom  {
   display: none;
 }
 
@@ -213,6 +214,7 @@ address {
   padding: 10px;
 }
 
+
 .scroll-container img {
   border-radius: 50px;
   padding: 2rem;
@@ -220,6 +222,9 @@ address {
   margin-bottom: 50px;
   white-space: var(--white);
   height: 400px;
+}
+img{
+  
 }
 
 .space {
@@ -268,4 +273,46 @@ address {
 .mg-30 {
   margin-top: 30rem;
   margin-bottom: 30rem;
+}
+
+
+.img1{
+  position:relative;
+  width: 300px;
+}
+
+@media (max-width: 100em) {
+  .w-100{
+    width: 30%;
+    height: 30%;
+    margin: 0 auto;
+  }
+ .Human{
+  display: block;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+
+
+  .btn{
+    display: block;
+    margin: 0 auto;
+
+  }
+ } 
+}
+
+
+bodY {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.center {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
 }
