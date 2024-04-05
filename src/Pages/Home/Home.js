@@ -4,6 +4,7 @@ import "./Home.css";
 import { useMediaQuery } from 'react-responsive'
 import File from "./data.json";
 import Navbar from "../../Components/Navbar/Navbar";
+import Footer from "../../Components/footer/footer"
 import image1 from "./service-banner.png";
 import image2 from "./cta-banner.png";
 import video1 from "./video1.mp4"
@@ -101,7 +102,7 @@ export default function App() {
 
 
 </section>
-        
+<Footer />
     </div>
   );
   
