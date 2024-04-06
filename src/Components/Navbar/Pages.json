@@ -18,5 +18,9 @@
   {
     "Text": "Login Page",
     "link": "/LoginPage"
+  },
+  {
+    "Text": "Home2",
+    "link": "/Home2"
   }
 ]

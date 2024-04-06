@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
-import "./Home.css";
-import { useMediaQuery } from 'react-responsive'
+import './Home.css';
+//import { useMediaQuery } from 'react-responsive'
 import File from "./data.json";
 import Navbar from "../../Components/Navbar/Navbar";
 import Footer from "../../Components/footer/footer"
@@ -16,22 +16,12 @@ export default function App() {
     //  document.body.classList.add("PageBody");
     
     // return () => document.body.classList.remove("PageBody");
-  }, []);
-
-
-
-  
+  }, []);  
   return (
     <div className="HomePage">
     <Navbar />
-
-
-    
     <section className="parent">
     <div>
-    
- 
- 
       </div>
     <h2 className="title-line child section-subtitle" >Welcome to Oral Radiology</h2>
       <h1 className="h1 hero-title" >Oral Radiology</h1>
@@ -44,44 +34,24 @@ export default function App() {
                 <source src={video1} type="video/mp4"/>
                 Error.
               </video>
-
               </center>
-             
-              </div>   
-
-
-    
-      <div className="Human">
-  
-  
-      
+              </div>       
+      <div className="Human"> 
       <figure class="doctor-banner">
             <img src={image2} className="img2" width="1056" height="1076" loading="lazy" alt="doctor banner"
               class="w-100"/>
           </figure>
-
           <div class="doctor-content">
-
             <p class="section-subtitle">MSA Oral Radiology</p>
-
             <h2 class="h2 section-title">Oral Radiology Film Assignments</h2>
-          
           <div className="center1">
             <a href="#" class="btn">Sign in</a>
             </div>
-
           </div>
       </div>
-    
-    
       <section className="section  bg-dark has-bg-image" aria-label="class">
-    
-    
 <div className="mg-30">
         <p className="section-subtitle">Sample Oral Radiology films Sample</p>
-
-
-
         <div class="scroll-container">
   <img src="https://vmscart.com/cdn/shop/products/SkydentDentalFilm_03.jpg?v=1681991984"/>
   <img src="https://velopex.com/wp-content/uploads/2017/06/film-inspection-600x600.jpg" />
@@ -92,21 +62,12 @@ export default function App() {
   <img src="https://stjacobsdentalcare.ca/images/blog/dental-x-rays-your-window-to-oral-health.jpg" />
   <img src="https://img.freepik.com/premium-photo/xray-dentist-examining-radiography-professional-oral-hospital-diagnosing_116317-23297.jpg" />
   <img src="https://img.freepik.com/premium-photo/dental-x-ray-film-dental-care-concept_117856-1402.jpg" />
-
 </div>
 <div className="space"></div>
-
-
 </div>    
-    
-
-
 </section>
 <Footer />
     </div>
   );
   
-
-
-
 }
