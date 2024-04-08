@@ -5,6 +5,7 @@ import InfiniteScroll from "./InfiniteScroll";
 import VideoComponent from "./VideoComponent";
 import QuotesSection from "./quotes/QuotesSection";
 import Footer from "./Footer";
+import Footer2 from "../../Components/Footer2/Footer";
 const Home2= ()=> (
   <>
     <Navbar />
@@ -32,7 +33,7 @@ const Home2= ()=> (
       <VideoComponent />
       <QuotesSection />
     </div>
-    <Footer />
+    <Footer2 />
   </>
 );
 export default Home2;

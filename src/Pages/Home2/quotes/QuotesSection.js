@@ -1,5 +1,5 @@
 import quotesData from './quotesData.json'; 
-import './QuotesSection.css'; 
+import './Quotes.css'; 
 
 const QuoteCard = ({ quote, image, name, title, years }) => {
   return (

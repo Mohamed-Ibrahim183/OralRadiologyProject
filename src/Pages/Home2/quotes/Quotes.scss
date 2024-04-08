@@ -1,0 +1,63 @@
+@use '../../../_Variables.scss' as *;
+
+// Define color variables
+$color-white: var(--mainBackGround);
+$color-light-gray: #dddddd84;
+$color-grey: grey;
+
+// Define size variables
+$font-size-small: 13px;
+$quote-image-size: 120px;
+$quote-card-width: 300px;
+
+.quotessection2 {
+  width: 100%;
+  background-color: $color-white;
+  margin-top: 40px;
+  overflow-x: auto;
+
+  &::-webkit-scrollbar {
+    display: none;  
+  }
+}
+
+.quotes-section {
+  display: flex;
+  gap: 20px;
+  padding: 20px 20px 10px;
+}
+
+.quote-card {
+  background: $color-light-gray;
+  border-radius: 20px;
+  padding: 20px;
+  width: $quote-card-width; 
+  flex-shrink: 0; 
+  display: grid;
+  place-items: center;
+
+  .quote-image {
+    border-radius: 50%;
+    margin-bottom: 20px;
+    width: $quote-image-size;
+    height: $quote-image-size; 
+  }
+
+  .quote-text {
+    font-style: italic;
+    margin-bottom: 20px;
+    font-size: $font-size-small;
+  }
+
+  .quote-author {
+    font-weight: bold;
+    margin-bottom: 5px;
+    font-size: $font-size-small;
+  }
+
+  .quote-years {
+    color: $color-grey;
+    margin-bottom: 10px;
+    font-size: $font-size-small;
+  }
+}

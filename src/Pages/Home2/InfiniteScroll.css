@@ -1,3 +1,4 @@
+
 :root {
   --gap: 10px;
   --scroll-section-width: 100vw;
@@ -19,7 +20,6 @@
   column-gap: var(--gap);
   background-color: #ddd;
   margin-top: 85px;
-  /* margin-bottom: 20px; */
 }
 .Home2Page .horizontal-scroll:hover .scroll-section {
   animation-play-state: paused;

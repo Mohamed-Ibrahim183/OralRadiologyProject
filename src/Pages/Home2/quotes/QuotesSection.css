@@ -1,4 +1,3 @@
-/* QuotesSection.css */
 .quotessection2 {
     width: 100%;
     background-color: white;
@@ -38,11 +37,9 @@
     font-weight: bold;
     margin-bottom: 5px;
     font-size: 13px;
-
   }
   .quote-years {
     color: grey;
     margin-bottom: 10px;
     font-size: 13px;
-
   }
