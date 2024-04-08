@@ -1,0 +1,48 @@
+/* QuotesSection.css */
+.quotessection2 {
+    width: 100%;
+    background-color: white;
+    margin-top: 40px;
+    overflow-x: auto; 
+  }
+  .quotessection2::-webkit-scrollbar {
+    display: none;  
+  }
+  .quotes-section {
+    display: flex;
+    gap: 20px;
+    padding-bottom: 10px; 
+    padding: 20px;
+  }
+  .quote-card {
+    background:  #dddddd84;
+    border-radius: 20px;
+    padding: 20px;
+    width: 300px; 
+    flex-shrink: 0; 
+    display: grid;
+    place-items: center;
+}
+  .quote-image {
+    border-radius: 50%;
+    margin-bottom: 20px;
+    width: 120px;
+    height: 120px; 
+  }
+  .quote-text {
+    font-style: italic;
+    margin-bottom: 20px;
+    font-size: 13px;
+  }
+  .quote-author {
+    font-weight: bold;
+    margin-bottom: 5px;
+    font-size: 13px;
+
+  }
+  .quote-years {
+    color: grey;
+    margin-bottom: 10px;
+    font-size: 13px;
+
+  }

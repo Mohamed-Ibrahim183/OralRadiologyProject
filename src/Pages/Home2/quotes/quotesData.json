@@ -1,0 +1,88 @@
+
+[
+    {
+        "id": 1,
+        "name": "Magdi Yacoub",
+        "title": "Egyptian surgeon",
+        "years": "1935",
+        "quote": "I don't have any regrets. I consider myself really privileged to belong to medicine and do what I do. I would do it all again.",
+        "image": "https://www.bibalex.org/SCIplanet/Attachments/Article/MediumImage/Magdi.Yacoub.jpg_2016032409274165028.jpg"
+    },
+    {
+      "id": 2,
+      "name": "Albert Einstein",
+      "title": "Theoretical Physicist",
+      "years": "1879 - 1955",
+      "quote": "It's not that I'm so smart, it's just that I stay with problems longer. Persistence is key to success. Every problem presents an opportunity to learn and grow, so don't be discouraged by challenges. Keep pushing forward, and you'll achieve great things.",
+      "image": "https://www.pngall.com/wp-content/uploads/5/Albert-Einstein-PNG-Image.png"
+    },
+    {
+      "id": 3,
+      "name": "Nelson Mandela",
+      "title": "Revolutionary, Politician",
+      "years": "1918 - 2013",
+      "quote": "Education is the most powerful weapon which you can use to change the world. Knowledge empowers individuals to enact positive change and build a brighter future for themselves and their communities. Embrace the transformative power of education and strive to make a difference.",
+      "image": "https://shmc.ca/wp-content/uploads/2020/11/SikhTimeline_1990-1.jpg"
+    },
+    {
+      "id": 4,
+      "name": "Steve Jobs",
+      "title": "Co-founder of Apple",
+      "years": "1955 - 2011",
+      "quote": "Your work is going to fill a large part of your life, and the only way to be truly satisfied is to do what you believe is great work. And the only way to do great work is to love what you do. Find your passion and pursue it with dedication and perseverance. True fulfillment comes from following your heart.",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Steve_Jobs_Headshot_2010-CROP.jpg/918px-Steve_Jobs_Headshot_2010-CROP.jpg?20110907012828"
+    },
+    {
+    "id": 5,
+    "name": "Mon3em",
+    "title": "Co-founder of 3azma",
+    "years": "2005",
+    "quote": "Success is the culmination of relentless effort, unwavering commitment, and the resilience to persevere through challenges, ultimately leading to the fulfillment of one's goals and aspirations.",
+    "image": "https://scontent.fcai19-4.fna.fbcdn.net/v/t1.6435-9/65431017_2356727734614644_4842234219289640960_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=5f2048&_nc_ohc=SP4-r855-igAb6Dy518&_nc_ht=scontent.fcai19-4.fna&oh=00_AfDFitwim6KQc4N5GC0OPPetLv3WJdAUe80ja-7Ls4A7JQ&oe=663AA5F4"
+    },
+
+
+
+    {
+        "id": 1,
+        "name": "Magdi Yacoub",
+        "title": "Egyptian surgeon",
+        "years": "1935",
+        "quote": "I don't have any regrets. I consider myself really privileged to belong to medicine and do what I do. I would do it all again.",
+        "image": "https://www.bibalex.org/SCIplanet/Attachments/Article/MediumImage/Magdi.Yacoub.jpg_2016032409274165028.jpg"
+    },
+    {
+      "id": 2,
+      "name": "Albert Einstein",
+      "title": "Theoretical Physicist",
+      "years": "1879 - 1955",
+      "quote": "It's not that I'm so smart, it's just that I stay with problems longer. Persistence is key to success. Every problem presents an opportunity to learn and grow, so don't be discouraged by challenges. Keep pushing forward, and you'll achieve great things.",
+      "image": "https://www.pngall.com/wp-content/uploads/5/Albert-Einstein-PNG-Image.png"
+    },
+    {
+      "id": 3,
+      "name": "Nelson Mandela",
+      "title": "Revolutionary, Politician",
+      "years": "1918 - 2013",
+      "quote": "Education is the most powerful weapon which you can use to change the world. Knowledge empowers individuals to enact positive change and build a brighter future for themselves and their communities. Embrace the transformative power of education and strive to make a difference.",
+      "image": "https://shmc.ca/wp-content/uploads/2020/11/SikhTimeline_1990-1.jpg"
+    },
+    {
+      "id": 4,
+      "name": "Steve Jobs",
+      "title": "Co-founder of Apple",
+      "years": "1955 - 2011",
+      "quote": "Your work is going to fill a large part of your life, and the only way to be truly satisfied is to do what you believe is great work. And the only way to do great work is to love what you do. Find your passion and pursue it with dedication and perseverance. True fulfillment comes from following your heart.",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Steve_Jobs_Headshot_2010-CROP.jpg/918px-Steve_Jobs_Headshot_2010-CROP.jpg?20110907012828"
+    },
+    {
+    "id": 5,
+    "name": "Mon3em",
+    "title": "Co-founder of 3azma",
+    "years": "2005",
+    "quote": "Success is the culmination of relentless effort, unwavering commitment, and the resilience to persevere through challenges, ultimately leading to the fulfillment of one's goals and aspirations.",
+    "image": "https://scontent.fcai19-4.fna.fbcdn.net/v/t1.6435-9/65431017_2356727734614644_4842234219289640960_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=5f2048&_nc_ohc=SP4-r855-igAb6Dy518&_nc_ht=scontent.fcai19-4.fna&oh=00_AfDFitwim6KQc4N5GC0OPPetLv3WJdAUe80ja-7Ls4A7JQ&oe=663AA5F4"
+    }
+      
+  ]
+  

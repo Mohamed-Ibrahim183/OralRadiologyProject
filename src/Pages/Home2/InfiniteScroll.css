@@ -10,7 +10,7 @@
     }
   }
   
-  .horizontal-scroll {
+  .Home2Page .horizontal-scroll {
     width: 100%;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -19,11 +19,12 @@
     column-gap: var(--gap);
     background-color: #ddd;
     margin-top: -20px;
+    /* margin-bottom: 20px; */
   }
-  .horizontal-scroll:hover .scroll-section {
+  .Home2Page .horizontal-scroll:hover .scroll-section {
     animation-play-state: paused;
   }
-  .scroll-section {
+  .Home2Page .scroll-section {
     min-width: 60vw;
     width: max-content;
     display: flex;
@@ -32,7 +33,7 @@
     text-wrap: nowrap;
     animation: scroll 8s linear infinite;
   }
-  h1 {
+h1 {
     font-size: var(--fz-header);
     pointer-events: none;
   }

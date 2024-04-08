@@ -2,28 +2,37 @@ import Navbar from "../../Components/Navbar/Navbar";
 import './Home2.css';
 import img1 from './img1.jpeg';
 import InfiniteScroll from "./InfiniteScroll";
-const Home2= ()=> {
-return(
-    <>
+import VideoComponent from "./VideoComponent";
+import QuotesSection from "./quotes/QuotesSection";
+import Footer from "./Footer";
+const Home2= ()=> (
+  <>
     <Navbar />
-    <div className="login-wrapper">
-      <div className="login-content">
-        <div className="text-section">
-          <h1>Academic Oral Radiology</h1>
-          <p>Welcome to Academic Oral Radiology, your premier platform for student learning and assessment in oral radiology. Upload your assignments and let our experienced professors provide valuable feedback to enhance your skills.</p>
-          <div className="login-form">
-            <input type="text" placeholder="Username ..." />
-            <input type="password" placeholder="Password..." />
-            <button type="button">Login</button>
+    <div className="Home2Page">
+      <div className="login-wrapper">
+        <div className="login-content">
+          <div className="text-section">
+            <h1>
+              Welcome To
+              <div className="titleblue"> Academic Oral Radiology</div>
+            </h1>
+            <p>Welcome to Academic Oral Radiology, your premier platform for student learning and assessment in cutting-edge oral radiology techniques. Upload your assignments and let our experienced professors provide personalized, constructive feedback to propel your skills to new heights.</p>
+            <div className="login-form">
+              <input type="text" placeholder="Username ..." />
+              <input type="password" placeholder="Password..." />
+              <button type="button">Login</button>
+            </div>
+          </div>
+          <div className="image-section">
+            <img src={img1} alt="Oral Radiology" />
           </div>
         </div>
-        <div className="image-section">
-          <img src={img1} alt="Oral Radiology"/>
-        </div>
       </div>
+      <InfiniteScroll />
+      <VideoComponent />
+      <QuotesSection />
     </div>
-    <InfiniteScroll />
-    </>
+    <Footer />
+  </>
 );
-};
 export default Home2;
