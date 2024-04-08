@@ -1,43 +1,44 @@
 /* VideoComponent.css */
-.videocomponent2{
-    width: 100%;
-    background-color: white;
-    padding-top: 25px;
+.videocomponent2 {
+  width: 100%;
+  background-color: white;
+  padding-top: 15px;
 }
 .video-component {
-    display: flex;
-    background-color: #ffffff; 
-    border-radius: 10px; 
-    overflow: hidden; 
-    max-width: 1350px; 
-    height:450px;
-    margin: auto; 
-  }
-  .video-wrapper {
-    flex: 1; 
-  }
-  .video-iframe {
-    width: 100%; 
-    height: 100%; 
-  }
-  .description-wrapper {
-    flex: 1; 
-    padding: 20px; 
-    display: flex;
-    align-items: center; 
-    justify-content: center; 
-  }
-  .description-wrapper p {
-    margin: 0;
-    color: #333; 
-    font-size: 16px; 
-  }
-  .textbackground{
-    background-color: #ddd;
-    height: 40%;
-    width: 80%;
-    display: grid;
-    place-items: center;
-    border-radius: 4%;
-    padding: 15px;  
+  display: flex;
+  background-color: #ffffff;
+  border-radius: 10px;
+  overflow: hidden;
+  max-width: 1350px;
+  height: 450px;
+  margin: 30px;
+  margin-left: 50px;
+}
+.video-wrapper {
+  flex: 1;
+}
+.video-iframe {
+  width: 100%;
+  height: 100%;
+}
+.description-wrapper {
+  flex: 1;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.description-wrapper p {
+  margin: 0;
+  color: #333;
+  font-size: 16px;
+}
+.textbackground {
+  background-color: #ddd;
+  height: 40%;
+  width: 80%;
+  display: grid;
+  place-items: center;
+  border-radius: 4%;
+  padding: 15px;
 }

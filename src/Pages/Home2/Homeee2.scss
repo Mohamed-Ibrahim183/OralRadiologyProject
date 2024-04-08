@@ -1,0 +1,98 @@
+// Define color variables
+@use '../../_Variables.scss' as *;
+$background-light: #dddddd2b;
+$white: Var(--mainBackGround);
+$black-shadow: rgba(0, 0, 0, 0.024);
+$text-color: var(--text-monem);
+$border-color: #ddd;
+$button-bg: var(--btnB);
+$button-bg-hover: var(--btnB-hover);
+$title-blue: var(--textColor);
+
+.Home2Page {
+  background-color: $background-light;
+  
+  .login-wrapper {
+    transform: scale(1.2);
+    margin-top: 3%;
+    margin-bottom: 4%;
+    display: flex;
+    justify-content: center;
+    height: 59vh;
+    padding: 20px;
+    background: $white;
+    width: 87.5%;
+    margin-left: 50px;
+    
+    .login-content {
+      display: flex;
+      max-width: 1100px;
+      width: fit-content;
+      margin-left: 4%;
+      box-shadow: 0 2px 10px $black-shadow;
+      
+      .text-section {
+        padding: 40px;
+        background-color: $white;
+        flex: 1;
+        
+        h1 {
+          margin: 0 0 20px 0;
+          font-size: 24px;
+          color:$text-color ;
+        }
+        
+        .titleblue {
+          color: $title-blue;
+          display: inline;
+        }
+        
+        p {
+          font-size: 14px;
+          color: $text-color;
+          line-height: 1.4;
+          margin-bottom: 20px;
+        }
+        
+        .login-form {
+          display: flex;
+          flex-direction: column;
+          
+          input {
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid $border-color;
+            border-radius: 4px;
+            font-size: 14px;
+          }
+          
+          button {
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            background-color: $button-bg;
+            color: $white;
+            font-size: 14px;
+            cursor: pointer;
+            
+            &:hover {
+              background-color: $button-bg-hover;
+            }
+          }
+        }
+      }
+      
+      .image-section {
+        flex: 1;
+        background-color: $white;
+        
+        img {
+          width: 100%;
+          height: fit-content;
+          object-fit: cover;
+          border-radius: 5%;
+        }
+      }
+    }
+  }
+}

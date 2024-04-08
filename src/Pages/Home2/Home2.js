@@ -1,5 +1,5 @@
 import Navbar from "../../Components/Navbar/Navbar";
-import './Home2.css';
+import './Homeee2.css';
 import img1 from './img1.jpeg';
 import InfiniteScroll from "./InfiniteScroll";
 import VideoComponent from "./VideoComponent";

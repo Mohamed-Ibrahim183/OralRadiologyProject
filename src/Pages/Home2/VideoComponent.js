@@ -22,5 +22,4 @@ const VideoComponent = () => {
   </div>
   );
 };
-
 export default VideoComponent;
