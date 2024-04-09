@@ -37,6 +37,9 @@
   width: 87.5%;
   margin-left: 50px;
 }
+.Home2Page .login-wrapper .smallscreens img {
+  display: none;
+}
 .Home2Page .login-wrapper .login-content {
   display: flex;
   max-width: 1100px;
@@ -100,12 +103,13 @@
      object-fit: cover;
   border-radius: 5%;
 }
-.Home2Page .videocomponent2 {
+
+.videocomponent2 {
   width: 100%;
   background-color: Var(--mainBackGround);
   padding-top: 15px;
 }
-.Home2Page .videocomponent2 .video-component {
+.videocomponent2 .video-component {
   display: flex;
   background-color: Var(--mainBackGround);
   border-radius: 10px;
@@ -115,26 +119,26 @@
   margin: 30px;
   margin-left: 50px;
 }
-.Home2Page .videocomponent2 .video-component .video-wrapper {
+.videocomponent2 .video-component .video-wrapper {
   flex: 1;
 }
-.Home2Page .videocomponent2 .video-component .video-wrapper .video-iframe {
+.videocomponent2 .video-component .video-wrapper .video-iframe {
   width: 100%;
   height: 100%;
 }
-.Home2Page .videocomponent2 .video-component .description-wrapper {
+.videocomponent2 .video-component .description-wrapper {
   flex: 1;
   padding: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.Home2Page .videocomponent2 .video-component .description-wrapper p {
+.videocomponent2 .video-component .description-wrapper p {
   margin: 0;
   color: #333;
   font-size: 16px;
 }
-.Home2Page .videocomponent2 .video-component .description-wrapper .textbackground {
+.videocomponent2 .video-component .description-wrapper .textbackground {
   background-color: #ddd;
   height: 40%;
   width: 80%;
@@ -142,4 +146,90 @@
   place-items: center;
   border-radius: 4%;
   padding: 15px;
+}
+
+@media screen and (max-width: 550px) {
+  .Home2Page .login-wrapper .smallscreens img {
+    display: none;
+  }
+  .Home2Page .login-wrapper .login-content .text-section h1 {
+    width: 350px;
+  }
+  .Home2Page .login-wrapper .login-content .image-section {
+    flex: 1;
+  }
+  .Home2Page .login-wrapper .login-content .image-section img {
+    display: none;
+  }
+  .Home2Page .video-component {
+    display: flex;
+    flex-direction: column;
+  }
+  .Home2Page .video-component .description-wrapper {
+    margin-top: -20px;
+  }
+  .Home2Page .video-component .description-wrapper .textbackground {
+    height: auto;
+    width: 100%;
+  }
+}
+@media screen and (max-width: 720px) {
+  .Home2Page .login-wrapper {
+    height: 70vh;
+  }
+  .Home2Page .login-wrapper .smallscreens img {
+    display: none;
+  }
+  .Home2Page .login-wrapper .login-content .text-section h1 {
+    width: 350px;
+  }
+  .Home2Page .login-wrapper .login-content .image-section {
+    flex: 1;
+  }
+  .Home2Page .login-wrapper .login-content .image-section img {
+    display: none;
+  }
+  .Home2Page .video-component {
+    display: flex;
+    flex-direction: column;
+  }
+  .Home2Page .video-component .description-wrapper {
+    margin-top: -20px;
+  }
+  .Home2Page .video-component .description-wrapper .textbackground {
+    height: auto;
+    width: 100%;
+  }
+}
+@media screen and (max-width: 960px) {
+  .Home2Page .login-wrapper {
+    height: 70vh;
+  }
+  .Home2Page .login-wrapper .smallscreens img {
+    display: none;
+  }
+  .Home2Page .login-wrapper .login-content {
+    margin-left: 17%;
+    transform: scale(1);
+  }
+  .Home2Page .login-wrapper .login-content .text-section h1 {
+    width: 350px;
+  }
+  .Home2Page .login-wrapper .login-content .image-section {
+    flex: 1;
+  }
+  .Home2Page .login-wrapper .login-content .image-section img {
+    display: none;
+  }
+  .Home2Page .video-component {
+    display: flex;
+    flex-direction: column;
+  }
+  .Home2Page .video-component .description-wrapper {
+    margin-top: -20px;
+  }
+  .Home2Page .video-component .description-wrapper .textbackground {
+    height: auto;
+    width: 100%;
+  }
 }/*# sourceMappingURL=Homeee2.css.map */

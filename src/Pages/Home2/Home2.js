@@ -11,6 +11,9 @@ const Home2= ()=> (
     <Navbar />
     <div className="Home2Page">
       <div className="login-wrapper">
+        <div className="smallscreens">
+           <img src={img1} alt="Oral Radiology" className="smalll" />
+        </div>
         <div className="login-content">
           <div className="text-section">
             <h1>

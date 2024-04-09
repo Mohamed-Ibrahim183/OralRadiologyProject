@@ -55,6 +55,7 @@ const SocialMediaIcon = ({ href, src, alt }) => (
           </div>
           <hr />
           <div className="sb__footer-below">
+            
             <p className='ymeenseeka'>©{year} MSA University Faculty of Dentistry. All rights reserved.</p>
             <div className="sb__footer-below-links">
               <a href="/terms"><p>Terms & Conditions</p></a>

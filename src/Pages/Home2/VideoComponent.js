@@ -1,4 +1,3 @@
-//import './VideoComponent.css'; 
 const VideoComponent = () => {
   return (
     <div className="videocomponent2">
