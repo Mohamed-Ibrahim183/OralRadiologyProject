@@ -26,7 +26,7 @@
   font-size: 1.8em;
 }
 .footer .sb__footer-links .sb__footer-links_div a p {
-  font-size: 1.4em;
+  font-size: 1em;
   margin-bottom: 0.5rem;
   color: rgb(175, 175, 179);
   text-decoration: none;
@@ -43,7 +43,7 @@
   margin-top: 1rem;
 }
 .footer .sb__footer-below p, .footer .sb__footer-below a {
-  font-size: 1.4em;
+  font-size: 1em;
   color: white;
   text-decoration: none;
 }

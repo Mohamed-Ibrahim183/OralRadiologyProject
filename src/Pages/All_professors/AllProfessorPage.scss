@@ -18,12 +18,24 @@ $text-color: #8d8d8d;
   font-family: Arial, sans-serif;
   background: $background-color;
 }
+.MainPage{
+  .adminHomeSection{
+    .table-responsive {
+      overflow-x: auto; // Allow horizontal scrolling
+      
+      @media (max-width: $breakpoint-mobile) {
+        -webkit-overflow-scrolling: touch; // Improve scrolling on mobile devices
+      }
+    }
+  }
+
 
 .monem_admin {
   width: 90%;
   margin: auto;
   overflow: hidden;
   color: $text-color;
+
   .table {
     width: 100%;
     border-collapse: collapse;
@@ -114,7 +126,7 @@ $text-color: #8d8d8d;
     height: 2rem;
     border: 1px solid $search-border-color;
     margin-top: 20px;
-    background-color: var(--mainColor);
+    background-color: #ddddddca;
   }
 
   #searchhh {
@@ -122,4 +134,5 @@ $text-color: #8d8d8d;
     font-weight: bold;
     font-size: 25px;
   }
+}
 }

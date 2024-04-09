@@ -31,8 +31,7 @@
   color: var(--textColor);
 }
 .monem2_admin #searchh, .monem2_admin .grade_num, .monem2_admin .FeedBack {
-  background-color: var(--mainColor);
-  color: white;
+  background-color: rgba(221, 221, 221, 0.4156862745);
 }
 .monem2_admin #searchhh {
   color: var(--text-monem);

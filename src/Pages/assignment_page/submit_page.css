@@ -120,13 +120,21 @@
   display: none;
 }
 
-@media only screen and (max-width: 650px) {
-  .container_monemm .header, .container_monemm .xray_image, .container_monemm .assignment-info {
-    width: 80%;
-    margin: auto;
+@media only screen and (max-width: 480px) {
+  .container_monemm {
+    width: 100%;
+    margin: 0;
   }
-  .container_monemm .xray_image {
-    width: 70%;
+  .container_monemm .header p {
+    text-align: center;
+    margin-top: 0.5rem;
+  }
+  .container_monemm .monem, .container_monemm .feedback {
+    display: block;
+  }
+  .container_monemm .header, .container_monemm .xray_image, .container_monemm .assignment-info {
+    width: 100%;
+    margin: 0;
   }
   .container_monemm .assignment-submission-text2 {
     display: block;
@@ -136,6 +144,108 @@
     display: none;
   }
   .container_monemm .assignment-info {
+    width: 90%;
+    padding: 20px;
+  }
+  .container_monemm .feedback h3 {
+    text-align: center;
+  }
+}
+@media only screen and (max-width: 650px) {
+  .container_monemm {
+    width: 100%;
+    margin: 0;
+  }
+  .container_monemm .header p {
+    text-align: center;
+    margin-top: 0.5rem;
+  }
+  .container_monemm .monem, .container_monemm .feedback {
+    display: block;
+  }
+  .container_monemm .header, .container_monemm .xray_image, .container_monemm .assignment-info {
+    width: 100%;
+    margin: 0;
+  }
+  .container_monemm .assignment-submission-text2 {
+    display: block;
+    text-align: center;
+  }
+  .container_monemm .assignment-submission-text {
+    display: none;
+  }
+  .container_monemm .assignment-info {
+    width: 90%;
+    padding: 20px;
+  }
+  .container_monemm .feedback h3 {
+    text-align: center;
+  }
+}
+@media only screen and (max-width: 780px) {
+  .container_monemm {
+    width: 100%;
+  }
+  .container_monemm .header .submit_images {
+    width: 90%;
+  }
+  .container_monemm .header, .container_monemm .xray_image, .container_monemm .assignment-info {
+    margin: 0;
+  }
+  .container_monemm .assignment-submission-text2 {
+    display: none;
+    text-align: center;
+  }
+  .container_monemm .assignment-info {
+    margin-left: 4rem;
+    width: 60%;
+    padding: 20px;
+  }
+  .container_monemm .feedback h3 {
+    text-align: center;
+  }
+}
+@media only screen and (max-width: 960px) {
+  .container_monemm {
+    width: 100%;
+  }
+  .container_monemm .header p {
+    text-align: center;
+    margin-top: 0.5rem;
+  }
+  .container_monemm .header, .container_monemm .xray_image, .container_monemm .assignment-info {
+    margin: 0;
+  }
+  .container_monemm .assignment-submission-text2 {
+    display: none;
+    text-align: center;
+  }
+  .container_monemm .assignment-info {
+    margin-left: 3rem;
+    width: 60%;
+    padding: 20px;
+  }
+  .container_monemm .feedback h3 {
+    text-align: center;
+  }
+}
+@media only screen and (max-width: 1100px) {
+  .container_monemm {
+    width: 100%;
+  }
+  .container_monemm .header p {
+    text-align: center;
+    margin-top: 0.5rem;
+  }
+  .container_monemm .header, .container_monemm .xray_image, .container_monemm .assignment-info {
+    margin: 0;
+  }
+  .container_monemm .assignment-submission-text2 {
+    display: none;
+    text-align: center;
+  }
+  .container_monemm .assignment-info {
+    margin-left: 3rem;
     width: 90%;
     padding: 20px;
   }

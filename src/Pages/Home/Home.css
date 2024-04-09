@@ -1,7 +1,7 @@
 html {
   font-family: "Arial", sans-serif;
-  font-size: 10px;
   scroll-behavior: smooth;
+  /* font-size: 10px; b3d eznk ya youssef pasha bs da m2sr 3la hagat fe pages tanya - monem*/
 }
 
 /* sets */
@@ -13,14 +13,13 @@ html {
   padding: 0;
   box-sizing: border-box;
 }
-
 a,
 img,
 span,
 input,
 button,
 ion-icon {
-  display: block;
+  /* display: block;  b3d eznk ya youssef pasha bs da m2sr 3la hagat fe pages tanya -monem*/
 }
 
 .body {

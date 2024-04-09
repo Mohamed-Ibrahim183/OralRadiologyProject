@@ -1,5 +1,4 @@
 import React from "react";
-//import "./All_professors.css";
 import TableHeader from "./TableHeader";
 import TableRow from "./TableRow";
 import monem from "./Professors.json";
@@ -22,12 +21,14 @@ function ProfessorTable() {
             Search:{" "}
           </label>
           <input type="search" id="searchh"></input>
-          <table className="table">
-            <TableHeader />
-            {monem.map((record) => (
-              <TableRow key={record.id} record={record} />
-            ))}
-          </table>
+          <div className="table-responsive">
+            <table className="table">
+              <TableHeader />
+              {monem.map((record) => (
+                <TableRow key={record.id} record={record} />
+              ))}
+            </table>
+          </div>
         </div>
       </div>
     </>

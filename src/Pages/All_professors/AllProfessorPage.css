@@ -104,7 +104,7 @@
   height: 2rem;
   border: 1px solid #ddd;
   margin-top: 20px;
-  background-color: var(--mainColor);
+  background-color: rgba(221, 221, 221, 0.7921568627);
 }
 .monem_admin #searchhh {
   color: var(--text-monem);
