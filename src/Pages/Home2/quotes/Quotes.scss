@@ -4,6 +4,8 @@
 $color-white: var(--mainBackGround);
 $color-light-gray: #dddddd84;
 $color-grey: grey;
+$textGrey1: #9C9C9C;
+$textGrey2: #1F1F1F;
 
 // Define size variables
 $font-size-small: 13px;
@@ -30,23 +32,26 @@ $quote-card-width: 300px;
 .quote-card {
   background: $color-light-gray;
   border-radius: 20px;
-  padding: 20px;
+  padding: 16px;
   width: $quote-card-width; 
   flex-shrink: 0; 
   display: grid;
   place-items: center;
+
 
   .quote-image {
     border-radius: 50%;
     margin-bottom: 20px;
     width: $quote-image-size;
     height: $quote-image-size; 
+    box-shadow: 0px 26px 37.6px 16px rgba(0,0,0,0.25);
   }
 
   .quote-text {
     font-style: italic;
     margin-bottom: 20px;
     font-size: $font-size-small;
+    color: $textGrey2;
   }
 
   .quote-author {
