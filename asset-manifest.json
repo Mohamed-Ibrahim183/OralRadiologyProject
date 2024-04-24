@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/react-gh-pages/static/css/main.9f3af9c1.css",
+    "main.js": "/react-gh-pages/static/js/main.63194ee2.js",
+    "static/media/video1.mp4": "/react-gh-pages/static/media/video1.ba3ab9ea15cd9c06860c.mp4",
+    "static/media/profile.png": "/react-gh-pages/static/media/profile.ea00812563c065c52706.png",
+    "static/media/Dental_Xray.png": "/react-gh-pages/static/media/Dental_Xray.d311a9fda0681e6dd8f5.png",
+    "static/media/cta-banner.png": "/react-gh-pages/static/media/cta-banner.291e784fdcf8b25bea31.png",
+    "static/media/img1.jpeg": "/react-gh-pages/static/media/img1.f6b70eeba4b7ec71cf3b.jpeg",
+    "static/media/logo.jpg": "/react-gh-pages/static/media/logo.f0c0b7052fc149a103b1.jpg",
+    "static/media/service-banner.png": "/react-gh-pages/static/media/service-banner.febe59da015abc8b35ec.png",
+    "static/media/Sun.svg": "/react-gh-pages/static/media/Sun.681607dcda2a01539a9a8a157ae74e6e.svg",
+    "index.html": "/react-gh-pages/index.html",
+    "static/media/instagram.svg": "/react-gh-pages/static/media/instagram.7f4c7a4f2d8d8e54c7be0497679c2263.svg",
+    "static/media/Moon.svg": "/react-gh-pages/static/media/Moon.0a6a2b75ac51157455302ddcfca385c0.svg",
+    "static/media/linkedin.svg": "/react-gh-pages/static/media/linkedin.13f3aab8afad96f798a72797896f5ba1.svg",
+    "static/media/facebook.svg": "/react-gh-pages/static/media/facebook.154d8a02e9588d34d247af6a584b8e28.svg",
+    "static/media/x-twitter.svg": "/react-gh-pages/static/media/x-twitter.98332b4798a55f7acfd45edd8a5e7ec5.svg",
+    "main.9f3af9c1.css.map": "/react-gh-pages/static/css/main.9f3af9c1.css.map",
+    "main.63194ee2.js.map": "/react-gh-pages/static/js/main.63194ee2.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.9f3af9c1.css",
+    "static/js/main.63194ee2.js"
+  ]
+}
