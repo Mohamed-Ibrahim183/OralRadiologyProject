@@ -5,7 +5,7 @@ import TableHeader_grading_page from "./TableHeader_grading_page";
 import TableRow_Grading_Page from "./TableRow_Grading_Page";
 import monem from "./Grading_Page.json";
 import Navbar from "../../Components/Navbar/Navbar";
-function Grading_Page() {
+function GradingPage() {
   return (
     <>
       <Navbar />
@@ -30,12 +30,10 @@ function Grading_Page() {
             {monem.map((record) => (
               <TableRow_Grading_Page key={record.id} record={record} />
             ))}
-            </table>
+          </table>
         </div>
-
-
       </div>
     </>
   );
 }
-export default Grading_Page;
+export default GradingPage;

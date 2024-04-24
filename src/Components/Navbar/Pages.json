@@ -4,20 +4,12 @@
     "link": "/Profile"
   },
   {
-    "Text": "Allprof",
-    "link": "/Allprof"
+    "Text": "All Professor",
+    "link": "/AllProfessor"
   },
   {
     "Text": "Admin_dashboard",
     "link": "/Admin_dashboard"
-  },
-  {
-    "Text": "Nav Admin",
-    "link": "/AdminNav"
-  },
-  {
-    "Text": "Login Page",
-    "link": "/LoginPage"
   },
   {
     "Text": "Home2",

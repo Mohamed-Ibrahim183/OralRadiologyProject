@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css"; // Import quill styles
-import "./Maill.css";
+import "./Mail.css";
 
 function Mail() {
   const [to, setTo] = useState("");
@@ -15,7 +15,6 @@ function Mail() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Process the form data here, such as sending it to a server
     console.log({ to, message, file });
   };
 

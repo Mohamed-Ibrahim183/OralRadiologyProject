@@ -71,7 +71,7 @@ const NavAdmin = ({ open = true }) => {
 
   const links = [
     {
-      Text: "Dashboard",
+      Text: "Home",
       To: "/",
       logoClass: "bx bx-grid-alt",
     },
@@ -100,18 +100,9 @@ const NavAdmin = ({ open = true }) => {
           <Link to={ele.To}>{ele.Text}</Link>
         </li>
       );
-      // return (
-      //   <li>
-      //     <Link to={ele.To}>
-      //       <i className={ele.logoClass}></i>
-      //       <span className="link_name">{ele.Text}</span>
-      //     </Link>
-      //   </li>
-      // );
     });
   }
   const content = links.map(function (ele) {
-    // let Drop;
     if (ele.Menu) {
       return (
         <li>
@@ -125,7 +116,6 @@ const NavAdmin = ({ open = true }) => {
           <ul className="sub-menu">{fill(ele.Menu)}</ul>
         </li>
       );
-      // Drop = fill(ele.Menu);
     }
     return (
       <li>
@@ -141,7 +131,6 @@ const NavAdmin = ({ open = true }) => {
     <div>
       <div className="sidebar close" style={styles}>
         <div className="logo-details">
-          {/* <i className="bx bxl-c-plus-plus"></i> */}
           <i class="fa-solid fa-user-tie"></i>
           <span className="logo_name">Admin</span>
         </div>

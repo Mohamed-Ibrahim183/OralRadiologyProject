@@ -40,6 +40,9 @@ nav.secondary-Navigation {
   position: relative;
   z-index: 10;
 }
+nav.secondary-Navigation .logo {
+  height: 70px;
+}
 nav.secondary-Navigation label.logo {
   color: white;
   font-size: 30px;

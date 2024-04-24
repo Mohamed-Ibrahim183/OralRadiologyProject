@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import DarkMode from "../DarkMode/DarkMode";
 import LinksFile from "./NavLinks.json";
 import PagesFiles from "./Pages.json";
-import logo from "./imgs/logo.jpg";
+import logo from "./imgs/logo.png";
 import "./Nav.css";
 
 const Navbar = () => {
@@ -43,7 +43,10 @@ const Navbar = () => {
           <label htmlFor="check" className="checkBtn">
             <i className="fas fa-bars"></i>
           </label>
-          <label className="logo">Oral Radiology</label>
+          <label className="logo">
+            {/* <img src={logo} alt="Oral Logo" className="logo"/> */}
+            <span>Oral Radiology</span>
+          </label>
           <ul className="MainList">
             {content3}
 

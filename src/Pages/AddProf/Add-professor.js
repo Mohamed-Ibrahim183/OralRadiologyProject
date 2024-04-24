@@ -28,17 +28,12 @@ export default function App() {
       </div>
     );
   });
-  const [state, setState] = useState(false);
-  // useEffect(() => {
-  //   if (state < 1000) {
-  //     setState(true);
-  //   }
-  // }, []);
+  // const [state, setState] = useState(true);
 
   return (
     <>
-      <NavAdmin open={state} />
-      <div class="container AddProf adminHomeSection">
+      <NavAdmin open={true} />
+      <div class="container AddProf">
         <h1 className="form-title">Add professor</h1>
         <hr class="title-line"></hr>
         <form action="#">

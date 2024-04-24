@@ -1,13 +1,13 @@
 import StatCard from "./StatCard";
-import Chart from "./Chartt.js";
+import Chart from "./Chart.js";
 //import "./Admin_page.css";
-import "./Admin.css"
+import "./Admin.css";
 import Navbar from "../../Components/Navbar/Navbar.js";
-import AdminNav from "../../Components/AdminNav/AdminNav.js";
+// import AdminNav from "../../Components/AdminNav/AdminNav.js";
 import NavAdmin from "../../Components/AdminNav2/NavAdmin.js";
-import Mail from "./Maill.js";
+import Mail from "./Mail.js";
 import { useEffect } from "react";
-function Admin_page() {
+function AdminPage() {
   useEffect(() => {
     document.body.classList.add("AdminBody");
     return () => document.body.classList.remove("AdminBody");
@@ -57,7 +57,6 @@ function Admin_page() {
         </div>
       </div>
     </>
-    // {/* <h1>Non3eem</h1> */}
   );
 }
-export default Admin_page;
+export default AdminPage;
