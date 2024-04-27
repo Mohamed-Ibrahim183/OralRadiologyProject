@@ -1,10 +1,10 @@
 import Navbar from "../../Components/Navbar/Navbar";
-import "./Homeee2.css";
+import "./Home2.css";
 import img1 from "./img1.jpeg";
 import InfiniteScroll from "./InfiniteScroll";
 import VideoComponent from "./VideoComponent";
 import QuotesSection from "./quotes/QuotesSection";
-import Footer from "./Footer";
+// import Footer from "./Footer";
 import Footer2 from "../../Components/Footer2/Footer";
 const Home2 = () => (
   <>

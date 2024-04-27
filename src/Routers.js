@@ -17,6 +17,7 @@ import NavAdmin from "./Components/AdminNav2/NavAdmin";
 import LoginPage from "./Pages/Login/LoginPage";
 import GradingPage from "./Pages/Grading_Page/Grading_Page";
 import Home2 from "./Pages/Home2/Home2";
+import BasicForm from "./Pages/basicForm/BasicForm";
 const routes = [
   {
     path: "/",
@@ -77,6 +78,11 @@ const routes = [
   {
     path: "/Home2",
     element: <Home2 />,
+    errorElement: <NotFound />,
+  },
+  {
+    path: "/BasicForm",
+    element: <BasicForm />,
     errorElement: <NotFound />,
   },
 ];
