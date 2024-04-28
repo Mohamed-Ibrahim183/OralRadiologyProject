@@ -97,6 +97,10 @@
   color: #7b7b7b;
   margin-left: 430px;
 }
+.fullPage .container.AssignmentSection .seeall:hover{
+cursor: pointer;
+color: #9b9b9b;
+}
 .fullPage .cc1 {
   float:left;
   width: 60%;
