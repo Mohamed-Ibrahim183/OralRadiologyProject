@@ -87,3 +87,11 @@
 .fullPage .cc1 {
   width: 60%;
 }/*# sourceMappingURL=StudentDB.css.map */
+.fullPage .Calenderrrr{
+  float: right;
+  margin-top: 50px;
+  background-color: #A2D1FD;
+  h2{
+    text-align: center;
+  }
+  }

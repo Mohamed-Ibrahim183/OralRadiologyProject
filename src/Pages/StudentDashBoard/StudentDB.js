@@ -3,11 +3,21 @@ import "./StudentDB.css";
 import Navbar from "../../Components/Navbar/Navbar";
 import AssignmentCard from "./AssignmentCard";
 import Chart from "./Chart";
+import Calendarr from "./Calender";
+import Calendar from 'react-calendar';
+import 'react-calendar/dist/Calendar.css';
+
+
 const StudentDB = () => {
   return (
     <>
       <Navbar />
       <div className="fullPage">
+      <div className="Calenderrrr">
+        {/* <Calendar year={2024} month={4} /> */}
+        <h2>Calendar</h2>
+        <Calendar ></Calendar>
+        </div>
         <div className="container AssignmentSection">
           <h2 className="sectionTitle">My Assignments</h2>
           <AssignmentCard
@@ -33,9 +43,11 @@ const StudentDB = () => {
             col="#FFD269"
           ></AssignmentCard>
         </div>
-        <div className="cc1">
-          <Chart className="chart1" />
+
+        <div className="cc1" >
+        <Chart className="chart1" />
         </div>
+
       </div>
     </>
   );
