@@ -12,15 +12,16 @@ const BasicForm = () => {
     e.preventDefault();
     // console.log(name);
     const url = "http://localhost/testOral/server.php";
+
     let fData = new FormData();
     fData.append("name", name);
     axios
       .post(url, fData)
       .then((response) => {
-        console.log(response. data); // Log the response data
-        console.log("name", response.data["name"]);
-        console.log("city", response.data["city"]);
-        console.log(`age ${response.data["age"]}`);
+        console.log(response.data); // Log the response data
+        // console.log("name", response.data["name"]);
+        // console.log("city", response.data["city"]);
+        // console.log(`age ${response.data["age"]}`);
         // end(response.data);
       })
       .catch((error) => alert(error));

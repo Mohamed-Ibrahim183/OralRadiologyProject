@@ -131,7 +131,7 @@ const NavAdmin = ({ open = true }) => {
     <div>
       <div className="sidebar close" style={styles}>
         <div className="logo-details">
-          <i class="fa-solid fa-user-tie"></i>
+          <i className="fa-solid fa-user-tie"></i>
           <span className="logo_name">Admin</span>
         </div>
         <ul className="nav-links">

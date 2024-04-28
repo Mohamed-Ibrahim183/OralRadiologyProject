@@ -1,67 +1,80 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
 import "./AddProf.css";
-import File from "./data.json";
+import File from "./data3.json";
 import NavAdmin from "../../Components/AdminNav2/NavAdmin";
+import axios from "axios";
+// import { findByLabelText } from "@testing-library/react";
 
-export default function App() {
+export default function AddUser() {
+  const [data, setData] = useState([]);
+  const [finalData, setFinalData] = useState({ userType: "Student" });
   useEffect(() => {
     // Add the class to the body element when the component mounts
     document.body.classList.add("PageBody");
-
     // Remove the class from the body element when the component unmounts
+    setData(File);
     return () => document.body.classList.remove("PageBody");
   }, []);
 
-  const [data, setData] = useState([]);
-  useEffect(() => setData(File), []);
   const content = data.map(function (ele) {
     return (
-      <div className="user-input-box">
+      <div className="user-input-box" key={ele.name}>
         <label htmlFor={ele.name}>{ele.text}:</label>
         <input
           type={ele.type}
           id={ele.name}
           name={ele.name}
           placeholder={ele.placeholder}
+          onChange={(e) => change(ele.name)}
         />
       </div>
     );
   });
-  // const [state, setState] = useState(true);
+  function change(name) {
+    setFinalData((prev) => ({
+      ...prev,
+      [name]: document.getElementById(name).value,
+    }));
+  }
+  function handleSubmit(e) {
+    e.preventDefault();
+    const url = "http://localhost/Projects/Oral Radiology/addUser.php";
+    let fData = new FormData();
+    // msa.edu.eg
+    Object.keys(finalData).forEach((key) => {
+      fData.append(key, finalData[key]);
+    });
+
+    axios
+      .post(url, fData)
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((error) => console.log(error));
+  }
 
   return (
     <>
       <NavAdmin open={true} />
-      <div class="container AddProf">
+      <div className="container AddProf">
         <h1 className="form-title">Add professor</h1>
-        <hr class="title-line"></hr>
-        <form action="#">
+        <hr className="title-line"></hr>
+        <form action="" method="POST" onSubmit={handleSubmit}>
+          <div className="main-user-info">{content}</div>
           <div className="main-user-info">
-            {content}
-            <div className="user-input-box">
-              <label htmlFor="cvFile">Choose File</label>
-              <input type="file" id="cvFile" name="cvFile" />
-            </div>
-            <div className="user-input-box">
-              <label htmlFor="education">Education</label>
-              <textarea
-                id="education"
-                name="education"
-                placeholder="Enter Education"
-              />
-            </div>
-            <div className="user-input-box">
-              <label htmlFor="gender">Gender</label>
-              <select id="gender" name="gender">
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-              </select>
-            </div>
+            <select
+              name="Type"
+              id="userType"
+              required
+              onChange={(e) => change("userType")}
+            >
+              <option value="Student">Student</option>
+              <option value="Professor">Professor</option>
+              <option value="Admin">Admin</option>
+            </select>
           </div>
-          <input type="submit" value="add professor" />
-          {/* <div className="form-submit-btn">
-        </div> */}
+          <input type="submit" value="Add User" />
         </form>
       </div>
     </>
