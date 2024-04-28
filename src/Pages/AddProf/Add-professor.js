@@ -41,7 +41,6 @@ export default function AddUser() {
     e.preventDefault();
     const url = "http://localhost/Projects/Oral Radiology/addUser.php";
     let fData = new FormData();
-    // msa.edu.eg
     Object.keys(finalData).forEach((key) => {
       fData.append(key, finalData[key]);
     });

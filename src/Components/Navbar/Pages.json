@@ -12,6 +12,10 @@
     "link": "/Admin_dashboard"
   },
   {
+    "Text": "StudentDB",
+    "link": "/StudentDB"
+  },
+  {
     "Text": "Home2",
     "link": "/Home2"
   }

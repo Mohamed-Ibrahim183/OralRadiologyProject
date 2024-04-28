@@ -18,6 +18,7 @@ import LoginPage from "./Pages/Login/LoginPage";
 import GradingPage from "./Pages/Grading_Page/Grading_Page";
 import Home2 from "./Pages/Home2/Home2";
 import BasicForm from "./Pages/basicForm/BasicForm";
+import StudentDB from "./Pages/StudentDashBoard/StudentDB";
 const routes = [
   {
     path: "/",
@@ -83,6 +84,11 @@ const routes = [
   {
     path: "/BasicForm",
     element: <BasicForm />,
+    errorElement: <NotFound />,
+  },
+  {
+    path: "/StudentDB",
+    element: <StudentDB />,
     errorElement: <NotFound />,
   },
 ];

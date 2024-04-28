@@ -9,6 +9,8 @@
   --btnB-hover:#14319b;
   --sidebar-expanded-margin: 200px;
   --sidebar-default-margin: 70px;
+  --mainText: black;
+  --secondaryText: #777;
 }
 
 [theme=Dark] {
@@ -20,6 +22,8 @@
   --text-monem:rgb(230, 230, 230);
   --btnB:#4d8ba8;
   --btnB-hover:#356981;
+  --mainText: white;
+  --secondaryText: #a9a9a9;
 }
 
 .monem2_admin {
