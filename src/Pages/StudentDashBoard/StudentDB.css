@@ -97,6 +97,13 @@
   color: #7b7b7b;
   margin-left: 430px;
 }
+.fullPage .CARDSASSIGNMENT{
+  height: 300px;
+overflow-y: auto;
+}
+.CARDSASSIGNMENT::-webkit-scrollbar {
+  display: none;
+}
 .fullPage .container.AssignmentSection .seeall:hover{
 cursor: pointer;
 color: #9b9b9b;
@@ -109,7 +116,7 @@ color: #9b9b9b;
 }/*# sourceMappingURL=StudentDB.css.map */
 .fullPage .Calenderrrr{
   float: right;
-  margin-top: 30px;
+  margin-top: 50px;
   box-shadow: 0px 5px 13px 0px rgba(0, 0, 0, 0.45);
 
   background-color: var(--currentday);
@@ -152,3 +159,32 @@ border: rgba(128, 0, 0, 0);
     background-color: #51aaef;
     cursor: pointer;
   }
+  .upppperr{
+    
+  }
+  .Loowwerr{
+
+  }
+@media screen and (max-width: 1080px) {
+  .fullPage .USERPROF{
+    width: 100%;
+    margin-top: -720px;
+  }
+  .fullPage .container.AssignmentSection {
+    width: 100%;
+    height: 100%;
+    margin-top: 400px;
+    float: none;
+  }
+  .fullPage .container.AssignmentSection h5 {
+    color: #7b7b7b;
+    margin-left: 5rem;
+  }
+  .fullPage .cc1 {
+    width: 100%;
+    height: 300px;
+  }
+  .fullPage .Calenderrrr{
+    margin-right: 6px;
+    }
+}
