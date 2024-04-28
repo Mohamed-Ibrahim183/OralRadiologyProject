@@ -89,6 +89,14 @@
   -ms-border-radius: 8px;
   -o-border-radius: 8px;
 }
+.fullPage  .BBBBBB{
+  display: flex;
+  align-items:first baseline;
+}
+.fullPage .container.AssignmentSection h5 {
+  color: #7b7b7b;
+  margin-left: 430px;
+}
 .fullPage .cc1 {
   float:left;
   width: 60%;
