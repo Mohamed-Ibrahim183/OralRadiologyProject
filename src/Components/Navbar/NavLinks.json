@@ -4,7 +4,7 @@
     "link": "/"
   },
   {
-    "Text": "Assignments",
+    "Text": "Requirements",
     "link": "/Assignments"
   },
   {
@@ -16,11 +16,7 @@
     "link": "/AddProf"
   },
   {
-    "Text": "Grading_Page",
+    "Text": "Grading Page",
     "link": "/Grading_Page"
-  },
-  {
-    "Text": "ProfessorDB",
-    "link": "/ProfessorDB"
   }
 ]
