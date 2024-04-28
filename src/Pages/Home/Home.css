@@ -5,7 +5,14 @@ html {
 }
 
 /* sets */
-
+:root {
+  --monemmonem:hsl(218, 70%, 18%);
+  }
+  
+  [theme=Dark] {
+  --monemmonem:white;
+  }
+  
 *,
 *::before,
 *::after {
@@ -39,6 +46,8 @@ ion-icon {
   margin: -2rem 1rem 30rem 1rem;
   padding: 2rem 2rem;
   text-align: center;
+  margin-bottom: -1px;
+  margin-bottom: 150px;
 }
 .HomePage .child {
   display: inline-block;
@@ -77,6 +86,9 @@ ion-icon {
   font-size: 1.8rem;
   font-weight: 700;
   text-transform: uppercase;
+  margin-top: -2px;
+  margin-top: 100px;
+  margin-bottom: 50px;
 }
 
 .HomePage .h1,
@@ -95,6 +107,7 @@ ion-icon {
 }
 .HomePage .h2 {
   font-size: 4rem;
+
 }
 .HomePage .h3 {
   font-size: 2.2rem;
@@ -149,14 +162,21 @@ ion-icon {
 .HomePage .doctor-banner {
   margin-block-end: 50px;
 }
-.HomePage .doctor .section-subtitle {
+.HomePage .doctor-content .section-subtitle {
   text-transform: capitalize;
+  margin-top: -30px;
+  margin-bottom: -1px;
+  margin-bottom: 13px;
 }
-.HomePage .doctor .section-title {
-  color: white;
+.HomePage  .section-title {
+  color: var(--monemmonem);
   font-size: 3.2rem;
   margin-block-end: 30px;
 }
+.HomePage .doctor-content .center1{
+margin-top: 10px;
+}
+
 .HomePage .doctor .btn {
   max-width: max-content;
 }
@@ -165,12 +185,17 @@ ion-icon {
   align-items: center;
   margin-top: 20rem;
   gap: 15px;
-}
-.HomePage .Human {
   line-height: 1.6;
+  margin-top: -1px;
+  margin-top: 30px;
+  margin-bottom: -24rem;
 }
 .HomePage .hero-title {
   font-size: 7rem;
+  color: var(--monemmonem);
+  margin-top: -10px;
+  margin-bottom: -1px;
+  margin-bottom: 2px;
 }
 .HomePage .scroll-container {
   display: flex;
@@ -182,11 +207,13 @@ ion-icon {
 }
 .HomePage .scroll-container img {
   border-radius: 50px;
-  padding: 2rem;
+  padding: 0rem;
   width: 600px;
   margin-bottom: 50px;
   white-space: var(--white);
   height: 400px;
+  transform: scale(0.8);
+
 }
 
 .HomePage .space {
@@ -194,7 +221,7 @@ ion-icon {
   padding-top: 50px;
 }
 .HomePage .scroll-container img:hover {
-  transform: scale(1.1);
+  transform: scale(0.9);
   transition: ease-in 0.24s;
 }
 
@@ -258,6 +285,14 @@ ion-icon {
       margin: 0 auto;
     }
   }
+  .HomePage .hero-title {
+      font-size: 4rem;
+    }
+.HomePage .scroll-container img{
+  transform: scale(0.6);
+  gap: 1px;
+}
+        
 }
 
 .HomePage bodY {
@@ -270,4 +305,11 @@ ion-icon {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.HomePage .bg-image {
+  /* display: none; */
+  margin-top: -100px;
+}
+.scroll-container img{
+  
 }

@@ -23,7 +23,7 @@ export default function App() {
     <section className="parent">
     <div>
       </div>
-    <h2 className="title-line child section-subtitle" >Welcome to Oral Radiology</h2>
+    <h2 className="title-line child section-subtitle" >Welcome to </h2>
       <h1 className="h1 hero-title" >Oral Radiology</h1>
       <img src={image1} alt="" className="img1 child"/>
     </section>
@@ -35,7 +35,7 @@ export default function App() {
                 Error.
               </video>
               </center>
-              </div>       
+    </div>       
       <div className="Human"> 
       <figure class="doctor-banner">
             <img src={image2} className="img2" width="1056" height="1076" loading="lazy" alt="doctor banner"
