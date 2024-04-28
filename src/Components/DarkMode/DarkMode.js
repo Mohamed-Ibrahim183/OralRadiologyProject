@@ -36,7 +36,7 @@ const DarkMode = () => {
         onChange={handleDarkMode}
         defaultChecked={localStorage.getItem("Theme") === "Dark"}
       />
-      <label className="dark_mode_label" for="dark-mode-toggle">
+      <label className="dark_mode_label" htmlFor="dark-mode-toggle">
         <Sun />
         <Moon />
       </label>
