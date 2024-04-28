@@ -19,6 +19,7 @@ import GradingPage from "./Pages/Grading_Page/Grading_Page";
 import Home2 from "./Pages/Home2/Home2";
 import BasicForm from "./Pages/basicForm/BasicForm";
 import StudentDB from "./Pages/StudentDashBoard/StudentDB";
+import ProfessorDB from "./Pages/ProfessorDB/ProfessorDB";
 const routes = [
   {
     path: "/",
@@ -91,6 +92,11 @@ const routes = [
     element: <StudentDB />,
     errorElement: <NotFound />,
   },
+  {
+    path: "/ProfessorDB",
+    element: <ProfessorDB />,
+    errorElement: <NotFound />,
+  }
 ];
 
 export default routes;
