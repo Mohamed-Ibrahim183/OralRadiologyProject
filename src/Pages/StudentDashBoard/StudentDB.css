@@ -11,6 +11,7 @@
   --sidebar-default-margin: 70px;
   --mainText: black;
   --secondaryText: #777;
+  --chartBack:white;
 }
 
 [theme=Dark] {
@@ -93,5 +94,8 @@
   background-color: #A2D1FD;
   h2{
     text-align: center;
+  }
+  .react-calendar{
+background-color:var( --chartBack) ;
   }
   }
