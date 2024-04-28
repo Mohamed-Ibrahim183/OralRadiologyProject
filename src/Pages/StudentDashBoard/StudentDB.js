@@ -16,6 +16,7 @@ const StudentDB = () => {
         <div className="upppperr">
         <div className="container AssignmentSection">
           <h2 className="sectionTitle">My Assignments</h2>
+          <h5 className="seeall">See all</h5>
           <AssignmentCard
             name="Assignment 1"
             state="Good"
