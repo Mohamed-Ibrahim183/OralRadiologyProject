@@ -13,11 +13,7 @@ const StudentDB = () => {
     <>
       <Navbar />
       <div className="fullPage">
-      <div className="Calenderrrr">
-        {/* <Calendar year={2024} month={4} /> */}
-        <h2>Calendar</h2>
-        <Calendar ></Calendar>
-        </div>
+        <div className="upppperr">
         <div className="container AssignmentSection">
           <h2 className="sectionTitle">My Assignments</h2>
           <AssignmentCard
@@ -43,11 +39,23 @@ const StudentDB = () => {
             col="#FFD269"
           ></AssignmentCard>
         </div>
-
+        <div className="USERPROF">
+          <div className="TEXT">
+          <h4>Welcome Back</h4>
+          <h2>Abdelmonem Hatem</h2>
+          <p>Welcome to our Oral Radiology system</p>
+          </div>
+          <button type="button" className="">Go To Profile</button>
+        </div>
+        </div>
         <div className="cc1" >
         <Chart className="chart1" />
         </div>
-
+        <div className="Calenderrrr">
+        {/* <Calendarr year={2024} month={4} />  */}
+        <h2>Calendar</h2>
+        <Calendar ></Calendar>
+        </div>
       </div>
     </>
   );

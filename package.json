@@ -12,6 +12,7 @@
     "react": "^18.2.0",
     "react-calendar": "^4.8.0",
     "react-chartjs-2": "^5.2.0",
+    "react-chatbot-kit": "^2.2.2",
     "react-dom": "^18.2.0",
     "react-quill": "^2.0.0",
     "react-responsive": "^10.0.0",

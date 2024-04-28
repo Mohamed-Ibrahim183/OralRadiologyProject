@@ -12,14 +12,16 @@ const ChartComponent = () => {
   // useEffect to set the color based on the theme
   useEffect(() => {
     const theme = localStorage.getItem("Theme");
+    console.log("Theme from localStorage:", theme); 
     if (theme === "Dark") {
       setLabelColor('#283747');
-      setTitleColor('#5D6D7E');
+      setTitleColor('white');
     } else {
       setLabelColor('#0082e6');
-      setTitleColor('#000000'); 
+      setTitleColor('black'); 
     }
-  }, []); 
+  }, []);
+  
 
   const data = {
     labels: ["Assignment 1", "Assignment 2", "Assignment 3", "Assignment 4", "Assignment 5"],
