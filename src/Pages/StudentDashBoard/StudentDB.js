@@ -33,7 +33,9 @@ const StudentDB = () => {
             col="#FFD269"
           ></AssignmentCard>
         </div>
-        <Chart className="chart1" />
+        <div className="cc1">
+          <Chart className="chart1" />
+        </div>
       </div>
     </>
   );

@@ -34,12 +34,14 @@ const Chart = () => {
         data: [69, 99, 88, 12, 50],
         // backgroundColor: "rgba(255, 99, 132, 0.5)",
         backgroundColor: "#FFD269",
+        barThickness: "20",
       },
       {
         label: "Average Grades",
         data: [60, 90, 90, 40, 50],
         // backgroundColor: "rgba(54, 162, 235, 0.5)",
         backgroundColor: "#A2D1FD",
+        barThickness: "20",
       },
     ],
   };
@@ -60,14 +62,14 @@ const Chart = () => {
         type: "category",
         title: {
           display: true,
-          text: "Year",
+          text: "Assignments",
         },
       },
       y: {
         type: "linear",
         title: {
           display: true,
-          text: "Amount",
+          text: "Grades",
         },
         beginAtZero: true,
       },
