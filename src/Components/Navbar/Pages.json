@@ -16,6 +16,10 @@
     "link": "/StudentDB"
   },
   {
+    "Text": "Groups",
+    "link": "/Groups"
+  },
+  {
     "Text": "Home2",
     "link": "/Home2"
   },
