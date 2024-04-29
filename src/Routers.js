@@ -21,6 +21,7 @@ import BasicForm from "./Pages/basicForm/BasicForm";
 import StudentDB from "./Pages/StudentDashBoard/StudentDB";
 import Groups from "./Pages/Groups/Groups";
 import EditUser from "./Pages/Groups/Edit";
+import ProfessorDB from "./Pages/ProfessorDB/ProfessorDB";
 const routes = [
   {
     path: "/",
@@ -103,6 +104,11 @@ const routes = [
     element: <StudentDB />,
     errorElement: <NotFound />,
   },
+  {
+    path: "/ProfessorDB",
+    element: <ProfessorDB />,
+    errorElement: <NotFound />,
+  }
 ];
 
 export default routes;

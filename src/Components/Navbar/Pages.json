@@ -22,5 +22,9 @@
   {
     "Text": "Home2",
     "link": "/Home2"
+  },
+  {
+    "Text": "ProfessorDB",
+    "link": "/ProfessorDB"
   }
 ]

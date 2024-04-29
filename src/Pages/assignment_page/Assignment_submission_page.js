@@ -12,7 +12,7 @@ const Header = () => {
       </div>
       <p>The Maximum limit of photos is 5</p>
       <br />
-      <p>The Grade of The Assignment Will Appear Here Once Evaluated</p>
+      <p>The Grade of The Requirement Will Appear Here Once Evaluated</p>
     </div>
   );
 };
@@ -36,7 +36,7 @@ const AssignmentInfo = () => {
   return (
     <>
       <div className="assignment-info">
-        <h2 className="assignment-submission-text">ASSIGNMENT SUBMISSION</h2>
+        <h2 className="assignment-submission-text">REQUIREMENT SUBMISSION</h2>
 
         <label htmlFor="submission-status">SUBMISSION STATUS</label>
         <input type="text" id="submission-status" disabled />
@@ -97,7 +97,7 @@ const AssignmentSubmission = () => {
       <Navbar />
       <div className="container_monemm">
         <div className="monem">
-          <h2 className="assignment-submission-text2">ASSIGNMENT SUBMISSION</h2>
+          <h2 className="assignment-submission-text2">REQUIREMENT SUBMISSION</h2>
           <Header />
           <AssignmentInfo />
         </div>
