@@ -19,6 +19,8 @@ import GradingPage from "./Pages/Grading_Page/Grading_Page";
 import Home2 from "./Pages/Home2/Home2";
 import BasicForm from "./Pages/basicForm/BasicForm";
 import StudentDB from "./Pages/StudentDashBoard/StudentDB";
+import Groups from "./Pages/Groups/Groups";
+import EditUser from "./Pages/Groups/Edit";
 const routes = [
   {
     path: "/",
@@ -84,6 +86,16 @@ const routes = [
   {
     path: "/BasicForm",
     element: <BasicForm />,
+    errorElement: <NotFound />,
+  },
+  {
+    path: "/Groups",
+    element: <Groups />,
+    errorElement: <NotFound />,
+  },
+  {
+    path: "/Edit/:id",
+    element: <EditUser />,
     errorElement: <NotFound />,
   },
   {

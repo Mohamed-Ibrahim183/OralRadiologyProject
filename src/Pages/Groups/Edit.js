@@ -1,21 +1,27 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
-import "./AddProf.css";
+import "./Edit.css";
 import File from "./data3.json";
 import NavAdmin from "../../Components/AdminNav2/NavAdmin";
 import axios from "axios";
+import { useParams } from "react-router-dom";
+import Navbar from "../../Components/Navbar/Navbar";
 
-export default function AddUser() {
+export default function EditUser() {
   const [data, setData] = useState([]);
   const [finalData, setFinalData] = useState({ userType: "Student" });
+  const urlData = useParams();
   useEffect(() => {
-    // Add the class to the body element when the component mounts
-    document.body.classList.add("PageBody");
-    // Remove the class from the body element when the component unmounts
     setData(File);
-    return () => document.body.classList.remove("PageBody");
+    const url =
+      "http://localhost/Projects/Oral Radiology/api.php/" + urlData.id;
+    axios.get(url).then((res) => {
+      setFinalData(res.data);
+    });
+  }, [urlData.id]);
+  useEffect(() => {
+    return () => console.log();
   }, []);
-
   const content = data.map(function (ele) {
     return (
       <div className="user-input-box" key={ele.name}>
@@ -26,6 +32,7 @@ export default function AddUser() {
           name={ele.name}
           placeholder={ele.placeholder}
           onChange={(e) => change(ele.name)}
+          value={finalData[ele.name] || ""}
         />
       </div>
     );
@@ -38,14 +45,15 @@ export default function AddUser() {
   }
   function handleSubmit(e) {
     e.preventDefault();
-    const url = "http://localhost/Projects/Oral Radiology/addUser.php";
+    const url =
+      "http://localhost/Projects/Oral Radiology/api.php/" + urlData.id;
     let fData = new FormData();
     Object.keys(finalData).forEach((key) => {
       fData.append(key, finalData[key]);
     });
 
     axios
-      .post(url, fData)
+      .put(url, fData)
       .then((res) => {
         console.log(res.data);
       })
@@ -54,6 +62,7 @@ export default function AddUser() {
 
   return (
     <>
+      <Navbar />
       <NavAdmin open={true} />
       <div className="container AddProf">
         <h1 className="form-title">Add professor</h1>

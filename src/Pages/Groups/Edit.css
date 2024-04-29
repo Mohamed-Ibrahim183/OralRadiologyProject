@@ -1,0 +1,113 @@
+:root {
+  --mainBackGround: #F5FBF9;
+  --mainColor: #0082e6;
+  --secondText: #65b4f1;
+  --textColor: var(--mainColor);
+  --headerColor: #0082e6;
+  --text-monem:rgb(20, 19, 19);
+  --btnB:#2450f1;
+  --btnB-hover:#14319b;
+  --sidebar-expanded-margin: 200px;
+  --sidebar-default-margin: 70px;
+  --mainText: black;
+  --secondaryText: #777;
+}
+
+[theme=Dark] {
+  --mainColor: #4d8ba8;
+  --mainBackGround: #1b343c;
+  --secondText: #65b4f1;
+  --textColor: #96bdcf;
+  --headerColor: #4d8ba8;
+  --text-monem:rgb(230, 230, 230);
+  --btnB:#4d8ba8;
+  --btnB-hover:#356981;
+  --mainText: white;
+  --secondaryText: #a9a9a9;
+}
+
+.PageBody {
+  font-family: Arial, sans-serif;
+  background-color: white;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.container.AddProf {
+  width: 80%;
+  max-width: 600px;
+  margin: 50px auto;
+  background-color: var(--mainBackGround);
+  color: var(--mainColor);
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: -2px 0px 34px 3px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: -2px 0px 34px 3px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: -2px 0px 34px 3px rgba(0, 0, 0, 0.75);
+  display: flex;
+  flex-direction: column;
+}
+.container.AddProf .form-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+.container.AddProf .title-line {
+  width: 100%;
+  height: 1px;
+  background-color: #ccc;
+  margin-bottom: 20px;
+}
+.container.AddProf input::-moz-placeholder {
+  background-color: var(--mainColor);
+  color: white;
+}
+.container.AddProf input, .container.AddProf input::placeholder {
+  background-color: var(--mainColor);
+  color: white;
+}
+.container.AddProf .main-user-info {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.container.AddProf .user-input-box {
+  width: calc(50% - 10px);
+  margin-bottom: 20px;
+}
+.container.AddProf label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+.container.AddProf input[type=text],
+.container.AddProf input[type=email],
+.container.AddProf input[type=password],
+.container.AddProf input[type=date],
+.container.AddProf select,
+.container.AddProf textarea,
+.container.AddProf input[type=file] {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+.container.AddProf select {
+  height: 40px;
+}
+.container.AddProf .form-submit-btn {
+  text-align: center;
+  margin-top: 20px;
+}
+.container.AddProf input[type=submit] {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.container.AddProf input[type=submit]:hover {
+  background-color: #45a049;
+}/*# sourceMappingURL=Edit.css.map */
