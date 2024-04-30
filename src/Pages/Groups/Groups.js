@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Navbar from "../../Components/Navbar/Navbar";
 import axios from "axios";
+
 // import { retinaScale } from "chart.js/helpers";
 // import { Navigate } from "react-router-dom";
 
@@ -43,6 +44,7 @@ const Groups = () => {
                 <td>{ele.MSAId}</td>
                 <td>{ele.Email}</td>
                 <td>{ele.Type}</td>
+                <Link to={`/EditUser2/${ele.Id}`}>Edit</Link>
               </tr>
             );
           })}

@@ -24,6 +24,7 @@ import EditUser from "./Pages/Groups/Edit2";
 import ProfessorDB from "./Pages/ProfessorDB/ProfessorDB";
 import Cardloginn from "./Pages/cardloginn/cardloginn";
 import EditUser2 from "./Pages/Groups/EditUser2";
+import AddGroup from "./Pages/Groups/AddGroup";
 const routes = [
   {
     path: "/",
@@ -38,6 +39,11 @@ const routes = [
   {
     path: "/EditUser2/:id",
     element: <EditUser2 />,
+    errorElement: <NotFound />,
+  },
+  {
+    path: "/AddGroup",
+    element: <AddGroup />,
     errorElement: <NotFound />,
   },
   {
@@ -117,10 +123,10 @@ const routes = [
     errorElement: <NotFound />,
   },
   {
-  path: "/Cardloginn",
-  element: <Cardloginn />,
-  errorElement: <NotFound />,
-}
+    path: "/Cardloginn",
+    element: <Cardloginn />,
+    errorElement: <NotFound />,
+  },
 ];
 
 export default routes;

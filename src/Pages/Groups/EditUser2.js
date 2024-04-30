@@ -3,57 +3,57 @@ import "./EditUser.css";
 import Navbar from "../../Components/Navbar/Navbar";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+
 const EditUser = () => {
   const [data, setData] = useState({});
   const urlData = useParams();
+
   useEffect(() => {
-    console.log("API");
-    const url =
-      "http://localhost/Projects/Oral Radiology/api.php/" + urlData.id;
-    axios.get(url).then((res) => {
-      console.log(res.data);
-      setData(res.data);
-      const keys = [
-        "Id",
-        "Username",
-        "Password",
-        "MSAId",
-        "Name",
-        "Email",
-        "Type",
-        "PersonalImage",
-      ];
-      keys.map((key) => {
-        document.querySelector("#" + key).value = res.data[key] || "NONE";
-        return null;
-      });
-    });
+    fetchData();
   }, [urlData]);
 
-  function handleSave() {
-    const url =
-      "http://localhost/Projects/Oral Radiology/api.php/" + urlData.id;
-    let fData = new FormData();
-    Object.keys(data).map((ele) => {
-      fData.append(ele, data[ele]);
-      return null;
+  const fetchData = async () => {
+    try {
+      const url = `http://localhost/Projects/Oral Radiology/api.php/${urlData.id}`;
+      const response = await axios.get(url);
+      setData(response.data);
+      populateFormData(response.data);
+    } catch (error) {
+      console.error("Error fetching user data:", error);
+    }
+  };
+
+  const populateFormData = (userData) => {
+    const keys = [
+      "Id",
+      "Username",
+      "Password",
+      "MSAId",
+      "Name",
+      "Email",
+      "Type",
+      "PersonalImage",
+    ];
+    keys.forEach((key) => {
+      document.querySelector(`#${key}`).value = userData[key] || "NONE";
     });
+  };
+
+  const handleSave = () => {
+    const url = `http://localhost/Projects/Oral Radiology/api.php/${urlData.id}`;
     axios
       .put(url, data)
       .then((res) => console.log(res.data))
       .catch((error) => console.error(error));
-  }
+  };
 
-  function handleChange(name) {
-    console.log(data);
-    return function (event) {
-      const value = event.target.value;
-      setData((prev) => ({
-        ...prev,
-        [name]: value,
-      }));
-    };
-  }
+  const handleChange = (name) => (event) => {
+    const value = event.target.value;
+    setData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
 
   return (
     <>
@@ -61,81 +61,31 @@ const EditUser = () => {
       <div className="editPage">
         <h2 className="title">Edit User ID={urlData.id}</h2>
         <div className="main">
-          <div className="row">
-            <span>Id</span>
-            <input
-              type="text"
-              name="Id"
-              id="Id"
-              onChange={handleChange("Id")}
-            />
+          <div className="mainLeft">
+            {[
+              "Id",
+              "Username",
+              "Password",
+              "MSAId",
+              "Name",
+              "Email",
+              "Type",
+              "PersonalImage",
+            ].map((fieldName) => (
+              <div className="row" key={fieldName}>
+                <span>{fieldName}</span>
+                <input
+                  type="text"
+                  name={fieldName}
+                  id={fieldName}
+                  onChange={handleChange(fieldName)}
+                />
+              </div>
+            ))}
+            <button className="saveBTN" onClick={handleSave}>
+              Save
+            </button>
           </div>
-          <div className="row">
-            <span>Username</span>
-            <input
-              type="text"
-              name="Username"
-              id="Username"
-              onChange={handleChange("Username")}
-            />
-          </div>
-          <div className="row">
-            <span>Password</span>
-            <input
-              type="text"
-              name="Password"
-              id="Password"
-              onChange={handleChange("Password")}
-            />
-          </div>
-          <div className="row">
-            <span>MSAId</span>
-            <input
-              type="text"
-              name="MSAId"
-              id="MSAId"
-              onChange={handleChange("MSAId")}
-            />
-          </div>
-          <div className="row">
-            <span>Name</span>
-            <input
-              type="text"
-              name="Name"
-              id="Name"
-              onChange={handleChange("Name")}
-            />
-          </div>
-          <div className="row">
-            <span>Email</span>
-            <input
-              type="text"
-              name="Email"
-              id="Email"
-              onChange={handleChange("Email")}
-            />
-          </div>
-          <div className="row">
-            <span>Type</span>
-            <input
-              type="text"
-              name="Type"
-              id="Type"
-              onChange={handleChange("Type")}
-            />
-          </div>
-          <div className="row">
-            <span>PersonalImage</span>
-            <input
-              type="text"
-              name="PersonalImage"
-              id="PersonalImage"
-              onChange={handleChange("PersonalImage")}
-            />
-          </div>
-          <button className="saveBTN" onClick={handleSave}>
-            Save
-          </button>
         </div>
       </div>
     </>

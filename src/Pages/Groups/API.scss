@@ -1,0 +1,36 @@
+.AddGroup{
+  width: 80%;
+  margin: auto;
+  .section1{
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+    margin-top: 50px;
+    .NEW{
+      color: white;
+      text-align: center;
+      text-transform: capitalize;
+      background-color: green;
+      padding: 8px;
+      border: none;
+      border-radius: 8px;
+      -webkit-border-radius: 8px;
+      -moz-border-radius: 8px;
+      -ms-border-radius: 8px;
+      -o-border-radius: 8px;
+      margin-left: 10px;
+      cursor: pointer;
+}
+  }
+  .main{
+    display: flex;
+    flex-direction: column;
+    .row{
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+  }
+}
