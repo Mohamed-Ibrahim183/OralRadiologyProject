@@ -11,9 +11,6 @@
   --sidebar-default-margin: 70px;
   --mainText: black;
   --secondaryText: #777;
-  --chartBack:rgba(255, 255, 255, 0.277);
-  --currentday:#A2D1FD;
-  --profile:#A2D1FD;
 }
 
 [theme=Dark] {
@@ -27,8 +24,6 @@
   --btnB-hover:#356981;
   --mainText: white;
   --secondaryText: #a9a9a9;
-  --currentday:#FFD269;
-  --profile:#4d8ba8;
 }
 
 .fullPage {
@@ -89,102 +84,6 @@
   -ms-border-radius: 8px;
   -o-border-radius: 8px;
 }
-.fullPage  .BBBBBB{
-  display: flex;
-  align-items:first baseline;
-}
-.fullPage .container.AssignmentSection h5 {
-  color: #7b7b7b;
-  margin-left: 430px;
-}
-.fullPage .CARDSASSIGNMENT{
-  height: 300px;
-overflow-y: auto;
-}
-.CARDSASSIGNMENT::-webkit-scrollbar {
-  display: none;
-}
-.fullPage .container.AssignmentSection .seeall:hover{
-cursor: pointer;
-color: #9b9b9b;
-}
 .fullPage .cc1 {
-  float:left;
   width: 60%;
-  margin-right: -100px;
-  margin-top: 40px;
 }/*# sourceMappingURL=StudentDB.css.map */
-.fullPage .Calenderrrr{
-  float: right;
-  margin-top: 50px;
-  box-shadow: 0px 5px 13px 0px rgba(0, 0, 0, 0.45);
-
-  background-color: var(--currentday);
-  h2{
-    text-align: center;
-  }
-  .react-calendar{
-background-color:rgb(255, 255, 255) ;
-border: rgba(128, 0, 0, 0);
-}
-  .react-calendar__tile--now {
-    background-color: var(--currentday); 
-
-  }
-  }
-  .fullPage .upppperr{
-    margin-bottom: 40px;
-  }
-  .fullPage .USERPROF{
-    margin-top: -290px;
-    float: right;
-    width: 30%;
-    height:300px;
-    background-color: var(--profile);
-  }
-  .fullPage .USERPROF .TEXT{
-    margin: 30px;
-  }
-  .fullPage .USERPROF p{
-    margin-top: 10px;
-  }
-  .fullPage .USERPROF button {
-    margin-left: 30px;
-    background-color: #65b4f1;
-    border: #35698100;
-    width: 7rem;
-    height: 2rem;
-  }
-  .fullPage .USERPROF button:hover {
-    background-color: #51aaef;
-    cursor: pointer;
-  }
-  .upppperr{
-    
-  }
-  .Loowwerr{
-
-  }
-@media screen and (max-width: 1080px) {
-  .fullPage .USERPROF{
-    width: 100%;
-    margin-top: -720px;
-  }
-  .fullPage .container.AssignmentSection {
-    width: 100%;
-    height: 100%;
-    margin-top: 400px;
-    float: none;
-  }
-  .fullPage .container.AssignmentSection h5 {
-    color: #7b7b7b;
-    margin-left: 5rem;
-  }
-  .fullPage .cc1 {
-    width: 100%;
-    height: 300px;
-  }
-  .fullPage .Calenderrrr{
-    margin-right: 6px;
-    }
-}

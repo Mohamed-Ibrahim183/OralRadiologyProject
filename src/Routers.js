@@ -20,9 +20,10 @@ import Home2 from "./Pages/Home2/Home2";
 import BasicForm from "./Pages/basicForm/BasicForm";
 import StudentDB from "./Pages/StudentDashBoard/StudentDB";
 import Groups from "./Pages/Groups/Groups";
-import EditUser from "./Pages/Groups/Edit";
+import EditUser from "./Pages/Groups/Edit2";
 import ProfessorDB from "./Pages/ProfessorDB/ProfessorDB";
 import Cardloginn from "./Pages/cardloginn/cardloginn";
+import EditUser2 from "./Pages/Groups/EditUser2";
 const routes = [
   {
     path: "/",
@@ -32,6 +33,11 @@ const routes = [
   {
     path: "/Assignments",
     element: <OverViewAssignmentsPage />,
+    errorElement: <NotFound />,
+  },
+  {
+    path: "/EditUser2/:id",
+    element: <EditUser2 />,
     errorElement: <NotFound />,
   },
   {

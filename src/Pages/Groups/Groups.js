@@ -19,13 +19,11 @@ const Groups = () => {
         setGroups(res.data);
       })
       .catch((error) => console.error(error));
-    // Navigate("/");
   }, []);
   function handleEdit(id) {}
   return (
     <>
       <Navbar />
-      {/* <button onClick={handleClick}>click me</button> */}
       <table cellSpacing={20}>
         <thead>
           <tr>
@@ -34,8 +32,6 @@ const Groups = () => {
             <th>MSA ID</th>
             <th>Email</th>
             <th>User Type</th>
-            {/* <th>Type</th>
-            <th>Personal Image</th> */}
           </tr>
         </thead>
         <tbody>
@@ -44,12 +40,9 @@ const Groups = () => {
               <tr>
                 <th>{ele.Id}</th>
                 <td>{ele.Username}</td>
-                {/* <td>{ele.Password}</td> */}
                 <td>{ele.MSAId}</td>
                 <td>{ele.Email}</td>
                 <td>{ele.Type}</td>
-                {/* <td>{ele.PersonalImage || "No Image"}</td> */}
-                <button>{/* <Link to="/Home2">Go</Link> */}</button>
               </tr>
             );
           })}
