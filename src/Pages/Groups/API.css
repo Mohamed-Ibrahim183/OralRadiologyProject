@@ -33,4 +33,35 @@
   justify-content: space-between;
   margin-top: 20px;
   margin-bottom: 20px;
+}
+
+.Buttons {
+  display: flex;
+  flex-direction: column;
+}
+
+.MainButton {
+  margin-top: 20px;
+  cursor: pointer;
+  text-align: center;
+  background-color: green;
+  color: white;
+  text-transform: capitalize;
+  font-size: 20px;
+  font-weight: bold;
+  padding: 16px;
+  outline: none;
+  border: none;
+  border-radius: 8px;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  -ms-border-radius: 8px;
+  -o-border-radius: 8px;
+}
+
+.sub {
+  display: inline-block;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin-left: auto;
 }/*# sourceMappingURL=API.css.map */

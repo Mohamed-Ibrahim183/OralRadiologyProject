@@ -34,3 +34,32 @@
     }
   }
 }
+.Buttons{
+  display: flex;
+  flex-direction: column;
+}
+
+// components
+.MainButton{
+  margin-top: 20px;
+  cursor: pointer;
+  text-align: center;
+  background-color: green;
+  color: white;
+  text-transform: capitalize;
+  font-size: 20px;
+  font-weight: bold;
+  padding: 16px;
+  outline: none;
+  border: none;
+  border-radius: 8px;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  -ms-border-radius: 8px;
+  -o-border-radius: 8px;
+}
+.sub{
+  display: inline-block;
+  width: fit-content;
+  margin-left: auto;
+}
