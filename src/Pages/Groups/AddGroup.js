@@ -5,6 +5,7 @@ import axios from "axios";
 
 const AddGroup = () => {
   const [rows, setRows] = useState(0);
+  const [render, setRender] = useState(0);
   const [formData, setFormData] = useState([1, 2, 3]);
   const generateOptions = (start, end) => {
     const options = [];
@@ -106,6 +107,7 @@ const AddGroup = () => {
       setRows(0);
       document.getElementById("GroupName").value = "";
       fetchFirst();
+      fetchFirst();
     } else {
       console.log("Please fill in all fields.");
       alert("Please fill in all fields.");
@@ -121,6 +123,8 @@ const AddGroup = () => {
         // console.log(typeof res.data);
       })
       .catch((error) => console.error(error));
+    setRender(-render);
+    setRender(-render);
   }
   useEffect(() => {
     // get groups from data base
@@ -150,6 +154,7 @@ const AddGroup = () => {
       })
       .catch((error) => console.error(error));
 
+    fetchFirst();
     fetchFirst();
   }
   const content = Object.entries(groups).map(([key, group]) => {
