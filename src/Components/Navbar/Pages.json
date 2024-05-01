@@ -26,5 +26,9 @@
   {
     "Text": "ProfessorDB",
     "link": "/ProfessorDB"
+  },
+  {
+    "Text": "Login2",
+    "link": "/Login2"
   }
 ]
