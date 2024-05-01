@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@react-login-page/page1": "^1.0.4",
     "@react-login-page/page4": "^1.0.4",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
@@ -15,6 +16,7 @@
     "react-chartjs-2": "^5.2.0",
     "react-chatbot-kit": "^2.2.2",
     "react-dom": "^18.2.0",
+    "react-login-page": "^1.0.4",
     "react-quill": "^2.0.0",
     "react-responsive": "^10.0.0",
     "react-router-dom": "^6.22.3",
