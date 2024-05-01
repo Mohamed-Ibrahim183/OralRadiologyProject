@@ -24,6 +24,10 @@
     "link": "/Home2"
   },
   {
+    "Text": "Add Group",
+    "link": "/AddGroup"
+  },
+  {
     "Text": "ProfessorDB",
     "link": "/ProfessorDB"
   }
