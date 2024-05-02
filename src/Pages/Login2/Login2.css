@@ -1,4 +1,4 @@
-.login-container, .recovery-container {
+.login-container {
     max-width: 300px;
     margin: auto;
     padding: 20px;
@@ -32,21 +32,12 @@
     cursor: pointer;
     width: 100%;
   }
-  .recovery-container button {
-    background-color: #4CAF50;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    cursor: pointer;
-    width: 100%;
-  }
+
   .login-container button:hover {
     opacity: 0.8;
   }
   .login-container .submit{
     margin-bottom: 20px;
+    background-color: rgb(43, 77, 247);
   }
-  .recovery-container .submit{
-    margin-bottom: 20px;
-  }
+ 
