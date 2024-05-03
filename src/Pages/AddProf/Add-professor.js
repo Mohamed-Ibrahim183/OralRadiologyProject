@@ -9,7 +9,6 @@ export default function AddUser() {
   const [data, setData] = useState([]);
   const [finalData, setFinalData] = useState({ Type: "Student" });
   useEffect(() => {
-    // Add the class to the body element when the component mounts
     document.body.classList.add("PageBody");
     setData(File);
     // Remove the class from the body element when the component unmounts
@@ -27,6 +26,7 @@ export default function AddUser() {
           placeholder={ele.placeholder}
           onChange={(e) => change(ele.name)}
         />
+        
       </div>
     );
   });
@@ -43,14 +43,16 @@ export default function AddUser() {
     Object.keys(finalData).forEach((key) => {
       fData.append(key, finalData[key]);
     });
-
-    axios
-      .post(url, fData)
-      .then((res) => {
-        console.log(res.data);
-      })
-      .catch((error) => console.log(error));
+  
+    axios.post(url, fData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    })
+    .then(res => console.log(res.data))
+    .catch(error => console.log(error));
   }
+  
 
   return (
     <>
@@ -60,6 +62,9 @@ export default function AddUser() {
         <hr className="title-line"></hr>
         <form action="" method="POST" onSubmit={handleSubmit}>
           <div className="main-user-info">{content}</div>
+          <input type="file" name="personalImage" 
+            onChange={(e) => setFinalData({ ...finalData, personalImage: e.target.files[0] })}
+          />
           <div className="main-user-info">
             <select
               name="Type"
@@ -72,6 +77,7 @@ export default function AddUser() {
               <option value="Admin">Admin</option>
             </select>
           </div>
+          
           <input type="submit" value="Add User" />
         </form>
       </div>

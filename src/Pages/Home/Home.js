@@ -57,7 +57,7 @@ function OralRadiologyInfoSection() {
         <p className="section-subtitle">MSA Oral Radiology</p>
         <h2 className="h2 section-title">Oral Radiology Film Assignments</h2>
         <div className="center1">
-          <Link to="../Cardloginn">
+          <Link to="../Login2">
           <a  className="btn">Sign in</a>
           </Link>
         </div>
