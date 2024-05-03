@@ -1,31 +1,31 @@
 [
   {
     "type": "text",
-    "name": "MAID",
+    "name": "MSAId",
     "placeholder": "Enter Your ID",
     "text": "MSA ID"
   },
   {
     "type": "text",
-    "name": "userName",
+    "name": "Username",
     "placeholder": "Enter Your UserName",
     "text": "User Name"
   },
   {
     "type": "password",
-    "name": "pwd",
+    "name": "Password",
     "placeholder": "Enter Your Password",
     "text": "New Password"
   },
   {
     "type": "text",
-    "name": "name",
+    "name": "Name",
     "placeholder": "Enter Your Full Name",
     "text": "Your Name"
   },
   {
     "type": "email",
-    "name": "email",
+    "name": "Email",
     "placeholder": "Enter Your MSA Email Address",
     "text": "Email"
   }

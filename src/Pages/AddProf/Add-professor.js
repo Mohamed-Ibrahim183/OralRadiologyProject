@@ -7,12 +7,12 @@ import axios from "axios";
 
 export default function AddUser() {
   const [data, setData] = useState([]);
-  const [finalData, setFinalData] = useState({ userType: "Student" });
+  const [finalData, setFinalData] = useState({ Type: "Student" });
   useEffect(() => {
     // Add the class to the body element when the component mounts
     document.body.classList.add("PageBody");
-    // Remove the class from the body element when the component unmounts
     setData(File);
+    // Remove the class from the body element when the component unmounts
     return () => document.body.classList.remove("PageBody");
   }, []);
 
@@ -63,9 +63,9 @@ export default function AddUser() {
           <div className="main-user-info">
             <select
               name="Type"
-              id="userType"
+              id="Type"
               required
-              onChange={(e) => change("userType")}
+              onChange={(e) => change("Type")}
             >
               <option value="Student">Student</option>
               <option value="Professor">Professor</option>
