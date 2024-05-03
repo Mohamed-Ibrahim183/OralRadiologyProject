@@ -26,7 +26,6 @@ export default function AddUser() {
           placeholder={ele.placeholder}
           onChange={(e) => change(ele.name)}
         />
-        
       </div>
     );
   });
@@ -43,16 +42,16 @@ export default function AddUser() {
     Object.keys(finalData).forEach((key) => {
       fData.append(key, finalData[key]);
     });
-  
-    axios.post(url, fData, {
-      headers: {
-        'Content-Type': 'multipart/form-data'
-      }
-    })
-    .then(res => console.log(res.data))
-    .catch(error => console.log(error));
+
+    axios
+      .post(url, fData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
+      .then((res) => console.log(res.data))
+      .catch((error) => console.log(error));
   }
-  
 
   return (
     <>
@@ -62,8 +61,12 @@ export default function AddUser() {
         <hr className="title-line"></hr>
         <form action="" method="POST" onSubmit={handleSubmit}>
           <div className="main-user-info">{content}</div>
-          <input type="file" name="personalImage" 
-            onChange={(e) => setFinalData({ ...finalData, personalImage: e.target.files[0] })}
+          <input
+            type="file"
+            name="personalImage"
+            onChange={(e) =>
+              setFinalData({ ...finalData, personalImage: e.target.files[0] })
+            }
           />
           <div className="main-user-info">
             <select
@@ -77,7 +80,7 @@ export default function AddUser() {
               <option value="Admin">Admin</option>
             </select>
           </div>
-          
+
           <input type="submit" value="Add User" />
         </form>
       </div>

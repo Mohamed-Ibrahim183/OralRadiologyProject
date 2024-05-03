@@ -18,15 +18,14 @@ const Profile = () => {
     return () => document.body.classList.remove("ProfileBody");
   }, []);
   function getPhoto() {
-    const url = "http://localhost/Projects/Oral Radiology/PersonalImage.php/" + urlData.id;
+    const url =
+      "http://localhost/Projects/Oral Radiology/PersonalImage.php/" +
+      urlData.id;
     axios
       .get(url)
       .then((res) => {
         console.log(res.data);
         setPersonalImag("http://localhost/Projects/Oral Radiology" + res.data);
-        // res.data["PersonalImage"] == null
-        //   ? console.log("No Image")
-        //   : console.log("Image");
       })
       .catch((res) => console.log(res.data));
   }
