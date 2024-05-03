@@ -5,7 +5,7 @@ import AssignmentCard from "./AssignmentCard";
 import Chart from "./Chart";
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
-
+import './professsor.css';
 const ProfessorDB = () => {
   const [professorName, setProfessorName] = useState('');
   const [professorImage, setProfessorImage] = useState('');
@@ -73,7 +73,6 @@ const ProfessorDB = () => {
                 ></AssignmentCard>
               </div>
               <h5 className="seeall">See all →</h5>
-
             </div>
             <div className="USERPROF">
               <div className="TEXT">

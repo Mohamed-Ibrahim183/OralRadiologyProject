@@ -5,6 +5,7 @@ import AssignmentCard from "./AssignmentCard";
 import Chart from "./Chart";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
+import "./studentttt.css";
 
 const StudentDB = () => {
   const [studentName, setStudentName] = useState('');
