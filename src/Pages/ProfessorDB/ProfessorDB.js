@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react"; 
 import "./ProfessorDB.css";
 import Navbar from "../../Components/Navbar/Navbar";
 import AssignmentCard from "./AssignmentCard";
@@ -7,6 +7,30 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 
 const ProfessorDB = () => {
+  const [professorName, setProfessorName] = useState('');
+  const [professorImage, setProfessorImage] = useState('');
+  useEffect(() => {
+    const userId = sessionStorage.getItem('userId');
+    console.log("User ID from session storage:", userId);
+    if (userId) {
+      const fetchProfessorData = async () => {
+        const response = await fetch(`http://localhost/Projects/Oral Radiology/getUser.php?userId=${userId}`);
+        const data = await response.json();
+        if (data.name) {
+          setProfessorName(data.name);
+          setProfessorImage(data.personalImage);  
+        } else {
+          console.error('Failed to fetch professor data:', data.error);
+        }
+      };
+  
+      fetchProfessorData();
+    } else {
+      console.error('User ID not found in session storage');
+    }
+  }, []);
+  
+
   return (
     <>
       <Navbar />
@@ -53,8 +77,10 @@ const ProfessorDB = () => {
             </div>
             <div className="USERPROF">
               <div className="TEXT">
+              <img src={professorImage} alt="Student Profile" style={{ width: '100px', height: '100px', borderRadius: '20px',marginTop:'-20px',marginBottom:'20px' }} />
+
               <h4>Welcome Back</h4>
-              <h2>Dr. Abdelmonem Hatem</h2>
+              <h2>Dr. {professorName}</h2>
               <p>Welcome to our Oral Radiology system</p>
               </div>
               <button type="button" className="">Go To Profile</button>

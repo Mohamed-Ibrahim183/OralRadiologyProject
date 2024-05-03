@@ -19,18 +19,16 @@ function Login2() {
         },
         body: JSON.stringify({ username, password }),
       });
-
+  
       const data = await response.json();
       if (data.redirect) {
+        sessionStorage.setItem('userId', data.userId);  // Save el id 
         switch (data.usertype) {
           case 'Professor':
-            window.location.href = '/ProfessorDB';
+            window.location.href = `/ProfessorDB?userId=${data.userId}`;
             break;
           case 'Student':
-            window.location.href = '/StudentDB';
-            break;
-          case 'Admin':
-            window.location.href = '/Admin_dashboard';
+            window.location.href = `/StudentDB?userId=${data.userId}`;
             break;
           default:
             setLoginError('Invalid user type');
@@ -44,6 +42,7 @@ function Login2() {
       setLoginError('Failed to login, please check your server connection.');
     }
   };
+  
 
   const togglePasswordVisibility = () => {
     setPasswordShown(!passwordShown);
