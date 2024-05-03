@@ -1,18 +1,35 @@
-import React from "react";
+import React, { useState } from "react";
 // import Navbar2 from "../../Components/Navbar/Navbar";
 import Navbar from "../../Components/Navbar/Navbar";
 import { useEffect } from "react";
 import "./Profile.css";
 import AccData from "./data.json";
+import axios from "axios";
+import { useParams } from "react-router-dom";
 
 const Profile = () => {
+  const [personalImag, setPersonalImag] = useState("");
+  const urlData = useParams();
   useEffect(() => {
     // Add the class to the body element when the component mounts
     document.body.classList.add("ProfileBody");
-
+    getPhoto();
     // Remove the class from the body element when the component unmounts
     return () => document.body.classList.remove("ProfileBody");
   }, []);
+  function getPhoto() {
+    const url = "http://localhost/Projects/Oral Radiology/PersonalImage.php/" + urlData.id;
+    axios
+      .get(url)
+      .then((res) => {
+        console.log(res.data);
+        setPersonalImag("http://localhost/Projects/Oral Radiology" + res.data);
+        // res.data["PersonalImage"] == null
+        //   ? console.log("No Image")
+        //   : console.log("Image");
+      })
+      .catch((res) => console.log(res.data));
+  }
 
   const [Data, setData] = React.useState([]);
   useEffect(() => setData(Object.values(AccData)), []);
@@ -39,10 +56,7 @@ const Profile = () => {
           <div className="personalImage">
             <span className="ImageTitle">Profile Image</span>
             <div className="imageContent">
-              <img
-                src="https://media-hbe1-1.cdn.whatsapp.net/v/t61.24694-24/416174799_749980907087258_7853982289657493947_n.jpg?ccb=11-4&oh=01_AdS9MEq31f5H9fyYRViGQeI6Y00EP5F2sIpCUNMjhrd43Q&oe=65F19E22&_nc_sid=e6ed6c&_nc_cat=106"
-                alt=""
-              />
+              <img src={personalImag} alt="Your" />
               <span className="imageNote">JPG or PNG no larger than 5 MB</span>
               <button className="SubImage">Upload Image</button>
             </div>

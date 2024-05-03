@@ -26,6 +26,7 @@ import Cardloginn from "./Pages/cardloginn/cardloginn";
 import EditUser2 from "./Pages/Groups/EditUser2";
 import AddGroup from "./Pages/Groups/AddGroup";
 import Login2 from "./Pages/Login2/Login2";
+import File from "./Pages/File/File";
 const routes = [
   {
     path: "/",
@@ -40,6 +41,11 @@ const routes = [
   {
     path: "/EditUser2/:id",
     element: <EditUser2 />,
+    errorElement: <NotFound />,
+  },
+  {
+    path: "/File",
+    element: <File />,
     errorElement: <NotFound />,
   },
   {
@@ -69,7 +75,7 @@ const routes = [
   },
 
   {
-    path: "/Profile",
+    path: "/Profile/:id",
     element: <Profile />,
     errorElement: <NotFound />,
   },
