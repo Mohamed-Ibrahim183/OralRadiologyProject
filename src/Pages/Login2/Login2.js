@@ -4,7 +4,7 @@ import "./Login2.css";
 import img from './logo2.jpeg';
 
 function Login2() {
-  const [username, setUsername] = useState('');
+  const [MSAId, setMSAId] = useState('');
   const [password, setPassword] = useState('');
   const [loginError, setLoginError] = useState('');
   const [passwordShown, setPasswordShown] = useState(false);
@@ -17,7 +17,7 @@ function Login2() {
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ username, password }),
+        body: JSON.stringify({ MSAId, password }),
       });
   
       const data = await response.json();
@@ -58,9 +58,9 @@ function Login2() {
           {loginError && <p className="error">{loginError}</p>}
           <input
             type="text"
-            placeholder="Username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            placeholder="MSAId"
+            value={MSAId}
+            onChange={(e) => setMSAId(e.target.value)}
             required
           />
           <div style={{ position: 'relative' }}>

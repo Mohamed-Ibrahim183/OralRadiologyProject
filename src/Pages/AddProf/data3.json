@@ -6,12 +6,6 @@
     "text": "MSA ID"
   },
   {
-    "type": "text",
-    "name": "Username",
-    "placeholder": "Enter Your UserName",
-    "text": "User Name"
-  },
-  {
     "type": "password",
     "name": "Password",
     "placeholder": "Enter Your Password",
