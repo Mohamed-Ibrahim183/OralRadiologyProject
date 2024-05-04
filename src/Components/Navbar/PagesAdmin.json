@@ -1,0 +1,28 @@
+[
+  {
+    "Text": "Profile",
+    "link": "/Profile"
+  },
+  {
+    "Text": "All Professor",
+    "link": "/AllProfessor"
+  },
+  {
+    "Text": "Admin_dashboard",
+    "link": "/Admin_dashboard"
+  },
+  {
+    "Text": "Groups",
+    "link": "/Groups"
+  },
+  {
+    "Text": "Home2",
+    "link": "/Home2"
+  },
+  {
+    "Text": "Add Group",
+    "link": "/AddGroup"
+  }
+
+
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "Text": "Home",
+    "link": "/"
+  },
+  {
+    "Text": "Add Professor",
+    "link": "/AddProf"
+  },
+  {
+    "Text": "Grading Page",
+    "link": "/Grading_Page"
+  }
+]
