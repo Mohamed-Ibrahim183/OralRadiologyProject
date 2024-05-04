@@ -61,7 +61,7 @@ export default function AddUser() {
     <>
       <NavAdmin open={true} />
       <div className="container AddProf">
-        <h1 className="form-title">Add professor</h1>
+        <h1 className="form-title">Add User</h1>
         <hr className="title-line"></hr>
         <form action="" method="POST" onSubmit={handleSubmit}>
           <div className="main-user-info">{content}</div>
