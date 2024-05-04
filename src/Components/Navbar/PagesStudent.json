@@ -1,0 +1,19 @@
+[
+  {
+    "Text": "Profile",
+    "link": "/Profile"
+  },
+
+  {
+    "Text": "StudentDB",
+    "link": "/StudentDB"
+  },
+  {
+    "Text": "Home2",
+    "link": "/Home2"
+  },
+  {
+    "Text": "Login2",
+    "link": "/Login2"
+  }
+]

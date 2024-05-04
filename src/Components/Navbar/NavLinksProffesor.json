@@ -1,0 +1,14 @@
+[
+  {
+    "Text": "Home",
+    "link": "/"
+  },
+  {
+    "Text": "Requirements",
+    "link": "/Assignments"
+  },
+  {
+    "Text": "Grading Page",
+    "link": "/Grading_Page"
+  }
+]
