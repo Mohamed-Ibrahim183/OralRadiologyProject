@@ -4,31 +4,23 @@ import Navbar from "../../Components/Navbar/Navbar";
 import { useEffect } from "react";
 import "./Profile.css";
 import AccData from "./data.json";
-import axios from "axios";
-import { useParams } from "react-router-dom";
+// import axios from "axios";
+// import { useParams } from "react-router-dom";
 
 const Profile = () => {
   const [personalImag, setPersonalImag] = useState("");
-  const urlData = useParams();
+  // const urlData = useParams();
   useEffect(() => {
     // Add the class to the body element when the component mounts
     document.body.classList.add("ProfileBody");
-    getPhoto();
-    // Remove the class from the body element when the component unmounts
+    if (sessionStorage.getItem("PersonalImage")) {
+      setPersonalImag(
+        "http://localhost/Projects/OralRadiology/" +
+          sessionStorage.getItem("PersonalImage")
+      );
+    }
     return () => document.body.classList.remove("ProfileBody");
   }, []);
-  function getPhoto() {
-    const url =
-      "http://localhost/Projects/Oral Radiology/PersonalImage.php/" +
-      urlData.id;
-    axios
-      .get(url)
-      .then((res) => {
-        console.log(res.data);
-        setPersonalImag("http://localhost/Projects/Oral Radiology" + res.data);
-      })
-      .catch((res) => console.log(res.data));
-  }
 
   const [Data, setData] = React.useState([]);
   useEffect(() => setData(Object.values(AccData)), []);

@@ -1,5 +1,6 @@
 import React from 'react';
-import './footerstyles.css';
+ import './footerstyles.css';
+import './footer.css';
 import fb from '../assets/facebook.svg';
 import insta from '../assets/instagram.svg';
 import linkedin from '../assets/linkedin.svg';
@@ -38,9 +39,15 @@ const SocialMediaIcon = ({ href, src, alt }) => (
     ];
     return (
       <footer className="footer">
+          <div class="waves">
+      <div class="wave" id="wave1"></div>
+      <div class="wave" id="wave2"></div>
+      <div class="wave" id="wave3"></div>
+      <div class="wave" id="wave4"></div>
+    </div>
         <div className="sb__footer section_padding">
           <div className="sb__footer-links">
-            <FooterLinkSection title="Academic Services" links={academicLinks} />
+            <FooterLinkSection title="Academic Services"  links={academicLinks} />
             <FooterLinkSection title="Resources & Support" links={resourceLinks} />
             <FooterLinkSection title="University Information" links={universityLinks} />
             <div className="sb__footer-links_div">

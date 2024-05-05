@@ -22,6 +22,10 @@
   {
     "Text": "Add Group",
     "link": "/AddGroup"
+  },
+  {
+    "Text": "Login2",
+    "link": "/Login2"
   }
 
 

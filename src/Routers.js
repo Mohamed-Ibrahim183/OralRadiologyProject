@@ -3,10 +3,6 @@ import React from "react";
 import OverViewAssignmentsPage from "./Pages/OverViewAssignmentsPage";
 import NotFound from "./Pages/NotFound";
 import SecondPage from "./Pages/SecondPage";
-//import { useMediaQuery } from 'react-responsive'
-// import SubmitAssignmentPage from "./Pages/SubmitAssignmentPage";
-// import AddProf from "./Pages/AddProf/Add-professor";
-// import Profile2 from "./Pages/Profile/Profile2";
 import AddProf from "./Pages/AddProf";
 import Profile from "./Pages/Profile/Profile";
 import Home from "./Pages/Home/Home";
@@ -26,7 +22,8 @@ import Cardloginn from "./Pages/cardloginn/cardloginn";
 import EditUser2 from "./Pages/Groups/EditUser2";
 import AddGroup from "./Pages/Groups/AddGroup";
 import Login2 from "./Pages/Login2/Login2";
-import File from "./Pages/File/File";
+import Login3 from "./Pages/Login3/Login3";
+import Users from "./Pages/Users/Users";
 const routes = [
   {
     path: "/",
@@ -44,8 +41,8 @@ const routes = [
     errorElement: <NotFound />,
   },
   {
-    path: "/File",
-    element: <File />,
+    path: "/Users",
+    element: <Users />,
     errorElement: <NotFound />,
   },
   {
@@ -137,6 +134,11 @@ const routes = [
   {
     path: "/Login2",
     element: <Login2 />,
+    errorElement: <NotFound />,
+  },
+  {
+    path: "/Login3",
+    element: <Login3 />,
     errorElement: <NotFound />,
   },
 ];

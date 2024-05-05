@@ -1,0 +1,14 @@
+.popupImage {
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.9);
+  height: 100% !important;
+  width: 100% !important;
+  z-index: 100;
+
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+}

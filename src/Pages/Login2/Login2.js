@@ -1,48 +1,54 @@
 // Login2.js
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import "./Login2.css";
-import img from './logo2.jpeg';
+import img from "./logo2.jpeg";
+import axios from "axios";
 
 function Login2() {
-  const [MSAId, setMSAId] = useState('');
-  const [password, setPassword] = useState('');
-  const [loginError, setLoginError] = useState('');
+  const [MSAId, setMSAId] = useState("");
+  const [password, setPassword] = useState("");
+  const [loginError, setLoginError] = useState("");
   const [passwordShown, setPasswordShown] = useState(false);
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    try {
-      const response = await fetch('http://localhost/Projects/Oral Radiology/login.php', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ MSAId, password }),
-      });
-  
-      const data = await response.json();
-      if (data.redirect) {
-        sessionStorage.setItem('userId', data.userId);  // Save el id 
-        switch (data.usertype) {
-          case 'Professor':
-            window.location.href = `/ProfessorDB?userId=${data.userId}`;
-            break;
-          case 'Student':
-            window.location.href = `/StudentDB?userId=${data.userId}`;
-            break;
-          default:
-            setLoginError('Invalid user type');
-            break;
+  function handleSubmit2(e) {
+    e.preventDefault();
+    const url = "http://localhost/Projects/OralRadiology/userLogic.php/Login";
+    let fData = new FormData();
+    fData.append("MSAId", MSAId);
+    fData.append("Password", password);
+    axios
+      .post(url, fData)
+      .then((res) => {
+        if (typeof res.data === "object") {
+          console.log(res.data);
+          sessionStorage.setItem("userId", res.data.Id); // Save el id
+
+          sessionStorage.setItem("MSAId", res.data.MSAId);
+          sessionStorage.setItem("Name", res.data.Name);
+          sessionStorage.setItem("Email", res.data.Email);
+          sessionStorage.setItem("Type", res.data.Type);
+          sessionStorage.setItem("PersonalImage", res.data.PersonalImage);
+
+          // set Session
+          switch (res.data.Type) {
+            case "Professor":
+              window.location.href = `/ProfessorDB?userId=${res.data.Id}`;
+              break;
+            case "Student":
+              window.location.href = `/StudentDB?userId=${res.data.Id}`;
+              break;
+            default:
+              setLoginError("Invalid user type");
+              break;
+          }
+        } else {
+          setLoginError(
+            "Failed To Login Because of Error in Msa ID or Password"
+          );
         }
-      } else {
-        setLoginError(data.error || 'Failed to login, please check your credentials.');
-      }
-    } catch (error) {
-      console.error('Login failed:', error);
-      setLoginError('Failed to login, please check your server connection.');
-    }
-  };
-  
+      })
+      .catch((res) => console.log(res.data));
+  }
 
   const togglePasswordVisibility = () => {
     setPasswordShown(!passwordShown);
@@ -51,9 +57,9 @@ function Login2() {
   return (
     <div className="app-container">
       <div className="login-container">
-      <img src={img} alt="logo"></img>
+        <img src={img} alt="logo"></img>
 
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit2}>
           <h2>Login</h2>
           {loginError && <p className="error">{loginError}</p>}
           <input
@@ -63,7 +69,7 @@ function Login2() {
             onChange={(e) => setMSAId(e.target.value)}
             required
           />
-          <div style={{ position: 'relative' }}>
+          <div style={{ position: "relative" }}>
             <input
               type={passwordShown ? "text" : "password"}
               placeholder="Password"
@@ -71,22 +77,25 @@ function Login2() {
               onChange={(e) => setPassword(e.target.value)}
               required
             />
-            <button 
-              type="button" 
-              onClick={togglePasswordVisibility} 
+            <button
+              type="button"
+              onClick={togglePasswordVisibility}
               style={{
-                position: 'absolute', 
+                position: "absolute",
                 left: 90,
                 bottom: -7,
-                background: 'transparent', 
-                color: 'Black',
-                border: 'none',
-                cursor: 'pointer'
-              }}>
-              {passwordShown ? 'Hide' : 'Show'}
+                background: "transparent",
+                color: "Black",
+                border: "none",
+                cursor: "pointer",
+              }}
+            >
+              {passwordShown ? "Hide" : "Show"}
             </button>
           </div>
-          <button type="submit" className='submit' >Log In</button>
+          <button type="submit" className="submit">
+            Log In
+          </button>
         </form>
       </div>
     </div>

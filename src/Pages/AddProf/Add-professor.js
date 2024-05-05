@@ -37,25 +37,14 @@ export default function AddUser() {
   }
   function handleSubmit(e) {
     e.preventDefault();
-    const url = process.env.REACT_APP_API_URL || "http://localhost/Projects/Oral Radiology/addUser.php";
     let fData = new FormData();
-    Object.keys(finalData).forEach((key) => {
-      if (key === "personalImage") {
-        fData.append(key, finalData[key]);
-      } else {
-        fData.append(key, finalData[key]);
-      }
-    });
-  
-    axios.post(url, fData, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    })
-    .then((res) => console.log(res.data))
-    .catch((error) => console.log(error));
+    Object.keys(finalData).forEach((key) => fData.append(key, finalData[key]));
+    const url = "http://localhost/Projects/OralRadiology/userLogic.php/Insert";
+    axios
+      .post(url, fData)
+      .then((res) => console.log(res.data))
+      .catch((error) => console.log(error));
   }
-  
 
   return (
     <>
