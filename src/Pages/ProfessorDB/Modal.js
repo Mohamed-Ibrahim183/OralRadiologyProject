@@ -12,7 +12,7 @@ const Modal = ({ isOpen, onClose }) => {
   useEffect(() => {
     const fetchGroups = async () => {
       try {
-        const response = await fetch('http://localhost/Projects/Oral%20Radiology/getgroups.php');
+        const response = await fetch('http://localhost/Projects/OralRadiology/getgroups.php');
         if (!response.ok) {
           throw new Error('Failed to fetch groups');
         }
