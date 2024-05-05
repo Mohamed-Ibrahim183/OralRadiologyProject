@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-
+import Navbar from "../../Components/Navbar/Navbar";
 const BasicForm = () => {
   const [name, setName] = React.useState("");
 
@@ -11,39 +11,34 @@ const BasicForm = () => {
   function handleSubmit(e) {
     e.preventDefault();
     // console.log(name);
-    const url = "http://localhost/testOral/server.php";
+    const url = "http://localhost/Projects/Oral Radiology2/userLogic.php/Login";
 
     let fData = new FormData();
-    fData.append("name", name);
+    fData.append("MSAId", name);
+    fData.append("Password", document.querySelector("#pass").value);
     axios
       .post(url, fData)
       .then((response) => {
         console.log(response.data); // Log the response data
-        // console.log("name", response.data["name"]);
-        // console.log("city", response.data["city"]);
-        // console.log(`age ${response.data["age"]}`);
-        // end(response.data);
       })
       .catch((error) => alert(error));
   }
 
-  // function end(data) {
-  //   console.log(data);
-  //   // Handle the response data here
-  // }
-
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        type="text"
-        name="username"
-        placeholder="username"
-        value={name}
-        onChange={change}
-      />
-      <input type="text" name="password" placeholder="password" />
-      <button type="submit">Submit</button>
-    </form>
+    <>
+      <Navbar />
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          name="MSAId"
+          placeholder="MSA ID"
+          value={name}
+          onChange={change}
+        />
+        <input type="text" name="Password" placeholder="password" id="pass" />
+        <button type="submit">Submit</button>
+      </form>
+    </>
   );
 };
 

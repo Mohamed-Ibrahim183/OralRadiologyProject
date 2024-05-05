@@ -8,35 +8,20 @@ import "react-calendar/dist/Calendar.css";
 import "./studentttt.css";
 
 const StudentDB = () => {
-  const [studentName, setStudentName] = useState('');
-  const [personalImage, setPersonalImage] = useState('');
+  const [studentName, setStudentName] = useState("");
+  const [personalImage, setPersonalImage] = useState("");
 
   useEffect(() => {
-    const fetchStudentData = async () => {
-      const userId = sessionStorage.getItem('userId');
-      if (userId) {
-        try {
-          const response = await fetch(`http://localhost/Projects/Oral Radiology/getUser.php?userId=${userId}`);
-          const data = await response.json();
-          if (data.name) {
-            setStudentName(data.name);
-            setPersonalImage(data.personalImage); 
-            console.log("Received image URL:", data.personalImage); 
-
-          } else {
-            console.error('Failed to fetch student data:', data.error);
-          }
-        } catch (error) {
-          console.error('Failed to fetch data:', error);
-        }
-      } else {
-        console.error('User ID not found in session storage');
-      }
-    };
-  
-    fetchStudentData();
+    const userId = sessionStorage.getItem("userId");
+    if (userId) {
+      setStudentName(sessionStorage["Name"]);
+      setPersonalImage(
+        "http://localhost/Projects/OralRadiology/" +
+          sessionStorage["PersonalImage"]
+      );
+    }
   }, []);
-  
+
   return (
     <>
       <Navbar />
@@ -81,10 +66,19 @@ const StudentDB = () => {
           </div>
           <div className="USERPROF">
             <div className="TEXT">
-            <div className="Profilephoto">
-
-            <img src={personalImage} alt="Student Profile" style={{ width: '100px', height: '100px', borderRadius: '20px',marginTop:'-20px',marginBottom:'20px' }} />
-</div>
+              <div className="Profilephoto">
+                <img
+                  src={personalImage}
+                  alt="Student Profile"
+                  style={{
+                    width: "100px",
+                    height: "100px",
+                    borderRadius: "20px",
+                    marginTop: "-20px",
+                    marginBottom: "20px",
+                  }}
+                />
+              </div>
               <h4>Welcome Back</h4>
               <h2>{studentName}</h2>
               <p>Welcome to our Oral Radiology system</p>
