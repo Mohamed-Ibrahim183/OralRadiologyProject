@@ -1,9 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Card from "./Card";
 import AssignmentsFile from "./assignments.json";
+import { useReactToPrint } from "react-to-print";
+import any from "../../Pages/AddProf/Dental_Xray-removebg-preview.jpg";
+import "./image.css";
 // import DarkMode from "./DarkMode/DarkMode";
 
 const Cards = () => {
+  const toPrint = useRef();
   const [assignments, setAssignments] = useState([]);
 
   useEffect(() => setAssignments(Object.values(AssignmentsFile)), []);
@@ -16,23 +20,40 @@ const Cards = () => {
       images={assignment.images}
     />
   ));
-  // /////////////////////
-  // const setDarkMode = () => {
-  //   document.querySelector("body").setAttribute("Theme", "Dark");
-  //   localStorage.setItem("Theme", "Dark");
-  // };
-  // const setLightMode = () => {
-  //   document.querySelector("body").setAttribute("Theme", "Light");
-  //   localStorage.setItem("Theme", "Light");
-  // };
-  // /////////////////////
-
+  const handlePrint = useReactToPrint({
+    content: () => toPrint.current,
+    documentTitle: "ALL Assignments Report 236671",
+  });
+  useEffect(() => {
+    return () =>
+      document.querySelectorAll("img").forEach(
+        (e) =>
+          (e.onclick = function () {
+            // console.log(e.parentElement);
+            e.parentElement.classList.toggle("popupImage");
+          })
+      );
+  });
   return (
-    <div className="Assignments ">
-      {/* <button className="ToggleDarkMode">Toggle Dark Mode</button> */}
-      {/* <DarkMode /> */}
-      {content}
-    </div>
+    <>
+      <button
+        style={{ backgroundColor: "#418C83" }}
+        className="MainBtn print"
+        onClick={handlePrint}
+      >
+        Print Report
+      </button>
+      <div className="Assignments" ref={toPrint}>
+        {content}
+      </div>
+      {/* <div className="popupImage">
+        <img src={any} alt="" />
+      </div> */}
+      {/* <div className="popupImage">
+        <span>&times;</span>
+        <img src={any} alt="" />
+      </div> */}
+    </>
   );
 };
 

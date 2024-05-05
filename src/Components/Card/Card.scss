@@ -1,18 +1,6 @@
 @use '../../_Variables.scss' as *;
 @import "./_breakpoints";
 
-// .Assignments{
-//   display: grid;
-//   grid-template-columns: repeat(2, 1fr);
-// }
-// $mainColor: #0082e6;
-// $mainBackGround: #e7fff7;
-
-// $mainColor: #4d8ba8;
-// $mainBackGround: #1b343c;
-// $textColor: #96bdcf;
-// $mainColor: #008080;
-// $mainBackGround: #1C445A;
 
 body{
   background-color: var(--mainBackGround);
