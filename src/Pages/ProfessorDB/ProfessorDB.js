@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react"; 
+import Modal from "./Modal";
 import "./ProfessorDB.css";
 import Navbar from "../../Components/Navbar/Navbar";
 import AssignmentCard from "./AssignmentCard";
@@ -9,6 +10,8 @@ import './professsor.css';
 const ProfessorDB = () => {
   const [professorName, setProfessorName] = useState('');
   const [professorImage, setProfessorImage] = useState('');
+  const [isModalOpen, setModalOpen] = useState(false);
+
   useEffect(() => {
     const userId = sessionStorage.getItem('userId');
     console.log("User ID from session storage:", userId);
@@ -29,17 +32,23 @@ const ProfessorDB = () => {
       console.error('User ID not found in session storage');
     }
   }, []);
-  
-
+  const handleOpenModal = () => {
+    setModalOpen(true);
+  };
+  const handleCloseModal = () => {
+    setModalOpen(false);
+  };
   return (
     <>
       <Navbar />
+      <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
+      </Modal> 
       <div className="fullProfessorPage">
         <div className="upppperr">
             <div className="container AssignmentSection">
               <div className="BBBBBB">
                   <h2 className="sectionTitle">My Assignments</h2>
-                  <button className="" >Add Requirement</button>
+                  <button className=""  onClick={handleOpenModal}>Add Requirement</button>
               </div>
               <div className="CARDSASSIGNMENT">
                 <AssignmentCard
