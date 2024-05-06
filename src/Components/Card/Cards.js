@@ -18,6 +18,7 @@ const Cards = () => {
       Name={assignment.Name}
       Features={assignment.Features}
       images={assignment.images}
+      images2={assignment.images2}
     />
   ));
   const handlePrint = useReactToPrint({
@@ -46,13 +47,6 @@ const Cards = () => {
       <div className="Assignments" ref={toPrint}>
         {content}
       </div>
-      {/* <div className="popupImage">
-        <img src={any} alt="" />
-      </div> */}
-      {/* <div className="popupImage">
-        <span>&times;</span>
-        <img src={any} alt="" />
-      </div> */}
     </>
   );
 };

@@ -1,34 +1,46 @@
 import React, { useState, useEffect } from "react";
+import Modal from "./Modal";
 import "./ProfessorDB.css";
 import Navbar from "../../Components/Navbar/Navbar";
 import AssignmentCard from "./AssignmentCard";
 import Chart from "./Chart";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
-import "./professsor.css";
+import "./professsor.css"
 const ProfessorDB = () => {
   const [professorName, setProfessorName] = useState("");
   const [professorImage, setProfessorImage] = useState("");
+  const [isModalOpen, setModalOpen] = useState(false);
+
   useEffect(() => {
     const userId = sessionStorage.getItem("userId");
     if (userId) {
-      setProfessorName(sessionStorage["Name"]);
+      setProfessorName(sessionStorage.getItem("Name")); // Changed sessionStorage["Name"] to sessionStorage.getItem("Name")
       setProfessorImage(
         "http://localhost/Projects/OralRadiology/" +
-          sessionStorage["PersonalImage"]
+          sessionStorage.getItem("PersonalImage") // Changed sessionStorage["PersonalImage"] to sessionStorage.getItem("PersonalImage")
       );
     }
   }, []);
 
+  const handleOpenModal = () => {
+    setModalOpen(true);
+  };
+  const handleCloseModal = () => {
+    setModalOpen(false);
+  };
+
   return (
     <>
       <Navbar />
+      <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
+      </Modal> 
       <div className="fullProfessorPage">
         <div className="upppperr">
           <div className="container AssignmentSection">
             <div className="BBBBBB">
               <h2 className="sectionTitle">My Assignments</h2>
-              <button className="">Add Requirement</button>
+              <button className="" onClick={handleOpenModal}>Add Requirement</button> {/* Added onClick event handler */}
             </div>
             <div className="CARDSASSIGNMENT">
               <AssignmentCard
@@ -67,7 +79,7 @@ const ProfessorDB = () => {
             <div className="TEXT">
               <img
                 src={professorImage}
-                alt="Student Profile"
+                alt="Professor Profile"
                 style={{
                   width: "100px",
                   height: "100px",
@@ -91,7 +103,6 @@ const ProfessorDB = () => {
             <Chart className="chart1" />
           </div>
           <div className="Calenderrrr">
-            {/* <Calendarr year={2024} month={4} />  */}
             <h2>Calendar</h2>
             <Calendar></Calendar>
           </div>

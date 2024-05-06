@@ -126,6 +126,11 @@ body {
   border-top-left-radius: 12px;
   border-bottom-right-radius: 12px;
 }
+.AssCard.container .Card .Images .status .cat {
+  color: var(--mainColor);
+  margin-left: 10px;
+  font-weight: bold;
+}
 .AssCard.container .Card .Images .status .AssName,
 .AssCard.container .Card .Images .status .Slider {
   font-weight: bold;

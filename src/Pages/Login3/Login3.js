@@ -105,7 +105,7 @@ function Login3() {
         <div class="overlay-panel overlay-left">
           <h1>Welcome Back!</h1>
           <p>To connect please login with your personal info</p>
-          <button class="ghost" id="signIn" onClick={script} >Sign In</button>
+          <button class="ghost" id="signIn" >Sign In</button>
         </div>
         <div class="overlay-panel overlay-right">
           <h1>Hello, Friend!</h1>

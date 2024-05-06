@@ -5,8 +5,9 @@ import axios from "axios";
 
 const AddGroup = () => {
   const [rows, setRows] = useState(0);
-  const [render, setRender] = useState(0);
-  const [formData, setFormData] = useState([1, 2, 3]);
+  const [render, setRender] = useState(1);
+  const [groups, setGroups] = useState([]);
+
   const generateOptions = (start, end) => {
     const options = [];
     for (let i = start; i <= end; i++) {
@@ -59,54 +60,57 @@ const AddGroup = () => {
             id={`Minutes${index}`}
           />
         </div>
+        <div className="section">
+          <label htmlFor={`Room${index}`}>Room:</label>
+          <input type="text" name={`Room${index}`} id={`Room${index}`} />
+        </div>
       </div>
     );
   }
 
-  const [groups, setGroups] = useState([]);
   function handleSubmit() {
     let isValid = true;
     let formDataCopy = [];
-    // console.log(`Rows = ${rows}`);
     for (let i = 1; i < rows + 1; i++) {
-      // console.log("once " + i);
       const day = document.getElementById(`Day${i}`).value;
       const hour = document.getElementById(`Hour${i}`).value;
       const duration = document.getElementById(`Duration${i}`).value;
       const minutes = document.getElementById(`Minutes${i}`).value;
-      // console.log(document.getElementById(`Day${i}`));
+      const Room = document.getElementById(`Room${i}`).value;
       if (
         day === "" ||
         hour === "" ||
         duration === "" ||
         minutes === "" ||
         document.getElementById("GroupName").value === "" ||
+        Room === "" ||
         rows === 0
       ) {
         isValid = false;
         break;
       }
 
-      formDataCopy[i - 1] = { day, hour, duration, minutes };
+      formDataCopy[i - 1] = { day, hour, duration, minutes, Room };
     }
+    console.log(rows);
+    console.log(isValid);
 
     if (isValid) {
-      // console.log(formDataCopy);
-      const url = `http://localhost/Projects/Oral Radiology/api.php/Group`;
+      const url = `http://localhost/Projects/OralRadiology/GroupLogic.php/Insert`;
       let fData = new FormData();
       fData.append("Name", document.getElementById("GroupName").value);
       Object.keys(formDataCopy).map((ele) => {
         fData.append(ele, JSON.stringify(formDataCopy[ele]));
+        return null;
       });
       console.table(formDataCopy);
       axios
         .post(url, fData)
         .then((res) => console.log(` coming Back end ${res.data}`))
         .catch((error) => console.error(error));
-      console.log("Calling the Server");
       setRows(0);
       document.getElementById("GroupName").value = "";
-      fetchFirst();
+      setRender(-render);
       fetchFirst();
     } else {
       console.log("Please fill in all fields.");
@@ -114,24 +118,26 @@ const AddGroup = () => {
     }
   }
   function fetchFirst() {
-    const url = `http://localhost/Projects/Oral Radiology/api.php/Groups`;
+    const url = `http://localhost/Projects/OralRadiology/GroupLogic.php/Groups`;
     axios
       .get(url)
       .then((res) => {
         console.log(res.data);
+        // Object.keys(res.data).forEach((e) => console.log(e));
         setGroups(res.data);
         // console.log(typeof res.data);
       })
       .catch((error) => console.error(error));
-    setRender(-render);
-    setRender(-render);
   }
   useEffect(() => {
     // get groups from data base
+    async function s() {
+      await setGroups({});
+    }
+    s();
     fetchFirst();
-  }, []);
-  // console.log(groups[2]);
-
+  }, [render]);
+  
   function check(ele, key) {
     if (Array.isArray(ele) && ele.length > 0) {
       let s = "";
@@ -144,7 +150,7 @@ const AddGroup = () => {
     return "NO";
   }
   function Delete(index) {
-    const url = `http://localhost/Projects/Oral Radiology/api.php/Delete`;
+    const url = `http://localhost/Projects/OralRadiology/GroupLogic.php/Delete`;
     let fData = new FormData();
     fData.append("id", index);
     axios
@@ -153,9 +159,7 @@ const AddGroup = () => {
         console.log(res.data);
       })
       .catch((error) => console.error(error));
-
-    fetchFirst();
-    fetchFirst();
+    setRender(-render);
   }
   const content = Object.entries(groups).map(([key, group]) => {
     return (
@@ -166,6 +170,7 @@ const AddGroup = () => {
         <td>{check(group.slice(1), "Hour")}</td>
         <td>{check(group.slice(1), "Minute")}</td>
         <td>{check(group.slice(1), "DurationInMinutes")}</td>
+        <td>{check(group.slice(1), "Room")}</td>
         <td>
           <button onClick={() => Delete(key)}>Delete</button>
         </td>
@@ -186,6 +191,7 @@ const AddGroup = () => {
               <th>Slots Hours</th>
               <th>Slots Minutes</th>
               <th>Slots Duration</th>
+              <th>Slots Room</th>
             </tr>
           </thead>
           <tbody>{content}</tbody>

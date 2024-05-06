@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import DarkMode from "../DarkMode/DarkMode";
 import LinksFile from "./NavLinksAdmin.json";
 import PagesFiles from "./PagesAdmin.json";
-import logo from "./imgs/logo.png";
+//import logo from "./imgs/logo.png";
 import "./Nav.css";
 
 const Navbar = () => {
