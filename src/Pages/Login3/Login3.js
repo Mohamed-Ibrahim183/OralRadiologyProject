@@ -7,11 +7,11 @@ import axios from "axios";
 
 function script() {
   const trouble = document.getElementById('trouble')
-  const forget = document.getElementById('forget');
+  // const forget = document.getElementById('forget');
   const signInButton = document.getElementById('signIn');
   const container = document.getElementById('container');
   
-  if(trouble || forget){
+  if(trouble ){
     trouble.addEventListener('click', () => {
     container.classList.add("right-panel-active");
   });
@@ -134,7 +134,7 @@ function Login3() {
               {passwordShown ? "Hide" : "Show"}
             </button>
             </div>
-        {/* <a href="#" id="forget" onClick={script}>Forgot your password?</a> */}
+        <a href="#" id="forget" onClick={script}>Forgot your password?</a>
       
         <button >Sign In</button>
       </form>
