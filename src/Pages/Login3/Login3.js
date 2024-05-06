@@ -2,10 +2,32 @@
 import React, { useState } from 'react';
 import "./Login3.css";
 import img from './logo2.jpeg';
-import myScript from './script.js';
+import myScript from './script';
 
 
 
+function script() {
+  const signUpButton = document.getElementById('signUp');
+  const signInButton = document.getElementById('signIn');
+  const container = document.getElementById('container');
+  
+  if(signUpButton){
+  signUpButton.addEventListener('click', () => {
+    container.classList.add("right-panel-active");
+  });
+  }
+  
+  console.log("works")
+  
+  if(signInButton){
+  signInButton.addEventListener('click', () => {
+    container.classList.remove("right-panel-active");
+  });
+  }
+}
+
+// myScript.async=true;
+// myScript.call();
 function Login3() {
   const [MSAId, setMSAId] = useState('');
   const [password, setPassword] = useState('');
@@ -83,12 +105,12 @@ function Login3() {
         <div class="overlay-panel overlay-left">
           <h1>Welcome Back!</h1>
           <p>To connect please login with your personal info</p>
-          <button class="ghost" id="signIn">Sign In</button>
+          <button class="ghost" id="signIn" onClick={script} >Sign In</button>
         </div>
         <div class="overlay-panel overlay-right">
           <h1>Hello, Friend!</h1>
           <p>Enter your personal details and start journey with us</p>
-          <button class="ghost" id="signUp" >Having Trouble Loggin in ?</button>
+          <button class="ghost" id="signUp" onClick={script} >Having Trouble Loggin in ?</button>
         </div>
       </div>
     </div>
@@ -97,5 +119,5 @@ function Login3() {
     </div>
   );
 }
-myScript.async=true;
+
 export default Login3;
