@@ -6,12 +6,13 @@ import Navbar  from '../../Components/Navbar/Navbar';
 import axios from "axios";
 
 function script() {
-  const signUpButton = document.getElementById('signUp');
+  const trouble = document.getElementById('trouble')
+  const forget = document.getElementById('forget');
   const signInButton = document.getElementById('signIn');
   const container = document.getElementById('container');
   
-  if(signUpButton){
-  signUpButton.addEventListener('click', () => {
+  if(trouble || forget){
+    trouble.addEventListener('click', () => {
     container.classList.add("right-panel-active");
   });
   }
@@ -133,7 +134,7 @@ function Login3() {
               {passwordShown ? "Hide" : "Show"}
             </button>
             </div>
-        <a href="#">Forgot your password?</a>
+        {/* <a href="#" id="forget" onClick={script}>Forgot your password?</a> */}
       
         <button >Sign In</button>
       </form>
@@ -149,7 +150,7 @@ function Login3() {
         <div class="overlay-panel overlay-right">
           <h1>Hello, Friend!</h1>
           <p>Enter your personal details and start journey with us</p>
-          <button class="ghost" id="signUp" onClick={script} >Having Trouble Loggin in ?</button>
+          <button class="ghost" id="trouble" onClick={script} >Having Trouble Loggin in ?</button>
         </div>
       </div>
     </div>
