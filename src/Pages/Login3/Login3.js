@@ -3,8 +3,7 @@ import React, { useState } from 'react';
 import "./Login3.css";
 import img from './logo2.jpeg';
 import Navbar  from '../../Components/Navbar/Navbar';
-
-
+import axios from "axios";
 
 function script() {
   const signUpButton = document.getElementById('signUp');
@@ -16,7 +15,6 @@ function script() {
     container.classList.add("right-panel-active");
   });
   }
-
   if(signInButton){
   signInButton.addEventListener('click', () => {
     container.classList.remove("right-panel-active");
@@ -27,44 +25,52 @@ function script() {
 // myScript.async=true;
 // myScript.call();
 function Login3() {
-  const [MSAId, setMSAId] = useState('');
-  const [password, setPassword] = useState('');
-  const [loginError, setLoginError] = useState('');
+  // -> important for no scrolling
+  document.body.style.overflow = "hidden"
+  const [MSAId, setMSAId] = useState("");
+  const [password, setPassword] = useState("");
+  const [loginError, setLoginError] = useState("");
   const [passwordShown, setPasswordShown] = useState(false);
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    try {
-      const response = await fetch('http://localhost/Projects/Oral Radiology/login.php', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ MSAId, password }),
-      });
-  
-      const data = await response.json();
-      if (data.redirect) {
-        sessionStorage.setItem('userId', data.userId);  // Save el id 
-        switch (data.usertype) {
-          case 'Professor':
-            window.location.href = `/ProfessorDB?userId=${data.userId}`;
-            break;
-          case 'Student':
-            window.location.href = `/StudentDB?userId=${data.userId}`;
-            break;
-          default:
-            setLoginError('Invalid user type');
-            break;
+  function handleSubmit2(e) {
+    e.preventDefault();
+    const url = "http://localhost/Projects/OralRadiology/userLogic.php/Login";
+    let fData = new FormData();
+    fData.append("MSAId", MSAId);
+    fData.append("Password", password);
+    axios
+      .post(url, fData)
+      .then((res) => {
+        if (typeof res.data === "object") {
+          console.log(res.data);
+          sessionStorage.setItem("userId", res.data.Id); // Save el id
+
+          sessionStorage.setItem("MSAId", res.data.MSAId);
+          sessionStorage.setItem("Name", res.data.Name);
+          sessionStorage.setItem("Email", res.data.Email);
+          sessionStorage.setItem("Type", res.data.Type);
+          sessionStorage.setItem("PersonalImage", res.data.PersonalImage);
+
+          // set Session
+          switch (res.data.Type) {
+            case "Professor":
+              window.location.href = `/ProfessorDB?userId=${res.data.Id}`;
+              break;
+            case "Student":
+              window.location.href = `/StudentDB?userId=${res.data.Id}`;
+              break;
+            default:
+              setLoginError("Invalid user type");
+              break;
+          }
+        } else {
+          setLoginError(
+            "Failed To Login Because of Error in Msa ID or Password"
+          );
         }
-      } else {
-        setLoginError(data.error || 'Failed to login, please check your credentials.');
-      }
-    } catch (error) {
-      console.error('Login failed:', error);
-      setLoginError('Failed to login, please check your server connection.');
-    }
-  };
+      })
+      .catch((res) => console.log(res.data));
+  }
   
 
   const togglePasswordVisibility = () => {
@@ -78,9 +84,9 @@ function Login3() {
       <div className='login3'>
     
   <h1>Welcome to MSA Oral Radiology</h1>
-  <div class="container" id="container">
+  <div class="container" id="container">  
     <div class="form-container sign-up-container">
-      <form action="#">
+      <form >
         <h2>Forgat Password?</h2>
       
         <span>Enter your MSA Email</span>
@@ -90,13 +96,45 @@ function Login3() {
       </form>
     </div>
     <div class="form-container sign-in-container">
-      <form action="#">
+      <form onSubmit={handleSubmit2}>
         <h2>Sign in</h2>
         
         <span>Use Your MSA Account Details</span>
-        <input  placeholder="Email or MSA ID" />
-        <input type="password" placeholder="Password" />
+          <input
+            type="text"
+            placeholder="Email or MSA ID"
+            value={MSAId}
+            onChange={(e) => setMSAId(e.target.value)}
+            required
+          />
+
+        
+        <input
+              type={passwordShown ? "text" : "password"}
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+             <div style={{ position: "relative" }}>
+              <button
+              type="button"
+              onClick={togglePasswordVisibility}
+              style={{
+                position: "absolute",
+                left: 50,
+                bottom: 10,
+                background: "transparent",
+                color: "Black",
+                border: "none",
+                cursor: "pointer",
+              }}
+            >
+              {passwordShown ? "Hide" : "Show"}
+            </button>
+            </div>
         <a href="#">Forgot your password?</a>
+      
         <button >Sign In</button>
       </form>
     </div>
@@ -105,7 +143,8 @@ function Login3() {
         <div class="overlay-panel overlay-left">
           <h1>Welcome Back!</h1>
           <p>To connect please login with your personal info</p>
-          <button class="ghost" id="signIn" >Sign In</button>
+          
+          <button type="submit" className="ghost submit" id="signIn" >Sign In</button>
         </div>
         <div class="overlay-panel overlay-right">
           <h1>Hello, Friend!</h1>
