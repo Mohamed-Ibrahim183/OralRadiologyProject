@@ -5,7 +5,7 @@ import axios from "axios";
 
 const AddGroup = () => {
   const [rows, setRows] = useState(0);
-  const [render, setRender] = useState(0);
+  // const [render, setRender] = useState(0);
   const [groups, setGroups] = useState([]);
 
   const generateOptions = (start, end) => {
@@ -97,7 +97,6 @@ const AddGroup = () => {
     }
 
     if (isValid) {
-      // console.log(formDataCopy);
       const url = `http://localhost/Projects/OralRadiology/GroupLogic.php/Insert`;
       let fData = new FormData();
       fData.append("Name", document.getElementById("GroupName").value);
@@ -125,13 +124,16 @@ const AddGroup = () => {
       .get(url)
       .then((res) => {
         console.log(res.data);
+        // Object.keys(res.data).forEach((e) => console.log(e));
+        setGroups(res.data);
+        // console.log(typeof res.data);
       })
       .catch((error) => console.error(error));
   }
   useEffect(() => {
     // get groups from data base
     fetchFirst();
-  });
+  }, []);
   // console.log(groups[2]);
 
   function check(ele, key) {
@@ -146,7 +148,7 @@ const AddGroup = () => {
     return "NO";
   }
   function Delete(index) {
-    const url = `http://localhost/Projects/Oral Radiology/api.php/Delete`;
+    const url = `http://localhost/Projects/OralRadiology/GroupLogic.php/Delete`;
     let fData = new FormData();
     fData.append("id", index);
     axios
@@ -168,6 +170,7 @@ const AddGroup = () => {
         <td>{check(group.slice(1), "Hour")}</td>
         <td>{check(group.slice(1), "Minute")}</td>
         <td>{check(group.slice(1), "DurationInMinutes")}</td>
+        <td>{check(group.slice(1), "Room")}</td>
         <td>
           <button onClick={() => Delete(key)}>Delete</button>
         </td>
@@ -188,6 +191,7 @@ const AddGroup = () => {
               <th>Slots Hours</th>
               <th>Slots Minutes</th>
               <th>Slots Duration</th>
+              <th>Slots Room</th>
             </tr>
           </thead>
           <tbody>{content}</tbody>
