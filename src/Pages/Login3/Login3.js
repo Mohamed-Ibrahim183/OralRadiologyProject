@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import "./Login3.css";
 import img from './logo2.jpeg';
-import myScript from './script';
+import Navbar  from '../../Components/Navbar/Navbar';
 
 
 
@@ -16,9 +16,7 @@ function script() {
     container.classList.add("right-panel-active");
   });
   }
-  
-  console.log("works")
-  
+
   if(signInButton){
   signInButton.addEventListener('click', () => {
     container.classList.remove("right-panel-active");
@@ -74,8 +72,10 @@ function Login3() {
   };
 
   return (
-    <div className='login3'>
-      <div>
+    
+    <div >
+      <Navbar />
+      <div className='login3'>
     
   <h1>Welcome to MSA Oral Radiology</h1>
   <div class="container" id="container">
