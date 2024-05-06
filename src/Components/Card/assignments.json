@@ -17,6 +17,24 @@
       "./Images/cardImages/cbct.jpg",
       "./Images/cardImages/download.jpeg",
       "./Images/cardImages/radyoloji.jpg"
+    ],
+    "images2": [
+      {
+        "category": "cat1",
+        "image": "./Images/cardImages/Dental_Xray-removebg-preview.jpg"
+      },
+      {
+        "category": "cat2",
+        "image": "./Images/cardImages/cbct.jpg"
+      },
+      {
+        "category": "cat3",
+        "image": "./Images/cardImages/download.jpeg"
+      },
+      {
+        "category": "cat4",
+        "image": "./Images/cardImages/radyoloji.jpg"
+      }
     ]
   },
   "Ass2": {
@@ -37,6 +55,24 @@
       "./Images/cardImages/download.jpeg",
       "./Images/cardImages/Dental_Xray-removebg-preview.jpg",
       "./Images/cardImages/radyoloji.jpg"
+    ],
+    "images2": [
+      {
+        "category": "cat3",
+        "image": "./Images/cardImages/download.jpeg"
+      },
+      {
+        "category": "cat4",
+        "image": "./Images/cardImages/radyoloji.jpg"
+      },
+      {
+        "category": "cat1",
+        "image": "./Images/cardImages/Dental_Xray-removebg-preview.jpg"
+      },
+      {
+        "category": "cat2",
+        "image": "./Images/cardImages/cbct.jpg"
+      }
     ]
   }
 }

@@ -5,7 +5,7 @@ import axios from "axios";
 
 const AddGroup = () => {
   const [rows, setRows] = useState(0);
-  // const [render, setRender] = useState(0);
+  const [render, setRender] = useState(1);
   const [groups, setGroups] = useState([]);
 
   const generateOptions = (start, end) => {
@@ -71,15 +71,12 @@ const AddGroup = () => {
   function handleSubmit() {
     let isValid = true;
     let formDataCopy = [];
-    // console.log(`Rows = ${rows}`);
     for (let i = 1; i < rows + 1; i++) {
-      // console.log("once " + i);
       const day = document.getElementById(`Day${i}`).value;
       const hour = document.getElementById(`Hour${i}`).value;
       const duration = document.getElementById(`Duration${i}`).value;
       const minutes = document.getElementById(`Minutes${i}`).value;
       const Room = document.getElementById(`Room${i}`).value;
-      // console.log(document.getElementById(`Day${i}`));
       if (
         day === "" ||
         hour === "" ||
@@ -95,6 +92,8 @@ const AddGroup = () => {
 
       formDataCopy[i - 1] = { day, hour, duration, minutes, Room };
     }
+    console.log(rows);
+    console.log(isValid);
 
     if (isValid) {
       const url = `http://localhost/Projects/OralRadiology/GroupLogic.php/Insert`;
@@ -109,9 +108,9 @@ const AddGroup = () => {
         .post(url, fData)
         .then((res) => console.log(` coming Back end ${res.data}`))
         .catch((error) => console.error(error));
-      // console.log("Calling the Server");
       setRows(0);
       document.getElementById("GroupName").value = "";
+      setRender(-render);
       fetchFirst();
     } else {
       console.log("Please fill in all fields.");
@@ -132,10 +131,13 @@ const AddGroup = () => {
   }
   useEffect(() => {
     // get groups from data base
+    async function s() {
+      await setGroups({});
+    }
+    s();
     fetchFirst();
-  }, []);
-  // console.log(groups[2]);
-
+  }, [render]);
+  
   function check(ele, key) {
     if (Array.isArray(ele) && ele.length > 0) {
       let s = "";
@@ -157,9 +159,7 @@ const AddGroup = () => {
         console.log(res.data);
       })
       .catch((error) => console.error(error));
-
-    fetchFirst();
-    fetchFirst();
+    setRender(-render);
   }
   const content = Object.entries(groups).map(([key, group]) => {
     return (

@@ -1,4 +1,4 @@
-.popupImage {
+/* .popupImage {
   position: fixed !important;
   top: 0;
   left: 0;
@@ -12,3 +12,6 @@
   justify-content: center;
   align-items: center;
 }
+.popupImage img {
+  width: 50%;
+} */

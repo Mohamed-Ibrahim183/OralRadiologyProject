@@ -62,6 +62,7 @@ body{
           -ms-border-radius: 10px;
           -o-border-radius: 10px;
           }
+
         
         .left-Arrow {
           cursor: pointer;
@@ -102,6 +103,14 @@ body{
         border: 3px solid var(--textColor);
         border-top-left-radius: 12px;
         border-bottom-right-radius: 12px;
+        .cat{
+          // position: absolute;
+          // top: -10px;
+          color: var(--mainColor);
+          // font-size: 14px;
+          margin-left: 10px;
+          font-weight: bold;
+        }
         .AssName,
         .Slider {
           font-weight: bold;
