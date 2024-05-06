@@ -6,7 +6,8 @@ import axios from "axios";
 const AddGroup = () => {
   const [rows, setRows] = useState(0);
   const [render, setRender] = useState(0);
-  const [formData, setFormData] = useState([1, 2, 3]);
+  const [groups, setGroups] = useState([]);
+
   const generateOptions = (start, end) => {
     const options = [];
     for (let i = start; i <= end; i++) {
@@ -59,11 +60,14 @@ const AddGroup = () => {
             id={`Minutes${index}`}
           />
         </div>
+        <div className="section">
+          <label htmlFor={`Room${index}`}>Room:</label>
+          <input type="text" name={`Room${index}`} id={`Room${index}`} />
+        </div>
       </div>
     );
   }
 
-  const [groups, setGroups] = useState([]);
   function handleSubmit() {
     let isValid = true;
     let formDataCopy = [];
@@ -74,6 +78,7 @@ const AddGroup = () => {
       const hour = document.getElementById(`Hour${i}`).value;
       const duration = document.getElementById(`Duration${i}`).value;
       const minutes = document.getElementById(`Minutes${i}`).value;
+      const Room = document.getElementById(`Room${i}`).value;
       // console.log(document.getElementById(`Day${i}`));
       if (
         day === "" ||
@@ -81,32 +86,33 @@ const AddGroup = () => {
         duration === "" ||
         minutes === "" ||
         document.getElementById("GroupName").value === "" ||
+        Room === "" ||
         rows === 0
       ) {
         isValid = false;
         break;
       }
 
-      formDataCopy[i - 1] = { day, hour, duration, minutes };
+      formDataCopy[i - 1] = { day, hour, duration, minutes, Room };
     }
 
     if (isValid) {
       // console.log(formDataCopy);
-      const url = `http://localhost/Projects/Oral Radiology/api.php/Group`;
+      const url = `http://localhost/Projects/OralRadiology/GroupLogic.php/Insert`;
       let fData = new FormData();
       fData.append("Name", document.getElementById("GroupName").value);
       Object.keys(formDataCopy).map((ele) => {
         fData.append(ele, JSON.stringify(formDataCopy[ele]));
+        return null;
       });
       console.table(formDataCopy);
       axios
         .post(url, fData)
         .then((res) => console.log(` coming Back end ${res.data}`))
         .catch((error) => console.error(error));
-      console.log("Calling the Server");
+      // console.log("Calling the Server");
       setRows(0);
       document.getElementById("GroupName").value = "";
-      fetchFirst();
       fetchFirst();
     } else {
       console.log("Please fill in all fields.");
@@ -114,22 +120,18 @@ const AddGroup = () => {
     }
   }
   function fetchFirst() {
-    const url = `http://localhost/Projects/Oral Radiology/api.php/Groups`;
+    const url = `http://localhost/Projects/OralRadiology/GroupLogic.php/Groups`;
     axios
       .get(url)
       .then((res) => {
         console.log(res.data);
-        setGroups(res.data);
-        // console.log(typeof res.data);
       })
       .catch((error) => console.error(error));
-    setRender(-render);
-    setRender(-render);
   }
   useEffect(() => {
     // get groups from data base
     fetchFirst();
-  }, []);
+  });
   // console.log(groups[2]);
 
   function check(ele, key) {
