@@ -6,22 +6,46 @@ import Chart from "./Chart";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import "./studentttt.css";
+import axios from 'axios';
+import { Link } from "react-router-dom";
 
 const StudentDB = () => {
   const [studentName, setStudentName] = useState("");
   const [personalImage, setPersonalImage] = useState("");
+  const [assignments, setAssignments] = useState([]);
+  const [UserId, setUserId] = useState();
 
   useEffect(() => {
     const userId = sessionStorage.getItem("userId");
     if (userId) {
+      setUserId(userId);
       setStudentName(sessionStorage["Name"]);
       setPersonalImage(
         "http://localhost/Projects/OralRadiology/" +
           sessionStorage["PersonalImage"]
       );
     }
-  }, []);
+    
+    async function fetchAssignments() {
+      try {
+        const response = await axios.get('http://localhost/Projects/OralRadiology/getassignments.php');
+        setAssignments(response.data);
+      } catch (error) {
+        console.error('Error fetching assignments:', error);
+      }
+    }
 
+    fetchAssignments(); // Call the fetchAssignments function here
+  }, []);
+  const [assignmentId, setAssignmentId] = useState('');
+
+  const handleAssignmentClick = (assignmentId) => {
+    setAssignmentId(assignmentId);
+    sessionStorage.setItem('assignmentId', assignmentId);  // Change this to 'assignmentId' to match your PHP
+  };
+  
+  
+  
   return (
     <>
       <Navbar />
@@ -33,7 +57,7 @@ const StudentDB = () => {
               <h5 className="seeall">See all →</h5>
             </div>
             <div className="CARDSASSIGNMENT">
-              <AssignmentCard
+              {/* <AssignmentCard
                 name="Assignment 1"
                 state="Good"
                 info="Topic Name, April 30, 2024, 1:00 pm"
@@ -61,7 +85,21 @@ const StudentDB = () => {
                 info="Topic Name, April 30, 2024, 1:00 pm"
                 grade="--"
                 col="green"
-              ></AssignmentCard>
+              ></AssignmentCard> */}
+            {assignments.map((assignment, i)=> (
+              <Link to={{ pathname: "/submit", search: `?userId=${UserId}?assignmentId=${assignment.Id}` }}
+                  onClick={() => handleAssignmentClick(assignment.Id)}>
+                  <AssignmentCard 
+                      name={assignment.Name}
+                      state="Good"
+                      info={`${assignment.Topic}, April 30, 2024, 1:00 pm`}
+                      grade="60"
+                      col="#0082e6">
+                  </AssignmentCard>
+              </Link>
+
+
+            ))}
             </div>
           </div>
           <div className="USERPROF">

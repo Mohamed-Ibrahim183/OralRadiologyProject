@@ -2,10 +2,11 @@ import React from "react";
 
 const AssignmentCard = (props) => {
   const stateStyle = {
-    backgroundColor: props.col, // Use the col prop for background color
+    backgroundColor: props.col, 
   };
   const label = {
     borderLeft: `10px solid ${props.col}`,
+    
   };
   return (
     <div className="AssCard" style={label}>

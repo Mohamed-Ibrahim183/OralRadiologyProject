@@ -7,20 +7,23 @@ import Chart from "./Chart";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import "./professsor.css"
+
 const ProfessorDB = () => {
   const [professorName, setProfessorName] = useState("");
   const [professorImage, setProfessorImage] = useState("");
   const [isModalOpen, setModalOpen] = useState(false);
 
+
   useEffect(() => {
     const userId = sessionStorage.getItem("userId");
     if (userId) {
-      setProfessorName(sessionStorage.getItem("Name")); // Changed sessionStorage["Name"] to sessionStorage.getItem("Name")
+      setProfessorName(sessionStorage.getItem("Name")); 
       setProfessorImage(
         "http://localhost/Projects/OralRadiology/" +
-          sessionStorage.getItem("PersonalImage") // Changed sessionStorage["PersonalImage"] to sessionStorage.getItem("PersonalImage")
+          sessionStorage.getItem("PersonalImage") 
       );
     }
+
   }, []);
 
   const handleOpenModal = () => {

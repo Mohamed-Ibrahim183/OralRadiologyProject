@@ -159,12 +159,9 @@
       background-color: #51aaef;
       cursor: pointer;
     }
-    .upppperr{
-      
-    }
-    .Loowwerr{
-  
-    }
+.AssCard{
+  cursor: pointer;
+}
   @media screen and (max-width: 1080px) {
     .fullPage .USERPROF{
       width: 100%;
