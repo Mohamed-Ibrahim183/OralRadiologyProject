@@ -27,7 +27,8 @@ function script() {
 // myScript.call();
 function Login3() {
   // -> important for no scrolling
-  document.body.style.overflow = "hidden"
+  // document.body.style.overflow ="hidden";
+
   const [MSAId, setMSAId] = useState("");
   const [password, setPassword] = useState("");
   const [loginError, setLoginError] = useState("");
@@ -80,7 +81,7 @@ function Login3() {
 
   return (
     
-    <div >
+    <div className='noScroll'>
       <Navbar />
       <div className='login3'>
     

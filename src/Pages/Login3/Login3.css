@@ -10,9 +10,16 @@
   --overlay-bg-start: #2b80ff;
   --overlay-bg-end: #41b9ff;
   --overlay-text-color: #ffffff;
+
 }
 @import url("https://fonts.googleapis.com/css?family=Montserrat:400,800");
+
+.noScroll{
+  overflow: hidden;
+}
+
 .login3 {
+  overflow: hidden;
   box-sizing: border-box;
 
   background: var(--background-color);
