@@ -18,32 +18,38 @@ const StudentDB = () => {
   useEffect(() => {
     const userId = sessionStorage.getItem("userId");
     if (userId) {
-      setUserId(userId);
-      setStudentName(sessionStorage["Name"]);
-      setPersonalImage(
-        "http://localhost/Projects/OralRadiology/" +
-          sessionStorage["PersonalImage"]
-      );
+        setUserId(userId);
+        setStudentName(sessionStorage["Name"]);
+        setPersonalImage(
+            "http://localhost/Projects/OralRadiology/" +
+            sessionStorage["PersonalImage"]
+        );
     }
-    
+
     async function fetchAssignments() {
-      try {
-        const response = await axios.get('http://localhost/Projects/OralRadiology/getassignments.php');
-        setAssignments(response.data);
-      } catch (error) {
-        console.error('Error fetching assignments:', error);
-      }
+        try {
+            const response = await axios.get('http://localhost/Projects/OralRadiology/mohsen.php');
+            const data = response.data;
+            if (Array.isArray(data)) {
+                setAssignments(data);
+            } else {
+                console.error('Received non-array response:', data);
+                setAssignments([]);
+            }
+        } catch (error) {
+            console.error('Error fetching assignments:', error);
+            setAssignments([]); 
+        }
     }
 
     fetchAssignments(); // Call the fetchAssignments function here
-  }, []);
+}, []);
   const [assignmentId, setAssignmentId] = useState('');
 
   const handleAssignmentClick = (assignmentId) => {
     setAssignmentId(assignmentId);
     sessionStorage.setItem('assignmentId', assignmentId);  // Change this to 'assignmentId' to match your PHP
   };
-  
   
   
   return (
@@ -87,8 +93,9 @@ const StudentDB = () => {
                 col="green"
               ></AssignmentCard> */}
             {assignments.map((assignment, i)=> (
-              <Link to={{ pathname: "/submit", search: `?userId=${UserId}?assignmentId=${assignment.Id}` }}
-                  onClick={() => handleAssignmentClick(assignment.Id)}>
+              <Link to={{ pathname: "/submit", search: `?userId=${UserId}&assignmentId=${assignment.Id}` }}
+    onClick={() => handleAssignmentClick(assignment.Id)}>
+
                   <AssignmentCard 
                       name={assignment.Name}
                       state="Good"

@@ -11,9 +11,16 @@ const AssignmentSubmission = () => {
     const fetchAssignmentInfo = async () => {
       try {
         const assignmentId = sessionStorage.getItem('assignmentId');
+        if (!assignmentId) {
+          console.error("Assignment ID is not set in session storage.");
+          return;
+        }
         const response = await axios.get(`http://localhost/Projects/OralRadiology/get_ass_info.php?assignmentId=${assignmentId}`);
-          
-        setAssignmentInfo(response.data);
+        if (response.data && !response.data.error) {
+          setAssignmentInfo(response.data);
+        } else {
+          throw new Error(response.data.error || "Unknown error");
+        }
       } catch (error) {
         console.error("Error fetching assignment info:", error);
       }
@@ -21,6 +28,7 @@ const AssignmentSubmission = () => {
   
     fetchAssignmentInfo();
   }, []);
+  
 
   const AssignmentInfo = () => {
     const [files, setFiles] = useState([]);
@@ -52,11 +60,15 @@ const AssignmentSubmission = () => {
       try {
         const userId = sessionStorage.getItem('userId');
         const assignmentId = sessionStorage.getItem('assignmentId');
-        const response = await axios.post(`http://localhost/Projects/OralRadiology/UploadAssignment.php?userId=${userId}&assignmentId=${assignmentId}`, formData, {
-          headers: {
-            'Content-Type': 'multipart/form-data'
-          }
-        });
+
+const response = await axios.post(`http://localhost/Projects/OralRadiology/UploadAssignment.php`, formData, {
+  headers: {
+    'Content-Type': 'multipart/form-data'
+  }
+});
+
+// In useEffect hook
+
         console.log(response.data);
         alert("Upload successful!");
       } catch (error) {
