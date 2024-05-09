@@ -4,23 +4,11 @@
     "link": "/Profile"
   },
   {
-    "Text": "Groups",
-    "link": "/Groups"
-  },
-  {
-    "Text": "Home2",
-    "link": "/Home2"
-  },
-  {
     "Text": "Add Group",
     "link": "/AddGroup"
   },
   {
     "Text": "ProfessorDB",
     "link": "/ProfessorDB"
-  },
-  {
-    "Text": "Login2",
-    "link": "/Login2"
   }
 ]

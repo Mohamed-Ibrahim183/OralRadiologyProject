@@ -4,10 +4,6 @@
     "link": "/Profile"
   },
   {
-    "Text": "All Professor",
-    "link": "/AllProfessor"
-  },
-  {
     "Text": "Admin_dashboard",
     "link": "/Admin_dashboard"
   },
@@ -20,19 +16,11 @@
     "link": "/users"
   },
   {
-    "Text": "Home2",
-    "link": "/Home2"
-  },
-  {
     "Text": "Add Group",
     "link": "/AddGroup"
   },
   {
     "Text": "ProfessorDB",
     "link": "/ProfessorDB"
-  },
-  {
-    "Text": "Login2",
-    "link": "/Login2"
   }
 ]
