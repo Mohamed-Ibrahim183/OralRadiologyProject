@@ -5,7 +5,11 @@ import TableHeader_grading_page from "./TableHeader_grading_page";
 import TableRow_Grading_Page from "./TableRow_Grading_Page";
 import monem from "./Grading_Page.json";
 import Navbar from "../../Components/Navbar/Navbar";
+import { Navigate } from "react-router-dom";
 function GradingPage() {
+  if (sessionStorage["Type"] !== "Professor") {
+    return <Navigate to="/" />;
+  }
   return (
     <>
       <Navbar />

@@ -4,6 +4,7 @@ import "./AddProf.css";
 import File from "./data3.json";
 import NavAdmin from "../../Components/AdminNav2/NavAdmin";
 import axios from "axios";
+import { Navigate } from "react-router-dom";
 
 export default function AddUser() {
   const [data, setData] = useState([]);
@@ -14,6 +15,10 @@ export default function AddUser() {
     // Remove the class from the body element when the component unmounts
     return () => document.body.classList.remove("PageBody");
   }, []);
+
+  if (sessionStorage["Type"] !== "Admin") {
+    return <Navigate to="/" />;
+  }
 
   const content = data.map(function (ele) {
     return (

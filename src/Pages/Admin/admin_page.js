@@ -7,11 +7,15 @@ import Navbar from "../../Components/Navbar/Navbar.js";
 import NavAdmin from "../../Components/AdminNav2/NavAdmin.js";
 import Mail from "./Mail.js";
 import { useEffect } from "react";
+import { Navigate } from "react-router-dom";
 function AdminPage() {
   useEffect(() => {
     document.body.classList.add("AdminBody");
     return () => document.body.classList.remove("AdminBody");
   }, []);
+  if (sessionStorage["Type"] !== "Admin") {
+    return <Navigate to="/" />;
+  }
   return (
     <>
       <Navbar />
