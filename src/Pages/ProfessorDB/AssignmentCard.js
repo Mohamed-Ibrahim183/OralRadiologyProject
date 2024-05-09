@@ -1,12 +1,25 @@
-import React from "react";
+import React, { useState } from "react"; 
+import Modal2 from "./Modal2";
 
 const AssignmentCard = (props) => {
   const stateStyle = {
-    backgroundColor: props.col, // Use the col prop for background color
+    backgroundColor: props.col, 
   };
+
   const label = {
     borderLeft: `10px solid ${props.col}`,
   };
+
+  const [isModal2Open, setModal2Open] = useState(false);
+
+  const handleOpenModal2 = () => {
+    setModal2Open(true);
+  };
+
+  const handleCloseModal2 = () => {
+    setModal2Open(false);
+  };
+
   return (
     <div className="AssCard" style={label}>
       <div className="info">
@@ -14,7 +27,10 @@ const AssignmentCard = (props) => {
         <span className="Details">{props.info}</span>
       </div>
       <div className="grade">
-        <span>{props.grade}/100</span>
+        <Modal2 open={isModal2Open} onClose={handleCloseModal2} />
+        <button onClick={handleOpenModal2}>
+          Add Group Slots
+        </button>
       </div>
       <div className="state" style={stateStyle}>
         {props.state}
