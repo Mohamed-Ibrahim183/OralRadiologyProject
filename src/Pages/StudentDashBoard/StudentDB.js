@@ -8,6 +8,7 @@ import "react-calendar/dist/Calendar.css";
 import "./student.css";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
 const StudentDB = () => {
   const studentName = sessionStorage["Name"] || "Student";
@@ -28,7 +29,9 @@ const StudentDB = () => {
   const handleAssignmentClick = (assignmentId) => {
     sessionStorage.setItem("assignmentId", assignmentId); // Change this to 'assignmentId' to match your PHP
   };
-
+  if (sessionStorage["Type"] !== "Student") {
+    return <Navigate to="/" />;
+  }
   return (
     <>
       <Navbar />

@@ -8,6 +8,7 @@ import "react-calendar/dist/Calendar.css";
 import "./ProfessorDB.css";
 import "./professor.css";
 import Modal2 from "./Modal2";
+import { Navigate } from "react-router-dom";
 
 import axios from "axios";
 
@@ -24,16 +25,20 @@ const ProfessorDB = () => {
   const handleCloseModal2 = () => setModal2Open(false);
 
   useEffect(() => {
-    axios.get("http://localhost/Projects/OralRadiology/mohsen.php")
-      .then(res => setAssignments(res.data))
-      .catch(error => console.error(error));
+    axios
+      .get("http://localhost/Projects/OralRadiology/mohsen.php")
+      .then((res) => setAssignments(res.data))
+      .catch((error) => console.error(error));
   }, []);
+  if (sessionStorage["Type"] !== "Professor") {
+    return <Navigate to="/" />;
+  }
 
   return (
     <>
       <Navbar />
       <Modal isOpen={isModalOpen} onClose={handleCloseModal}></Modal>
-      <Modal2 open={isModal2Open} onClose={handleCloseModal2} /> 
+      <Modal2 open={isModal2Open} onClose={handleCloseModal2} />
       <div className="fullProfessorPage">
         <div className="upper">
           <div className="container AssignmentSection">
@@ -50,7 +55,7 @@ const ProfessorDB = () => {
                 <AssignmentCard
                   key={index}
                   name={assignment.Name}
-                //  state="Good"
+                  //  state="Good"
                   info={`${assignment.Topic}, April 30, 2024, 1:00 pm`}
                   //grade="60"
                   //col="#0082e6"

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./API.css";
 import Navbar from "../../Components/Navbar/Navbar";
 import axios from "axios";
+import { Navigate } from "react-router-dom";
 
 const AddGroup = () => {
   const [rows, setRows] = useState(0);
@@ -137,7 +138,9 @@ const AddGroup = () => {
     s();
     fetchFirst();
   }, [render]);
-  
+  if (sessionStorage["Type"] !== "Admin") {
+    return <Navigate to="/" />;
+  }
   function check(ele, key) {
     if (Array.isArray(ele) && ele.length > 0) {
       let s = "";

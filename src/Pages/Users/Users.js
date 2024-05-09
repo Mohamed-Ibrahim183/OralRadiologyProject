@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./users2.css";
 import Navbar from "../../Components/Navbar/Navbar";
 import axios from "axios";
+import { Navigate } from "react-router-dom";
 
 const Users = () => {
   const [view, setView] = useState([]);
@@ -52,6 +53,10 @@ const Users = () => {
       FrontView(res.data);
     });
   }, [Type]);
+
+  if (sessionStorage["Type"] !== "Admin") {
+    return <Navigate to="/" />;
+  }
 
   return (
     <>
