@@ -6,25 +6,12 @@ import AssignmentCard from "./AssignmentCard";
 import Chart from "./Chart";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
-import "./professsor.css"
+import "./professor.css";
 
 const ProfessorDB = () => {
-  const [professorName, setProfessorName] = useState("");
-  const [professorImage, setProfessorImage] = useState("");
+  const professorName = sessionStorage["Name"] || "Professor";
+  const professorImage = sessionStorage["PersonalImage"];
   const [isModalOpen, setModalOpen] = useState(false);
-
-
-  useEffect(() => {
-    const userId = sessionStorage.getItem("userId");
-    if (userId) {
-      setProfessorName(sessionStorage.getItem("Name")); 
-      setProfessorImage(
-        "http://localhost/Projects/OralRadiology/" +
-          sessionStorage.getItem("PersonalImage") 
-      );
-    }
-
-  }, []);
 
   const handleOpenModal = () => {
     setModalOpen(true);
@@ -36,16 +23,18 @@ const ProfessorDB = () => {
   return (
     <>
       <Navbar />
-      <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
-      </Modal> 
+      <Modal isOpen={isModalOpen} onClose={handleCloseModal}></Modal>
       <div className="fullProfessorPage">
-        <div className="upppperr">
+        <div className="upper">
           <div className="container AssignmentSection">
             <div className="BBBBBB">
               <h2 className="sectionTitle">My Assignments</h2>
-              <button className="" onClick={handleOpenModal}>Add Requirement</button> {/* Added onClick event handler */}
+              <button className="" onClick={handleOpenModal}>
+                Add Requirement
+              </button>{" "}
+              {/* Added onClick event handler */}
             </div>
-            <div className="CARDSASSIGNMENT">
+            <div className="cardAssignment">
               <AssignmentCard
                 name="Assignment 1"
                 state="Visible"
@@ -76,9 +65,9 @@ const ProfessorDB = () => {
                 col="red"
               ></AssignmentCard>
             </div>
-            <h5 className="seeall">See all →</h5>
+            <h5 className="seal">See all →</h5>
           </div>
-          <div className="USERPROF">
+          <div className="userProfile">
             <div className="TEXT">
               <img
                 src={professorImage}
@@ -101,11 +90,11 @@ const ProfessorDB = () => {
             </button>
           </div>
         </div>
-        <div className="Loowwerr">
+        <div className="lower">
           <div className="cc1">
             <Chart className="chart1" />
           </div>
-          <div className="Calenderrrr">
+          <div className="calender">
             <h2>Calendar</h2>
             <Calendar></Calendar>
           </div>
