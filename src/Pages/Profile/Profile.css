@@ -1,9 +1,29 @@
-.ProfileBody {
-  background-image: url(./img/profile.png);
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-color: rgb(255, 255, 255);
-  color: #69707a;
+:root {
+  --mainBackGround: #F5FBF9;
+  --mainColor: #0082e6;
+  --secondText: #65b4f1;
+  --textColor: var(--mainColor);
+  --headerColor: #0082e6;
+  --text-monem:rgb(20, 19, 19);
+  --btnB:#2450f1;
+  --btnB-hover:#14319b;
+  --sidebar-expanded-margin: 200px;
+  --sidebar-default-margin: 70px;
+  --mainText: black;
+  --secondaryText: #777;
+}
+
+[theme=Dark] {
+  --mainColor: #4d8ba8;
+  --mainBackGround: #1b343c;
+  --secondText: #65b4f1;
+  --textColor: #96bdcf;
+  --headerColor: #4d8ba8;
+  --text-monem:rgb(230, 230, 230);
+  --btnB:#4d8ba8;
+  --btnB-hover:#356981;
+  --mainText: white;
+  --secondaryText: #a9a9a9;
 }
 
 .Profile .container .Information .informationTitle, .Profile .container .personalImage .ImageTitle {
@@ -35,6 +55,7 @@
 }
 
 .Profile {
+  color: var(--text-monem);
   padding-top: 50px;
   display: flex;
   justify-content: center;
@@ -55,6 +76,7 @@
   max-height: 500px;
 }
 .Profile .container .personalImage .imageContent {
+  background-color: var(--mainBackGround);
   display: flex;
   flex-direction: column;
   padding: 20px;
@@ -72,6 +94,7 @@
   padding-top: 15px;
 }
 .Profile .container .Information {
+  background-color: var(--mainBackGround);
   justify-content: flex-start;
 }
 .Profile .container .Information .InformationContent {

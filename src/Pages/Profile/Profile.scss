@@ -1,13 +1,6 @@
 @import './breakpoints';
+@import '../../Variables';
 
-.ProfileBody {
-  // margin-top: 20px;
-  background-image: url(./img/profile.png);
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-color: rgb(255, 255, 255);
-  color: #69707a;
-}
 %SectionTitle {
   background-color: #f8f8f9;
   color: #87777d;
@@ -35,6 +28,7 @@
   font-weight: bold;
 }
 .Profile {
+  color: var(--text-monem);
   padding-top: 50px;
   display: flex;
   justify-content: center;
@@ -56,6 +50,7 @@
         @extend %SectionTitle;
       }
       .imageContent {
+        background-color: var(--mainBackGround);
         display: flex;
         flex-direction: column;
         padding: 20px;
@@ -77,6 +72,7 @@
       }
     }
     .Information {
+      background-color: var(--mainBackGround);
       .InformationContent {
         padding: 10px;
         .mainContent{

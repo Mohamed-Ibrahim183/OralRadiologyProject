@@ -64,7 +64,7 @@ const routes = [
   },
 
   {
-    path: "/Profile/:id",
+    path: "/Profile",
     element: <Profile />,
     errorElement: <NotFound />,
   },
