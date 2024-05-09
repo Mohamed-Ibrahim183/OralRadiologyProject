@@ -1,5 +1,5 @@
 @use "../../Variables" as *;
-@import "../Global/_breakpoints.scss";
+@import "../../breakpoints";
 
 
 
@@ -165,57 +165,57 @@ nav.secondary-Navigation {
   box-shadow: 3px 19px 89px -13px rgba(0,0,0,0.51);
   -webkit-box-shadow: 3px 19px 89px -13px rgba(0,0,0,0.51);
   -moz-box-shadow: 3px 19px 89px -13px rgba(0,0,0,0.51);
-}
-section {
-  // background: url(bg1.jpg) no-repeat;
-  background-size: cover;
-  height: calc(100vh - 80px);
-}
-
-// my code
-.logoName{
-  display: flex;
-  img{
-    width: 200px;
-  }
-}
-.DropParent{
-  padding-right: 20px;
-}
-ul li {
-  position: relative;
-  a{
-    &:hover{
-      color: green;
-    }
-  }
-  ul.dropDown li {
-    display: block;
+  section {
+    // background: url(bg1.jpg) no-repeat;
+    background-size: cover;
+    height: calc(100vh - 80px);
   }
   
-  ul.dropDown {
-    width: fit-content;
-    background-color: $primary-color;
-    position: absolute;
-    left: -50px;
-    z-index: 11;
-    display: none;
-    transition: 0.5s;
-    -webkit-transition: 0.5s;
-    -moz-transition: 0.5s;
-    -ms-transition: 0.5s;
-    -o-transition: 0.5s;
+  // my code
+  .logoName{
+    display: flex;
+    img{
+      width: 200px;
+    }
   }
-
-  &:hover {
-    ul.dropDown {
+  .DropParent{
+    padding-right: 20px;
+  }
+  ul li {
+    position: relative;
+    a{
+      &:hover{
+        color: green;
+      }
+    }
+    ul.dropDown li {
       display: block;
     }
-  }
-}
-ul.showDropList{
-  position: absolute !important;
-  z-index: 100;
-  color: red !important;
+    
+    ul.dropDown {
+      width: fit-content;
+      background-color: $primary-color;
+      position: absolute;
+      left: -50px;
+      z-index: 11;
+      display: none;
+      transition: 0.5s;
+      -webkit-transition: 0.5s;
+      -moz-transition: 0.5s;
+      -ms-transition: 0.5s;
+      -o-transition: 0.5s;
+    }
   
+    &:hover {
+      ul.dropDown {
+        display: block;
+      }
+    }
+  }
+  ul.showDropList{
+    position: absolute !important;
+    z-index: 100;
+    color: red !important;
+    
+  }
 }

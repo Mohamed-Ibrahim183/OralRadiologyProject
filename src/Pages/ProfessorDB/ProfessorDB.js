@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Modal from "./Modal";
 import "./ProfessorDB.css";
 import Navbar from "../../Components/Navbar/Navbar";
@@ -7,11 +7,14 @@ import Chart from "./Chart";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import "./professor.css";
+import Modal2 from "./Modal2";
 
 const ProfessorDB = () => {
   const professorName = sessionStorage["Name"] || "Professor";
   const professorImage = sessionStorage["PersonalImage"];
   const [isModalOpen, setModalOpen] = useState(false);
+
+  const [mod2, setMod2] = useState(true);
 
   const handleOpenModal = () => {
     setModalOpen(true);
@@ -20,10 +23,18 @@ const ProfessorDB = () => {
     setModalOpen(false);
   };
 
+  function handleClose2() {
+    setMod2(false);
+  }
+  function handleOpen2() {
+    setMod2(true);
+  }
+
   return (
     <>
       <Navbar />
       <Modal isOpen={isModalOpen} onClose={handleCloseModal}></Modal>
+      <Modal2 open={false} onClose={handleClose2} />
       <div className="fullProfessorPage">
         <div className="upper">
           <div className="container AssignmentSection">

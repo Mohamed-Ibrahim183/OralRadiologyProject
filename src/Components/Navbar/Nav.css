@@ -157,33 +157,29 @@ nav.secondary-Navigation #check {
   -webkit-box-shadow: 3px 19px 89px -13px rgba(0, 0, 0, 0.51);
   -moz-box-shadow: 3px 19px 89px -13px rgba(0, 0, 0, 0.51);
 }
-
-section {
+.HEADER section {
   background-size: cover;
   height: calc(100vh - 80px);
 }
-
-.logoName {
+.HEADER .logoName {
   display: flex;
 }
-.logoName img {
+.HEADER .logoName img {
   width: 200px;
 }
-
-.DropParent {
+.HEADER .DropParent {
   padding-right: 20px;
 }
-
-ul li {
+.HEADER ul li {
   position: relative;
 }
-ul li a:hover {
+.HEADER ul li a:hover {
   color: green;
 }
-ul li ul.dropDown li {
+.HEADER ul li ul.dropDown li {
   display: block;
 }
-ul li ul.dropDown {
+.HEADER ul li ul.dropDown {
   width: -moz-fit-content;
   width: fit-content;
   background-color: var(--headerColor);
@@ -197,11 +193,10 @@ ul li ul.dropDown {
   -ms-transition: 0.5s;
   -o-transition: 0.5s;
 }
-ul li:hover ul.dropDown {
+.HEADER ul li:hover ul.dropDown {
   display: block;
 }
-
-ul.showDropList {
+.HEADER ul.showDropList {
   position: absolute !important;
   z-index: 100;
   color: red !important;

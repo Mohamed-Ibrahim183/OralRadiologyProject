@@ -16,23 +16,13 @@ const StudentDB = () => {
   const [assignments, setAssignments] = useState([]);
 
   useEffect(() => {
-    async function fetchAssignments() {
-      try {
-        const response = await axios.get(
-          "http://localhost/Projects/OralRadiology/mohsen.php"
-        );
-        const data = response.data;
-        if (Array.isArray(data)) {
-          setAssignments(data);
-        } else {
-          console.error("Received non-array response:", data);
-        }
-      } catch (error) {
-        console.error("Error fetching assignments:", error);
-      }
-    }
-
-    fetchAssignments(); // Call the fetchAssignments function here
+    const url = "http://localhost/Projects/OralRadiology/mohsen.php";
+    axios
+      .get(url)
+      .then((res) => {
+        res.data ? setAssignments(res.data) : setAssignments(null);
+      })
+      .catch((error) => console.error(error));
   }, []);
 
   const handleAssignmentClick = (assignmentId) => {
@@ -88,7 +78,7 @@ const StudentDB = () => {
               <h2>{studentName}</h2>
               <p>Welcome to our Oral Radiology system</p>
             </div>
-            <button type="button" className="">
+            <button type="button">
               <Link to="/Profile">Go To Profile</Link>
             </button>
           </div>
