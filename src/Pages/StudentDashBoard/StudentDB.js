@@ -17,10 +17,12 @@ const StudentDB = () => {
   const [assignments, setAssignments] = useState([]);
 
   useEffect(() => {
-    const url = "http://localhost/Projects/OralRadiology/mohsen.php";
+    const url =
+      "http://localhost/Projects/OralRadiology/AssignmentLogic.php/GetAll";
     axios
       .get(url)
       .then((res) => {
+        console.log(res.data);
         res.data ? setAssignments(res.data) : setAssignments(null);
       })
       .catch((error) => console.error(error));
@@ -45,6 +47,7 @@ const StudentDB = () => {
             <div className="cardAssignment">
               {assignments.map((assignment, i) => (
                 <Link
+                  key={i}
                   to={{
                     pathname: "/submit",
                     search: `?userId=${UserId}&assignmentId=${assignment.Id}`,

@@ -21,24 +21,28 @@ const ProfessorDB = () => {
 
   const handleOpenModal = () => setModalOpen(true);
   const handleCloseModal = () => setModalOpen(false);
-  const handleOpenModal2 = () => setModal2Open(true);
+  // const handleOpenModal2 = () => setModal2Open(true);
   const handleCloseModal2 = () => setModal2Open(false);
 
   useEffect(() => {
     axios
-      .get("http://localhost/Projects/OralRadiology/mohsen.php")
-      .then((res) => setAssignments(res.data))
+      .get("http://localhost/Projects/OralRadiology/AssignmentLogic.php/GetAll")
+      .then((res) => {
+        console.log(res.data);
+        setAssignments(res.data);
+      })
       .catch((error) => console.error(error));
   }, []);
   if (sessionStorage["Type"] !== "Professor") {
     return <Navigate to="/" />;
   }
 
+  // console.log("assignments:", assignments);
   return (
     <>
       <Navbar />
       <Modal isOpen={isModalOpen} onClose={handleCloseModal}></Modal>
-      <Modal2 open={isModal2Open} onClose={handleCloseModal2} />
+      {/* <Modal2 open={isModal2Open} onClose={handleCloseModal2} /> */}
       <div className="fullProfessorPage">
         <div className="upper">
           <div className="container AssignmentSection">
@@ -48,17 +52,14 @@ const ProfessorDB = () => {
               <button className="" onClick={handleOpenModal}>
                 Add Requirement
               </button>{" "}
-              {/* Added onClick event handler */}
             </div>
             <div className="cardAssignment">
               {assignments.map((assignment, index) => (
                 <AssignmentCard
                   key={index}
                   name={assignment.Name}
-                  //  state="Good"
                   info={`${assignment.Topic}, April 30, 2024, 1:00 pm`}
-                  //grade="60"
-                  //col="#0082e6"
+                  AssignmentId={assignment.Id}
                 />
               ))}
             </div>

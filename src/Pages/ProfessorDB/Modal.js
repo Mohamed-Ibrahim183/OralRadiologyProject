@@ -14,34 +14,21 @@ const Modal = ({ isOpen, onClose }) => {
       alert("Please fill in all fields.");
       return;
     }
-
     setLoading(true);
-    try {
-      const assignmentData = {
-        Name: assignmentName,
-        Topic: topicName,
-        maxLimitImages: parseInt(maxImages, 10),
-        ProfessorId: parseInt(userId, 10),
-      };
-
-      const response = await axios.post(
-        `http://localhost/Projects/OralRadiology/add_assignment.php?userId=${userId}`,
-        assignmentData,
-        {
-          withCredentials: true, // If using sessions that require cookies
-        }
-      );
-      console.log("Assignment saved successfully:", response.data);
-      alert("Assignment saved successfully");
-    } catch (error) {
-      console.error("Failed to save assignment:", error);
-      alert(
-        "Failed to save assignment: " +
-          (error.response ? error.response.data.error : error.message)
-      );
-    } finally {
-      setLoading(false);
-    }
+    const url =
+      "http://localhost/Projects/OralRadiology/AssignmentLogic.php/InsertAssignment";
+    let fData = new FormData();
+    fData.append("Name", assignmentName);
+    fData.append("Topic", topicName);
+    fData.append("maxLimitImages", parseInt(maxImages, 10));
+    fData.append("ProfessorId", parseInt(userId, 10));
+    axios
+      .post(url, fData)
+      .then((res) => {
+        if (res.data === "Inserted") alert("Assignment Added Successfully");
+      })
+      .catch((error) => console.error(error));
+    setLoading(false);
   };
 
   if (!isOpen) return null;

@@ -63,6 +63,9 @@ function Login3() {
             case "Student":
               window.location.href = `/StudentDB?userId=${res.data.Id}`;
               break;
+            case "Admin":
+              window.location.href = `/Admin_dashboard?userId=${res.data.Id}`;
+              break;
             default:
               // setLoginError("Invalid user type");
               break;

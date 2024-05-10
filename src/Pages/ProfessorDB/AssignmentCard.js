@@ -1,9 +1,9 @@
-import React, { useState } from "react"; 
+import React, { useState } from "react";
 import Modal2 from "./Modal2";
 
 const AssignmentCard = (props) => {
   const stateStyle = {
-    backgroundColor: props.col, 
+    backgroundColor: props.col,
   };
 
   const label = {
@@ -27,13 +27,12 @@ const AssignmentCard = (props) => {
         <span className="Details">{props.info}</span>
       </div>
       <div className="grade">
-        <Modal2 open={isModal2Open} onClose={handleCloseModal2} />
-        <button onClick={handleOpenModal2}>
-          Add Group Slots
-        </button>
-      </div>
-      <div className="state" style={stateStyle}>
-        {props.state}
+        <Modal2
+          open={isModal2Open}
+          onClose={handleCloseModal2}
+          AssignmentId={props.AssignmentId}
+        />
+        <button onClick={handleOpenModal2}>Add Group Slots</button>
       </div>
     </div>
   );

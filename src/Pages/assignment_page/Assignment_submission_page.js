@@ -9,23 +9,19 @@ const AssignmentSubmission = () => {
 
   useEffect(() => {
     const fetchAssignmentInfo = async () => {
-      try {
-        const assignmentId = sessionStorage.getItem("assignmentId");
-        if (!assignmentId) {
-          console.error("Assignment ID is not set in session storage.");
-          return;
-        }
-        const response = await axios.get(
-          `http://localhost/Projects/OralRadiology/get_ass_info.php?assignmentId=${assignmentId}`
-        );
-        if (response.data && !response.data.error) {
-          setAssignmentInfo(response.data);
-        } else {
-          throw new Error(response.data.error || "Unknown error");
-        }
-      } catch (error) {
-        console.error("Error fetching assignment info:", error);
+      const assignmentId = sessionStorage.getItem("assignmentId");
+      if (!assignmentId) {
+        console.error("Assignment ID is not set in session storage.");
+        return;
       }
+      const url = `http://localhost/Projects/OralRadiology/AssignmentLogic.php/GetAssignment?assignmentId=${assignmentId}`;
+      await axios
+        .get(url)
+        .then((res) => {
+          console.log(res.data);
+          setAssignmentInfo(res.data);
+        })
+        .catch((error) => console.error(error));
     };
 
     fetchAssignmentInfo();
@@ -171,7 +167,7 @@ const Header = ({ assignmentInfo }) => {
   return (
     <div className="header">
       <div className="submit_images">
-        <img src={image} alt="Teeth image" className="xray_iamge" />
+        <img src={image} alt="Teeth Film" className="xray_image" />
       </div>
       <p>{`Max Limit of Images: ${
         assignmentInfo.maxLimitImages || "Loading.."
