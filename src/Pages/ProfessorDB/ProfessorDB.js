@@ -7,6 +7,7 @@ import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import "./ProfessorDB.css";
 import "./professor.css";
+import { Link } from "react-router-dom";
 import Modal2 from "./Modal2";
 import { Navigate } from "react-router-dom";
 
@@ -18,6 +19,7 @@ const ProfessorDB = () => {
   const [isModalOpen, setModalOpen] = useState(false);
   const [isModal2Open, setModal2Open] = useState(false);
   const [assignments, setAssignments] = useState([]);
+  const [UserId, setUserId] = useState();
 
   const handleOpenModal = () => setModalOpen(true);
   const handleCloseModal = () => setModalOpen(false);
@@ -25,6 +27,12 @@ const ProfessorDB = () => {
   const handleCloseModal2 = () => setModal2Open(false);
 
   useEffect(() => {
+    const storedUserId = sessionStorage["userId"];
+    if (!storedUserId) {
+      console.error("UserId not found in sessionStorage");
+    } else {
+      setUserId(storedUserId);
+    }
     axios
       .get("http://localhost/Projects/OralRadiology/AssignmentLogic.php/GetAll")
       .then((res) => {
@@ -36,6 +44,9 @@ const ProfessorDB = () => {
   if (sessionStorage["Type"] !== "Professor") {
     return <Navigate to="/" />;
   }
+  const handleAssignmentClick = (assignmentId) => {
+    sessionStorage.setItem("assignmentId", assignmentId); 
+  };
 
   // console.log("assignments:", assignments);
   return (
@@ -54,13 +65,22 @@ const ProfessorDB = () => {
               </button>{" "}
             </div>
             <div className="cardAssignment">
-              {assignments.map((assignment, index) => (
+              {assignments.map((assignment, i) => (
+                 <Link
+                 key={i}
+                 to={{
+                   pathname: "/Grading_Page",
+                   search: `?userId=${UserId}&assignmentId=${assignment.Id}`,
+                 }}
+                 onClick={() => handleAssignmentClick(assignment.Id)}
+               >
                 <AssignmentCard
-                  key={index}
+                  key={i}
                   name={assignment.Name}
                   info={`${assignment.Topic}, April 30, 2024, 1:00 pm`}
                   AssignmentId={assignment.Id}
                 />
+                </Link>
               ))}
             </div>
             <h5 className="seal">See all →</h5>

@@ -13,7 +13,8 @@ import { Navigate } from "react-router-dom";
 const StudentDB = () => {
   const studentName = sessionStorage["Name"] || "Student";
   const personalImage = sessionStorage["PersonalImage"];
-  const UserId = sessionStorage["UserId"];
+  const UserId = sessionStorage["userId"];
+  
   const [assignments, setAssignments] = useState([]);
 
   useEffect(() => {
