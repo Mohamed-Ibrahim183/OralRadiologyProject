@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import Modal2 from "./Modal2";
-
+import { Link } from "react-router-dom";
 const AssignmentCard = (props) => {
-  const stateStyle = {
-    backgroundColor: props.col,
-  };
+  // const stateStyle = {
+  //   backgroundColor: props.col,
+  // };
 
   const label = {
     borderLeft: `10px solid ${props.col}`,
@@ -22,10 +22,12 @@ const AssignmentCard = (props) => {
 
   return (
     <div className="AssCard" style={label}>
-      <div className="info">
-        <h3 className="name">{props.name}</h3>
-        <span className="Details">{props.info}</span>
-      </div>
+      <Link to={props.toPage} search={props.searchContent}>
+        <div className="info">
+          <h3 className="name">{props.name}</h3>
+          <span className="Details">{props.info}</span>
+        </div>
+      </Link>
       <div className="grade">
         <Modal2
           open={isModal2Open}

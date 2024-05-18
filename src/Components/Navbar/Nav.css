@@ -26,13 +26,6 @@
   --secondaryText: #a9a9a9;
 }
 
-a {
-  text-decoration: none;
-}
-a:hover {
-  color: #3ca0e7;
-}
-
 ul li ul li a {
   transition: all 0.5s ease;
 }
@@ -172,9 +165,6 @@ nav.secondary-Navigation #check {
 }
 .HEADER ul li {
   position: relative;
-}
-.HEADER ul li a:hover {
-  color: green;
 }
 .HEADER ul li ul.dropDown li {
   display: block;

@@ -5,13 +5,6 @@
 
 
 
-a {
-  text-decoration: none;
-
-  &:hover {
-    color: #3ca0e7;
-  }
-}
 
 ul li ul li a {
   transition: all 0.5s ease;
@@ -51,8 +44,6 @@ nav.secondary-Navigation {
 
   ul {
     float: right;
-    // margin-right: 20px;
-    
     li {
       display: inline-block;
       line-height: 80px;
@@ -166,7 +157,6 @@ nav.secondary-Navigation {
   -webkit-box-shadow: 3px 19px 89px -13px rgba(0,0,0,0.51);
   -moz-box-shadow: 3px 19px 89px -13px rgba(0,0,0,0.51);
   section {
-    // background: url(bg1.jpg) no-repeat;
     background-size: cover;
     height: calc(100vh - 80px);
   }
@@ -183,11 +173,7 @@ nav.secondary-Navigation {
   }
   ul li {
     position: relative;
-    a{
-      &:hover{
-        color: green;
-      }
-    }
+    
     ul.dropDown li {
       display: block;
     }

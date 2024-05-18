@@ -159,18 +159,6 @@
 .fullProfessorPage .userProfile p {
   margin-top: 10px;
 }
-.fullProfessorPage .userProfile button {
-  margin-left: 30px;
-  background-color: #65b4f1;
-  border: #35698100;
-  width: 7rem;
-  height: 2rem;
-}
-.fullProfessorPage .userProfile button:hover {
-  background-color: #51aaef;
-  cursor: pointer;
-}
-
 @media screen and (max-width: 1080px) {
   .fullProfessorPage .userProfile {
     width: 100%;

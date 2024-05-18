@@ -32,3 +32,22 @@
   -ms-border-radius: 8px;
   -o-border-radius: 8px;
 }
+a{
+  text-decoration: none;
+
+}
+.stdBtn{
+  margin-left: 30px;
+  background-color: #65b4f1;
+  color: white;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 16px;
+  padding: 16px;
+  width: fit-content;
+  height: auto;
+  &:hover{
+    background-color: #51aaef;
+    cursor: pointer;
+  }
+}

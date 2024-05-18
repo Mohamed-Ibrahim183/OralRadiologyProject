@@ -23,8 +23,8 @@ const ProfessorDB = () => {
 
   const handleOpenModal = () => setModalOpen(true);
   const handleCloseModal = () => setModalOpen(false);
-  // const handleOpenModal2 = () => setModal2Open(true);
   const handleCloseModal2 = () => setModal2Open(false);
+  // const handleOpenModal2 = () => setModal2Open(true);
 
   useEffect(() => {
     const storedUserId = sessionStorage["userId"];
@@ -44,43 +44,37 @@ const ProfessorDB = () => {
   if (sessionStorage["Type"] !== "Professor") {
     return <Navigate to="/" />;
   }
-  const handleAssignmentClick = (assignmentId) => {
-    sessionStorage.setItem("assignmentId", assignmentId); 
-  };
+  // const handleAssignmentClick = (assignmentId) => {
+  //   sessionStorage.setItem("assignmentId", assignmentId);
+  // };
 
   // console.log("assignments:", assignments);
   return (
     <>
       <Navbar />
       <Modal isOpen={isModalOpen} onClose={handleCloseModal}></Modal>
-      {/* <Modal2 open={isModal2Open} onClose={handleCloseModal2} /> */}
+      <Modal2 open={isModal2Open} onClose={handleCloseModal2} />
       <div className="fullProfessorPage">
         <div className="upper">
           <div className="container AssignmentSection">
             <div className="BBBBBB">
               <h2 className="sectionTitle">My Assignments</h2>
-              {/* Added onClick event handler */}
               <button className="" onClick={handleOpenModal}>
                 Add Requirement
               </button>{" "}
             </div>
             <div className="cardAssignment">
               {assignments.map((assignment, i) => (
-                 <Link
-                 key={i}
-                 to={{
-                   pathname: "/Grading_Page",
-                   search: `?userId=${UserId}&assignmentId=${assignment.Id}`,
-                 }}
-                 onClick={() => handleAssignmentClick(assignment.Id)}
-               >
-                <AssignmentCard
-                  key={i}
-                  name={assignment.Name}
-                  info={`${assignment.Topic}, April 30, 2024, 1:00 pm`}
-                  AssignmentId={assignment.Id}
-                />
-                </Link>
+                <>
+                  <AssignmentCard
+                    key={i}
+                    toPage="/Grading_Page"
+                    searchContent={`?userId=${UserId}&assignmentId=${assignment.Id}`}
+                    name={assignment.Name}
+                    info={`${assignment.Topic}, April 30, 2024, 1:00 pm`}
+                    AssignmentId={assignment.Id}
+                  />
+                </>
               ))}
             </div>
             <h5 className="seal">See all →</h5>
@@ -103,9 +97,9 @@ const ProfessorDB = () => {
               <h2>Dr. {professorName}</h2>
               <p>Welcome to our Oral Radiology system</p>
             </div>
-            <button type="button" className="">
+            <Link to="/Profile" className="ProfileButton stdBtn">
               Go To Profile
-            </button>
+            </Link>
           </div>
         </div>
         <div className="lower">
