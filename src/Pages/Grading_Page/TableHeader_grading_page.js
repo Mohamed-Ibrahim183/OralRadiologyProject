@@ -10,7 +10,7 @@ function TableHeader_grading_page() {
                 <th>Email</th>
                 <th>Status</th>
                 <th>Grade</th>
-                <th>Edit</th>
+                <th>Submission Date</th>
                 <th>File submissions</th>
                 <th>Last modified</th>
                 <th>FeedBaxk comments</th>

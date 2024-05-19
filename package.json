@@ -20,6 +20,7 @@
     "react-chatbot-kit": "^2.2.2",
     "react-dom": "^18.2.0",
     "react-login-page": "^1.0.4",
+    "react-modal": "^3.16.1",
     "react-quill": "^2.0.0",
     "react-responsive": "^10.0.0",
     "react-router-dom": "^6.22.3",

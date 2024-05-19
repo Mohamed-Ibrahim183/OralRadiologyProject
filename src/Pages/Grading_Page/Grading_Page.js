@@ -4,23 +4,23 @@ import Navbar from "../../Components/Navbar/Navbar";
 import { Navigate } from "react-router-dom";
 import TableHeader_grading_page from "./TableHeader_grading_page";
 import TableRow_Grading_Page from "./TableRow_Grading_Page";
-import './Grading.css'
+import './Grading.css';
 
 function GradingPage() {
   const assignmentId = sessionStorage.getItem("assignmentId");
   const userId = sessionStorage.getItem("userId");
 
-  const [data, setData] = useState({ images: [], user: {} });
+  const [data, setData] = useState({ images: [] });
   const [error, setError] = useState("");
 
   useEffect(() => {
-    if (!userId) {
-      console.error("UserId not found in sessionStorage");
-      setError("User ID missing in session storage.");
-      return; // Early return if no userId
+    if (!assignmentId || !userId) {
+      console.error("AssignmentId or UserId not found in sessionStorage");
+      setError("Assignment ID or User ID missing in session storage.");
+      return;
     }
 
-    axios.get(`http://localhost/Projects/OralRadiology/monem.php`, { 
+    axios.get(`http://localhost/Projects/OralRadiology/monem.php`, {
       params: { assignmentId, userId }
     })
     .then(response => {
@@ -30,15 +30,18 @@ function GradingPage() {
       setError("Failed to fetch data");
       console.error("Error fetching data:", error);
     });
-  }, [assignmentId, userId]); // Ensure dependencies are correct for the useEffect hook
+  }, [assignmentId, userId]);
 
   if (sessionStorage["Type"] !== "Professor") {
     return <Navigate to="/" />;
   }
 
   if (error) {
- //   return <p>Error: {error}</p>; // Display error if it exists
+    return <p>Error: {error}</p>;
   }
+
+  // Ensure data.images is initialized before mapping
+  const images = data.images || [];
 
   return (
     <>
@@ -54,14 +57,14 @@ function GradingPage() {
         <div className="table-responsive">
           <table className="table">
             <TableHeader_grading_page />
-            {data.images.map((record, index) => (
+            {images.map((record, index) => (
               <TableRow_Grading_Page key={index} record={{
-                profilePic: record.user.profilePic,
-                name: record.user.name,
-                IDD: record.user.IDD,
-                email: record.user.email,
-                status: record.user.status,
-                joiningDate: "s"
+                profilePic: record.PersonalImage,
+                name: record.Name,
+                IDD: record.MSAId,
+                email: record.Email,
+                status: record.Type,
+                joiningDate: record.submitTime 
               }} />
             ))}
           </table>

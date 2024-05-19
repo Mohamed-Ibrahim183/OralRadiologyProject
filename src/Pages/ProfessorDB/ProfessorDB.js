@@ -12,19 +12,16 @@ import Modal2 from "./Modal2";
 import axios from "axios";
 
 const ProfessorDB = () => {
-  const professorName = sessionStorage["Name"] || "Professor";
-  const professorImage = sessionStorage["PersonalImage"];
+  const professorName = sessionStorage.getItem("Name") || "Professor";
+  const professorImage = sessionStorage.getItem("PersonalImage");
+  const storedUserId = sessionStorage.getItem("userId");
+
   const [isModalOpen, setModalOpen] = useState(false);
   const [isModal2Open, setModal2Open] = useState(false);
   const [assignments, setAssignments] = useState([]);
-  const [UserId, setUserId] = useState();
-
-  const handleOpenModal = () => setModalOpen(true);
-  const handleCloseModal = () => setModalOpen(false);
-  const handleCloseModal2 = () => setModal2Open(false);
+  const [userId, setUserId] = useState(storedUserId);
 
   useEffect(() => {
-    const storedUserId = sessionStorage["userId"];
     if (!storedUserId) {
       console.error("UserId not found in sessionStorage");
     } else {
@@ -37,35 +34,35 @@ const ProfessorDB = () => {
         setAssignments(res.data);
       })
       .catch((error) => console.error(error));
-  }, []);
+  }, [storedUserId]);
 
-  if (sessionStorage["Type"] !== "Professor") {
+  if (sessionStorage.getItem("Type") !== "Professor") {
     return <Navigate to="/" />;
   }
 
   return (
     <>
       <Navbar />
-      <Modal isOpen={isModalOpen} onClose={handleCloseModal}></Modal>
-      <Modal2 open={isModal2Open} onClose={handleCloseModal2} />
+      <Modal isOpen={isModalOpen} onClose={() => setModalOpen(false)}></Modal>
+      <Modal2 open={isModal2Open} onClose={() => setModal2Open(false)} />
       <div className="fullProfessorPage">
         <div className="upper">
           <div className="container AssignmentSection">
             <div className="BBBBBB">
               <h2 className="sectionTitle">My Assignments</h2>
-              <button className="" onClick={handleOpenModal}>
+              <button onClick={() => setModalOpen(true)}>
                 Add Requirement
-              </button>{" "}
+              </button>
             </div>
             <div className="cardAssignment">
               {assignments.map((assignment, i) => (
                 <AssignmentCard
                   key={i}
-                  userId={UserId}
+                  userId={userId}
                   assignmentId={assignment.Id}
                   name={assignment.Name}
                   info={`${assignment.Topic}, April 30, 2024, 1:00 pm`}
-                  toPage={`/Grading_Page?userId=${UserId}&assignmentId=${assignment.Id}`}
+                  toPage={`/Grading_Page?userId=${userId}&assignmentId=${assignment.Id}`}
                 />
               ))}
             </div>

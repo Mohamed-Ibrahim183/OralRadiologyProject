@@ -1,6 +1,7 @@
+// AssignmentCard.js
 import React, { useState } from "react";
 import Modal2 from "./Modal2";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const AssignmentCard = (props) => {
   const label = {
@@ -19,7 +20,7 @@ const AssignmentCard = (props) => {
 
   const handleClick = () => {
     sessionStorage.setItem("userId", props.userId);
-    sessionStorage.setItem("assignmentId", props.AssignmentId);
+    sessionStorage.setItem("assignmentId", props.assignmentId); // Lowercase "a"
   };
 
   return (
@@ -34,7 +35,7 @@ const AssignmentCard = (props) => {
         <Modal2
           open={isModal2Open}
           onClose={handleCloseModal2}
-          AssignmentId={props.AssignmentId}
+          AssignmentId={props.assignmentId}
         />
         <button onClick={handleOpenModal2}>Add Group Slots</button>
       </div>
