@@ -9,6 +9,7 @@ import {
   Legend,
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
+import axios from "axios";
 
 ChartJS.register(
   CategoryScale,
@@ -19,7 +20,20 @@ ChartJS.register(
   Legend
 );
 
-const ChartComponent = () => {
+const ChartComponent = (props) => {
+  useEffect(() => {
+    // get user assignments Data
+    axios
+      .get(
+        "http://localhost/Projects/OralRadiology/userLogic.php/UserAssignments/" +
+          props.userID
+      )
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((error) => console.error(error));
+  });
+
   // State variables for colors
   const [labelColor, setLabelColor] = useState("#283747");
   const [titleColor, setTitleColor] = useState("#5D6D7E");
