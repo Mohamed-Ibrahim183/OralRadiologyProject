@@ -1,11 +1,8 @@
 import React, { useState } from "react";
 import Modal2 from "./Modal2";
-import { Link } from "react-router-dom";
-const AssignmentCard = (props) => {
-  // const stateStyle = {
-  //   backgroundColor: props.col,
-  // };
+import { Link, useNavigate } from "react-router-dom";
 
+const AssignmentCard = (props) => {
   const label = {
     borderLeft: `10px solid ${props.col}`,
   };
@@ -20,9 +17,14 @@ const AssignmentCard = (props) => {
     setModal2Open(false);
   };
 
+  const handleClick = () => {
+    sessionStorage.setItem("userId", props.userId);
+    sessionStorage.setItem("assignmentId", props.AssignmentId);
+  };
+
   return (
     <div className="AssCard" style={label}>
-      <Link to={props.toPage} search={props.searchContent}>
+      <Link to={props.toPage} onClick={handleClick}>
         <div className="info">
           <h3 className="name">{props.name}</h3>
           <span className="Details">{props.info}</span>
