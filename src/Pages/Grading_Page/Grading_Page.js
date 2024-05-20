@@ -4,7 +4,7 @@ import Navbar from "../../Components/Navbar/Navbar";
 import { Navigate } from "react-router-dom";
 import TableHeader_grading_page from "./TableHeader_grading_page";
 import TableRow_Grading_Page from "./TableRow_Grading_Page";
-import ViewSubmissionsModal from "./ViewSubmissionsModal"; // Import the modal component
+import ViewSubmissionsModal from "./ViewSubmissionsModal"; 
 import './Grading.css';
 
 function GradingPage() {
@@ -43,7 +43,6 @@ function GradingPage() {
   }, [assignmentId, userId]);
 
   const handleOpenModal = (studentId) => {
-    //when opening the modal put the studentid in the session 34an 7atago eny ageeb el swr 
     sessionStorage.setItem("StudentId", studentId);
     setCurrentStudentId(studentId);
     setShowModal(true);
@@ -86,7 +85,7 @@ function GradingPage() {
                     email: record.Email,
                     status: record.Type,
                     joiningDate: record.submitTime,
-                    openModal: () => handleOpenModal(record.IDD)
+                    openModal: () => handleOpenModal(record.Id)
                   }} 
                 />
               ))}
@@ -94,7 +93,12 @@ function GradingPage() {
           </table>
         </div>
       </div>
-      <ViewSubmissionsModal show={showModal} handleClose={handleCloseModal} studentId={currentStudentId} />
+      <ViewSubmissionsModal 
+        show={showModal} 
+        handleClose={handleCloseModal} 
+        studentId={currentStudentId} 
+        assignmentId={assignmentId}
+      />
     </>
   );
 }

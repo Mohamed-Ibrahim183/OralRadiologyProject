@@ -55,7 +55,7 @@ const ProfessorDB = () => {
               </button>
             </div>
             <div className="cardAssignment">
-              {assignments.map((assignment, i) => (
+              {assignments && assignments.map((assignment, i) => (
                 <AssignmentCard
                   key={i}
                   userId={userId}
