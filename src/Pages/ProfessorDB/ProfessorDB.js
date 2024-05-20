@@ -7,10 +7,8 @@ import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import "./ProfessorDB.css";
 import "./professor.css";
-import { Link } from "react-router-dom";
-import Modal2 from "./Modal2";
-import { Navigate } from "react-router-dom";
-
+import { Link, Navigate } from "react-router-dom"; 
+import Modal2 from "./Modal2"; 
 import axios from "axios";
 
 const ProfessorDB = () => {
@@ -24,7 +22,6 @@ const ProfessorDB = () => {
   const handleOpenModal = () => setModalOpen(true);
   const handleCloseModal = () => setModalOpen(false);
   const handleCloseModal2 = () => setModal2Open(false);
-  // const handleOpenModal2 = () => setModal2Open(true);
 
   useEffect(() => {
     const storedUserId = sessionStorage["userId"];
@@ -41,14 +38,11 @@ const ProfessorDB = () => {
       })
       .catch((error) => console.error(error));
   }, []);
+
   if (sessionStorage["Type"] !== "Professor") {
     return <Navigate to="/" />;
   }
-  // const handleAssignmentClick = (assignmentId) => {
-  //   sessionStorage.setItem("assignmentId", assignmentId);
-  // };
 
-  // console.log("assignments:", assignments);
   return (
     <>
       <Navbar />
@@ -65,16 +59,14 @@ const ProfessorDB = () => {
             </div>
             <div className="cardAssignment">
               {assignments.map((assignment, i) => (
-                <>
-                  <AssignmentCard
-                    key={i}
-                    toPage="/Grading_Page"
-                    searchContent={`?userId=${UserId}&assignmentId=${assignment.Id}`}
-                    name={assignment.Name}
-                    info={`${assignment.Topic}, April 30, 2024, 1:00 pm`}
-                    AssignmentId={assignment.Id}
-                  />
-                </>
+                <AssignmentCard
+                  key={i}
+                  userId={UserId}
+                  assignmentId={assignment.Id}
+                  name={assignment.Name}
+                  info={`${assignment.Topic}, April 30, 2024, 1:00 pm`}
+                  toPage={`/Grading_Page?userId=${UserId}&assignmentId=${assignment.Id}`}
+                />
               ))}
             </div>
             <h5 className="seal">See all →</h5>
