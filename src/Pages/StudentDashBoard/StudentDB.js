@@ -14,7 +14,7 @@ const StudentDB = () => {
   const studentName = sessionStorage["Name"] || "Student";
   const personalImage = sessionStorage["PersonalImage"];
   const UserId = sessionStorage["userId"];
-  
+
   const [assignments, setAssignments] = useState([]);
 
   useEffect(() => {
@@ -92,7 +92,7 @@ const StudentDB = () => {
         </div>
         <div>
           <div className="cc1">
-            <Chart className="chart1" />
+            <Chart className="chart1" userID={sessionStorage["userId"] || 1} />
           </div>
           <div className="Calender">
             <h2>Calendar</h2>

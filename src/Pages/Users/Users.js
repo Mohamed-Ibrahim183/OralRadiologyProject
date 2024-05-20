@@ -3,29 +3,63 @@ import "./users2.css";
 import Navbar from "../../Components/Navbar/Navbar";
 import axios from "axios";
 import { Navigate } from "react-router-dom";
+import BasicModal from "./Edit";
+// import Button from "@mui/material/Button";
+import { Avatar, Button } from "@mui/material";
 
 const Users = () => {
+  const [open, setOpen] = useState(false);
+  const [clickedUser, setClickedUser] = useState();
   const [view, setView] = useState([]);
   const [Type, setType] = useState("Student");
-  const [data, setData] = useState([]);
+  const [changes, setChanges] = useState([]);
+
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   useEffect(() => {
     document.body.classList.add("TableBody");
 
+    // Fetch data when the component mounts
     FetchFirst();
 
+    // Clean up the class on unmount
     return () => document.body.classList.remove("TableBody");
   }, []);
 
+  // useEffect(() => console.table(changes), [changes]);
+
   function FrontView(dataContent) {
+    console.table(dataContent);
     const content = dataContent.map((ele) => (
       <tr key={ele.Id}>
         <td>{ele.Id}</td>
+        <td>
+          <Avatar
+            src={"http://localhost/Projects/OralRadiology/" + ele.PersonalImage}
+            alt={ele.Name}
+            sx={{
+              m: "auto",
+              width: "75px",
+              height: "75px",
+              objectFit: "cover",
+            }}
+          />
+        </td>
+        <td>{ele.Name}</td>
         <td>{ele.MSAId}</td>
         <td>{ele.Type}</td>
         <td>{ele.Email}</td>
         <td className="select">
-          <button className="button edit">Edit</button>
+          <button
+            className="button edit"
+            onClick={() => {
+              setClickedUser(ele);
+              setOpen(true);
+            }}
+          >
+            Edit
+          </button>
           <button className="button del">Delete</button>
         </td>
       </tr>
@@ -33,25 +67,43 @@ const Users = () => {
     setView(content);
   }
 
+  function handleSaveChanges() {
+    if (!changes) return;
+    const url =
+      "http://localhost/Projects/OralRadiology/GroupLogic.php/Changes";
+    let fData = new FormData();
+    Object.keys(changes).forEach((ele) => {
+      fData.append(ele, changes[ele]);
+    });
+    axios
+      .post(url, fData)
+      .then((res) => console.log(res.data))
+      .catch((error) => console.error(error));
+  }
+
   function FetchFirst() {
     const url = "http://localhost/Projects/OralRadiology/userLogic.php/Users";
-    axios.get(url).then((res) => {
-      console.log(res.data);
-      if (res.data) FrontView(res.data);
-    });
-    // .catch((error) => console.log(error));
+    axios
+      .get(url)
+      .then((res) => {
+        if (res.data) FrontView(res.data);
+      })
+      .catch((error) => console.log(error));
   }
 
   function handleType(e) {
     setType(e.target.value);
   }
+
   useEffect(() => {
-    // console.log(Type);
     const url =
       "http://localhost/Projects/OralRadiology/userLogic.php/Users/" + Type;
-    axios.get(url).then((res) => {
-      FrontView(res.data);
-    });
+    axios
+      .get(url)
+      .then((res) => {
+        FrontView(res.data);
+      })
+      .catch((error) => console.log(error));
   }, [Type]);
 
   if (sessionStorage["Type"] !== "Admin") {
@@ -61,7 +113,14 @@ const Users = () => {
   return (
     <>
       <Navbar />
-      <select name="Type" id="Type" onChange={handleType}>
+      <BasicModal
+        open={open}
+        handleOpen={handleOpen}
+        handleClose={handleClose}
+        selectedUser={clickedUser}
+        setChanges={setChanges}
+      />
+      <select name="Type" id="Type" onChange={handleType} value={Type}>
         <option value="Student">Student</option>
         <option value="Professor">Professor</option>
         <option value="Admin">Admin</option>
@@ -73,20 +132,31 @@ const Users = () => {
             <thead>
               <tr>
                 <th>#</th>
+                <th>Image</th>
+                <th>Name</th>
                 <th>MSA ID</th>
                 <th>Type</th>
                 <th>Email</th>
-                <th></th>
+                <th>Actions</th>
               </tr>
             </thead>
             <tfoot>
               <tr>
-                <th colSpan="5">Spring 24</th>
+                <th colSpan="7">Spring 24</th>
               </tr>
             </tfoot>
             <tbody>{view}</tbody>
           </table>
         </main>
+        <Button
+          sx={{ mb: 5 }}
+          fullWidth
+          variant="contained"
+          color="primary"
+          onClick={handleSaveChanges}
+        >
+          Save Changes
+        </Button>
       </div>
     </>
   );
