@@ -4,14 +4,17 @@ import Navbar from "../../Components/Navbar/Navbar";
 import { Navigate } from "react-router-dom";
 import TableHeader_grading_page from "./TableHeader_grading_page";
 import TableRow_Grading_Page from "./TableRow_Grading_Page";
+import ViewSubmissionsModal from "./ViewSubmissionsModal"; // Import the modal component
 import './Grading.css';
 
 function GradingPage() {
   const assignmentId = sessionStorage.getItem("assignmentId");
   const userId = sessionStorage.getItem("userId");
 
-  const [data, setData] = useState({ images: [] });
+  const [data, setData] = useState([]);
   const [error, setError] = useState("");
+  const [showModal, setShowModal] = useState(false);
+  const [currentStudentId, setCurrentStudentId] = useState(null);
 
   useEffect(() => {
     if (!assignmentId || !userId) {
@@ -24,13 +27,31 @@ function GradingPage() {
       params: { assignmentId, userId }
     })
     .then(response => {
-      setData(response.data);
+      console.log("API response data:", response.data);
+
+      if (response.data.error) {
+        setError(response.data.error);
+      } else {
+        const responseData = Array.isArray(response.data) ? response.data : [];
+        setData(responseData);
+      }
     })
     .catch(error => {
       setError("Failed to fetch data");
       console.error("Error fetching data:", error);
     });
   }, [assignmentId, userId]);
+
+  const handleOpenModal = (studentId) => {
+    //when opening the modal put the studentid in the session 34an 7atago eny ageeb el swr 
+    sessionStorage.setItem("StudentId", studentId);
+    setCurrentStudentId(studentId);
+    setShowModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
 
   if (sessionStorage["Type"] !== "Professor") {
     return <Navigate to="/" />;
@@ -39,9 +60,6 @@ function GradingPage() {
   if (error) {
     return <p>Error: {error}</p>;
   }
-
-  // Ensure data.images is initialized before mapping
-  const images = data.images || [];
 
   return (
     <>
@@ -57,19 +75,26 @@ function GradingPage() {
         <div className="table-responsive">
           <table className="table">
             <TableHeader_grading_page />
-            {images.map((record, index) => (
-              <TableRow_Grading_Page key={index} record={{
-                profilePic: record.PersonalImage,
-                name: record.Name,
-                IDD: record.MSAId,
-                email: record.Email,
-                status: record.Type,
-                joiningDate: record.submitTime 
-              }} />
-            ))}
+            <tbody>
+              {data.map((record, index) => (
+                <TableRow_Grading_Page 
+                  key={index} 
+                  record={{
+                    profilePic: record.PersonalImage,
+                    name: record.Name,
+                    IDD: record.MSAId,
+                    email: record.Email,
+                    status: record.Type,
+                    joiningDate: record.submitTime,
+                    openModal: () => handleOpenModal(record.IDD)
+                  }} 
+                />
+              ))}
+            </tbody>
           </table>
         </div>
       </div>
+      <ViewSubmissionsModal show={showModal} handleClose={handleCloseModal} studentId={currentStudentId} />
     </>
   );
 }
