@@ -34,13 +34,9 @@ $hover-background-color: #f1f1f1;
       text-transform: uppercase;
     }
 
-    tbody tr:nth-child(even) {
-      background: lighten($background-color, 5%);
-    }
+  
+    
 
-    tbody tr:hover {
-      background: $hover-background-color;
-    }
 
     td button {
       padding: 5px 10px;
@@ -151,5 +147,20 @@ $hover-background-color: #f1f1f1;
         }
       }
     }
+  }
+}
+
+[theme="Dark"]{
+  .AddGroup {
+    background-color: #151b20
+  }
+
+  tbody tr:nth-child(even) {
+    background-color: #2C3845;
+    color: white;
+  }
+  tbody tr:nth-child(odd) {
+    background-color: #202932;
+    color: white;
   }
 }
