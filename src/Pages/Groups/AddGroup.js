@@ -196,6 +196,7 @@ const AddGroup = () => {
               <th>Slots Minutes</th>
               <th>Slots Duration</th>
               <th>Slots Room</th>
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>{content}</tbody>
