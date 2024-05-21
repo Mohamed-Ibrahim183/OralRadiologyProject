@@ -4,7 +4,7 @@ const TableRow_Grading_Page = ({ record }) => {
   return (
     <tr>
       <td><input type='checkbox' /></td>
-      <td><img src={record.profilePic} alt="Profile" /></td>
+      <td><img src={record.profilePic} alt="Profile" style={{width:"40px",height:"40px",borderRadius:"50%"}}/></td>
       <td>{record.name}</td>
       <td>{record.IDD}</td>
       <td>{record.email}</td>
