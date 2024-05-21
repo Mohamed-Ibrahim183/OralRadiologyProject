@@ -1,0 +1,140 @@
+/* AddGroup.scss */
+
+// Variables for colors
+$main-color: hsl(209, 100%, 49%);
+$main-color-dark: hsl(209, 100%, 40%);
+$background-color: #f0f0f0;
+$border-color: #ddd;
+$text-color: #333;
+$hover-background-color: #f1f1f1;
+
+.AddGroup {
+  font-family: 'Arial', sans-serif;
+  color: $text-color;
+  padding: 20px;
+  background: $background-color;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+
+    th,
+    td {
+      padding: 10px;
+      text-align: left;
+      border-bottom: 1px solid $border-color;
+    }
+
+    th {
+      background: $main-color;
+      color: #fff;
+      text-transform: uppercase;
+    }
+
+    tbody tr:nth-child(even) {
+      background: lighten($background-color, 5%);
+    }
+
+    tbody tr:hover {
+      background: $hover-background-color;
+    }
+  }
+
+  .section1 {
+    margin-bottom: 20px;
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid $border-color;
+      border-radius: 5px;
+      margin-bottom: 10px;
+    }
+
+    .NEW {
+      display: inline-block;
+      padding: 10px 20px;
+      background: $main-color;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s;
+
+      &:hover {
+        background: $main-color-dark;
+      }
+    }
+  }
+
+  .row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    padding: 10px;
+    background: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+
+    .section {
+      flex: 1;
+      margin-right: 10px;
+
+      &:last-child {
+        margin-right: 0;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+      }
+
+      select,
+      input[type="number"],
+      input[type="text"] {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid $border-color;
+        border-radius: 5px;
+      }
+    }
+  }
+
+  .Buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+
+    .MainButton {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s;
+
+      &.sub {
+        background: $main-color;
+        color: #fff;
+
+        &:hover {
+          background: $main-color-dark;
+        }
+
+        &:disabled {
+          background: #ccc;
+          cursor: not-allowed;
+        }
+      }
+    }
+  }
+}

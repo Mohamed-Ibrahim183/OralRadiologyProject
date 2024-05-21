@@ -1,0 +1,111 @@
+/* AddGroup.scss */
+.AddGroup {
+  font-family: "Arial", sans-serif;
+  color: #333;
+  padding: 20px;
+  background: #f0f0f0;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.AddGroup table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+.AddGroup table th,
+.AddGroup table td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+.AddGroup table th {
+  background: hsl(209, 100%, 49%);
+  color: #fff;
+  text-transform: uppercase;
+}
+.AddGroup table tbody tr:nth-child(even) {
+  background: #fdfdfd;
+}
+.AddGroup table tbody tr:hover {
+  background: #f1f1f1;
+}
+.AddGroup .section1 {
+  margin-bottom: 20px;
+}
+.AddGroup .section1 label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+.AddGroup .section1 input[type=text] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+.AddGroup .section1 .NEW {
+  display: inline-block;
+  padding: 10px 20px;
+  background: hsl(209, 100%, 49%);
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+.AddGroup .section1 .NEW:hover {
+  background: hsl(209, 100%, 40%);
+}
+.AddGroup .row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  padding: 10px;
+  background: #fff;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+.AddGroup .row .section {
+  flex: 1;
+  margin-right: 10px;
+}
+.AddGroup .row .section:last-child {
+  margin-right: 0;
+}
+.AddGroup .row .section label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+.AddGroup .row .section select,
+.AddGroup .row .section input[type=number],
+.AddGroup .row .section input[type=text] {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+.AddGroup .Buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+.AddGroup .Buttons .MainButton {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+.AddGroup .Buttons .MainButton.sub {
+  background: hsl(209, 100%, 49%);
+  color: #fff;
+}
+.AddGroup .Buttons .MainButton.sub:hover {
+  background: hsl(209, 100%, 40%);
+}
+.AddGroup .Buttons .MainButton.sub:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}/*# sourceMappingURL=ADDGroup.css.map */
