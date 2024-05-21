@@ -12,7 +12,7 @@ function Login({ onRecovery }) {
     event.preventDefault();
     try {
       const response = await fetch(
-        "http://localhost/Projects/Oral_Radiology/login.php",
+        "http://localhost/Projects/OralRadiology/login.php",
         {
           method: "POST",
           headers: {
