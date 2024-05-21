@@ -36,7 +36,7 @@ const ViewSubmissionsModal = ({ show, handleClose, studentId, assignmentId }) =>
                 {error ? <p>{error}</p> : null}
                 <div className="image-container">
     {Array.isArray(images) && images.length > 0 ? images.map((img, index) => (
-        <img key={index} src={`http://localhost/Projects/OralRadiology/${img.Path}jpg`} alt={`Submission ${index + 1}`} />
+        <img key={index} src={`http://localhost/Projects/OralRadiology/${img.Path}`} alt={`Submission ${index + 1}`} />
     )) : <p>No images available</p>}
 </div>
 
