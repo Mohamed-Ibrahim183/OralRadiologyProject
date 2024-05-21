@@ -8,6 +8,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 999;
 }
 
 .Modal2Group .ModalContent {
@@ -33,7 +34,8 @@
   margin-bottom: 5px;
 }
 
-.Modal2Group .ModalContent select, input[type="datetime-local"] {
+.Modal2Group .ModalContent select,
+input[type="datetime-local"] {
   width: 100%;
   padding: 8px;
   border: 1px solid #ccc;

@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import "./Modaalll.css";
 import axios from "axios";
 import "./Modal2.css";
+import Button from "@mui/material/Button";
+import { Close, Send } from "@mui/icons-material";
+import { IconButton } from "@mui/material";
 
 const Modal2 = ({ open, onClose, AssignmentId }) => {
   const [groups, setGroups] = useState([]);
@@ -25,30 +28,10 @@ const Modal2 = ({ open, onClose, AssignmentId }) => {
       })
       .catch((error) => console.error(error));
 
-    GetGroupsData();
+    // GetGroupsData();
   }, []);
   if (!open) return null;
 
-  function GetGroupsData() {
-    const url =
-      "http://localhost/Projects/OralRadiology/AssignmentLogic.php/AssignmentGroupsShow";
-    axios
-      .get(url)
-      .then((res) => {
-        const content = res.data.map((ele, i) => {
-          return (
-            <tr key={i}>
-              <td>{ele.group}</td>
-              <td>{ele.Assignment}</td>
-              <td>{ele.openTime}</td>
-              <td>{ele.closeTime}</td>
-            </tr>
-          );
-        });
-        setView(content);
-      })
-      .catch((error) => console.error(error));
-  }
   const handleGroupChange = (event) => {
     setSelectedGroupIndex(event.target.value);
   };
@@ -83,41 +66,12 @@ const Modal2 = ({ open, onClose, AssignmentId }) => {
   return (
     <div className="Modal2Group" onClick={onClose}>
       <main className="main">
-        {/* <div className="ModalContent Left">
-          <table>
-            <thead>
-              <tr>
-                <td>Assignment Name</td>
-                <td>Group Name</td>
-                <td>Open Time</td>
-                <td>Close Time</td>
-              </tr>
-            </thead>
-          </table>
-        </div> */}
         <div className="ModalContent" onClick={(e) => e.stopPropagation()}>
           <div className="Left"></div>
           <div className="Right">
-            <button
-              className="CloseButton"
-              onClick={onClose}
-              style={{ backgroundColor: "#c7cbcf00" }}
-            >
-              x
-            </button>
-            <section>
-              <table cellSpacing={20}>
-                <thead>
-                  <tr>
-                    <td>Group</td>
-                    <td>Assignment</td>
-                    <td>Open</td>
-                    <td>Close</td>
-                  </tr>
-                </thead>
-                <tbody>{view}</tbody>
-              </table>
-            </section>
+            <IconButton onClick={onClose} className="CloseButton">
+              <Close />
+            </IconButton>
             <section>
               <label htmlFor="Groups">Select the Group</label>
               <select
@@ -153,13 +107,26 @@ const Modal2 = ({ open, onClose, AssignmentId }) => {
                 onChange={handleTimeChange}
               />
             </section>
-            <button
+            {/* <button
               className="MainBtn"
               style={{ marginLeft: "75px" }}
               onClick={handleSave}
             >
               Save
-            </button>
+            </button> */}
+            <Button
+              variant="outlined"
+              color="secondary"
+              onClick={handleSave}
+              endIcon={<Send />}
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              Save
+            </Button>
           </div>
         </div>
       </main>

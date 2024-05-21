@@ -7,19 +7,37 @@ import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import "./ProfessorDB.css";
 import "./professor.css";
-import { Link, Navigate } from "react-router-dom"; 
-import Modal2 from "./Modal2"; 
+import { Link, Navigate } from "react-router-dom";
+import Modal2 from "./Modal2";
 import axios from "axios";
+import Button from "@mui/material/Button";
+import { Add } from "@mui/icons-material";
+import {
+  Paper,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  ThemeProvider,
+  createTheme,
+} from "@mui/material";
+import { Table } from "react-bootstrap";
 
 const ProfessorDB = () => {
   const professorName = sessionStorage.getItem("Name") || "Professor";
   const professorImage = sessionStorage.getItem("PersonalImage");
   const storedUserId = sessionStorage.getItem("userId");
 
+  // const [themeMode, setThemeMode] = useState(
+  //
+  // );
   const [isModalOpen, setModalOpen] = useState(false);
   const [isModal2Open, setModal2Open] = useState(false);
   const [assignments, setAssignments] = useState([]);
   const [userId, setUserId] = useState(storedUserId);
+  const [groups, setGroups] = useState([]);
+  const [darkMode, setDarkMode] = useState(false);
 
   useEffect(() => {
     if (!storedUserId) {
@@ -27,6 +45,7 @@ const ProfessorDB = () => {
     } else {
       setUserId(storedUserId);
     }
+
     axios
       .get("http://localhost/Projects/OralRadiology/AssignmentLogic.php/GetAll")
       .then((res) => {
@@ -36,35 +55,98 @@ const ProfessorDB = () => {
       .catch((error) => console.error(error));
   }, [storedUserId]);
 
+  useEffect(() => {
+    axios
+      .get(
+        "http://localhost/Projects/OralRadiology/AssignmentLogic.php/AssignmentGroupsShow"
+      )
+      .then((res) => {
+        setGroups(res.data);
+      })
+      .catch((error) => console.error(error));
+  }, []);
+
   if (sessionStorage.getItem("Type") !== "Professor") {
     return <Navigate to="/" />;
   }
 
+  function GroupsInfos() {
+    if (!groups.length) {
+      return <div>Loading...</div>;
+    }
+
+    return (
+      <TableContainer component={Paper}>
+        <Table aria-label="simple table">
+          <TableHead>
+            <TableRow>
+              <TableCell align="center">Group Name</TableCell>
+              <TableCell align="center">Assignment Name</TableCell>
+              <TableCell align="center">Open Time</TableCell>
+              <TableCell align="center">Close Time</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {groups.map((row) => (
+              <TableRow
+                key={row.Assignment + row.open}
+                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+              >
+                <TableCell component="th" scope="row">
+                  {row.group}
+                </TableCell>
+                <TableCell align="center">{row.Assignment}</TableCell>
+                <TableCell align="center">{row.openTime}</TableCell>
+                <TableCell align="center">{row.closeTime}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    );
+  }
+  // const newTheme =
+
+  console.log('localStorage.getItem("Theme"):', localStorage.getItem("Theme"));
+  const darkTheme = createTheme({
+    palette: {
+      // mode: darkMode ? "dark" : "light",
+      mode: localStorage.getItem("Theme") === "Dark" ? "dark" : "light",
+    },
+  });
+
   return (
-    <>
+    <ThemeProvider theme={darkTheme}>
       <Navbar />
       <Modal isOpen={isModalOpen} onClose={() => setModalOpen(false)}></Modal>
       <Modal2 open={isModal2Open} onClose={() => setModal2Open(false)} />
       <div className="fullProfessorPage">
         <div className="upper">
           <div className="container AssignmentSection">
+            {GroupsInfos()}
             <div className="BBBBBB">
               <h2 className="sectionTitle">My Assignments</h2>
-              <button onClick={() => setModalOpen(true)}>
+              <Button
+                variant="contained"
+                color="secondary"
+                onClick={() => setModalOpen(true)}
+                endIcon={<Add />}
+              >
                 Add Requirement
-              </button>
+              </Button>
             </div>
             <div className="cardAssignment">
-              {assignments && assignments.map((assignment, i) => (
-                <AssignmentCard
-                  key={i}
-                  userId={userId}
-                  assignmentId={assignment.Id}
-                  name={assignment.Name}
-                  info={`${assignment.Topic}, April 30, 2024, 1:00 pm`}
-                  toPage={`/Grading_Page?userId=${userId}&assignmentId=${assignment.Id}`}
-                />
-              ))}
+              {assignments &&
+                assignments.map((assignment, i) => (
+                  <AssignmentCard
+                    key={i}
+                    userId={userId}
+                    assignmentId={assignment.Id}
+                    name={assignment.Name}
+                    info={`${assignment.Topic}, April 30, 2024, 1:00 pm`}
+                    toPage={`/Grading_Page?userId=${userId}&assignmentId=${assignment.Id}`}
+                  />
+                ))}
             </div>
             <h5 className="seal">See all →</h5>
           </div>
@@ -101,7 +183,7 @@ const ProfessorDB = () => {
           </div>
         </div>
       </div>
-    </>
+    </ThemeProvider>
   );
 };
 
