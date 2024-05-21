@@ -102,12 +102,13 @@ const Users = () => {
         selectedUser={clickedUser}
         setChanges={setChanges}
       />
-      <select name="Type" id="Type" onChange={handleType} value={Type}>
+      <div className="Table">
+        
+      <select className="select" name="Type" id="Type" onChange={handleType} value={Type}>
         <option value="Student">Student</option>
         <option value="Professor">Professor</option>
         <option value="Admin">Admin</option>
       </select>
-      <div className="Table">
         <h1>Users</h1>
         <main>
           <table>
