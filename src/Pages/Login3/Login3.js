@@ -3,62 +3,43 @@ import "./Login3.css";
 import Navbar from "../../Components/Navbar/Navbar";
 import axios from "axios";
 
-function script() {
-  const trouble = document.getElementById("trouble");
-  const signInButton = document.getElementById("signIn");
-  const container = document.getElementById("container");
-
-  if (trouble) {
-    trouble.addEventListener("click", () => {
-      container.classList.add("right-panel-active");
-    });
-  }
-  if (signInButton) {
-    signInButton.addEventListener("click", () => {
-      container.classList.remove("right-panel-active");
-    });
-  }
-}
-
-// myScript.async=true;
-// myScript.call();
 function Login3() {
-  // -> important for no scrolling
-  // document.body.style.overflow ="hidden";
-
-  const [MSAId, setMSAId] = useState("");
+  const [identifier, setIdentifier] = useState("");
   const [password, setPassword] = useState("");
-  // const [loginError, setLoginError] = useState("");
   const [passwordShown, setPasswordShown] = useState(false);
 
   function handleSubmit2(e) {
     e.preventDefault();
-    if (MSAId.trim() === "" || password.trim() === "")
-      alert("MSAId and Password must be not empty");
+    if (identifier.trim() === "" || password.trim() === "") {
+        alert("Identifier and Password must not be empty");
+        return; // Return to prevent submission if fields are empty
+    }
+
     const url = "http://localhost/Projects/OralRadiology/userLogic.php/Login";
     let fData = new FormData();
-    fData.append("MSAId", MSAId);
-    fData.append("Password", password);
-    axios
-      .post(url, fData)
-      .then((res) => {
-        if (typeof res.data === "object") {
-          sessionStorage.setItem("userId", res.data.Id); // Save el id
-          sessionStorage.setItem("MSAId", res.data.MSAId);
-          sessionStorage.setItem("Name", res.data.Name);
-          sessionStorage.setItem("Email", res.data.Email);
-          sessionStorage.setItem("Type", res.data.Type);
-          sessionStorage.setItem(
-            "PersonalImage",
-            "http://localhost/Projects/OralRadiology/" + res.data.PersonalImage
-          );
-          window.location.href = `/Dashboard`;
-        } else {
-          alert("Error in MSAId or Password (User Not Found)");
-        }
-      })
-      .catch((res) => console.log(res.data));
-  }
+    fData.append("identifier", identifier);
+    fData.append("password", password);
+
+    console.log("Form Data:", identifier, password); // Log form data for debugging
+
+    axios.post(url, fData)
+        .then((res) => {
+            console.log("Response Data:", res.data); // Log response data for debugging
+            if (typeof res.data === "object") {
+                sessionStorage.setItem("userId", res.data.Id);
+                sessionStorage.setItem("MSAId", res.data.MSAId);
+                sessionStorage.setItem("Name", res.data.Name);
+                sessionStorage.setItem("Email", res.data.Email);
+                sessionStorage.setItem("Type", res.data.Type);
+                sessionStorage.setItem("PersonalImage", "http://localhost/Projects/OralRadiology/" + res.data.PersonalImage);
+                window.location.href = `/Dashboard`;
+            } else {
+                alert(res.data); 
+            }
+        })
+        .catch((err) => console.error("Login Error:", err));
+}
+
 
   const togglePasswordVisibility = () => {
     setPasswordShown(!passwordShown);
@@ -73,9 +54,7 @@ function Login3() {
           <div className="form-container sign-up-container">
             <form>
               <h2>Forgat Password?</h2>
-
               <span>Enter your MSA Email</span>
-
               <input type="email" placeholder="Email" />
               <button>Continue</button>
             </form>
@@ -83,16 +62,14 @@ function Login3() {
           <div className="form-container sign-in-container">
             <form onSubmit={handleSubmit2}>
               <h2>Sign in</h2>
-
               <span>Use Your MSA Account Details</span>
               <input
                 type="text"
                 placeholder="Email or MSA ID"
-                value={MSAId}
-                onChange={(e) => setMSAId(e.target.value)}
+                value={identifier}
+                onChange={(e) => setIdentifier(e.target.value)}
                 required
               />
-
               <input
                 type={passwordShown ? "text" : "password"}
                 placeholder="Password"
@@ -117,10 +94,9 @@ function Login3() {
                   {passwordShown ? "Hide" : "Show"}
                 </button>
               </div>
-              <a href="#" id="forget" onClick={script}>
+              <a href="#" id="forget" onClick={() => { /* handle forgot password logic */ }}>
                 Forgot your password?
               </a>
-
               <button>Sign In</button>
             </form>
           </div>
@@ -129,7 +105,6 @@ function Login3() {
               <div className="overlay-panel overlay-left">
                 <h1>Welcome Back!</h1>
                 <p>To connect please login with your personal info</p>
-
                 <button type="submit" className="ghost submit" id="signIn">
                   Sign In
                 </button>
@@ -137,8 +112,8 @@ function Login3() {
               <div className="overlay-panel overlay-right">
                 <h1>Hello, Friend!</h1>
                 <p>Enter your personal details and start journey with us</p>
-                <button className="ghost" id="trouble" onClick={script}>
-                  Having Trouble Loggin in ?
+                <button className="ghost" id="trouble" onClick={() => { /* handle trouble logging in */ }}>
+                  Having Trouble Logging in?
                 </button>
               </div>
             </div>
