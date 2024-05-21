@@ -22,6 +22,16 @@ function GradingPage() {
       setError("Assignment ID or User ID missing in session storage.");
       return;
     }
+
+    fetchData();
+
+    // Cleanup function
+    return () => {
+      sessionStorage.removeItem("submissionData");
+    };
+  }, [assignmentId, userId]);
+
+  const fetchData = () => {
     const dataSending = {
       assignmentId: assignmentId,
       userId: userId,
@@ -34,16 +44,46 @@ function GradingPage() {
       )
       .then((res) => {
         if (res.msg) {
-          // success
+          // Success
           const responseData = Array.isArray(res.msg) ? res.msg : [];
-          setData(responseData);
+          // Initialize data from response
+          const initializedData = responseData.map((record) => ({
+            ...record,
+            Grade: record.Grade ?? 0, // Default to 0 if Grade is null or undefined
+            Comment: record.Comment ?? "", // Default to empty string if Comment is null or undefined
+          }));
+          setData(initializedData);
           sessionStorage.setItem("ProfileImgs", responseData.PersonalImage);
         } else {
-          // fail
+          // Fail
           setError(res.error);
         }
       });
-  }, [assignmentId, userId]);
+  };
+
+  const handleGradeChange = (studentId, newGrade) => {
+    setData((prevData) =>
+      prevData.map((record) =>
+        record.MSAId === studentId ? { ...record, Grade: newGrade } : record
+      )
+    );
+    updateSessionData(studentId, { grade: newGrade });
+  };
+
+  const handleCommentChange = (studentId, newComment) => {
+    setData((prevData) =>
+      prevData.map((record) =>
+        record.MSAId === studentId ? { ...record, Comment: newComment } : record
+      )
+    );
+    updateSessionData(studentId, { comment: newComment });
+  };
+
+  const updateSessionData = (studentId, newData) => {
+    const sessionData = JSON.parse(sessionStorage.getItem("submissionData")) || {};
+    sessionData[studentId] = { ...sessionData[studentId], ...newData };
+    sessionStorage.setItem("submissionData", JSON.stringify(sessionData));
+  };
 
   const handleOpenModal = (studentId) => {
     setCurrentStudentId(studentId);
@@ -52,6 +92,35 @@ function GradingPage() {
 
   const handleCloseModal = () => {
     setShowModal(false);
+  };
+
+  const handleSaveAll = () => {
+    const submissionData = JSON.parse(sessionStorage.getItem("submissionData")) || {};
+    const dataToSend = Object.entries(submissionData).map(([studentId, { grade, comment }]) => ({
+      assignmentId: assignmentId,
+      studentId: studentId,
+      grade: grade,
+      comment: comment,
+    }));
+
+    new axiosMethods()
+    .post(
+      "http://localhost/Projects/OralRadiology/UpdateSubmission.php",
+      submissionData
+    )
+    .then((res) => {
+      if (res && res.data && res.data.success) {
+        alert("Submissions saved successfully!");
+      } else {
+        console.error("Error response from server:", res); // Log the error response
+        alert("Failed to save submissions. Please try again.");
+      }
+    })
+    .catch((error) => {
+      console.error("Error saving submissions:", error);
+      alert("An error occurred while saving submissions.");
+    });
+  
   };
 
   if (sessionStorage["Type"] !== "Professor") {
@@ -70,6 +139,9 @@ function GradingPage() {
         <hr />
         <div>
           <h2>Submissions</h2>
+          <button type="button" onClick={handleSaveAll}>
+            Save All
+          </button>
           <button type="submit">Download Report</button>
         </div>
         <input type="search" id="searchh" />
@@ -82,15 +154,17 @@ function GradingPage() {
                   key={index}
                   record={{
                     profilePic: `http://localhost/Projects/OralRadiology/${record.PersonalImage}`,
-
-                    //     profilePic: record.PersonalImage,
                     name: record.Name,
                     IDD: record.MSAId,
                     email: record.Email,
                     status: record.Type,
                     joiningDate: record.submitTime,
+                    Grade: record.Grade,
+                    Comment: record.Comment,
                     openModal: () => handleOpenModal(record.Id),
                   }}
+                  onGradeChange={handleGradeChange}
+                  onCommentChange={handleCommentChange}
                 />
               ))}
             </tbody>

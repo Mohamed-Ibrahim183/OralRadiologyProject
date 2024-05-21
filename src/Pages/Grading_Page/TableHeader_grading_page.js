@@ -3,7 +3,6 @@ function TableHeader_grading_page() {
     return (
         <thead>
             <tr>
-                <th>Select</th>
                 <th>Profile</th>
                 <th>Name</th>
                 <th>ID</th>
