@@ -23,12 +23,6 @@
   color: #fff;
   text-transform: uppercase;
 }
-.AddGroup table tbody tr:nth-child(even) {
-  background: #fdfdfd;
-}
-.AddGroup table tbody tr:hover {
-  background: #f1f1f1;
-}
 .AddGroup table td button {
   padding: 5px 10px;
   background: hsl(209, 100%, 49%);
@@ -121,4 +115,16 @@
 .AddGroup .Buttons .MainButton.sub:disabled {
   background: #ccc;
   cursor: not-allowed;
+}
+
+[theme=Dark] .AddGroup {
+  background-color: #151b20;
+}
+[theme=Dark] tbody tr:nth-child(even) {
+  background-color: #2C3845;
+  color: white;
+}
+[theme=Dark] tbody tr:nth-child(odd) {
+  background-color: #202932;
+  color: white;
 }/*# sourceMappingURL=ADDGroup.css.map */
