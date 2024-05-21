@@ -54,6 +54,7 @@ export default function AddUser() {
   return (
     <>
       <NavAdmin open={true} />
+      
       <div className="container AddProf">
         <h1 className="form-title">Add User</h1>
         <hr className="title-line"></hr>
