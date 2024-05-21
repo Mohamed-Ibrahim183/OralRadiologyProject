@@ -12,7 +12,7 @@
   --mainText: black;
   --secondaryText: #777;
   --chartBack: rgba(255, 255, 255, 0.277);
-  --currentday: #a2d1fd;
+  --currentDay: #a2d1fd;
   --profile: #a2d1fd;
 }
 [theme="Dark"] {
@@ -26,7 +26,7 @@
   --btnB-hover: #356981;
   --mainText: white;
   --secondaryText: #a9a9a9;
-  --currentday: #ffd269;
+  --currentDay: #ffd269;
   --profile: #4d8ba8;
 }
 .fullProfessorPage {
@@ -89,22 +89,12 @@
 }
 .fullProfessorPage .BBBBBB {
   display: flex;
-  align-items: first baseline;
+  justify-content: space-between;
+  align-items: center;
 }
 .fullProfessorPage .container.AssignmentSection h5 {
   color: #7b7b7b;
   margin-top: 20px;
-}
-.fullProfessorPage .container.AssignmentSection button {
-  margin-left: 370px;
-  width: 7rem;
-  height: 3rem;
-  background-color: var(--btnB);
-  color: black;
-  border: #0082e600;
-}
-.fullProfessorPage .container.AssignmentSection button:hover {
-  background-color: var(--btnB-hover);
 }
 .fullProfessorPage .cardAssignment {
   height: 300px;
@@ -128,7 +118,7 @@
   margin-top: 50px;
   box-shadow: 0px 5px 13px 0px rgba(0, 0, 0, 0.45);
 
-  background-color: var(--currentday);
+  background-color: var(--currentDay);
   h2 {
     text-align: center;
   }
@@ -137,7 +127,7 @@
     border: rgba(128, 0, 0, 0);
   }
   .react-calendar__tile--now {
-    background-color: var(--currentday);
+    background-color: var(--currentDay);
   }
 }
 .fullProfessorPage .upper {
@@ -170,10 +160,7 @@
     margin-top: 400px;
     float: none;
   }
-  .fullProfessorPage .container.AssignmentSection button {
-    color: #7b7b7b;
-    margin-left: 4rem;
-  }
+
   .fullProfessorPage .cc1 {
     width: 100%;
     height: 300px;

@@ -1,12 +1,10 @@
 import React, { useState } from "react";
 import "./Login3.css";
-import img from "./logo2.jpeg";
 import Navbar from "../../Components/Navbar/Navbar";
 import axios from "axios";
 
 function script() {
   const trouble = document.getElementById("trouble");
-  // const forget = document.getElementById('forget');
   const signInButton = document.getElementById("signIn");
   const container = document.getElementById("container");
 
@@ -43,9 +41,7 @@ function Login3() {
       .post(url, fData)
       .then((res) => {
         if (typeof res.data === "object") {
-          console.log(res.data);
           sessionStorage.setItem("userId", res.data.Id); // Save el id
-
           sessionStorage.setItem("MSAId", res.data.MSAId);
           sessionStorage.setItem("Name", res.data.Name);
           sessionStorage.setItem("Email", res.data.Email);
@@ -55,25 +51,7 @@ function Login3() {
             "http://localhost/Projects/OralRadiology/" + res.data.PersonalImage
           );
 
-          // set Session
-          switch (res.data.Type) {
-            case "Professor":
-              window.location.href = `/ProfessorDB?userId=${res.data.Id}`;
-              break;
-            case "Student":
-              window.location.href = `/StudentDB?userId=${res.data.Id}`;
-              break;
-            case "Admin":
-              window.location.href = `/Admin_dashboard?userId=${res.data.Id}`;
-              break;
-            default:
-              // setLoginError("Invalid user type");
-              break;
-          }
-        } else {
-          // setLoginError(
-          //   "Failed To Login Because of Error in Msa ID or Password"
-          // );
+          window.location.href = `/Dashboard`;
         }
       })
       .catch((res) => console.log(res.data));
@@ -88,8 +66,8 @@ function Login3() {
       <Navbar />
       <div className="login3">
         <h1>Welcome to MSA Oral Radiology</h1>
-        <div class="container" id="container">
-          <div class="form-container sign-up-container">
+        <div className="container" id="container">
+          <div className="form-container sign-up-container">
             <form>
               <h2>Forgat Password?</h2>
 
@@ -99,7 +77,7 @@ function Login3() {
               <button>Continue</button>
             </form>
           </div>
-          <div class="form-container sign-in-container">
+          <div className="form-container sign-in-container">
             <form onSubmit={handleSubmit2}>
               <h2>Sign in</h2>
 
@@ -143,9 +121,9 @@ function Login3() {
               <button>Sign In</button>
             </form>
           </div>
-          <div class="overlay-container">
-            <div class="overlay">
-              <div class="overlay-panel overlay-left">
+          <div className="overlay-container">
+            <div className="overlay">
+              <div className="overlay-panel overlay-left">
                 <h1>Welcome Back!</h1>
                 <p>To connect please login with your personal info</p>
 
@@ -153,10 +131,10 @@ function Login3() {
                   Sign In
                 </button>
               </div>
-              <div class="overlay-panel overlay-right">
+              <div className="overlay-panel overlay-right">
                 <h1>Hello, Friend!</h1>
                 <p>Enter your personal details and start journey with us</p>
-                <button class="ghost" id="trouble" onClick={script}>
+                <button className="ghost" id="trouble" onClick={script}>
                   Having Trouble Loggin in ?
                 </button>
               </div>

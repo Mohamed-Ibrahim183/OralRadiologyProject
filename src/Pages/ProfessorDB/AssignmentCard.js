@@ -2,7 +2,8 @@
 import React, { useState } from "react";
 import Modal2 from "./Modal2";
 import { Link } from "react-router-dom";
-
+import Button from "@mui/material/Button";
+import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 const AssignmentCard = (props) => {
   const label = {
     borderLeft: `10px solid ${props.col}`,
@@ -37,7 +38,15 @@ const AssignmentCard = (props) => {
           onClose={handleCloseModal2}
           AssignmentId={props.assignmentId}
         />
-        <button onClick={handleOpenModal2}>Add Group Slots</button>
+        <Button
+          sx={{ colo: "white" }}
+          variant="contained"
+          color="primary"
+          onClick={handleOpenModal2}
+          endIcon={<AddCircleOutlineIcon />}
+        >
+          Add Group Slots
+        </Button>
       </div>
     </div>
   );
