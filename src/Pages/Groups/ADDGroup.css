@@ -29,6 +29,19 @@
 .AddGroup table tbody tr:hover {
   background: #f1f1f1;
 }
+.AddGroup table td button {
+  padding: 5px 10px;
+  background: hsl(209, 100%, 49%);
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: transform 0.3s, background 0.3s;
+}
+.AddGroup table td button:hover {
+  background: hsl(209, 100%, 40%);
+  transform: scale(1.1);
+}
 .AddGroup .section1 {
   margin-bottom: 20px;
 }

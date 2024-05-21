@@ -41,6 +41,21 @@ $hover-background-color: #f1f1f1;
     tbody tr:hover {
       background: $hover-background-color;
     }
+
+    td button {
+      padding: 5px 10px;
+      background: $main-color;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: transform 0.3s, background 0.3s;
+
+      &:hover {
+        background: $main-color-dark;
+        transform: scale(1.1);
+      }
+    }
   }
 
   .section1 {
