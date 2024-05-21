@@ -9,13 +9,15 @@ const TableRow_Grading_Page = ({ record }) => {
       <td>{record.IDD}</td>
       <td>{record.email}</td>
       <td></td>
-      <td></td>
+      {/* Grade */}
+      <td><input type='number' style={{width:"50%"}} ></input></td>
       <td>{record.joiningDate}</td>
       <td>
         <button onClick={record.openModal}>View Submissions</button>
       </td>
       <td></td>
-      <td><input type='' ></input></td>
+      {/* FeedBack comment */}
+      <td><input type='text' ></input></td>
     </tr>
   );
 };

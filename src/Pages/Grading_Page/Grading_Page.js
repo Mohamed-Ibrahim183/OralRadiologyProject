@@ -27,13 +27,15 @@ function GradingPage() {
       params: { assignmentId, userId }
     })
     .then(response => {
-      console.log("API response data:", response.data);
-
       if (response.data.error) {
         setError(response.data.error);
       } else {
         const responseData = Array.isArray(response.data) ? response.data : [];
         setData(responseData);
+        sessionStorage.setItem("ProfileImgs", responseData.PersonalImage);
+        const profileImags = sessionStorage.getItem("ProfileImgs");
+
+        //console.log(responseData.PersonalImage);
       }
     })
     .catch(error => {
@@ -43,7 +45,6 @@ function GradingPage() {
   }, [assignmentId, userId]);
 
   const handleOpenModal = (studentId) => {
-    sessionStorage.setItem("StudentId", studentId);
     setCurrentStudentId(studentId);
     setShowModal(true);
   };
@@ -79,7 +80,9 @@ function GradingPage() {
                 <TableRow_Grading_Page 
                   key={index} 
                   record={{
-                    profilePic: record.PersonalImage,
+                    profilePic: `http://localhost/Projects/OralRadiology/${record.PersonalImage}`,
+
+               //     profilePic: record.PersonalImage,
                     name: record.Name,
                     IDD: record.MSAId,
                     email: record.Email,
