@@ -4,8 +4,8 @@ import Navbar from "../../Components/Navbar/Navbar";
 import axios from "axios";
 import { Navigate } from "react-router-dom";
 import BasicModal from "./Edit";
-// import Button from "@mui/material/Button";
 import { Avatar, Button } from "@mui/material";
+import { axiosMethods } from "../Controller";
 
 const Users = () => {
   const [open, setOpen] = useState(false);
@@ -20,14 +20,9 @@ const Users = () => {
   useEffect(() => {
     document.body.classList.add("TableBody");
 
-    // Fetch data when the component mounts
-    FetchFirst();
-
     // Clean up the class on unmount
     return () => document.body.classList.remove("TableBody");
   }, []);
-
-  // useEffect(() => console.table(changes), [changes]);
 
   function FrontView(dataContent) {
     console.table(dataContent);
@@ -81,16 +76,6 @@ const Users = () => {
       .catch((error) => console.error(error));
   }
 
-  function FetchFirst() {
-    const url = "http://localhost/Projects/OralRadiology/userLogic.php/Users";
-    axios
-      .get(url)
-      .then((res) => {
-        if (res.data) FrontView(res.data);
-      })
-      .catch((error) => console.log(error));
-  }
-
   function handleType(e) {
     setType(e.target.value);
   }
@@ -98,12 +83,9 @@ const Users = () => {
   useEffect(() => {
     const url =
       "http://localhost/Projects/OralRadiology/userLogic.php/Users/" + Type;
-    axios
+    new axiosMethods()
       .get(url)
-      .then((res) => {
-        FrontView(res.data);
-      })
-      .catch((error) => console.log(error));
+      .then((res) => (res.msg ? FrontView(res.msg) : console.error(res.error)));
   }, [Type]);
 
   if (sessionStorage["Type"] !== "Admin") {

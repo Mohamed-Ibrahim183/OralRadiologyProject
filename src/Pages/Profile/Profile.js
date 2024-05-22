@@ -21,6 +21,7 @@ const Profile = () => {
           name={ele.name}
           id={ele.name}
           placeholder={ele.placeholder}
+          value={sessionStorage[ele.name]}
         />
       </div>
     );

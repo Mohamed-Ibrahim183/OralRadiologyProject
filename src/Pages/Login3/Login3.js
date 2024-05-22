@@ -33,6 +33,8 @@ function Login3() {
 
   function handleSubmit2(e) {
     e.preventDefault();
+    if (MSAId.trim() === "" || password.trim() === "")
+      alert("MSAId and Password must be not empty");
     const url = "http://localhost/Projects/OralRadiology/userLogic.php/Login";
     let fData = new FormData();
     fData.append("MSAId", MSAId);
@@ -50,8 +52,9 @@ function Login3() {
             "PersonalImage",
             "http://localhost/Projects/OralRadiology/" + res.data.PersonalImage
           );
-
           window.location.href = `/Dashboard`;
+        } else {
+          alert("Error in MSAId or Password (User Not Found)");
         }
       })
       .catch((res) => console.log(res.data));

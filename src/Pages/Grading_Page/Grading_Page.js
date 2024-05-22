@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import Navbar from "../../Components/Navbar/Navbar";
 import { Navigate } from "react-router-dom";
 import TableHeader_grading_page from "./TableHeader_grading_page";
 import TableRow_Grading_Page from "./TableRow_Grading_Page";
-import ViewSubmissionsModal from "./ViewSubmissionsModal"; 
-import './Grading.css';
+import ViewSubmissionsModal from "./ViewSubmissionsModal";
+import "./Grading.css";
+import { axiosMethods } from "../Controller";
 
 function GradingPage() {
   const assignmentId = sessionStorage.getItem("assignmentId");
@@ -22,26 +22,27 @@ function GradingPage() {
       setError("Assignment ID or User ID missing in session storage.");
       return;
     }
+    const dataSending = {
+      assignmentId: assignmentId,
+      userId: userId,
+    };
 
-    axios.get(`http://localhost/Projects/OralRadiology/monem.php`, {
-      params: { assignmentId, userId }
-    })
-    .then(response => {
-      if (response.data.error) {
-        setError(response.data.error);
-      } else {
-        const responseData = Array.isArray(response.data) ? response.data : [];
-        setData(responseData);
-        sessionStorage.setItem("ProfileImgs", responseData.PersonalImage);
-        const profileImags = sessionStorage.getItem("ProfileImgs");
-
-        //console.log(responseData.PersonalImage);
-      }
-    })
-    .catch(error => {
-      setError("Failed to fetch data");
-      console.error("Error fetching data:", error);
-    });
+    new axiosMethods()
+      .get(
+        "http://localhost/Projects/OralRadiology/AssignmentLogic.php/GetSubmissionAssignment",
+        dataSending
+      )
+      .then((res) => {
+        if (res.msg) {
+          // success
+          const responseData = Array.isArray(res.msg) ? res.msg : [];
+          setData(responseData);
+          sessionStorage.setItem("ProfileImgs", responseData.PersonalImage);
+        } else {
+          // fail
+          setError(res.error);
+        }
+      });
   }, [assignmentId, userId]);
 
   const handleOpenModal = (studentId) => {
@@ -77,29 +78,29 @@ function GradingPage() {
             <TableHeader_grading_page />
             <tbody>
               {data.map((record, index) => (
-                <TableRow_Grading_Page 
-                  key={index} 
+                <TableRow_Grading_Page
+                  key={index}
                   record={{
                     profilePic: `http://localhost/Projects/OralRadiology/${record.PersonalImage}`,
 
-               //     profilePic: record.PersonalImage,
+                    //     profilePic: record.PersonalImage,
                     name: record.Name,
                     IDD: record.MSAId,
                     email: record.Email,
                     status: record.Type,
                     joiningDate: record.submitTime,
-                    openModal: () => handleOpenModal(record.Id)
-                  }} 
+                    openModal: () => handleOpenModal(record.Id),
+                  }}
                 />
               ))}
             </tbody>
           </table>
         </div>
       </div>
-      <ViewSubmissionsModal 
-        show={showModal} 
-        handleClose={handleCloseModal} 
-        studentId={currentStudentId} 
+      <ViewSubmissionsModal
+        show={showModal}
+        handleClose={handleCloseModal}
+        studentId={currentStudentId}
         assignmentId={assignmentId}
       />
     </>

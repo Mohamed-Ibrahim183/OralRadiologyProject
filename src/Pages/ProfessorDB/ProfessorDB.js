@@ -49,7 +49,7 @@ const ProfessorDB = () => {
     axios
       .get("http://localhost/Projects/OralRadiology/AssignmentLogic.php/GetAll")
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         setAssignments(res.data);
       })
       .catch((error) => console.error(error));
@@ -107,7 +107,7 @@ const ProfessorDB = () => {
   }
   // const newTheme =
 
-  console.log('localStorage.getItem("Theme"):', localStorage.getItem("Theme"));
+  // console.log('localStorage.getItem("Theme"):', localStorage.getItem("Theme"));
   const darkTheme = createTheme({
     palette: {
       // mode: darkMode ? "dark" : "light",
