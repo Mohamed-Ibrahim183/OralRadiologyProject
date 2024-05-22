@@ -3,6 +3,24 @@ import "./Login3.css";
 import Navbar from "../../Components/Navbar/Navbar";
 import axios from "axios";
 
+function script() {
+  const trouble = document.getElementById("trouble");
+  const signInButton = document.getElementById("signIn");
+  const container = document.getElementById("container");
+
+  if (trouble) {
+    trouble.addEventListener("click", () => {
+      container.classList.add("right-panel-active");
+    });
+  }
+  if (signInButton) {
+    signInButton.addEventListener("click", () => {
+      container.classList.remove("right-panel-active");
+    });
+  }
+}
+
+
 function Login3() {
   const [identifier, setIdentifier] = useState("");
   const [password, setPassword] = useState("");
@@ -94,7 +112,7 @@ function Login3() {
                   {passwordShown ? "Hide" : "Show"}
                 </button>
               </div>
-              <a href="#" id="forget" onClick={() => { /* handle forgot password logic */ }}>
+              <a href="#" id="forget" onClick={script}>
                 Forgot your password?
               </a>
               <button>Sign In</button>
@@ -112,7 +130,7 @@ function Login3() {
               <div className="overlay-panel overlay-right">
                 <h1>Hello, Friend!</h1>
                 <p>Enter your personal details and start journey with us</p>
-                <button className="ghost" id="trouble" onClick={() => { /* handle trouble logging in */ }}>
+                <button className="ghost" id="trouble" onClick={script}>
                   Having Trouble Logging in?
                 </button>
               </div>
