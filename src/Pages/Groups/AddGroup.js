@@ -114,6 +114,7 @@ const AddGroup = () => {
       document.getElementById("GroupName").value = "";
       setRender(-render);
       fetchFirst();
+      alert("The Group Saved Successfully");
     } else {
       console.log("Please fill in all fields.");
       alert("Please fill in all fields.");
