@@ -1,0 +1,201 @@
+:root {
+  --mainBackGround: #F5FBF9;
+  --mainColor: #0082e6;
+  --secondText: #65b4f1;
+  --textColor: var(--mainColor);
+  --headerColor: #0082e6;
+  --text-monem:rgb(20, 19, 19);
+  --btnB:#2450f1;
+  --btnB-hover:#14319b;
+  --sidebar-expanded-margin: 200px;
+  --sidebar-default-margin: 70px;
+  --mainText: black;
+  --secondaryText: #777;
+}
+
+[theme=Dark] {
+  --mainColor: #4d8ba8;
+  --mainBackGround: #1b343c;
+  --secondText: #65b4f1;
+  --textColor: #96bdcf;
+  --headerColor: #4d8ba8;
+  --text-monem:rgb(230, 230, 230);
+  --btnB:#4d8ba8;
+  --btnB-hover:#356981;
+  --mainText: white;
+  --secondaryText: #a9a9a9;
+}
+
+.monem2_admin {
+  width: 90%;
+  margin: auto;
+  overflow: hidden;
+}
+.monem2_admin h1, .monem2_admin h2 {
+  color: var(--textColor);
+}
+.monem2_admin #searchh, .monem2_admin .grade_num, .monem2_admin .FeedBack {
+  background-color: rgba(221, 221, 221, 0.4156862745);
+}
+.monem2_admin #searchhh {
+  color: var(--text-monem);
+  color: var(--text-monem);
+  font-weight: bold;
+  font-size: 25px;
+}
+.monem2_admin .table-responsive {
+  overflow-x: auto;
+}
+@media (max-width: 480px) {
+  .monem2_admin .table-responsive {
+    -webkit-overflow-scrolling: touch;
+  }
+}
+.monem2_admin .table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 25px 0;
+  font-size: 0.9em;
+  background: var(--mainBackGround);
+  text-align: left;
+  color: #8d8d8d;
+  color: var(--text-monem);
+  min-width: 600px;
+}
+.monem2_admin .table thead tr {
+  background-color: var(--headerColor);
+  color: white;
+  text-align: left;
+}
+.monem2_admin .table th, .monem2_admin .table td {
+  padding: 12px 15px;
+}
+.monem2_admin .table tbody tr {
+  border-bottom: 1px solid #ddd;
+}
+.monem2_admin .table tbody tr:nth-of-type(even) {
+  background-color: var(--mainBackGround);
+}
+.monem2_admin .table tbody tr:last-of-type {
+  border-bottom: 2px solid #ddd;
+}
+@media (max-width: 480px) {
+  .monem2_admin .table .thead {
+    display: none;
+  }
+  .monem2_admin .table .table tbody, .monem2_admin .table .table tr, .monem2_admin .table .table td {
+    display: block;
+    width: 100%;
+  }
+  .monem2_admin .table .tr {
+    margin-bottom: 15px;
+  }
+  .monem2_admin .table .td {
+    text-align: right;
+    padding-left: 50%;
+    position: relative;
+  }
+  .monem2_admin .table .td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 0;
+    width: 50%;
+    padding-left: 15px;
+    font-weight: bold;
+    text-align: left;
+  }
+}
+.monem2_admin .profile-pic {
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+}
+.monem2_admin .profile-pic:hover {
+  cursor: pointer;
+}
+.monem2_admin .icon {
+  margin-left: 10px;
+  display: inline-block;
+}
+.monem2_admin .pen, .monem2_admin .basket {
+  width: 20px;
+  height: 20px;
+  border-radius: 20%;
+  color: white;
+}
+.monem2_admin .pen.pen, .monem2_admin .basket.pen {
+  background-color: #1c37d0;
+}
+.monem2_admin .pen.basket, .monem2_admin .basket.basket {
+  background-color: red;
+}
+.monem2_admin .oooo {
+  display: flex;
+}
+.monem2_admin .oooo h2 {
+  float: left;
+  margin-right: 65rem;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+  font-size: 32px;
+}
+.monem2_admin #searchh {
+  height: 2rem;
+  border: 1px solid #ddd;
+}
+.monem2_admin .grade_num {
+  width: 60px;
+  height: 40%;
+  margin-bottom: 5px;
+  margin-right: 10px;
+}
+.monem2_admin .right {
+  display: grid;
+  float: right;
+  margin-top: -8rem;
+}
+.monem2_admin .right button {
+  background-color: var(--btnB);
+}
+.monem2_admin .right button:hover {
+  background-color: var(--btnB-hover);
+}
+.monem2_admin .grade_button {
+  margin: 0;
+  width: 60px;
+  background-color: var(--btnB);
+  font-weight: bold;
+}
+.monem2_admin .grade_button:hover {
+  background-color: var(--btnB-hover);
+  color: white;
+}
+.monem2_admin .grade_button:focus {
+  outline: none;
+}
+@media (max-width: 480px) {
+  .monem2_admin h1, .monem2_admin h2 {
+    font-size: 20px;
+  }
+  .monem2_admin .oooo h2 {
+    margin-right: 1rem;
+  }
+  .monem2_admin .table, .monem2_admin .right, .monem2_admin #searchh {
+    width: 100%;
+  }
+  .monem2_admin .grade_num, .monem2_admin .FeedBack {
+    width: 100%;
+  }
+  .monem2_admin .right {
+    margin-top: 1rem;
+    float: none;
+  }
+}
+@media (min-width: 768px) and (max-width: 1024px) {
+  .monem2_admin h1, .monem2_admin h2 {
+    font-size: 24px;
+  }
+  .monem2_admin .oooo h2 {
+    margin-right: 2rem;
+  }
+}/*# sourceMappingURL=Grading.css.map */

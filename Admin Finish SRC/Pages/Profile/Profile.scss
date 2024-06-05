@@ -1,0 +1,118 @@
+@import './breakpoints';
+@import '../../Variables';
+
+%SectionTitle {
+  background-color: #f8f8f9;
+  color: #87777d;
+  padding: 10px;
+  border-bottom: 1px solid #87777d;
+  padding-left: 25px;
+  font-weight: bold;
+}
+%SectionGround {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  // justify-content: center;
+  filter: drop-shadow(-2px 5px 21px #b8b8b8);
+  overflow: hidden;
+}
+%SubmitBtn {
+  outline: none;
+  border: none;
+  background-color: #0061f2;
+  color: white;
+  border-radius: 6px;
+  margin-top: 20px;
+  padding: 5px;
+  font-weight: bold;
+}
+.Profile {
+  color: var(--text-monem);
+  padding-top: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .container {
+    // display: flex;
+    @include md(){
+      width: 90% !important; 
+      margin: auto;
+    }
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 40px;
+
+    .personalImage {
+      @extend %SectionGround;
+      max-height: 500px;
+      .ImageTitle {
+        @extend %SectionTitle;
+      }
+      .imageContent {
+        background-color: var(--mainBackGround);
+        display: flex;
+        flex-direction: column;
+        padding: 20px;
+        img {
+          width: 250px;
+          height: 250px;
+          border-radius: 50%;
+          -webkit-border-radius: 50%;
+          -moz-border-radius: 50%;
+          -ms-border-radius: 50%;
+          -o-border-radius: 50%;
+        }
+        .imageNote {
+          padding-top: 15px;
+        }
+        .SubImage {
+          @extend %SubmitBtn;
+        }
+      }
+    }
+    .Information {
+      background-color: var(--mainBackGround);
+      .InformationContent {
+        padding: 10px;
+        .mainContent{
+          form{
+
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+            @include lg(){
+              grid-template-columns: 1fr;
+            }
+            .section {
+              display: flex;
+              flex-direction: column;
+              input {
+                margin-left: 5px;
+                padding: 5px;
+                outline: none;
+                border: 1px solid #87777d;
+                border-radius: 6px;
+                -webkit-border-radius: 6px;
+                -moz-border-radius: 6px;
+                -ms-border-radius: 6px;
+                -o-border-radius: 6px;
+              }
+            }
+          }
+          .SubmitData{
+            @extend %SubmitBtn;
+            padding: 5px 10px;
+            font-weight: 500;
+          }
+        }
+      }
+      @extend %SectionGround;
+      justify-content: flex-start;
+      .informationTitle {
+        @extend %SectionTitle;
+        // color: red;
+      }
+    }
+  }
+}

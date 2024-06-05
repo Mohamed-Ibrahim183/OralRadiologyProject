@@ -1,0 +1,193 @@
+:root {
+  --mainBackGround: #F5FBF9;
+  --mainColor: #0082e6;
+  --secondText: #65b4f1;
+  --textColor: var(--mainColor);
+  --headerColor: #0082e6;
+  --text-monem:rgb(20, 19, 19);
+  --btnB:#2450f1;
+  --btnB-hover:#14319b;
+  --sidebar-expanded-margin: 200px;
+  --sidebar-default-margin: 70px;
+  --mainText: black;
+  --secondaryText: #777;
+}
+
+[theme=Dark] {
+  --mainColor: #4d8ba8;
+  --mainBackGround: #1b343c;
+  --secondText: #65b4f1;
+  --textColor: #96bdcf;
+  --headerColor: #4d8ba8;
+  --text-monem:rgb(230, 230, 230);
+  --btnB:#4d8ba8;
+  --btnB-hover:#356981;
+  --mainText: white;
+  --secondaryText: #a9a9a9;
+}
+
+ul li ul li a {
+  transition: all 0.5s ease;
+}
+
+nav.secondary-Navigation {
+  background: var(--headerColor);
+  height: 80px;
+  width: 100%;
+  position: relative;
+  z-index: 10;
+}
+nav.secondary-Navigation .logo {
+  height: 70px;
+}
+nav.secondary-Navigation label.logo {
+  color: white;
+  font-size: 30px;
+  line-height: 80px;
+  padding-left: 10px;
+  font-weight: bold;
+}
+@media (max-width: 480px) {
+  nav.secondary-Navigation label.logo {
+    font-size: 8px;
+    line-height: 40px;
+  }
+}
+nav.secondary-Navigation ul {
+  float: right;
+}
+nav.secondary-Navigation ul li {
+  display: inline-block;
+  line-height: 80px;
+  margin: 0 5px;
+}
+nav.secondary-Navigation ul li a {
+  color: white;
+  font-size: 16px;
+  padding: 7px 13px;
+  border-radius: 3px;
+  text-transform: uppercase;
+}
+nav.secondary-Navigation ul li a.active, nav.secondary-Navigation ul li a:hover {
+  background: var(--secondText);
+  transition: 0.5s;
+}
+nav.secondary-Navigation .checkBtn {
+  font-size: 30px;
+  color: white;
+  float: right;
+  line-height: 80px;
+  margin-right: 40px;
+  cursor: pointer;
+  display: none;
+}
+nav.secondary-Navigation #check {
+  display: none;
+}
+@media (max-width: 952px) {
+  nav.secondary-Navigation .MainList {
+    max-height: 100vh;
+    overflow-y: scroll;
+  }
+  nav.secondary-Navigation label.logo {
+    font-size: 30px;
+    padding-left: 50px;
+  }
+  nav.secondary-Navigation ul li a {
+    font-size: 16px;
+  }
+}
+@media (max-width: 1070px) {
+  nav.secondary-Navigation .checkBtn {
+    display: block;
+  }
+  nav.secondary-Navigation ul {
+    position: fixed;
+    width: 30%;
+    height: 100vh;
+    background: #2c3e50;
+    top: 80px;
+    left: -100%;
+    text-align: center;
+    transition: all 0.5s;
+  }
+  nav.secondary-Navigation ul li {
+    display: block;
+    margin: 30px 0;
+    line-height: 30px;
+  }
+  nav.secondary-Navigation ul li a {
+    font-size: 20px;
+  }
+  nav.secondary-Navigation ul li a:hover, nav.secondary-Navigation ul li a.active {
+    background: none;
+    color: var(--headerColor);
+  }
+  nav.secondary-Navigation ul.dropDown {
+    margin-top: -50px;
+    left: 10px;
+  }
+  nav.secondary-Navigation ul.dropDown li {
+    color: white;
+    margin: 10px;
+  }
+  nav.secondary-Navigation ul.dropDown li:hover {
+    background-color: var(--secondText);
+    color: white;
+  }
+  nav.secondary-Navigation #check:checked ~ ul {
+    width: -moz-fit-content;
+    width: fit-content;
+    left: 0;
+  }
+}
+
+.HEADER {
+  display: flex;
+  align-items: center;
+  background: var(--headerColor);
+  box-shadow: 3px 19px 89px -13px rgba(0, 0, 0, 0.51);
+  -webkit-box-shadow: 3px 19px 89px -13px rgba(0, 0, 0, 0.51);
+  -moz-box-shadow: 3px 19px 89px -13px rgba(0, 0, 0, 0.51);
+}
+.HEADER section {
+  background-size: cover;
+  height: calc(100vh - 80px);
+}
+.HEADER .logoName {
+  display: flex;
+}
+.HEADER .logoName img {
+  width: 200px;
+}
+.HEADER .DropParent {
+  padding-right: 20px;
+}
+.HEADER ul li {
+  position: relative;
+}
+.HEADER ul li ul.dropDown li {
+  display: block;
+}
+.HEADER ul li ul.dropDown {
+  width: -moz-fit-content;
+  width: fit-content;
+  background-color: var(--headerColor);
+  position: absolute;
+  left: -50px;
+  z-index: 11;
+  display: none;
+  transition: 0.5s;
+  -webkit-transition: 0.5s;
+  -moz-transition: 0.5s;
+  -ms-transition: 0.5s;
+  -o-transition: 0.5s;
+}
+.HEADER ul li:hover ul.dropDown {
+  display: block;
+}
+.HEADER ul.showDropList {
+  position: absolute !important;
+  z-index: 100;
+  color: red !important;
+}/*# sourceMappingURL=Nav.css.map */

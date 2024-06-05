@@ -1,0 +1,93 @@
+html {
+  font-family: "Arial", sans-serif;
+  font-size: 10px;
+  scroll-behavior: smooth;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+a,
+img,
+span,
+input,
+button,
+ion-icon {
+  display: block;
+}
+
+.body {
+  color: hsl(0, 0%, 47%);
+  font-size: 1.5rem;
+}
+
+.HomePage .PageBody {
+  font-family: "Arial", sans-serif;
+  background-position: static;
+  background-blend-mode: hue;
+  background-color: rgb(255, 255, 255);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.HomePage .parent {
+  margin: -2rem 1rem 30rem;
+  padding: 2rem;
+  text-align: center;
+}
+.HomePage .parent .child {
+  display: inline-block;
+  padding: 1rem;
+  vertical-align: middle;
+  align-items: center;
+}
+.HomePage .title-line {
+  margin-top: 200px;
+}
+.HomePage .btn {
+  background-image: linear-gradient(90deg, hsl(201, 92%, 47%) 0%, hsl(225, 68%, 53%) 100%);
+  color: white;
+  font-size: 1.6rem;
+  width: 300px;
+  text-transform: uppercase;
+  padding: 20px 30px;
+  text-align: center;
+  border-radius: 4px;
+  box-shadow: 0px 10px 30px hsla(0, 0%, 0%, 0.1);
+}
+.HomePage .btn:is(:hover, :focus) {
+  --deg: -90deg;
+}
+.HomePage .bg-image {
+  background-color: #0e264f;
+  padding-bottom: 30rem;
+}
+.HomePage .section-subtitle {
+  color: hsl(225, 68%, 53%);
+  font-family: "Arial", sans-serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+@media (max-width: 100em) {
+  .HomePage .w-100 {
+    width: 30%;
+    height: 30%;
+    margin: 0 auto;
+  }
+  .HomePage .Human {
+    display: block;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  .HomePage .Human .btn {
+    display: block;
+    margin: 0 auto;
+  }
+}/*# sourceMappingURL=Home_monem.css.map */

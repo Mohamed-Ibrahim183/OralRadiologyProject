@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "./Login3.css";
 import Navbar from "../../Components/Navbar/Navbar";
 import axios from "axios";
+import { ContextData } from "../../ContextData";
 
 function script() {
   const trouble = document.getElementById("trouble");
@@ -20,17 +21,17 @@ function script() {
   }
 }
 
-
 function Login3() {
   const [identifier, setIdentifier] = useState("");
   const [password, setPassword] = useState("");
   const [passwordShown, setPasswordShown] = useState(false);
+  const conData = useContext(ContextData);
 
   function handleSubmit2(e) {
     e.preventDefault();
     if (identifier.trim() === "" || password.trim() === "") {
-        alert("Identifier and Password must not be empty");
-        return; // Return to prevent submission if fields are empty
+      alert("Identifier and Password must not be empty");
+      return; // Return to prevent submission if fields are empty
     }
 
     const url = "http://localhost/Projects/OralRadiology/userLogic.php/Login";
@@ -38,26 +39,33 @@ function Login3() {
     fData.append("identifier", identifier);
     fData.append("password", password);
 
-    console.log("Form Data:", identifier, password); // Log form data for debugging
+    // console.log("Form Data:", identifier, password); // Log form data for debugging
 
-    axios.post(url, fData)
-        .then((res) => {
-            console.log("Response Data:", res.data); // Log response data for debugging
-            if (typeof res.data === "object") {
-                sessionStorage.setItem("userId", res.data.Id);
-                sessionStorage.setItem("MSAId", res.data.MSAId);
-                sessionStorage.setItem("Name", res.data.Name);
-                sessionStorage.setItem("Email", res.data.Email);
-                sessionStorage.setItem("Type", res.data.Type);
-                sessionStorage.setItem("PersonalImage", "http://localhost/Projects/OralRadiology/" + res.data.PersonalImage);
-                window.location.href = `/Dashboard`;
-            } else {
-                alert(res.data); 
-            }
-        })
-        .catch((err) => console.error("Login Error:", err));
-}
-
+    axios
+      .post(url, fData)
+      .then((res) => {
+        // console.log("Response Data:", res.data); // Log response data for debugging
+        conData.setCurrentUser(res.data);
+        if (typeof res.data === "object") {
+          sessionStorage.setItem("userId", res.data.Id);
+          sessionStorage.setItem("MSAId", res.data.MSAId);
+          sessionStorage.setItem("Name", res.data.Name);
+          sessionStorage.setItem("Email", res.data.Email);
+          sessionStorage.setItem("Type", res.data.Type);
+          sessionStorage.setItem(
+            "PersonalImage",
+            "http://localhost/Projects/OralRadiology/" + res.data.PersonalImage
+          );
+          window.location.href = `/Dashboard`;
+        } else {
+          alert(res.data);
+        }
+      })
+      .catch((err) => {
+        alert("Login Error With Server" + err.message);
+        console.error("Login Error:", err);
+      });
+  }
 
   const togglePasswordVisibility = () => {
     setPasswordShown(!passwordShown);

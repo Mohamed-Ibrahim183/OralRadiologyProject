@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@emailjs/browser": "^4.3.3",
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
     "@mui/icons-material": "^5.15.18",
@@ -17,6 +18,7 @@
     "bootstrap": "^5.3.3",
     "chart.js": "^4.4.2",
     "cors": "^2.8.5",
+    "emailjs": "^4.0.3",
     "express": "^4.19.2",
     "loadjs": "^4.3.0",
     "mysql": "^2.18.1",

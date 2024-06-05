@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import DarkMode from "../DarkMode/DarkMode";
-import LinksFile from "./NavLinksStudent.json";
-import PagesFiles from "./PagesStudent.json";
-import logo from "./imgs/logo.png";
+import DarkMode from "../../DarkMode/DarkMode";
+import LinksFile from "./NavLinksAdmin.json";
+import PagesFiles from "./PagesAdmin.json";
+//import logo from "./imgs/logo.png";
 import "./Nav.css";
 
 const Navbar = () => {
