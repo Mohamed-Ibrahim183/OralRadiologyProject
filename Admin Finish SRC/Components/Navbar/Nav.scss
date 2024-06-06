@@ -1,0 +1,207 @@
+@use "../../Variables" as *;
+@import "../../breakpoints";
+
+
+
+
+
+
+ul li ul li a {
+  transition: all 0.5s ease;
+}
+
+
+// $primary-color: #0082e6;
+// $secondary-color: #1b9bff;
+// $background-color: #2c3e50;
+$primary-color: var(--headerColor);
+$secondary-color: var(--secondText);
+$background-color: #2c3e50;
+
+nav.secondary-Navigation {
+  .logo{
+    height: 70px;
+  }
+  
+  background: $primary-color;
+  height: 80px;
+  width: 100%;
+  position: relative;
+  z-index: 10;
+
+  label.logo {
+    color: white;
+    font-size: 30px;
+    line-height: 80px;
+    // padding: 0 100px;
+    padding-left: 10px;
+    font-weight: bold;
+    @include sm(){
+      font-size: 8px;
+      line-height: 40px
+    }
+  }
+
+  ul {
+    float: right;
+    li {
+      display: inline-block;
+      line-height: 80px;
+      margin: 0 5px;
+      
+      a {
+        color: white;
+        font-size: 16px;
+        padding: 7px 13px;
+        border-radius: 3px;
+        text-transform: uppercase;
+
+        &.active, &:hover {
+          background: $secondary-color;
+          transition: .5s;
+        }
+      }
+    }
+  }
+  
+  
+
+  .checkBtn {
+    font-size: 30px;
+    color: white;
+    float: right;
+    line-height: 80px;
+    margin-right: 40px;
+    cursor: pointer;
+    display: none;
+  }
+
+  #check {
+    display: none;
+  }
+
+
+  @media (max-width: 952px) {
+    .MainList{
+      max-height: 100vh;
+      overflow-y: scroll;
+    }
+    label.logo {
+      font-size: 30px;
+      padding-left: 50px;
+    }
+
+    ul {
+      li a {
+        font-size: 16px;
+      }
+    }
+  }
+
+  // @media (max-width: 858px) {
+  @media (max-width: 1070px) {
+    .checkBtn {
+      display: block;
+    }
+
+    ul {
+      position: fixed;
+      width: 30%;
+      height: 100vh;
+      background: $background-color;
+      top: 80px;
+      left: -100%;
+      text-align: center;
+      transition: all .5s;
+
+      li {
+        display: block;
+        margin: 30px 0;
+        line-height: 30px;
+        
+        a {
+          font-size: 20px;
+          &:hover, &.active {
+            background: none;
+            color: $primary-color;
+          }
+        }
+      }
+    }
+    ul.dropDown{
+      margin-top: -50px;
+      left: 10px;
+      li{
+        color: white;
+        margin: 10px;
+        &:hover{
+          background-color: $secondary-color;
+          color: white;
+        }
+      }
+    }
+    #check:checked ~ ul {
+      width: fit-content;
+
+      left: 0;
+    }
+  }
+  
+}
+
+.HEADER{
+  display: flex;
+  align-items: center;
+  background: var(--headerColor);
+  box-shadow: 3px 19px 89px -13px rgba(0,0,0,0.51);
+  -webkit-box-shadow: 3px 19px 89px -13px rgba(0,0,0,0.51);
+  -moz-box-shadow: 3px 19px 89px -13px rgba(0,0,0,0.51);
+  section {
+    background-size: cover;
+    height: calc(100vh - 80px);
+  }
+  
+  // my code
+  .logoName{
+    display: flex;
+    img{
+      width: 200px;
+    }
+  }
+  .DropParent{
+    padding-right: 20px;
+  }
+  ul li {
+    position: relative;
+    
+    ul.dropDown li {
+      display: block;
+    }
+    
+    ul.dropDown {
+      width: fit-content;
+      background-color: $primary-color;
+      position: absolute;
+      left: -50px;
+      z-index: 11;
+      display: none;
+      transition: 0.5s;
+      -webkit-transition: 0.5s;
+      -moz-transition: 0.5s;
+      -ms-transition: 0.5s;
+      -o-transition: 0.5s;
+    }
+  
+    &:hover {
+      ul.dropDown {
+        display: block;
+      }
+    }
+  }
+  ul.showDropList{
+    position: absolute !important;
+    z-index: 100;
+    color: red !important;
+    
+  }
+}

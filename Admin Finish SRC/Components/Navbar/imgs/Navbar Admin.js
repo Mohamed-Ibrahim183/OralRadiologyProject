@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import DarkMode from "../DarkMode/DarkMode";
+import DarkMode from "../../DarkMode/DarkMode";
 import LinksFile from "./NavLinksAdmin.json";
 import PagesFiles from "./PagesAdmin.json";
 //import logo from "./imgs/logo.png";

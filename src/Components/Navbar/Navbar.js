@@ -2,80 +2,66 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import DarkMode from "../DarkMode/DarkMode";
 import "./Nav.css";
+import {
+  AppBar,
+  Avatar,
+  Box,
+  Button,
+  IconButton,
+  Menu,
+  MenuItem,
+  Toolbar,
+  Tooltip,
+  Typography,
+} from "@mui/material";
 
 const Navbar = () => {
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [Links, setLinks] = useState(null);
   const userType = sessionStorage["Type"];
+  const [anchorElUser, setAnchorElUser] = useState(null);
+
+  const handleOpenUserMenu = (event) => {
+    setAnchorElUser(event.currentTarget);
+  };
+
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
+  };
 
   useEffect(() => {
     switch (userType) {
       case "Admin":
         setLinks({
           navLinks: [
-            {
-              Text: "Add User",
-              link: "/AddProf",
-            },
-            {
-              Text: "Add Group",
-              link: "/AddGroup",
-            },
-            {
-              Text: "users",
-              link: "/users",
-            },
-            {
-              Text: "Dashboard",
-              link: "/Dashboard",
-            },
+            { Text: "Add User", link: "/AddProf" },
+            { Text: "Add Group", link: "/AddGroup" },
+            { Text: "Users", link: "/users" },
+            { Text: "Dashboard", link: "/Dashboard" },
           ],
         });
         break;
       case "Professor":
         setLinks({
           navLinks: [
-            {
-              Text: "Dashboard",
-              link: "/Dashboard",
-            },
-            {
-              Text: "Grading Page",
-              link: "/Grading_Page",
-            },
+            { Text: "Dashboard", link: "/Dashboard" },
+            { Text: "Grading Page", link: "/Grading_Page" },
           ],
         });
         break;
       case "Student":
         setLinks({
           navLinks: [
-            {
-              Text: "Requirements",
-              link: "/Assignments",
-            },
-            {
-              Text: "Upload",
-              link: "/submit",
-            },
-            {
-              Text: "Dashboard",
-              link: "/Dashboard",
-            },
+            { Text: "Requirements", link: "/Assignments" },
+            { Text: "Upload", link: "/submit" },
+            { Text: "Dashboard", link: "/Dashboard" },
           ],
         });
         break;
-
       default:
         setLinks({
           navLinks: [
-            {
-              Text: "Home",
-              link: "/",
-            },
-            {
-              Text: "Login",
-              link: "/Login3",
-            },
+            { Text: "Home", link: "/" },
+            { Text: "Login", link: "/Login3" },
           ],
         });
     }
@@ -83,86 +69,95 @@ const Navbar = () => {
     setLinks((prev) => ({
       ...prev,
       Pages: [
-        {
-          Text: "Profile",
-          link: "/Profile",
-        },
-        {
-          Text: "Login",
-          link: "/Login3",
-        },
-        {
-          Text: "Home",
-          link: "/",
-        },
-        {
-          Text: "Logout",
-          link: "/Login3",
-          fun: () => sessionStorage.clear(),
-        },
-        // logOut ... login
+        { Text: "Profile", link: "/Profile" },
+        { Text: "Login", link: "/Login3" },
+        { Text: "Home", link: "/" },
+        { Text: "Logout", link: "/Login3", fun: () => sessionStorage.clear() },
       ],
     }));
-  }, []);
+  }, [userType]);
 
-  if (!Links) {
-    return;
-  }
-  const toggleDropdown = () => {
-    setIsDropdownOpen(!isDropdownOpen);
-  };
-  const content3 = Links.navLinks.map((ele) => (
-    <li key={ele.link}>
-      <Link to={ele.link}>{ele.Text}</Link>
-    </li>
-  ));
-
-  const content2 = Links.Pages.map((ele) => (
-    <li key={ele.link + ele.Text}>
-      <Link
-        to={ele.link}
-        className="Page"
-        onClick={ele.fun ? () => ele.fun() : null}
-      >
-        {ele.Text}
-      </Link>
-    </li>
-  ));
+  if (!Links) return null;
 
   return (
-    <>
-      <div className="HEADER">
-        <nav className="secondary-Navigation">
-          <div></div>
-          <input type="checkbox" id="check" />
-          <label htmlFor="check" className="checkBtn">
-            <i className="fas fa-bars"></i>
-          </label>
-          <label className="logo">
-            <span>Oral Radiology</span>
-          </label>
-          <ul className="MainList">
-            {content3}
-            {userType && (
-              <li className="DropParent" onClick={toggleDropdown}>
-                <Link to="">
-                  Pages <i className="fa-solid fa-caret-down"></i>
+    <Box sx={{ flexGrow: 1 }}>
+      <AppBar position="static">
+        <Toolbar>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            <Link to="/" style={{ color: "white" }}>
+              <Typography
+                variant="h5"
+                color="inherit"
+                sx={{ display: "flex", alignItems: "center" }}
+              >
+                <Avatar
+                  src="./Images/logo.png"
+                  alt="Oral Radiology"
+                  sx={{ width: 60 }}
+                />
+                Oral Radiology
+              </Typography>
+            </Link>
+          </Typography>
+          <Box
+            sx={{
+              color: "white",
+              display: "flex",
+              justifyContent: "space-around",
+              alignItems: "center",
+              gap: 2,
+            }}
+          >
+            {Links.navLinks.map((ele, index) => (
+              <Button color="inherit" key={index}>
+                <Link style={{ color: "inherit" }} to={ele.link}>
+                  {ele.Text}
                 </Link>
-                <ul
-                  className={`dropDown`}
-                  style={{
-                    display: isDropdownOpen ? "block" : "none",
-                  }}
+              </Button>
+            ))}
+          </Box>
+          {sessionStorage["PersonalImage"] && (
+            <Tooltip title="Open Menu" sx={{ mx: 2 }}>
+              <IconButton onClick={handleOpenUserMenu}>
+                <Avatar
+                  src={sessionStorage["PersonalImage"]}
+                  alt={sessionStorage["Name"]}
+                />
+              </IconButton>
+            </Tooltip>
+          )}
+          <Menu
+            sx={{ mt: "45px" }}
+            id="menu-appbar"
+            anchorEl={anchorElUser}
+            anchorOrigin={{
+              vertical: "top",
+              horizontal: "right",
+            }}
+            keepMounted
+            transformOrigin={{
+              vertical: "top",
+              horizontal: "right",
+            }}
+            open={Boolean(anchorElUser)}
+            onClose={handleCloseUserMenu}
+          >
+            {Links.Pages.map((page, index) => (
+              <MenuItem key={index}>
+                <Link
+                  style={{ color: "inherit" }}
+                  to={page.link}
+                  onClick={page.fun ? () => page.fun() : null}
                 >
-                  {content2}
-                </ul>
-              </li>
-            )}
-          </ul>
-        </nav>
-        <DarkMode />
-      </div>
-    </>
+                  {page.Text}
+                </Link>
+              </MenuItem>
+            ))}
+          </Menu>
+          <DarkMode />
+        </Toolbar>
+      </AppBar>
+    </Box>
   );
 };
 

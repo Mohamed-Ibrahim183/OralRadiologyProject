@@ -1,0 +1,171 @@
+:root {
+  --mainBackGround: #f5fbf9;
+  --mainColor: #0082e6;
+  --secondText: #65b4f1;
+  --textColor: var(--mainColor);
+  --headerColor: #0082e6;
+  --text-monem: rgb(20, 19, 19);
+  --btnB: #266bf5c1;
+  --btnB-hover: #266bf5;
+  --sidebar-expanded-margin: 200px;
+  --sidebar-default-margin: 70px;
+  --mainText: black;
+  --secondaryText: #777;
+  --chartBack: rgba(255, 255, 255, 0.277);
+  --currentDay: #a2d1fd;
+  --profile: #a2d1fd;
+}
+[theme="Dark"] {
+  --mainColor: #4d8ba8;
+  --mainBackGround: #1b343c;
+  --secondText: #65b4f1;
+  --textColor: #96bdcf;
+  --headerColor: #4d8ba8;
+  --text-monem: rgb(230, 230, 230);
+  --btnB: #4d8ba8;
+  --btnB-hover: #356981;
+  --mainText: white;
+  --secondaryText: #a9a9a9;
+  --currentDay: #ffd269;
+  --profile: #4d8ba8;
+}
+.fullProfessorPage {
+  padding-top: 16px;
+  width: 80%;
+  margin: auto;
+}
+.fullProfessorPage .container.AssignmentSection {
+  width: 60%;
+}
+.fullProfessorPage .container.AssignmentSection .sectionTitle {
+  font-size: 25px;
+  font-weight: bold;
+  padding: 16px 0 8px;
+  color: var(--mainText);
+}
+.fullProfessorPage .container.AssignmentSection .AssCard {
+  box-shadow: 0px 5px 13px 0px rgba(0, 0, 0, 0.25);
+  margin-top: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+.fullProfessorPage .container.AssignmentSection .AssCard .info {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.fullProfessorPage .container.AssignmentSection .AssCard .info .name {
+  font-size: 20px;
+  font-weight: bold;
+  text-transform: capitalize;
+  color: var(--mainText);
+}
+.fullProfessorPage .container.AssignmentSection .AssCard .info .Details {
+  color: var(--secondaryText);
+}
+.fullProfessorPage .container.AssignmentSection .AssCard .grade {
+  font-size: 20px;
+  font-weight: bold;
+  color: var(--secondaryText);
+}
+.fullProfessorPage .container.AssignmentSection .AssCard .state {
+  padding: 16px;
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  text-transform: capitalize;
+  border-radius: 8px;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  -ms-border-radius: 8px;
+  -o-border-radius: 8px;
+}
+.fullProfessorPage .BBBBBB {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.fullProfessorPage .container.AssignmentSection h5 {
+  color: #7b7b7b;
+  margin-top: 20px;
+}
+.fullProfessorPage .cardAssignment {
+  height: 300px;
+  overflow-y: auto;
+}
+.cardAssignment::-webkit-scrollbar {
+  display: none;
+}
+.fullProfessorPage .container.AssignmentSection .seal:hover {
+  cursor: pointer;
+  color: #9b9b9b;
+}
+.fullProfessorPage .cc1 {
+  float: left;
+  width: 60%;
+  margin-right: -100px;
+  margin-top: 40px;
+} /*# sourceMappingURL=StudentDB.css.map */
+.fullProfessorPage .calender {
+  float: right;
+  margin-top: 50px;
+  box-shadow: 0px 5px 13px 0px rgba(0, 0, 0, 0.45);
+
+  background-color: var(--currentDay);
+  h2 {
+    text-align: center;
+  }
+  .react-calendar {
+    background-color: rgb(255, 255, 255);
+    border: rgba(128, 0, 0, 0);
+  }
+  .react-calendar__tile--now {
+    background-color: var(--currentDay);
+  }
+}
+.fullProfessorPage .upper {
+  margin-bottom: 40px;
+}
+.fullProfessorPage .userProfile {
+  margin-top: -350px;
+  float: right;
+  width: 30%;
+  height: 300px;
+  background-color: var(--profile);
+}
+.fullProfessorPage .lower {
+  margin-top: -20px;
+}
+.fullProfessorPage .userProfile .TEXT {
+  margin: 30px;
+}
+.fullProfessorPage .userProfile p {
+  margin-top: 10px;
+}
+@media screen and (max-width: 1080px) {
+  .fullProfessorPage .userProfile {
+    width: 100%;
+    margin-top: -720px;
+  }
+  .fullProfessorPage .container.AssignmentSection {
+    width: 100%;
+    height: 100%;
+    margin-top: 400px;
+    float: none;
+  }
+
+  .fullProfessorPage .cc1 {
+    width: 100%;
+    height: 300px;
+  }
+  .fullProfessorPage .calender {
+    margin-right: 6px;
+  }
+}

@@ -1,0 +1,160 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+
+.aSidebar {
+  position: absolute;
+  height: 100%;
+  background: #0a2558;
+  transition: all 0.5s ease;
+  font-family: "Poppins", sans-serif;
+  
+  //
+  width: 200px;
+  // padding-right: 50px;
+  // overflow: hidden;
+  top: 0;
+  // bottom: 0;
+  min-height: 102vh;
+  
+
+  &.active {
+    width: 60px;
+  }
+
+  .logo-details {
+    height: 80px;
+    display: flex;
+    align-items: center;
+
+    i {
+      font-size: 28px;
+      font-weight: 500;
+      color: #fff;
+      min-width: 60px;
+      text-align: center;
+    }
+
+    .logo_name {
+      color: #fff;
+      font-size: 24px;
+      font-weight: 500;
+    }
+  }
+
+  .nav-links {
+    margin-top: 10px;
+
+    li {
+      position: relative;
+      list-style: none;
+      height: 50px;
+
+      a {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+        transition: all 0.4s ease;
+
+        &.active {
+          background: #081d45;
+        }
+
+        &:hover {
+          background: #081d45;
+        }
+
+        i {
+          min-width: 60px;
+          text-align: center;
+          font-size: 18px;
+          color: #fff;
+        }
+
+        .links_name {
+          color: #fff;
+          font-size: 15px;
+          font-weight: 400;
+          white-space: nowrap;
+        }
+      }
+    }
+
+    .log_out {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+    }
+  }
+  .DropListItem{
+    color: white;
+    // padding-left: 50px;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    transition: all 0.4s ease;
+    &:hover{
+      cursor: pointer;
+      .DropDownList{
+        display: block;
+      }
+
+    }
+    i{
+      min-width: 60px;
+      text-align: center;
+      font-size: 18px;
+      color: #fff;
+    }
+    .DropDownList{
+      display: none;
+      transition: 0.5s;
+      -webkit-transition: 0.5s;
+      -moz-transition: 0.5s;
+      -ms-transition: 0.5s;
+      -o-transition: 0.5s;
+}
+  }
+}
+
+.DropListItem {
+  color: white;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  transition: all 0.4s ease;
+  &:hover {
+    cursor: pointer;
+  }
+  i {
+    min-width: 60px;
+    text-align: center;
+    font-size: 18px;
+    color: #fff;
+  }
+  .DropDownList {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #081d45;
+    padding: 10px;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+    transition: opacity 0.3s ease;
+    -webkit-transition: opacity 0.3s ease;
+    -moz-transition: opacity 0.3s ease;
+    -ms-transition: opacity 0.3s ease;
+    -o-transition: opacity 0.3s ease;
+}
+  &:hover .DropDownList {
+    display: block;
+    opacity: 1; /* Show the dropdown list and change opacity smoothly */
+  }
+}
+

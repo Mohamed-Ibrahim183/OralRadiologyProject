@@ -1,0 +1,53 @@
+@import "./_breakpoints";
+@mixin dynamicColor($color) {
+  color: $color;
+}
+
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+
+}
+.containerWidth{
+  width: 90%;
+  margin: auto;
+}
+
+.MainBtn{
+  margin-top: 20px;
+  cursor: pointer;
+  text-align: center;
+  background-color: green;
+  color: white;
+  text-transform: capitalize;
+  font-size: 20px;
+  font-weight: bold;
+  padding: 16px;
+  outline: none;
+  border: none;
+  border-radius: 8px;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  -ms-border-radius: 8px;
+  -o-border-radius: 8px;
+}
+a{
+  text-decoration: none;
+
+}
+.stdBtn{
+  margin-left: 30px;
+  background-color: #65b4f1;
+  color: white;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 16px;
+  padding: 16px;
+  width: fit-content;
+  height: auto;
+  &:hover{
+    background-color: #51aaef;
+    cursor: pointer;
+  }
+}

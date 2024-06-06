@@ -1,0 +1,131 @@
+:root {
+  --mainBackGround: #F5FBF9;
+  --mainColor: #0082e6;
+  --secondText: #65b4f1;
+  --textColor: var(--mainColor);
+  --headerColor: #0082e6;
+  --text-monem:rgb(20, 19, 19);
+  --btnB:#2450f1;
+  --btnB-hover:#14319b;
+  --sidebar-expanded-margin: 200px;
+  --sidebar-default-margin: 70px;
+  --mainText: black;
+  --secondaryText: #777;
+}
+
+[theme=Dark] {
+  --mainColor: #4d8ba8;
+  --mainBackGround: #1b343c;
+  --secondText: #65b4f1;
+  --textColor: #96bdcf;
+  --headerColor: #4d8ba8;
+  --text-monem:rgb(230, 230, 230);
+  --btnB:#4d8ba8;
+  --btnB-hover:#356981;
+  --mainText: white;
+  --secondaryText: #a9a9a9;
+}
+
+.Profile .container .Information .informationTitle, .Profile .container .personalImage .ImageTitle {
+  background-color: #f8f8f9;
+  color: #87777d;
+  padding: 10px;
+  border-bottom: 1px solid #87777d;
+  padding-left: 25px;
+  font-weight: bold;
+}
+
+.Profile .container .Information, .Profile .container .personalImage {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  filter: drop-shadow(-2px 5px 21px #b8b8b8);
+  overflow: hidden;
+}
+
+.Profile .container .Information .InformationContent .mainContent .SubmitData, .Profile .container .personalImage .imageContent .SubImage {
+  outline: none;
+  border: none;
+  background-color: #0061f2;
+  color: white;
+  border-radius: 6px;
+  margin-top: 20px;
+  padding: 5px;
+  font-weight: bold;
+}
+
+.Profile {
+  color: var(--text-monem);
+  padding-top: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.Profile .container {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 40px;
+}
+@media (max-width: 720px) {
+  .Profile .container {
+    width: 90% !important;
+    margin: auto;
+  }
+}
+.Profile .container .personalImage {
+  max-height: 500px;
+}
+.Profile .container .personalImage .imageContent {
+  background-color: var(--mainBackGround);
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+.Profile .container .personalImage .imageContent img {
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+}
+.Profile .container .personalImage .imageContent .imageNote {
+  padding-top: 15px;
+}
+.Profile .container .Information {
+  background-color: var(--mainBackGround);
+  justify-content: flex-start;
+}
+.Profile .container .Information .InformationContent {
+  padding: 10px;
+}
+.Profile .container .Information .InformationContent .mainContent form {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 25px;
+}
+@media (max-width: 960px) {
+  .Profile .container .Information .InformationContent .mainContent form {
+    grid-template-columns: 1fr;
+  }
+}
+.Profile .container .Information .InformationContent .mainContent form .section {
+  display: flex;
+  flex-direction: column;
+}
+.Profile .container .Information .InformationContent .mainContent form .section input {
+  margin-left: 5px;
+  padding: 5px;
+  outline: none;
+  border: 1px solid #87777d;
+  border-radius: 6px;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  -ms-border-radius: 6px;
+  -o-border-radius: 6px;
+}
+.Profile .container .Information .InformationContent .mainContent .SubmitData {
+  padding: 5px 10px;
+  font-weight: 500;
+}/*# sourceMappingURL=Profile.css.map */

@@ -6,60 +6,52 @@ html {
 
 /* sets */
 :root {
-  --monemmonem:hsl(218, 70%, 18%);
+  --monemmonem: hsl(218, 70%, 18%);
+}
+:root {
+  .HomePage .scroll-container::-webkit-scrollbar {
+    height: 1.5rem;
   }
-  :root{ 
-    .HomePage .scroll-container::-webkit-scrollbar {
-      height: 1.5rem;
-    }
-    
-     .scroll-container::-webkit-scrollbar-track,
-     .scroll-container::-webkit-scrollbar-thumb {
-      border-radius: 50px;
-    }
-    
-     .scroll-container::-webkit-scrollbar-thumb:hover {
-      background-color: hsl(209, 100%, 49%);
-    }
-    
-     .scroll-container::-webkit-scrollbar-button {
-      width: calc(22% - 25px);
-    }
-    
-     ::-webkit-scrollbar {
-      width: 10px;
-    }
-    
-     ::-webkit-scrollbar-track {
-      background-color: hsl(0, 0%, 80%);
-    }
-    
-     ::-webkit-scrollbar-thumb {
-      background-color: hsl(209, 100%, 49%);
-    }
-    
-     ::-webkit-scrollbar-thumb:hover {
-      background-color: hsl(210, 26%, 11%);
-    }
-    }
-  [theme=Dark] {
-  --monemmonem:white;
+
+  .scroll-container::-webkit-scrollbar-track,
+  .scroll-container::-webkit-scrollbar-thumb {
+    border-radius: 50px;
   }
-  
+
+  .scroll-container::-webkit-scrollbar-thumb:hover {
+    background-color: hsl(209, 100%, 49%);
+  }
+
+  .scroll-container::-webkit-scrollbar-button {
+    width: calc(22% - 25px);
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background-color: hsl(0, 0%, 80%);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: hsl(209, 100%, 49%);
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: hsl(210, 26%, 11%);
+  }
+}
+[theme="Dark"] {
+  --monemmonem: white;
+}
+
 *,
 *::before,
 *::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-}
-a,
-img,
-span,
-input,
-button,
-ion-icon {
-  /* display: block;  b3d eznk ya youssef pasha bs da m2sr 3la hagat fe pages tanya -monem*/
 }
 
 .body {
@@ -99,7 +91,7 @@ ion-icon {
   padding-bottom: 30rem;
 }
 .HomePage .video {
-  background-image: url("https://www.google.com/url?sa=i&url=https%3A%2F%2Fthink3dimaging.com%2F&psig=AOvVaw2_jtiONyR1J7gepS23USfn&ust=1711284495415000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCKikp9a1ioUDFQAAAAAdAAAAABAE");
+  /* background-image: url("https://www.google.com/url?sa=i&url=https%3A%2F%2Fthink3dimaging.com%2F&psig=AOvVaw2_jtiONyR1J7gepS23USfn&ust=1711284495415000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCKikp9a1ioUDFQAAAAAdAAAAABAE"); */
   padding-block: 0;
   margin-block-end: -250px;
   margin-top: 50px;
@@ -140,14 +132,17 @@ ion-icon {
 }
 .HomePage .h2 {
   font-size: 4rem;
-
 }
 .HomePage .h3 {
   font-size: 2.2rem;
 }
 .HomePage .btn {
   margin-top: 2rem;
-  background-image: linear-gradient(90deg, hsl(201, 92%, 47%) 0%, hsl(225, 68%, 53%) 100%);
+  background-image: linear-gradient(
+    90deg,
+    hsl(201, 92%, 47%) 0%,
+    hsl(225, 68%, 53%) 100%
+  );
   color: white;
   font-size: 1.6rem;
   width: 300px;
@@ -201,13 +196,13 @@ ion-icon {
   margin-bottom: -1px;
   margin-bottom: 13px;
 }
-.HomePage  .section-title {
+.HomePage .section-title {
   color: var(--monemmonem);
   font-size: 3.2rem;
   margin-block-end: 30px;
 }
-.HomePage .doctor-content .center1{
-margin-top: 10px;
+.HomePage .doctor-content .center1 {
+  margin-top: 10px;
 }
 
 .HomePage .doctor .btn {
@@ -246,7 +241,6 @@ margin-top: 10px;
   white-space: var(--white);
   height: 400px;
   transform: scale(0.8);
-
 }
 
 .HomePage .space {
@@ -319,13 +313,12 @@ margin-top: 10px;
     }
   }
   .HomePage .hero-title {
-      font-size: 4rem;
-    }
-.HomePage .scroll-container img{
-  transform: scale(0.8);
-  gap: 1px;
-}
-        
+    font-size: 4rem;
+  }
+  .HomePage .scroll-container img {
+    transform: scale(0.8);
+    gap: 1px;
+  }
 }
 
 .HomePage bodY {
@@ -342,7 +335,4 @@ margin-top: 10px;
 .HomePage .bg-image {
   /* display: none; */
   margin-top: -100px;
-}
-.scroll-container img{
-  
 }
