@@ -1,13 +1,11 @@
-import React, { Suspense, lazy, useReducer } from "react";
+import React, { Suspense, lazy, useContext, useReducer } from "react";
 import {
   createBrowserRouter,
   createRoutesFromElements,
   Route,
   RouterProvider,
+  useNavigate,
 } from "react-router-dom";
-
-import ReactLoading from "react-loading";
-
 import Root from "./Root";
 import Home from "./Pages/Home/Home";
 import Login3 from "./Pages/Login3/Login3";
@@ -27,30 +25,20 @@ function reducer(state, action) {
   switch (action.type) {
     case "setUser":
       return { ...state, currentUser: action.payload };
-    case "logOut":
-      return { ...state, currentUser: {} };
+    case "navigateTo":
+      action.payload.navigate(action.payload.path);
+      return state; // Return current state after navigation
     default:
+      console.log("action:", action);
       throw new Error("Unknown action");
   }
 }
-
-function Loading() {
-  return (
-    <div className="loading">
-      <ReactLoading
-        type="spinningBubbles"
-        color="#007bff"
-        height={100}
-        width={100}
-      />
-    </div>
-  );
-}
-
 function App() {
   const [mode, setMode] = React.useState(true); // Placeholder for mode state
 
+  const navigate = useNavigate(); // Get navigate function from react-router-dom
   const [state, dispatch] = useReducer(reducer, initialState);
+  const userType = state.currentUser.Type || "student";
 
   return (
     <ContextData.Provider
@@ -68,7 +56,7 @@ function App() {
               <Route
                 index
                 element={
-                  <Suspense fallback={<Loading />}>
+                  <Suspense fallback={<div>Loading...</div>}>
                     <Home />
                   </Suspense>
                 }
@@ -76,41 +64,45 @@ function App() {
               <Route
                 path="Login3"
                 element={
-                  <Suspense fallback={<Loading />}>
+                  <Suspense fallback={<div>Loading...</div>}>
                     <Login3 />
                   </Suspense>
                 }
               />
-              <Route
-                path="student/*"
-                element={
-                  <Suspense fallback={<Loading />}>
-                    <StudentPages />
-                  </Suspense>
-                }
-              />
-
-              <Route
-                path="admin/*"
-                element={
-                  <Suspense fallback={<Loading />}>
-                    <AdminPages />
-                  </Suspense>
-                }
-              />
-
-              <Route
-                path="professor/*"
-                element={
-                  <Suspense fallback={<Loading />}>
-                    <ProfessorPages />
-                  </Suspense>
-                }
-              />
+              {userType === "student" && (
+                <Route
+                  path="/*"
+                  element={
+                    <Suspense fallback={<div>Loading...</div>}>
+                      <StudentPages />
+                    </Suspense>
+                  }
+                />
+              )}
+              {userType === "admin" && (
+                <Route
+                  path="/*"
+                  element={
+                    <Suspense fallback={<div>Loading...</div>}>
+                      <AdminPages />
+                    </Suspense>
+                  }
+                />
+              )}
+              {userType === "professor" && (
+                <Route
+                  path="/*"
+                  element={
+                    <Suspense fallback={<div>Loading...</div>}>
+                      <ProfessorPages />
+                    </Suspense>
+                  }
+                />
+              )}
               <Route
                 path="Profile"
                 element={
-                  <Suspense fallback={<Loading />}>
+                  <Suspense fallback={<div>Loading...</div>}>
                     <Profile />
                   </Suspense>
                 }
@@ -118,7 +110,7 @@ function App() {
               <Route
                 path="*"
                 element={
-                  <Suspense fallback={<Loading />}>
+                  <Suspense fallback={<div>Loading...</div>}>
                     <NotFound />
                   </Suspense>
                 }

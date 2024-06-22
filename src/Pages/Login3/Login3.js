@@ -1,8 +1,9 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./Login3.css";
 import Navbar from "../../Components/Navbar/Navbar";
 import axios from "axios";
 import { ContextData } from "../../ContextData";
+import { useNavigate } from "react-router-dom";
 
 function script() {
   const trouble = document.getElementById("trouble");
@@ -26,6 +27,9 @@ function Login3() {
   const [password, setPassword] = useState("");
   const [passwordShown, setPasswordShown] = useState(false);
   const conData = useContext(ContextData);
+  const [userType, setUserType] = useState("");
+  const Navigator = useNavigate();
+  // console.log("conData:", conData);
 
   function handleSubmit2(e) {
     e.preventDefault();
@@ -45,7 +49,10 @@ function Login3() {
       .post(url, fData)
       .then((res) => {
         // console.log("Response Data:", res.data); // Log response data for debugging
-        conData.setCurrentUser(res.data);
+        // async function fun() {
+        //   await conData.setCurrentUser(res.data);
+        // }
+        // fun();
         if (typeof res.data === "object") {
           sessionStorage.setItem("userId", res.data.Id);
           sessionStorage.setItem("MSAId", res.data.MSAId);
@@ -56,7 +63,11 @@ function Login3() {
             "PersonalImage",
             "http://localhost/Projects/OralRadiology/" + res.data.PersonalImage
           );
-          window.location.href = `/Dashboard`;
+          setUserType(res.data.Type);
+          sessionStorage.setItem("full", JSON.stringify(res.data));
+          // window.location.href = `/Dashboard`;
+          conData.dispatch({ type: "setUser", payload: res.data });
+          // Navigator("/admin/Dashboard");
         } else {
           alert(res.data);
         }
@@ -67,6 +78,12 @@ function Login3() {
       });
   }
 
+  useEffect(() => {
+    if (userType !== "") {
+      Navigator(`/${userType}/Dashboard`);
+    }
+  }, [userType, Navigator]);
+
   const togglePasswordVisibility = () => {
     setPasswordShown(!passwordShown);
   };
@@ -74,6 +91,7 @@ function Login3() {
   return (
     <div className="noScroll">
       <Navbar />
+      <button onClick={() => console.log(conData)}>See context</button>
       <div className="login3">
         <h1>Welcome to MSA Oral Radiology</h1>
         <div className="container" id="container">

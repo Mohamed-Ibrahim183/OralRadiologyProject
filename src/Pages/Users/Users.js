@@ -8,7 +8,6 @@ import {
   Avatar,
   Box,
   Button,
-  Modal,
   Paper,
   TableBody,
   TableCell,
@@ -21,6 +20,7 @@ import {
 import { Cancel, Delete } from "@mui/icons-material";
 import { DBMethods, axiosMethods } from "../Controller";
 import BasicModalComp from "../../Components/BasicModal/BasicModalComp";
+const Methods = new DBMethods();
 
 const Users = () => {
   const [open, setOpen] = useState(false);
@@ -32,7 +32,6 @@ const Users = () => {
   const [render, setRender] = useState(1);
   const [deleteUser, setDeleteUser] = useState(null);
   const [deleteModal, setDeleteModal] = useState(false);
-  const Methods = new DBMethods();
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => {

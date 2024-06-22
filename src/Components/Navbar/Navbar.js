@@ -33,27 +33,27 @@ const Navbar = () => {
       case "Admin":
         setLinks({
           navLinks: [
-            { Text: "Add User", link: "/AddProf" },
-            { Text: "Add Group", link: "/AddGroup" },
-            { Text: "Users", link: "/users" },
-            { Text: "Dashboard", link: "/Dashboard" },
+            { Text: "Add User", link: "/admin/AddProf" },
+            { Text: "Add Group", link: "/admin/AddGroup" },
+            { Text: "Users", link: "/admin/users" },
+            { Text: "Dashboard", link: "/admin/Dashboard" },
           ],
         });
         break;
       case "Professor":
         setLinks({
           navLinks: [
-            { Text: "Dashboard", link: "/Dashboard" },
-            { Text: "Grading Page", link: "/Grading_Page" },
+            { Text: "Dashboard", link: "/professor/Dashboard" },
+            { Text: "Grading Page", link: "/professor/Grading_Page" },
           ],
         });
         break;
       case "Student":
         setLinks({
           navLinks: [
-            { Text: "Requirements", link: "/Assignments" },
-            { Text: "Upload", link: "/submit" },
-            { Text: "Dashboard", link: "/Dashboard" },
+            { Text: "Requirements", link: "/student/Assignments" },
+            { Text: "Upload", link: "/student/submit" },
+            { Text: "Dashboard", link: "/student/Dashboard" },
           ],
         });
         break;
@@ -93,7 +93,7 @@ const Navbar = () => {
                 <Avatar
                   src="./Images/logo.png"
                   alt="Oral Radiology"
-                  sx={{ width: 60 }}
+                  sx={{ width: 60, height: 60 }}
                 />
                 Oral Radiology
               </Typography>

@@ -43,7 +43,7 @@ const NavAdmin = ({ open = true }) => {
     };
   }, []);
 
-  const HeaderHeight = 80;
+  const HeaderHeight = 64;
   const [scroll, setScroll] = useState(window.scrollY);
   const [styles, setStyle] = useState({ top: "80px" });
 

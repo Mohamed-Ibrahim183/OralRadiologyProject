@@ -10,15 +10,15 @@ import { Navigate } from "react-router-dom";
 import { Box } from "@mui/material";
 import { ContextData } from "../../ContextData.jsx";
 function AdminPage() {
-  const conData = useContext(ContextData);
+  // const conData = useContext(ContextData);
 
-  useEffect(() => {
-    document.body.classList.add("AdminBody");
-    // console.table(conData.currentUser);
+  // useEffect(() => {
+  //   document.body.classList.add("AdminBody");
+  //   // console.table(conData.currentUser);
 
-    console.log(conData);
-    return () => document.body.classList.remove("AdminBody");
-  }, [conData]);
+  //   console.log(conData);
+  //   return () => document.body.classList.remove("AdminBody");
+  // }, [conData]);
   if (sessionStorage["Type"] !== "Admin") {
     return <Navigate to="/" />;
   }
@@ -62,12 +62,7 @@ function AdminPage() {
         {/* <NavAdmin /> */}
         <div className="AdminSection adminHomeSection containerWidth">
           <div className="Charts">
-            <div
-              className="stats-row"
-              onClick={() => console.table(conData.currentUser)}
-            >
-              {cards}
-            </div>
+            <div className="stats-row">{cards}</div>
             <div className="chart-row">
               <Chart />
             </div>
