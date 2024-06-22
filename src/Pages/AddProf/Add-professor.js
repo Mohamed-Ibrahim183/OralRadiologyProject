@@ -10,10 +10,10 @@ export default function AddUser() {
   const [data, setData] = useState([]);
   const [finalData, setFinalData] = useState({ Type: "Student" });
   useEffect(() => {
-    document.body.classList.add("PageBody");
+    // document.body.classList.add("PageBody");
     setData(File);
     // Remove the class from the body element when the component unmounts
-    return () => document.body.classList.remove("PageBody");
+    // return () => document.body.classList.remove("PageBody");
   }, []);
 
   if (sessionStorage["Type"] !== "Admin") {
@@ -53,8 +53,8 @@ export default function AddUser() {
 
   return (
     <>
-      <NavAdmin open={true} />
-      
+      {/* <NavAdmin open={true} /> */}
+
       <div className="container AddProf">
         <h1 className="form-title">Add User</h1>
         <hr className="title-line"></hr>

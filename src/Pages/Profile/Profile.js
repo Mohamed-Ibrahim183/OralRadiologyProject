@@ -49,7 +49,6 @@ const Profile = () => {
 
   return (
     <>
-      <Navbar />
       <div className="Profile">
         <div className="container">
           <div className="personalImage">

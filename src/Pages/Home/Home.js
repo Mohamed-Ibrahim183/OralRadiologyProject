@@ -1,6 +1,5 @@
 import React from "react";
 import "./Home.css";
-import Navbar from "../../Components/Navbar/Navbar";
 import Footer from "../../Components/footer/footer";
 import image1 from "./service-banner.png";
 import image2 from "./cta-banner.png";
@@ -13,7 +12,6 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 export default function Home() {
   return (
     <div className="HomePage">
-      <Navbar />
       <WelcomeSection />
       <VideoSection />
       <OralRadiologyInfoSection />

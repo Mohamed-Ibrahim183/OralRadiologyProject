@@ -29,7 +29,6 @@ function Login3() {
   const conData = useContext(ContextData);
   const [userType, setUserType] = useState("");
   const Navigator = useNavigate();
-  // console.log("conData:", conData);
 
   function handleSubmit2(e) {
     e.preventDefault();
@@ -43,16 +42,9 @@ function Login3() {
     fData.append("identifier", identifier);
     fData.append("password", password);
 
-    // console.log("Form Data:", identifier, password); // Log form data for debugging
-
     axios
       .post(url, fData)
       .then((res) => {
-        // console.log("Response Data:", res.data); // Log response data for debugging
-        // async function fun() {
-        //   await conData.setCurrentUser(res.data);
-        // }
-        // fun();
         if (typeof res.data === "object") {
           sessionStorage.setItem("userId", res.data.Id);
           sessionStorage.setItem("MSAId", res.data.MSAId);
@@ -90,8 +82,7 @@ function Login3() {
 
   return (
     <div className="noScroll">
-      <Navbar />
-      <button onClick={() => console.log(conData)}>See context</button>
+      {/* <Navbar /> */}
       <div className="login3">
         <h1>Welcome to MSA Oral Radiology</h1>
         <div className="container" id="container">
@@ -138,9 +129,6 @@ function Login3() {
                   {passwordShown ? "Hide" : "Show"}
                 </button>
               </div>
-              <a href="#" id="forget" onClick={script}>
-                Forgot your password?
-              </a>
               <button>Sign In</button>
             </form>
           </div>

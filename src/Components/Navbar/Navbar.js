@@ -14,6 +14,7 @@ import {
   Tooltip,
   Typography,
 } from "@mui/material";
+import logo from "./logo.png";
 
 const Navbar = () => {
   const [Links, setLinks] = useState(null);
@@ -69,9 +70,8 @@ const Navbar = () => {
     setLinks((prev) => ({
       ...prev,
       Pages: [
-        { Text: "Profile", link: "/Profile" },
-        { Text: "Login", link: "/Login3" },
         { Text: "Home", link: "/" },
+        { Text: "Profile", link: "/Profile" },
         { Text: "Logout", link: "/Login3", fun: () => sessionStorage.clear() },
       ],
     }));
@@ -91,7 +91,7 @@ const Navbar = () => {
                 sx={{ display: "flex", alignItems: "center" }}
               >
                 <Avatar
-                  src="./Images/logo.png"
+                  src={logo}
                   alt="Oral Radiology"
                   sx={{ width: 60, height: 60 }}
                 />

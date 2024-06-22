@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import Modal from "./Modal";
-import Navbar from "../../Components/Navbar/Navbar";
 import AssignmentCard from "./AssignmentCard";
 import Chart from "./Chart";
 import Calendar from "react-calendar";
@@ -117,7 +116,6 @@ const ProfessorDB = () => {
 
   return (
     <ThemeProvider theme={darkTheme}>
-      <Navbar />
       <Modal isOpen={isModalOpen} onClose={() => setModalOpen(false)}></Modal>
       <Modal2 open={isModal2Open} onClose={() => setModal2Open(false)} />
       <div className="fullProfessorPage">

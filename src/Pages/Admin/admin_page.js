@@ -2,23 +2,14 @@ import StatCard from "./StatCard";
 import Chart from "./Chart.js";
 import "./Admin.css";
 import Navbar from "../../Components/Navbar/Navbar.js";
-// import NavAdmin from "../../Components/AdminNav2/NavAdmin.js";
+
 import Calendar from "react-calendar";
 import Mail from "./Mail.js";
-import { useContext, useEffect } from "react";
+
 import { Navigate } from "react-router-dom";
 import { Box } from "@mui/material";
-import { ContextData } from "../../ContextData.jsx";
+
 function AdminPage() {
-  // const conData = useContext(ContextData);
-
-  // useEffect(() => {
-  //   document.body.classList.add("AdminBody");
-  //   // console.table(conData.currentUser);
-
-  //   console.log(conData);
-  //   return () => document.body.classList.remove("AdminBody");
-  // }, [conData]);
   if (sessionStorage["Type"] !== "Admin") {
     return <Navigate to="/" />;
   }
@@ -57,7 +48,6 @@ function AdminPage() {
   });
   return (
     <>
-      <Navbar />
       <div className="MainPage">
         {/* <NavAdmin /> */}
         <div className="AdminSection adminHomeSection containerWidth">

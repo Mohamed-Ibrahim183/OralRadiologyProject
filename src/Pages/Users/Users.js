@@ -123,7 +123,7 @@ const Users = () => {
     Methods.getType(Type).then((res) =>
       res.msg !== "" ? FrontView(res.msg) : null
     );
-  }, [Type, render, Methods]);
+  }, [Type, render]);
 
   if (sessionStorage["Type"] !== "Admin") {
     return <Navigate to="/" />;
@@ -250,7 +250,6 @@ const Users = () => {
 
   return (
     <>
-      <Navbar />
       {finalModal()}
       {deleteModalContent()}
       <BasicModal

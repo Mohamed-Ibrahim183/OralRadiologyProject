@@ -1,20 +1,13 @@
-import React, { useContext, useEffect, useReducer, useState } from "react";
-import { Outlet, useNavigate } from "react-router-dom";
+import React, { useContext } from "react";
+import { Outlet } from "react-router-dom";
 import { ContextData } from "./ContextData";
 
 import { Box, CssBaseline } from "@mui/material";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
-function reducer(state, action) {
-  switch (action.type) {
-    case "setUser":
-      return { ...state, current: action.payload };
-    default:
-      return state;
-  }
-}
+import Navbar from "./Components/Navbar/Navbar";
 
 const Root = () => {
-  const { mode, currentUser } = useContext(ContextData);
+  const { mode } = useContext(ContextData);
   const theme = createTheme({
     palette: {
       mode: mode ? "dark" : "light",
@@ -24,6 +17,7 @@ const Root = () => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
+      <Navbar />
       <Box>
         <Outlet />
       </Box>

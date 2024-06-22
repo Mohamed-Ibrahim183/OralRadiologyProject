@@ -5,20 +5,13 @@ import Navbar from "../../Components/Navbar/Navbar";
 import axios from "axios";
 import { Navigate } from "react-router-dom";
 // import Button from "@mui/material/Button";
-import {
-  // Box,
-  createTheme,
-  // Modal,
-  ThemeProvider,
-  // Typography,
-} from "@mui/material";
+import { createTheme, ThemeProvider } from "@mui/material";
 
 const AddGroup = () => {
   const [rows, setRows] = useState(0);
   const [render, setRender] = useState(1);
   const [groups, setGroups] = useState([]);
-  // const [modalOpen, setModalOpen] = useState(false);
-  // const [group, setGroup] = useState({});
+
   const [editingGroup, setEditingGroup] = useState(null);
   const [editingRows, setEditingRows] = useState([]);
   const [editingGroupIndex, setEditingGroupIndex] = useState(null);
@@ -160,17 +153,9 @@ const AddGroup = () => {
   }
 
   function handleEditSubmit() {
-    // Logic for submitting edited group data
-    // Object.keys(groups).forEach((ele) => {
-    //   // Delete(ele);
-    // });
     Delete(editingGroupIndex);
     handleSubmit(2);
     setEditingGroup(null);
-    // console.log("editingGroup:", editingGroup);
-
-    // console.log("editingGroupIndex:", editingGroupIndex);
-    // alert("Submit the edited group logic here");
   }
 
   function fetchFirst() {
@@ -363,7 +348,6 @@ const AddGroup = () => {
 
   return (
     <>
-      <Navbar />
       <ThemeProvider theme={Theme}>
         <div className="AddGroup">
           <table cellSpacing={20}>
