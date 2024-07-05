@@ -70,9 +70,9 @@ const Navbar = () => {
     setLinks((prev) => ({
       ...prev,
       Pages: [
-        { Text: "Home", link: "/" },
         { Text: "Profile", link: "/Profile" },
-        { Text: "Logout", link: "/Login3", fun: () => sessionStorage.clear() },
+        { Text: "Home", link: "/" },
+        { Text: "Logout", link: "/Login3", fun: () => sessionStorage.clear() }, // delete the current user
       ],
     }));
   }, [userType]);

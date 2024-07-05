@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Modal from "./Modal";
 import AssignmentCard from "./AssignmentCard";
 import Chart from "./Chart";
@@ -10,8 +10,9 @@ import { Link, Navigate } from "react-router-dom";
 import Modal2 from "./Modal2";
 import axios from "axios";
 import Button from "@mui/material/Button";
-import { Add } from "@mui/icons-material";
+import { Add, RestaurantMenu } from "@mui/icons-material";
 import {
+  Box,
   Paper,
   TableBody,
   TableCell,
@@ -20,35 +21,33 @@ import {
   TableRow,
   ThemeProvider,
   createTheme,
+  Typography,
 } from "@mui/material";
 import { Table } from "react-bootstrap";
+import { axiosMethods } from "../Controller";
+import BasicModal from "../Users/Edit";
+import BasicModalComp from "../../Components/BasicModal/BasicModalComp";
 
 const ProfessorDB = () => {
   const professorName = sessionStorage.getItem("Name") || "Professor";
   const professorImage = sessionStorage.getItem("PersonalImage");
   const storedUserId = sessionStorage.getItem("userId");
 
-  // const [themeMode, setThemeMode] = useState(
-  //
-  // );
   const [isModalOpen, setModalOpen] = useState(false);
   const [isModal2Open, setModal2Open] = useState(false);
   const [assignments, setAssignments] = useState([]);
   const [userId, setUserId] = useState(storedUserId);
   const [groups, setGroups] = useState([]);
-  // const [darkMode, setDarkMode] = useState(false);
+  const [showCats, setShowCats] = useState(false);
 
   useEffect(() => {
-    if (!storedUserId) {
-      console.error("UserId not found in sessionStorage");
-    } else {
-      setUserId(storedUserId);
-    }
+    !storedUserId
+      ? console.error("UserId not found in sessionStorage")
+      : setUserId(storedUserId);
 
     axios
       .get("http://localhost/Projects/OralRadiology/AssignmentLogic.php/GetAll")
       .then((res) => {
-        // console.log(res.data);
         setAssignments(res.data);
       })
       .catch((error) => console.error(error));
@@ -142,11 +141,19 @@ const ProfessorDB = () => {
                     assignmentId={assignment.Id}
                     name={assignment.Name}
                     info={`${assignment.Topic}, April 30, 2024, 1:00 pm`}
-                    toPage={`/Grading_Page?userId=${userId}&assignmentId=${assignment.Id}`}
+                    toPage={`/professor/Grading_Page?assignmentId=${assignment.Id}`}
                   />
                 ))}
             </div>
             <h5 className="seal">See all →</h5>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={() => setShowCats(!showCats)}
+            >
+              {showCats ? "Hide Categories" : "Show Categories"}
+            </Button>
+            {showCats && <Categories />}
           </div>
           <div className="userProfile">
             <div className="TEXT">
@@ -184,5 +191,110 @@ const ProfessorDB = () => {
     </ThemeProvider>
   );
 };
+
+function Categories() {
+  const [cats, setCats] = useState([]); // categories
+  const [addCat, setAddCat] = useState(false);
+  const [update, setUpdate] = useState(0);
+
+  const element = useRef();
+  useEffect(() => {
+    new axiosMethods()
+      .get(
+        "http://localhost/Projects/OralRadiology/AssignmentLogic.php/GetCategories"
+      )
+      .then((res) => {
+        setCats(res.msg);
+      });
+  }, [update]);
+  // if (cats.length === 0) return;
+  function addNewCategory() {
+    new axiosMethods()
+      .post(
+        "http://localhost/Projects/OralRadiology/AssignmentLogic.php/addCategory",
+        { Name: element.current.value }
+      )
+      .then((res) => {
+        console.log(res.msg);
+        setUpdate(update + 1);
+        setAddCat(false);
+      });
+  }
+  function AddCategoryComp() {
+    return (
+      <BasicModalComp openModal={addCat} closeModal={() => setAddCat(false)}>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            flexDirection: "column",
+            gap: 2,
+          }}
+        >
+          <Typography variant="h5" color="inherit">
+            Adding a New Category
+          </Typography>
+          <form>
+            <input
+              ref={element}
+              type="text"
+              placeholder="Name of the Category Here"
+              // value={category}
+              // onChange={(e) => setCategory(e.target.value)}
+            />
+          </form>
+        </Box>
+        <Box sx={{ display: "flex", justifyContent: "space-between", mt: 2 }}>
+          <Button variant="contained" color="primary" onClick={addNewCategory}>
+            Submit
+          </Button>
+          <Button
+            variant="outlined"
+            color="error"
+            onClick={() => setAddCat(false)}
+          >
+            Cancel
+          </Button>
+        </Box>
+      </BasicModalComp>
+    );
+  }
+  return (
+    <Box>
+      {addCat && <AddCategoryComp />}
+      {cats.length > 0 && (
+        <TableContainer component={Paper}>
+          <Table aria-label="simple table">
+            <TableHead>
+              <TableRow>
+                <TableCell align="center">Category Name</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {cats.map((row) => (
+                <TableRow
+                  key={row.Name + row.Id}
+                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                >
+                  <TableCell align="center">{row.Name}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      )}
+      <Button
+        variant="outlined"
+        color="secondary"
+        onClick={() => {
+          setAddCat(!addCat);
+        }}
+      >
+        Add Category
+      </Button>
+    </Box>
+  );
+}
 
 export default ProfessorDB;

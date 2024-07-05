@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "../../Components/Navbar/Navbar";
-import { Navigate } from "react-router-dom";
-import TableHeader_grading_page from "./TableHeader_grading_page";
-import TableRow_Grading_Page from "./TableRow_Grading_Page";
+import { Navigate, useSearchParams } from "react-router-dom";
+import TableHeaderGradingPage from "./TableHeader_grading_page";
+import TableRowGradingPage from "./TableRow_Grading_Page";
 import ViewSubmissionsModal from "./ViewSubmissionsModal";
 import "./Grading.css";
 import { axiosMethods } from "../Controller";
 
 function GradingPage() {
-  const assignmentId = sessionStorage.getItem("assignmentId");
-  const userId = sessionStorage.getItem("userId");
+  const [searchParams, setSearchParams] = useSearchParams();
+  const assignmentId = searchParams.get("assignmentId");
+  const [assignmentName, setAssignmentName] = useState("");
 
   const [data, setData] = useState([]);
   const [error, setError] = useState("");
@@ -17,49 +18,51 @@ function GradingPage() {
   const [currentStudentId, setCurrentStudentId] = useState(null);
 
   useEffect(() => {
-    if (!assignmentId || !userId) {
+    if (!assignmentId) {
       console.error("AssignmentId or UserId not found in sessionStorage");
       setError("Assignment ID or User ID missing in session storage.");
       return;
     }
 
+    const fetchData = () => {
+      const dataSending = {
+        assignmentId: assignmentId,
+      };
+
+      new axiosMethods()
+        .get(
+          "http://localhost/Projects/OralRadiology/AssignmentLogic.php/GetSubmissionAssignment",
+          dataSending
+        )
+        .then((res) => {
+          console.log("res.msg:", res.msg);
+          if (res.msg) {
+            // Success
+            const responseData = Array.isArray(res.msg) ? res.msg : [];
+            // Initialize data from response
+            const initializedData = responseData.map((record) => ({
+              ...record,
+              Grade: record.Grade ?? 0, // Default to 0 if Grade is null or undefined
+              Comment: record.Comment ?? "", // Default to empty string if Comment is null or undefined
+            }));
+            setData(initializedData);
+            console.log("initializedData:", initializedData);
+            // sessionStorage.setItem("ProfileImgs", responseData.PersonalImage);
+          } else {
+            // Fail
+            setError(res.error);
+          }
+        })
+        .catch((err) => console.error(err));
+        
+    };
     fetchData();
 
     // Cleanup function
     return () => {
       sessionStorage.removeItem("submissionData");
     };
-  }, [assignmentId, userId]);
-
-  const fetchData = () => {
-    const dataSending = {
-      assignmentId: assignmentId,
-      userId: userId,
-    };
-
-    new axiosMethods()
-      .get(
-        "http://localhost/Projects/OralRadiology/AssignmentLogic.php/GetSubmissionAssignment",
-        dataSending
-      )
-      .then((res) => {
-        if (res.msg) {
-          // Success
-          const responseData = Array.isArray(res.msg) ? res.msg : [];
-          // Initialize data from response
-          const initializedData = responseData.map((record) => ({
-            ...record,
-            Grade: record.Grade ?? 0, // Default to 0 if Grade is null or undefined
-            Comment: record.Comment ?? "", // Default to empty string if Comment is null or undefined
-          }));
-          setData(initializedData);
-          sessionStorage.setItem("ProfileImgs", responseData.PersonalImage);
-        } else {
-          // Fail
-          setError(res.error);
-        }
-      });
-  };
+  }, [assignmentId]);
 
   const handleGradeChange = (studentId, newGrade) => {
     setData((prevData) =>
@@ -80,7 +83,8 @@ function GradingPage() {
   };
 
   const updateSessionData = (studentId, newData) => {
-    const sessionData = JSON.parse(sessionStorage.getItem("submissionData")) || {};
+    const sessionData =
+      JSON.parse(sessionStorage.getItem("submissionData")) || {};
     sessionData[studentId] = { ...sessionData[studentId], ...newData };
     sessionStorage.setItem("submissionData", JSON.stringify(sessionData));
   };
@@ -95,32 +99,34 @@ function GradingPage() {
   };
 
   const handleSaveAll = () => {
-    const submissionData = JSON.parse(sessionStorage.getItem("submissionData")) || {};
-    const dataToSend = Object.entries(submissionData).map(([studentId, { grade, comment }]) => ({
-      assignmentId: assignmentId,
-      studentId: studentId,
-      grade: grade,
-      comment: comment,
-    }));
+    const submissionData =
+      JSON.parse(sessionStorage.getItem("submissionData")) || {};
+    const dataToSend = Object.entries(submissionData).map(
+      ([studentId, { grade, comment }]) => ({
+        assignmentId: assignmentId,
+        studentId: studentId,
+        grade: grade,
+        comment: comment,
+      })
+    );
 
     new axiosMethods()
-    .post(
-      "http://localhost/Projects/OralRadiology/UpdateSubmission.php",
-      submissionData
-    )
-    .then((res) => {
-      if (res && res.data && res.data.success) {
-        alert("Submissions saved successfully!");
-      } else {
-        console.error("Error response from server:", res); // Log the error response
-        alert("Failed to save submissions. Please try again.");
-      }
-    })
-    .catch((error) => {
-      console.error("Error saving submissions:", error);
-      alert("An error occurred while saving submissions.");
-    });
-  
+      .post(
+        "http://localhost/Projects/OralRadiology/UpdateSubmission.php",
+        submissionData
+      )
+      .then((res) => {
+        if (res && res.data && res.data.success) {
+          alert("Submissions saved successfully!");
+        } else {
+          console.error("Error response from server:", res); // Log the error response
+          alert("Failed to save submissions. Please try again.");
+        }
+      })
+      .catch((error) => {
+        console.error("Error saving submissions:", error);
+        alert("An error occurred while saving submissions.");
+      });
   };
 
   if (sessionStorage["Type"] !== "Professor") {
@@ -133,7 +139,6 @@ function GradingPage() {
 
   return (
     <>
-      <Navbar />
       <div className="monem2_admin">
         <h1>Assignment 1</h1>
         <hr />
@@ -147,10 +152,10 @@ function GradingPage() {
         <input type="search" id="searchh" />
         <div className="table-responsive">
           <table className="table">
-            <TableHeader_grading_page />
+            <TableHeaderGradingPage />
             <tbody>
               {data.map((record, index) => (
-                <TableRow_Grading_Page
+                <TableRowGradingPage
                   key={index}
                   record={{
                     profilePic: `http://localhost/Projects/OralRadiology/${record.PersonalImage}`,

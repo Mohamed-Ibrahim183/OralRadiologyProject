@@ -5,7 +5,7 @@ import React from "react";
 const OverViewAssignmentsPage = () => {
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
       <Cards />
     </>
   );

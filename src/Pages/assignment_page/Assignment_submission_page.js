@@ -3,9 +3,11 @@ import image from "./Dental_Xray.png";
 import "./submit_page.css";
 import Navbar from "../../Components/Navbar/Navbar";
 import axios from "axios";
-import { Navigate } from "react-router-dom";
+import { Navigate, useSearchParams } from "react-router-dom";
+
 const AssignmentSubmission = () => {
   const [assignmentInfo, setAssignmentInfo] = useState({});
+  const [searchParams] = useSearchParams();
 
   useEffect(() => {
     const fetchAssignmentInfo = async () => {
@@ -17,15 +19,13 @@ const AssignmentSubmission = () => {
       const url = `http://localhost/Projects/OralRadiology/AssignmentLogic.php/GetAssignment?assignmentId=${assignmentId}`;
       await axios
         .get(url)
-        .then((res) => {
-          console.log(res.data);
-          setAssignmentInfo(res.data);
-        })
+        .then((res) => setAssignmentInfo(res.data))
         .catch((error) => console.error(error));
     };
 
     fetchAssignmentInfo();
   }, []);
+
   if (sessionStorage["Type"] !== "Student") {
     return <Navigate to="/" />;
   }
@@ -37,13 +37,16 @@ const AssignmentSubmission = () => {
       const selectedFiles = Array.from(event.target.files);
       setFiles(selectedFiles);
     };
+
     const deleteFile = (index) => {
       const newFiles = files.filter((_, i) => i !== index);
       setFiles(newFiles);
     };
+
     const deleteLastFile = () => {
       setFiles([]);
     };
+
     const handleSubmit = async () => {
       if (files.length > assignmentInfo.maxLimitImages) {
         alert(
@@ -56,13 +59,13 @@ const AssignmentSubmission = () => {
       files.forEach((file) => {
         formData.append("images[]", file);
       });
-      formData.append("userId", sessionStorage.getItem("userId"));
-      formData.append("assignmentId", sessionStorage.getItem("assignmentId"));
+
+      const userId = sessionStorage.getItem("userId");
+      const assignmentId = sessionStorage.getItem("assignmentId");
+      formData.append("userId", userId);
+      formData.append("assignmentId", assignmentId);
 
       try {
-        // const userId = sessionStorage.getItem('userId');
-        // const assignmentId = sessionStorage.getItem('assignmentId');
-
         const response = await axios.post(
           `http://localhost/Projects/OralRadiology/UploadAssignment.php`,
           formData,
@@ -72,8 +75,6 @@ const AssignmentSubmission = () => {
             },
           }
         );
-
-        // In useEffect hook
 
         console.log(response.data);
         alert("Upload successful!");
@@ -148,7 +149,6 @@ const AssignmentSubmission = () => {
 
   return (
     <>
-      <Navbar />
       <div className="container_monemm">
         <div className="monem">
           <h2 className="assignment-submission-text2">
@@ -157,7 +157,7 @@ const AssignmentSubmission = () => {
           <Header assignmentInfo={assignmentInfo} />
           <AssignmentInfo />
         </div>
-        <Feedback />
+        {/* <Feedback /> */}
       </div>
     </>
   );

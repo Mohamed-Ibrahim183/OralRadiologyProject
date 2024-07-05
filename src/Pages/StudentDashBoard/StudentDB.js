@@ -37,7 +37,7 @@ const StudentDB = () => {
   }
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
       <div className="fullPage">
         <div className="upper">
           <div className="container AssignmentSection">
@@ -50,7 +50,7 @@ const StudentDB = () => {
                 <Link
                   key={i}
                   to={{
-                    pathname: "/submit",
+                    pathname: "/student/submit",
                     search: `?userId=${UserId}&assignmentId=${assignment.Id}`,
                   }}
                   onClick={() => handleAssignmentClick(assignment.Id)}

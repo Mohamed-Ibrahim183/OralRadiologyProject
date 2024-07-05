@@ -10,27 +10,27 @@
       { "key": "Opened Time:", "value": "24 March 2024 09:00" }
     ],
     "images": [
-      "./Images/cardImages/Dental_Xray-removebg-preview.jpg",
-      "./Images/cardImages/cbct.jpg",
-      "./Images/cardImages/download.jpeg",
-      "./Images/cardImages/radyoloji.jpg"
+      "./Images/CardImages/1.jpg",
+      "./Images/CardImages/2.jpg",
+      "./Images/CardImages/3.jpeg",
+      "./Images/CardImages/4.jpg"
     ],
     "images2": [
       {
         "category": "cat1",
-        "image": "./Images/cardImages/Dental_Xray-removebg-preview.jpg"
+        "image": "./Images/CardImages/1.jpg"
       },
       {
         "category": "cat2",
-        "image": "./Images/cardImages/cbct.jpg"
+        "image": "./Images/CardImages/2.jpg"
       },
       {
         "category": "cat3",
-        "image": "./Images/cardImages/download.jpeg"
+        "image": "./Images/CardImages/3.jpeg"
       },
       {
         "category": "cat4",
-        "image": "./Images/cardImages/radyoloji.jpg"
+        "image": "./Images/CardImages/4.jpg"
       }
     ]
   },

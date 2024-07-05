@@ -48,7 +48,7 @@ function Loading() {
 }
 
 function App() {
-  const [mode, setMode] = React.useState(true); // Placeholder for mode state
+  const [mode, setMode] = React.useState(true); // true => Dark
 
   const [state, dispatch] = useReducer(reducer, initialState);
 
