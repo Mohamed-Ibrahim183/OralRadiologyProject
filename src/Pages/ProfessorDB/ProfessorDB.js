@@ -31,20 +31,40 @@ import UserProfile from "../../Components/UserProfile";
 function GroupsData() {
   const [groups, setGroups] = useState([]);
   const [showGroups, setShowGroups] = useState(false);
-  useEffect(() => {
+  const [loadingMessage, setLoadingMessage] = useState(
+    "Loading Groups Data..."
+  );
+  const maxRetries = 2;
+
+  const fetchData = (attempt = 0) => {
     axios
       .get(
         "http://localhost/Projects/OralRadiology/AssignmentLogic.php/AssignmentGroupsShow"
       )
       .then((res) => {
-        setGroups(res.data);
+        if (res.data.length > 0) {
+          setGroups(res.data);
+        } else if (attempt < maxRetries) {
+          setTimeout(() => fetchData(attempt + 1), 1000); // Retry after 1 second
+        } else {
+          setLoadingMessage("No Groups Data");
+        }
       })
-      .catch((error) => console.error(error));
+      .catch((error) => {
+        console.error(error);
+        if (attempt < maxRetries) {
+          setTimeout(() => fetchData(attempt + 1), 1000); // Retry after 1 second
+        } else {
+          setLoadingMessage("No Groups Data");
+        }
+      });
+  };
+
+  useEffect(() => {
+    fetchData();
   }, []);
-  if (!groups.length) {
-    return <div>Loading...</div>;
-  }
-  const tableHeader = () => {
+  
+  const renderTableHeader = () => {
     return (
       <TableHead>
         <TableRow>
@@ -56,7 +76,8 @@ function GroupsData() {
       </TableHead>
     );
   };
-  const tableBody = () => {
+
+  const renderTableBody = () => {
     return (
       <TableBody>
         {groups.map((row) => (
@@ -88,13 +109,14 @@ function GroupsData() {
       {showGroups ? (
         <TableContainer component={Paper}>
           <Table aria-label="simple table">
-            {tableHeader()}
-            {tableBody()}
+            {renderTableHeader()}
+            {renderTableBody()}
           </Table>
         </TableContainer>
       ) : (
         ""
       )}
+      {!groups.length && <div>{loadingMessage}</div>}
     </>
   );
 }
