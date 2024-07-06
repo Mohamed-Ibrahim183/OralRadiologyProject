@@ -16,25 +16,55 @@ const StudentDB = () => {
   const UserId = sessionStorage["userId"];
 
   const [assignments, setAssignments] = useState([]);
+  const [submissions, setSubmissions] = useState([]);
 
   useEffect(() => {
-    const url =
-      "http://localhost/Projects/OralRadiology/AssignmentLogic.php/GetAll";
-    axios
-      .get(url)
-      .then((res) => {
-        console.log(res.data);
-        res.data ? setAssignments(res.data) : setAssignments(null);
-      })
-      .catch((error) => console.error(error));
+    const fetchData = async () => {
+      const fetchAssignments = async () => {
+        try {
+          const assignmentUrl =
+            "http://localhost/Projects/OralRadiology/AssignmentLogic.php/GetAll";
+          const assignmentResponse = await axios.get(assignmentUrl);
+          setAssignments(assignmentResponse.data || []);
+        } catch (error) {
+          console.error(error);
+        }
+      };
+
+      const fetchSubmissions = async () => {
+        try {
+          const submissionUrl =
+            "http://localhost/Projects/OralRadiology/AssignmentLogic.php/GetSubmission";
+          const submissionResponse = await axios.get(submissionUrl, {
+            params: { userId: UserId },
+          });
+          console.log("Submissions API Response:", submissionResponse); // Log the full response
+          console.log("Submissions Data:", submissionResponse.data); // Log the data part of the response
+          console.log(
+            "Submissions Assignments:",
+            submissionResponse.data.assignments
+          ); // Log the assignments part of the data
+          setSubmissions(submissionResponse.data.assignments || []);
+        } catch (error) {
+          console.error(error);
+        }
+      };
+
+      await fetchAssignments();
+      await fetchSubmissions();
+    };
+
+    fetchData();
   }, []);
 
   const handleAssignmentClick = (assignmentId) => {
     sessionStorage.setItem("assignmentId", assignmentId); // Change this to 'assignmentId' to match your PHP
   };
+
   if (sessionStorage["Type"] !== "Student") {
     return <Navigate to="/" />;
   }
+
   return (
     <>
       {/* <Navbar /> */}
@@ -92,7 +122,12 @@ const StudentDB = () => {
         </div>
         <div>
           <div className="cc1">
-            <Chart className="chart1" userID={sessionStorage["userId"] || 1} />
+            <Chart
+              className="chart1"
+              userID={UserId}
+              Assignments={assignments}
+              Submission={submissions}
+            />
           </div>
           <div className="Calender">
             <h2>Calendar</h2>
