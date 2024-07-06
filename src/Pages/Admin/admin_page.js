@@ -44,7 +44,7 @@ function AdminPage() {
     },
   ];
   const cards = cardsData.map((ele) => {
-    return <StatCard key={ele.title} {...ele} />;
+    // return <StatCard key={ele.title} {...ele} />;
   });
   return (
     <>
@@ -53,9 +53,7 @@ function AdminPage() {
         <div className="AdminSection adminHomeSection containerWidth">
           <div className="Charts">
             <div className="stats-row">{cards}</div>
-            <div className="chart-row">
-              <Chart />
-            </div>
+            <div className="chart-row">{/* <Chart /> */}</div>
           </div>
           <Box
             sx={{
@@ -64,6 +62,7 @@ function AdminPage() {
               justifyContent: "space-between",
             }}
           >
+            {/* Slider */}
             <Mail />
             <Calendar />
           </Box>

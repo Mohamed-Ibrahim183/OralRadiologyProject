@@ -50,17 +50,17 @@ const ChartComponent = (props) => {
   }, []);
 
   const data = {
-    labels: props.Submission.map((assignment) => assignment.assignmentName),
+    labels: props.Assignments.map((assignment) => assignment.Name),
     datasets: [
       {
         label: "Your Grades",
-        data: props.Submission.map((assignment) => assignment.totalGrade),
+        data: [140, 160, 160, 150, 170, 180, 175], // Placeholder values; adjust according to your data
         backgroundColor: "#FFD269",
         barThickness: 25,
       },
       {
         label: "Average Grades",
-        data: [60, 90, 90], // Placeholder values; adjust according to your data
+        data: [160, 190, 190, 180, 170, 190, 175], // Placeholder values; adjust according to your data
         backgroundColor: "#A2D1FD",
         barThickness: 25,
       },

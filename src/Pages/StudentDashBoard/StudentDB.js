@@ -73,7 +73,6 @@ const StudentDB = () => {
           <div className="container AssignmentSection">
             <div className="BBBBBB">
               <h2 className="sectionTitle">My Assignments</h2>
-              <h5 className="seal">See all →</h5>
             </div>
             <div className="cardAssignment">
               {assignments.map((assignment, i) => (
@@ -89,7 +88,7 @@ const StudentDB = () => {
                     name={assignment.Name}
                     state="Good"
                     info={`${assignment.Topic}, April 30, 2024, 1:00 pm`}
-                    grade="60"
+                    //grade="60"
                     col="#0082e6"
                   ></AssignmentCard>
                 </Link>
