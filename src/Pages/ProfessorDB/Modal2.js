@@ -107,13 +107,6 @@ const Modal2 = ({ open, onClose, AssignmentId }) => {
                 onChange={handleTimeChange}
               />
             </section>
-            {/* <button
-              className="MainBtn"
-              style={{ marginLeft: "75px" }}
-              onClick={handleSave}
-            >
-              Save
-            </button> */}
             <Button
               variant="outlined"
               color="secondary"

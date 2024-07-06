@@ -4,7 +4,10 @@ import Modal2 from "./Modal2";
 import { Link } from "react-router-dom";
 import Button from "@mui/material/Button";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
+import { Delete } from "@mui/icons-material";
+
 const AssignmentCard = (props) => {
+  // props.assignmentId
   const label = {
     borderLeft: `10px solid ${props.col}`,
   };
@@ -32,6 +35,13 @@ const AssignmentCard = (props) => {
           <span className="Details">{props.info}</span>
         </div>
       </Link>
+      <Button
+        variant="outlined"
+        color="error"
+        onClick={() => props.onDelete(props.assignmentId)}
+      >
+        Delete <Delete />
+      </Button>
       <div className="grade">
         <Modal2
           open={isModal2Open}

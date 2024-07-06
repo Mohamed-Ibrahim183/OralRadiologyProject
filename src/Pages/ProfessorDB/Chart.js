@@ -9,6 +9,7 @@ import {
   Legend,
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
+import { axiosMethods } from "../Controller";
 
 ChartJS.register(
   CategoryScale,
@@ -24,6 +25,9 @@ const ChartComponent = () => {
   const [labelColor, setLabelColor] = useState("#283747");
   const [titleColor, setTitleColor] = useState("#5D6D7E");
 
+  const [assignments, setAssignments] = useState([]);
+  const [countUsers, setCountUsers] = useState(0);
+
   // useEffect to set the color based on the theme
   useEffect(() => {
     const theme = localStorage.getItem("Theme");
@@ -36,25 +40,41 @@ const ChartComponent = () => {
       setTitleColor("black");
     }
   }, []);
+  useEffect(() => {
+    new axiosMethods()
+      .get(
+        "http://localhost/Projects/OralRadiology/AssignmentLogic.php/submissionsStatus"
+      )
+      .then((res) => {
+        console.log(res.msg);
+        setAssignments(res.msg);
+      });
 
+    new axiosMethods()
+      .post(
+        "http://localhost/Projects/OralRadiology/userLogic.php/GetTotalUsersType",
+        { Type: "Student" }
+      )
+      .then((res) => {
+        setCountUsers(res.msg);
+      });
+  }, []);
   const data = {
-    labels: [
-      "Assignment 1",
-      "Assignment 2",
-      "Assignment 3",
-      "Assignment 4",
-      "Assignment 5",
-    ],
+    labels: assignments
+      ? assignments.map((ele) => {
+          return ele.Name;
+        })
+      : [],
     datasets: [
       {
         label: "Students Uploaded Assignments",
-        data: [16, 29, 27, 29, 20],
+        data: assignments ? assignments.map((ele) => ele.Submitted) : [],
         backgroundColor: "#FFD269",
         barThickness: 25,
       },
       {
         label: "Total Students",
-        data: [30, 30, 30, 30, 30],
+        data: Array.from({ length: countUsers }, (_) => countUsers),
         backgroundColor: "#A2D1FD",
         barThickness: 25,
       },
