@@ -42,7 +42,7 @@ const Card = (props) => {
             ></i>
             <img
               className="image"
-              src={AssImage}
+              src={"http://localhost:3000" + AssImage}
               alt={props.Name}
               onClick={toggleModal}
             />

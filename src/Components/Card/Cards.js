@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import Card from "./Card";
 import AssignmentsFile from "./assignments.json";
 import { useReactToPrint } from "react-to-print";
-import any from "../../Pages/AddProf/Dental_Xray-removebg-preview.jpg";
+// import any from "../../Pages/AddProf/Dental_Xray-removebg-preview.jpg";
 import "./image.css";
 // import DarkMode from "./DarkMode/DarkMode";
 

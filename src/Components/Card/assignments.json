@@ -18,54 +18,19 @@
     "images2": [
       {
         "category": "cat1",
-        "image": "./Images/CardImages/1.jpg"
+        "image": "/Images/CardImages/1.jpg"
       },
       {
         "category": "cat2",
-        "image": "./Images/CardImages/2.jpg"
+        "image": "/Images/CardImages/2.jpg"
       },
       {
         "category": "cat3",
-        "image": "./Images/CardImages/3.jpeg"
+        "image": "/Images/CardImages/3.jpeg"
       },
       {
         "category": "cat4",
-        "image": "./Images/CardImages/4.jpg"
-      }
-    ]
-  },
-  "Ass2": {
-    "Name": "Assignment 2",
-    "Features": [
-      { "key": "Assignment Grade:", "value": "8/10" },
-      {
-        "key": "Doctor's Comment:",
-        "value": "Very Good,  Keep it up! "
-      },
-      { "key": "Opened Time:", "value": "23 March 2024 09:00" }
-    ],
-    "images": [
-      "./Images/cardImages/cbct.jpg",
-      "./Images/cardImages/download.jpeg",
-      "./Images/cardImages/Dental_Xray-removebg-preview.jpg",
-      "./Images/cardImages/radyoloji.jpg"
-    ],
-    "images2": [
-      {
-        "category": "cat3",
-        "image": "./Images/cardImages/download.jpeg"
-      },
-      {
-        "category": "cat4",
-        "image": "./Images/cardImages/radyoloji.jpg"
-      },
-      {
-        "category": "cat1",
-        "image": "./Images/cardImages/Dental_Xray-removebg-preview.jpg"
-      },
-      {
-        "category": "cat2",
-        "image": "./Images/cardImages/cbct.jpg"
+        "image": "/Images/CardImages/4.jpg"
       }
     ]
   }

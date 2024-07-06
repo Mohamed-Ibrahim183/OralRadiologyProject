@@ -7,12 +7,12 @@ function TableHeaderGradingPage() {
         <th>Name</th>
         <th>ID</th>
         <th>Email</th>
-        <th>Status</th>
-        <th>Grade</th>
-        <th>Submission Date</th>
+        {/* <th>Status</th> */}
+        {/* <th>Grade</th> */}
+        {/* <th>Submission Date</th> */}
         <th>File submissions</th>
-        <th>Last modified</th>
-        <th>FeedBack comments</th>
+        {/* <th>Last modified</th> */}
+        {/* <th>FeedBack comments</th> */}
       </tr>
     </thead>
   );
