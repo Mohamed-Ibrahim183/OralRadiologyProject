@@ -1,16 +1,17 @@
 import React, { useState, useEffect, useRef } from "react";
-import Modal from "./Modal";
+// import Modal from "./Modal";
 import AssignmentCard from "./AssignmentCard";
 import Chart from "./Chart";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
-import "./ProfessorDB.css";
+// import "./Modal.css";
+
 import "./professor.css";
-import { Link, Navigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import Modal2 from "./Modal2";
 import axios from "axios";
 import Button from "@mui/material/Button";
-import { Add, RestaurantMenu } from "@mui/icons-material";
+import { Add } from "@mui/icons-material";
 import {
   Box,
   Paper,
@@ -19,14 +20,170 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  ThemeProvider,
-  createTheme,
   Typography,
 } from "@mui/material";
 import { Table } from "react-bootstrap";
 import { axiosMethods } from "../Controller";
-import BasicModal from "../Users/Edit";
+
 import BasicModalComp from "../../Components/BasicModal/BasicModalComp";
+import UserProfile from "../../Components/UserProfile";
+
+function GroupsData() {
+  const [groups, setGroups] = useState([]);
+  const [showGroups, setShowGroups] = useState(false);
+  useEffect(() => {
+    axios
+      .get(
+        "http://localhost/Projects/OralRadiology/AssignmentLogic.php/AssignmentGroupsShow"
+      )
+      .then((res) => {
+        setGroups(res.data);
+      })
+      .catch((error) => console.error(error));
+  }, []);
+  if (!groups.length) {
+    return <div>Loading...</div>;
+  }
+  const tableHeader = () => {
+    return (
+      <TableHead>
+        <TableRow>
+          <TableCell align="center">Group Name</TableCell>
+          <TableCell align="center">Assignment Name</TableCell>
+          <TableCell align="center">Open Time</TableCell>
+          <TableCell align="center">Close Time</TableCell>
+        </TableRow>
+      </TableHead>
+    );
+  };
+  const tableBody = () => {
+    return (
+      <TableBody>
+        {groups.map((row) => (
+          <TableRow
+            key={row.Assignment + row.open}
+            sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+          >
+            <TableCell component="th" scope="row">
+              {row.group}
+            </TableCell>
+            <TableCell align="center">{row.Assignment}</TableCell>
+            <TableCell align="center">{row.openTime}</TableCell>
+            <TableCell align="center">{row.closeTime}</TableCell>
+          </TableRow>
+        ))}
+      </TableBody>
+    );
+  };
+
+  return (
+    <>
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={() => setShowGroups(!showGroups)}
+      >
+        {showGroups ? "Hide" : "Show"} Groups & Assignments
+      </Button>
+      {showGroups ? (
+        <TableContainer component={Paper}>
+          <Table aria-label="simple table">
+            {tableHeader()}
+            {tableBody()}
+          </Table>
+        </TableContainer>
+      ) : (
+        ""
+      )}
+    </>
+  );
+}
+function AddRequirementModal({ isOpen, onClose }) {
+  const [assignmentName, setAssignmentName] = useState("");
+  const [topicName, setTopicName] = useState("");
+  const [maxImages, setMaxImages] = useState("");
+  const userId = sessionStorage["userId"];
+  const [loading, setLoading] = useState(false); // State to handle loading status
+
+  const saveAssignment = async () => {
+    if (!assignmentName || !topicName || !maxImages) {
+      alert("Please fill in all fields.");
+      return;
+    }
+    setLoading(true);
+    const url =
+      "http://localhost/Projects/OralRadiology/AssignmentLogic.php/InsertAssignment";
+    let fData = new FormData();
+    fData.append("Name", assignmentName);
+    fData.append("Topic", topicName);
+    fData.append("maxLimitImages", parseInt(maxImages, 10));
+    fData.append("ProfessorId", parseInt(userId, 10));
+    axios
+      .post(url, fData)
+      .then((res) => {
+        if (res.data === "Inserted") alert("Assignment Added Successfully");
+      })
+      .catch((error) => console.error(error));
+    setLoading(false);
+    onClose();
+  };
+
+  if (!isOpen) return null;
+
+  return (
+    <>
+      <BasicModalComp openModal={isOpen} closeModal={onClose}>
+        <div className="modal">
+          <div className="modal-content">
+            <h2 style={{ marginBottom: "10px" }}>Add Requirement</h2>
+            <form onSubmit={(e) => e.preventDefault()}>
+              <div className="form-group">
+                <section>
+                  <label htmlFor="requirementName">Requirement Name:</label>
+                  <input
+                    type="text"
+                    id="requirementName"
+                    name="requirementName"
+                    value={assignmentName}
+                    onChange={(e) => setAssignmentName(e.target.value)}
+                  />
+                </section>
+                <section>
+                  <label htmlFor="topicName">Topic Name:</label>
+                  <input
+                    type="text"
+                    id="topicName"
+                    name="topicName"
+                    value={topicName}
+                    onChange={(e) => setTopicName(e.target.value)}
+                  />
+                </section>
+                <section>
+                  <label htmlFor="maxImages">Maximum Number of Images:</label>
+                  <input
+                    type="number"
+                    id="maxImages"
+                    name="maxImages"
+                    value={maxImages}
+                    onChange={(e) => setMaxImages(e.target.value)}
+                  />
+                </section>
+              </div>
+              <button
+                type="button"
+                onClick={saveAssignment}
+                disabled={loading}
+                className="submit"
+              >
+                {loading ? "Saving..." : "Save"}
+              </button>
+            </form>
+          </div>
+        </div>
+      </BasicModalComp>
+    </>
+  );
+}
 
 const ProfessorDB = () => {
   const professorName = sessionStorage.getItem("Name") || "Professor";
@@ -37,8 +194,18 @@ const ProfessorDB = () => {
   const [isModal2Open, setModal2Open] = useState(false);
   const [assignments, setAssignments] = useState([]);
   const [userId, setUserId] = useState(storedUserId);
-  const [groups, setGroups] = useState([]);
   const [showCats, setShowCats] = useState(false);
+  const [updateAssignments, setUpdateAssignments] = useState(0);
+
+  function DeleteAssignment(assignmentId) {
+    new axiosMethods()
+      .post(
+        "http://localhost/Projects/OralRadiology/AssignmentLogic.php/DeleteAssignment",
+        { assignmentId }
+      )
+      .then((res) => console.log(res.msg));
+    setUpdateAssignments(updateAssignments + 1);
+  }
 
   useEffect(() => {
     !storedUserId
@@ -51,132 +218,68 @@ const ProfessorDB = () => {
         setAssignments(res.data);
       })
       .catch((error) => console.error(error));
-  }, [storedUserId]);
-
-  useEffect(() => {
-    axios
-      .get(
-        "http://localhost/Projects/OralRadiology/AssignmentLogic.php/AssignmentGroupsShow"
-      )
-      .then((res) => {
-        setGroups(res.data);
-      })
-      .catch((error) => console.error(error));
-  }, []);
+  }, [storedUserId, updateAssignments]);
 
   if (sessionStorage.getItem("Type") !== "Professor") {
     return <Navigate to="/" />;
   }
-
-  function GroupsInfos() {
-    if (!groups.length) {
-      return <div>Loading...</div>;
-    }
-
+  const AssignmentsContainer = () => {
     return (
-      <TableContainer component={Paper}>
-        <Table aria-label="simple table">
-          <TableHead>
-            <TableRow>
-              <TableCell align="center">Group Name</TableCell>
-              <TableCell align="center">Assignment Name</TableCell>
-              <TableCell align="center">Open Time</TableCell>
-              <TableCell align="center">Close Time</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {groups.map((row) => (
-              <TableRow
-                key={row.Assignment + row.open}
-                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-              >
-                <TableCell component="th" scope="row">
-                  {row.group}
-                </TableCell>
-                <TableCell align="center">{row.Assignment}</TableCell>
-                <TableCell align="center">{row.openTime}</TableCell>
-                <TableCell align="center">{row.closeTime}</TableCell>
-              </TableRow>
+      <div className="container AssignmentSection">
+        <GroupsData />
+        <div className="BBBBBB">
+          <h2 className="sectionTitle">My Assignments</h2>
+          <Button
+            variant="contained"
+            color="secondary"
+            onClick={() => setModalOpen(true)}
+            endIcon={<Add />}
+          >
+            Add Requirement
+          </Button>
+        </div>
+        <div className="cardAssignment">
+          {assignments &&
+            assignments.map((assignment, i) => (
+              <AssignmentCard
+                key={i}
+                userId={userId}
+                assignmentId={assignment.Id}
+                onDelete={DeleteAssignment}
+                name={"Name: " + assignment.Name}
+                info={`Topic: ${assignment.Topic}`}
+                toPage={`/professor/Grading_Page?assignmentId=${assignment.Id}`}
+              />
             ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+        </div>
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={() => setShowCats(!showCats)}
+        >
+          {showCats ? "Hide Categories" : "Show Categories"}
+        </Button>
+        {showCats && <Categories />}
+      </div>
     );
-  }
-  // const newTheme =
-
-  // console.log('localStorage.getItem("Theme"):', localStorage.getItem("Theme"));
-  const darkTheme = createTheme({
-    palette: {
-      // mode: darkMode ? "dark" : "light",
-      mode: localStorage.getItem("Theme") === "Dark" ? "dark" : "light",
-    },
-  });
-
+  };
   return (
-    <ThemeProvider theme={darkTheme}>
-      <Modal isOpen={isModalOpen} onClose={() => setModalOpen(false)}></Modal>
+    <>
+      <AddRequirementModal
+        isOpen={isModalOpen}
+        onClose={() => {
+          setModalOpen(false);
+          setUpdateAssignments(updateAssignments + 1);
+        }}
+      />
       <Modal2 open={isModal2Open} onClose={() => setModal2Open(false)} />
       <div className="fullProfessorPage">
         <div className="upper">
-          <div className="container AssignmentSection">
-            {GroupsInfos()}
-            <div className="BBBBBB">
-              <h2 className="sectionTitle">My Assignments</h2>
-              <Button
-                variant="contained"
-                color="secondary"
-                onClick={() => setModalOpen(true)}
-                endIcon={<Add />}
-              >
-                Add Requirement
-              </Button>
-            </div>
-            <div className="cardAssignment">
-              {assignments &&
-                assignments.map((assignment, i) => (
-                  <AssignmentCard
-                    key={i}
-                    userId={userId}
-                    assignmentId={assignment.Id}
-                    name={assignment.Name}
-                    info={`${assignment.Topic}, April 30, 2024, 1:00 pm`}
-                    toPage={`/professor/Grading_Page?assignmentId=${assignment.Id}`}
-                  />
-                ))}
-            </div>
-            <h5 className="seal">See all →</h5>
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={() => setShowCats(!showCats)}
-            >
-              {showCats ? "Hide Categories" : "Show Categories"}
-            </Button>
-            {showCats && <Categories />}
-          </div>
-          <div className="userProfile">
-            <div className="TEXT">
-              <img
-                src={professorImage}
-                alt="Professor Profile"
-                style={{
-                  width: "100px",
-                  height: "100px",
-                  borderRadius: "20px",
-                  marginTop: "-20px",
-                  marginBottom: "20px",
-                }}
-              />
-
-              <h4>Welcome Back</h4>
-              <h2>Dr. {professorName}</h2>
-              <p>Welcome to our Oral Radiology system</p>
-            </div>
-            <Link to="/Profile" className="ProfileButton stdBtn">
-              Go To Profile
-            </Link>
-          </div>
+          {AssignmentsContainer()}
+          <UserProfile
+            professorImage={professorImage}
+            professorName={"Dr. " + professorName}
+          />
         </div>
         <div className="lower">
           <div className="cc1">
@@ -188,7 +291,7 @@ const ProfessorDB = () => {
           </div>
         </div>
       </div>
-    </ThemeProvider>
+    </>
   );
 };
 
@@ -240,8 +343,6 @@ function Categories() {
               ref={element}
               type="text"
               placeholder="Name of the Category Here"
-              // value={category}
-              // onChange={(e) => setCategory(e.target.value)}
             />
           </form>
         </Box>
@@ -264,7 +365,7 @@ function Categories() {
     <Box>
       {addCat && <AddCategoryComp />}
       {cats.length > 0 && (
-        <TableContainer component={Paper}>
+        <TableContainer component={Paper} sx={{ width: "fit-content" }}>
           <Table aria-label="simple table">
             <TableHead>
               <TableRow>

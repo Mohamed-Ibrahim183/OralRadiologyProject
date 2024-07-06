@@ -97,16 +97,14 @@
   margin-top: 20px;
 }
 .fullProfessorPage .cardAssignment {
-  height: 300px;
+  max-height: 300px;
   overflow-y: auto;
+  padding: 0px 8px;
 }
 .cardAssignment::-webkit-scrollbar {
   display: none;
 }
-.fullProfessorPage .container.AssignmentSection .seal:hover {
-  cursor: pointer;
-  color: #9b9b9b;
-}
+
 .fullProfessorPage .cc1 {
   float: left;
   width: 60%;
@@ -131,18 +129,10 @@
   }
 }
 .fullProfessorPage .upper {
-  margin-bottom: 40px;
+  display: flex;
+  justify-content: space-between;
 }
-.fullProfessorPage .userProfile {
-  margin-top: -350px;
-  float: right;
-  width: 30%;
-  height: 300px;
-  background-color: var(--profile);
-}
-.fullProfessorPage .lower {
-  margin-top: -20px;
-}
+
 .fullProfessorPage .userProfile .TEXT {
   margin: 30px;
 }
@@ -150,15 +140,12 @@
   margin-top: 10px;
 }
 @media screen and (max-width: 1080px) {
-  .fullProfessorPage .userProfile {
-    width: 100%;
-    margin-top: -720px;
+  .fullProfessorPage .upper {
+    flex-direction: column;
   }
   .fullProfessorPage .container.AssignmentSection {
     width: 100%;
     height: 100%;
-    margin-top: 400px;
-    float: none;
   }
 
   .fullProfessorPage .cc1 {
@@ -168,4 +155,35 @@
   .fullProfessorPage .calender {
     margin-right: 6px;
   }
+}
+
+/* ---------------------- MODAL ----------------------- */
+.close-button {
+  float: right;
+  border: none;
+  background: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+.modal-content .submit {
+  background-color: #65b4f1;
+  padding: 5px;
+  margin-top: 20px;
+  width: 100%;
+  border: rgba(255, 222, 173, 0);
+}
+.modal-content .submit:hover {
+  background-color: #379fef;
+  cursor: pointer;
+}
+.modal-content .select {
+  margin-left: 5px;
+  padding: 5px;
+}
+
+.modal-content .form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  justify-content: center;
 }
