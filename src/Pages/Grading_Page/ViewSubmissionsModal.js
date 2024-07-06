@@ -93,6 +93,7 @@ const ViewSubmissionsModal = ({
               <button className="next-button" onClick={nextImage}>
                 &#10095;
               </button>
+              
             </div>
           </Modal>
         )}
