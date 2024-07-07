@@ -3,6 +3,7 @@ import axios from "axios";
 import Modal from "react-responsive-modal";
 import "./ViewSubmissionsModal.css";
 import { axiosMethods } from "../Controller";
+import Button from "@mui/material/Button";
 
 const ViewSubmissionsModal = ({
   show,
@@ -14,6 +15,7 @@ const ViewSubmissionsModal = ({
   const [error, setError] = useState("");
   const [openImageModal, setOpenImageModal] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [grades, setGrades] = useState([]);
 
   useEffect(() => {
     if (show && studentId && assignmentId) {
@@ -22,7 +24,19 @@ const ViewSubmissionsModal = ({
           "http://localhost/Projects/OralRadiology/AssignmentLogic.php/FetchAssignmentImages",
           { studentId, assignmentId }
         )
-        .then((res) => (res.msg ? setImages(res.msg) : setError(res.error)));
+        .then((res) => {
+          console.log("Images", res.msg);
+          setImages(res.msg);
+          setGrades(
+            res.msg.map((ele) => {
+              return {
+                image: ele.Path,
+                grade: 0,
+              };
+            })
+          );
+        });
+      // .then((res) => (res.msg ? setImages(res.msg) : setError(res.error)));
     }
   }, [show, studentId, assignmentId]);
 
@@ -44,6 +58,17 @@ const ViewSubmissionsModal = ({
       (prevIndex) => (prevIndex - 1 + images.length) % images.length
     );
   };
+  function EvaluateImage() {
+    new axiosMethods()
+      .post(
+        "http://localhost/Projects/OralRadiology/AssignmentLogic.php/EvaluateImage",
+        {
+          ImageId: images[currentImageIndex].Id,
+          Grade: images[currentImageIndex].Grade,
+        }
+      )
+      .then((res) => console.log(res.msg));
+  }
 
   if (!show) {
     return null;
@@ -93,7 +118,45 @@ const ViewSubmissionsModal = ({
               <button className="next-button" onClick={nextImage}>
                 &#10095;
               </button>
-              
+              <div
+                className="grading"
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  gap: "20px",
+                }}
+              >
+                <input
+                  style={{
+                    width: "200px",
+                    padding: "8px",
+                    borderRadius: "16px",
+                  }}
+                  type="number"
+                  max={100}
+                  min={0}
+                  placeholder="Enter Grade of the Film"
+                  value={images[currentImageIndex].Grade}
+                  onChange={(event) => {
+                    setImages((prev) => {
+                      return prev.map((image) => {
+                        if (image.Id === images[currentImageIndex].Id) {
+                          return { ...image, Grade: event.target.value };
+                        } else {
+                          return image;
+                        }
+                      });
+                    });
+                  }}
+                />
+                <Button
+                  variant="contained"
+                  color="success"
+                  onClick={EvaluateImage}
+                >
+                  Grade
+                </Button>
+              </div>
             </div>
           </Modal>
         )}

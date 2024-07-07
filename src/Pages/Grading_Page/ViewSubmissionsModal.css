@@ -46,7 +46,7 @@
 .large-image {
   max-width: 100%;
   max-height: 80vh;
-  margin-top: 60px;
+  margin-top: -60px;
 }
 
 .prev-button,
@@ -73,10 +73,14 @@
 }
 .closebutton {
   position: absolute;
-  top: 90px;
+  top: 0px;
+  /* margin-left: -20px; */
+  /* left: -10px; */
   background-color: rgba(0, 0, 128, 0);
   color: aliceblue;
   border-color: rgba(255, 222, 173, 0) transparent;
-  font-size: larger;
+  color: red;
+  cursor: pointer;
+  font-size: 45px;
   font-weight: bold;
 }
