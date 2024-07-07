@@ -21,18 +21,17 @@ ChartJS.register(
 );
 
 const ChartComponent = (props) => {
+  const [labels, setLabels] = useState([]);
+
   useEffect(() => {
-    // get user assignments Data
-    axios
-      .get(
-        "http://localhost/Projects/OralRadiology/userLogic.php/UserAssignments/" +
-          props.userID
-      )
-      .then((res) => {
-        console.log(res.data);
-      })
-      .catch((error) => console.error(error));
-  });
+    console.log("Chart props:", props); // Log the props
+
+    if (props.Submission && Array.isArray(props.Submission)) {
+      setLabels(
+        props.Submission.map((assignment) => assignment.assignmentName)
+      );
+    }
+  }, [props.Submission]);
 
   // State variables for colors
   const [labelColor, setLabelColor] = useState("#283747");
@@ -51,23 +50,17 @@ const ChartComponent = (props) => {
   }, []);
 
   const data = {
-    labels: [
-      "Assignment 1",
-      "Assignment 2",
-      "Assignment 3",
-      "Assignment 4",
-      "Assignment 5",
-    ],
+    labels: props.Submission.map((assignment) => assignment.assignmentName),
     datasets: [
       {
         label: "Your Grades",
-        data: [69, 99, 88, 12, 50],
+        data: props.Submission.map((assignment) => assignment.totalGrade),
         backgroundColor: "#FFD269",
         barThickness: 25,
       },
       {
         label: "Average Grades",
-        data: [60, 90, 90, 40, 50],
+        data: [60, 90, 90], // Placeholder values; adjust according to your data
         backgroundColor: "#A2D1FD",
         barThickness: 25,
       },
@@ -115,6 +108,7 @@ const ChartComponent = (props) => {
       },
     },
   };
+
   return <Bar data={data} options={options} />;
 };
 
