@@ -35,7 +35,7 @@ function GradingPage() {
           dataSending
         )
         .then((res) => {
-          console.log("res.msg:", res.msg);
+          // console.log("res.msg:", res.msg);
           if (res.msg) {
             // Success
             const responseData = Array.isArray(res.msg) ? res.msg : [];
@@ -46,7 +46,7 @@ function GradingPage() {
               Comment: record.Comment ?? "", // Default to empty string if Comment is null or undefined
             }));
             setData(initializedData);
-            console.log("initializedData:", initializedData);
+            // console.log("initializedData:", initializedData);
             // sessionStorage.setItem("ProfileImgs", responseData.PersonalImage);
           } else {
             // Fail
@@ -54,7 +54,6 @@ function GradingPage() {
           }
         })
         .catch((err) => console.error(err));
-        
     };
     fetchData();
 
@@ -140,16 +139,8 @@ function GradingPage() {
   return (
     <>
       <div className="monem2_admin">
-        <h1>Assignment 1</h1>
+        <h1>Grading Assignment</h1>
         <hr />
-        <div>
-          <h2>Submissions</h2>
-          <button type="button" onClick={handleSaveAll}>
-            Save All
-          </button>
-          <button type="submit">Download Report</button>
-        </div>
-        <input type="search" id="searchh" />
         <div className="table-responsive">
           <table className="table">
             <TableHeaderGradingPage />

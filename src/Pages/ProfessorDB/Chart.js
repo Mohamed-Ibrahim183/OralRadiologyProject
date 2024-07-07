@@ -74,7 +74,7 @@ const ChartComponent = () => {
       },
       {
         label: "Total Students",
-        data: Array.from({ length: countUsers }, (_) => countUsers),
+        data: Array.from({ length: assignments.length }, (_) => countUsers),
         backgroundColor: "#A2D1FD",
         barThickness: 25,
       },
