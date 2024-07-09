@@ -9,7 +9,8 @@ import {
   Legend,
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
-import axios from "axios";
+
+import { axiosMethods } from "../Controller";
 
 ChartJS.register(
   CategoryScale,
@@ -20,22 +21,20 @@ ChartJS.register(
   Legend
 );
 
-const ChartComponent = (props) => {
-  const [labels, setLabels] = useState([]);
-
-  useEffect(() => {
-    console.log("Chart props:", props); // Log the props
-
-    if (props.Submission && Array.isArray(props.Submission)) {
-      setLabels(
-        props.Submission.map((assignment) => assignment.assignmentName)
-      );
-    }
-  }, [props.Submission]);
-
+const ChartComponent = () => {
   // State variables for colors
   const [labelColor, setLabelColor] = useState("#283747");
   const [titleColor, setTitleColor] = useState("#5D6D7E");
+
+  const [assignments, setAssignments] = useState([]);
+
+  useEffect(() => {
+    new axiosMethods()
+      .get("http://localhost/Projects/OralRadiology/AssignmentLogic.php/GetAll")
+      .then((res) => {
+        setAssignments(res.msg);
+      });
+  }, []);
 
   // useEffect to set the color based on the theme
   useEffect(() => {
@@ -50,7 +49,7 @@ const ChartComponent = (props) => {
   }, []);
 
   const data = {
-    labels: props.Assignments.map((assignment) => assignment.Name),
+    labels: assignments.map((assignment) => assignment.Name),
     datasets: [
       {
         label: "Your Grades",
@@ -87,7 +86,7 @@ const ChartComponent = (props) => {
         type: "category",
         title: {
           display: true,
-          text: "Year",
+          text: "Assignments",
           color: titleColor,
         },
         ticks: {
@@ -98,7 +97,7 @@ const ChartComponent = (props) => {
         type: "linear",
         title: {
           display: true,
-          text: "Amount",
+          text: "Grade",
           color: titleColor,
         },
         ticks: {

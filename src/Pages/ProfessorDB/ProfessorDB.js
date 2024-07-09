@@ -36,34 +36,33 @@ function GroupsData() {
   );
   const maxRetries = 2;
 
-  const fetchData = (attempt = 0) => {
-    axios
-      .get(
-        "http://localhost/Projects/OralRadiology/AssignmentLogic.php/AssignmentGroupsShow"
-      )
-      .then((res) => {
-        if (res.data.length > 0) {
-          setGroups(res.data);
-        } else if (attempt < maxRetries) {
-          setTimeout(() => fetchData(attempt + 1), 1000); // Retry after 1 second
-        } else {
-          setLoadingMessage("No Groups Data");
-        }
-      })
-      .catch((error) => {
-        console.error(error);
-        if (attempt < maxRetries) {
-          setTimeout(() => fetchData(attempt + 1), 1000); // Retry after 1 second
-        } else {
-          setLoadingMessage("No Groups Data");
-        }
-      });
-  };
-
   useEffect(() => {
+    const fetchData = (attempt = 0) => {
+      axios
+        .get(
+          "http://localhost/Projects/OralRadiology/AssignmentLogic.php/AssignmentGroupsShow"
+        )
+        .then((res) => {
+          if (res.data.length > 0) {
+            setGroups(res.data);
+          } else if (attempt < maxRetries) {
+            setTimeout(() => fetchData(attempt + 1), 1000); // Retry after 1 second
+          } else {
+            setLoadingMessage("No Groups Data");
+          }
+        })
+        .catch((error) => {
+          console.error(error);
+          if (attempt < maxRetries) {
+            setTimeout(() => fetchData(attempt + 1), 1000); // Retry after 1 second
+          } else {
+            setLoadingMessage("No Groups Data");
+          }
+        });
+    };
     fetchData();
   }, []);
-  
+
   const renderTableHeader = () => {
     return (
       <TableHead>

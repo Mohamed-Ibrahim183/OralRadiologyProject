@@ -1,6 +1,6 @@
-import React from 'react';
+import React from "react";
 
-const Calendarr = ({ year, month }) => {
+const Calendar = ({ year, month }) => {
   // Create a new date object for the first day of the given month and year
   const firstDay = new Date(year, month - 1, 1);
 
@@ -29,9 +29,7 @@ const Calendarr = ({ year, month }) => {
   const rows = [];
   for (let i = 0; i < totalSlots.length; i += 7) {
     const weekRow = totalSlots.slice(i, i + 7);
-    rows.push(
-      <tr key={`week-${i / 7}`}>{weekRow}</tr>
-    );
+    rows.push(<tr key={`week-${i / 7}`}>{weekRow}</tr>);
   }
 
   return (
@@ -39,7 +37,7 @@ const Calendarr = ({ year, month }) => {
       <table className="calendar">
         <thead>
           <tr>
-            {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(day => (
+            {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((day) => (
               <th key={day}>{day}</th>
             ))}
           </tr>
@@ -59,7 +57,8 @@ const Calendarr = ({ year, month }) => {
           border-collapse: collapse;
           table-layout: fixed;
         }
-        .calendar th, .calendar td {
+        .calendar th,
+        .calendar td {
           padding: 10px;
           text-align: center;
           border: 1px solid #ddd;
@@ -82,4 +81,4 @@ const Calendarr = ({ year, month }) => {
   );
 };
 
-export default Calendarr;
+export default Calendar;

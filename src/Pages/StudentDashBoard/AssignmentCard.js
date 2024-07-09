@@ -1,22 +1,24 @@
 import React from "react";
 
-const AssignmentCard = (props) => {
+const AssignmentCard = ({ col, name, info, state, grade, maxGrade }) => {
   const stateStyle = {
-    backgroundColor: props.col,
+    backgroundColor: col,
   };
   const label = {
-    borderLeft: `10px solid ${props.col}`,
+    borderLeft: `10px solid ${col}`,
   };
   return (
     <div className="AssCard" style={label}>
       <div className="info">
-        <h3 className="name">{props.name}</h3>
-        <span className="Details">{props.info}</span>
+        <h3 className="name">{name}</h3>
+        {info && <span className="Details">{info}</span>}
       </div>
-      <div className="grade">{/* <span>{props.grade}/100</span> */}</div>
-      <div className="state" style={stateStyle}>
-        {/* {props.state} */}
-      </div>
+      {grade && <div className="grade">{/* <span>{grade}/100</span> */}</div>}
+      {state && (
+        <div className="state" style={stateStyle}>
+          {state}
+        </div>
+      )}
     </div>
   );
 };
