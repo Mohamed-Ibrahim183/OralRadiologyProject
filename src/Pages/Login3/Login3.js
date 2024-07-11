@@ -1,26 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import "./Login3.css";
-import Navbar from "../../Components/Navbar/Navbar";
 import axios from "axios";
 import { ContextData } from "../../ContextData";
 import { useNavigate } from "react-router-dom";
-
-function script() {
-  const trouble = document.getElementById("trouble");
-  const signInButton = document.getElementById("signIn");
-  const container = document.getElementById("container");
-
-  if (trouble) {
-    trouble.addEventListener("click", () => {
-      container.classList.add("right-panel-active");
-    });
-  }
-  if (signInButton) {
-    signInButton.addEventListener("click", () => {
-      container.classList.remove("right-panel-active");
-    });
-  }
-}
 
 function Login3() {
   const [identifier, setIdentifier] = useState("");
@@ -34,7 +16,7 @@ function Login3() {
     e.preventDefault();
     if (identifier.trim() === "" || password.trim() === "") {
       alert("Identifier and Password must not be empty");
-      return; // Return to prevent submission if fields are empty
+      return;
     }
 
     const url = "http://localhost/Projects/OralRadiology/userLogic.php/Login";
@@ -57,9 +39,7 @@ function Login3() {
           );
           setUserType(res.data.Type);
           sessionStorage.setItem("full", JSON.stringify(res.data));
-          // window.location.href = `/Dashboard`;
           conData.dispatch({ type: "setUser", payload: res.data });
-          // Navigator("/admin/Dashboard");
         } else {
           alert(res.data);
         }
@@ -82,71 +62,64 @@ function Login3() {
 
   return (
     <div className="noScroll">
-      {/* <Navbar /> */}
       <div className="login3">
         <h1>Welcome to MSA Oral Radiology</h1>
         <div className="container" id="container">
-          <div className="form-container sign-up-container">
-            <form>
-              <h2>Forgat Password?</h2>
-              <span>Enter your MSA Email</span>
-              <input type="email" placeholder="Email" />
-              <button>Continue</button>
-            </form>
-          </div>
-          <div className="form-container sign-in-container">
-            <form onSubmit={handleSubmit2}>
-              <h2>Sign in</h2>
-              <span>Use Your MSA Account Details</span>
-              <input
-                type="text"
-                placeholder="Email or MSA ID"
-                value={identifier}
-                onChange={(e) => setIdentifier(e.target.value)}
-                required
-              />
-              <input
-                type={passwordShown ? "text" : "password"}
-                placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-              />
-              <div style={{ position: "relative" }}>
-                <button
-                  type="button"
-                  onClick={togglePasswordVisibility}
-                  style={{
-                    position: "absolute",
-                    left: 50,
-                    bottom: 10,
-                    background: "transparent",
-                    color: "Black",
-                    border: "none",
-                    cursor: "pointer",
-                  }}
-                >
-                  {passwordShown ? "Hide" : "Show"}
-                </button>
-              </div>
-              <button>Sign In</button>
-            </form>
-          </div>
-          <div className="overlay-container">
-            <div className="overlay">
-              <div className="overlay-panel overlay-left">
-                <h1>Welcome Back!</h1>
-                <p>To connect please login with your personal info</p>
-                <button type="submit" className="ghost submit" id="signIn">
-                  Sign In
-                </button>
-              </div>
-              <div className="overlay-panel overlay-right">
-                <h1>Hello, Friend!</h1>
-                <p>Enter your personal details and start journey with us</p>
-                <button className="ghost" id="trouble" onClick={script}>
-                  Having Trouble Logging in?
-                </button>
+          <div className="bigContainer">
+            <div className="form-container sign-in-container">
+              <form onSubmit={handleSubmit2}>
+                <h2>Sign in</h2>
+                <span>Use Your MSA Account Details</span>
+                <input
+                  type="text"
+                  placeholder="Email or MSA ID"
+                  value={identifier}
+                  onChange={(e) => setIdentifier(e.target.value)}
+                  required
+                />
+                <input
+                  type={passwordShown ? "text" : "password"}
+                  placeholder="Password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                />
+                <div style={{ position: "relative" }}>
+                  <button
+                    type="button"
+                    onClick={togglePasswordVisibility}
+                    style={{
+                      position: "absolute",
+                      left: 50,
+                      bottom: 10,
+                      background: "transparent",
+                      color: "Black",
+                      border: "none",
+                      cursor: "pointer",
+                    }}
+                  >
+                    {passwordShown ? "Hide" : "Show"}
+                  </button>
+                </div>
+                <button>Sign In</button>
+              </form>
+            </div>
+            <div className="overlay-container">
+              <div className="overlay">
+                <div className="overlay-panel overlay-left">
+                  <h1>Welcome Back!</h1>
+                  <p>To connect please login with your personal info</p>
+                  <button type="submit" className="ghost submit" id="signIn">
+                    Sign In
+                  </button>
+                </div>
+                <div className="overlay-panel overlay-right">
+                  <h1>Hello, Friend!</h1>
+                  <p>Enter your personal details and start journey with us</p>
+                  <button className="ghost" id="trouble">
+                    Having Trouble Logging in?
+                  </button>
+                </div>
               </div>
             </div>
           </div>

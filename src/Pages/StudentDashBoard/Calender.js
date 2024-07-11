@@ -1,5 +1,5 @@
 import React from "react";
-
+import "./student.css";
 const Calendar = ({ year, month }) => {
   // Create a new date object for the first day of the given month and year
   const firstDay = new Date(year, month - 1, 1);
@@ -36,7 +36,7 @@ const Calendar = ({ year, month }) => {
     <div className="calendar-container">
       <table className="calendar">
         <thead>
-          <tr>
+          <tr className="calanderdays">
             {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((day) => (
               <th key={day}>{day}</th>
             ))}
