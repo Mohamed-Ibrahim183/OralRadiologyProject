@@ -21,19 +21,21 @@ const TableRowGradingPage = ({ record, onGradeChange, onCommentChange }) => {
       <td>{record.email}</td>
       {/* <td></td> */}
       {/* Grade */}
-      {/* <td>
+      <td>
         <input
           type="number"
-          value={record.Grade ?? 0} // Default to 0 if Grade is null or undefined
-          onChange={handleGradeChange}
-          style={{ width: "50%" }}
+          value={record.Grade["Total"] ?? 0} // Default to 0 if Grade is null or undefined
+          readOnly={true}
+          // onChange={handleGradeChange}
+          style={{ width: "25%" }}
         />
-      </td> */}
+      </td>
+      <td>{record.Time}</td>
+
       {/* <td>{record.joiningDate}</td> */}
       <td>
         <button onClick={record.openModal}>View Submissions</button>
       </td>
-      {/* <td></td> */}
       {/* Feedback comment */}
       {/* <td>
         <input

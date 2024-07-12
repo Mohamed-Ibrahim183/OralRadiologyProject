@@ -1,27 +1,27 @@
 :root {
-  --mainBackGround: #F5FBF9;
+  --mainBackGround: #f5fbf9;
   --mainColor: #0082e6;
   --secondText: #65b4f1;
   --textColor: var(--mainColor);
   --headerColor: #0082e6;
-  --text-monem:rgb(20, 19, 19);
-  --btnB:#2450f1;
-  --btnB-hover:#14319b;
+  --text-monem: rgb(20, 19, 19);
+  --btnB: #2450f1;
+  --btnB-hover: #14319b;
   --sidebar-expanded-margin: 200px;
   --sidebar-default-margin: 70px;
   --mainText: black;
   --secondaryText: #777;
 }
 
-[theme=Dark] {
+[theme="Dark"] {
   --mainColor: #4d8ba8;
   --mainBackGround: #1b343c;
   --secondText: #65b4f1;
   --textColor: #96bdcf;
   --headerColor: #4d8ba8;
-  --text-monem:rgb(230, 230, 230);
-  --btnB:#4d8ba8;
-  --btnB-hover:#356981;
+  --text-monem: rgb(230, 230, 230);
+  --btnB: #4d8ba8;
+  --btnB-hover: #356981;
   --mainText: white;
   --secondaryText: #a9a9a9;
 }
@@ -40,15 +40,18 @@
   flex-direction: column;
   color: var(--text-monem);
 }
-.container_monemm .header, .container_monemm .assignment-info {
+.container_monemm .header,
+.container_monemm .assignment-info {
   padding: 20px;
 }
-.container_monemm .header label, .container_monemm .assignment-info label {
+.container_monemm .header label,
+.container_monemm .assignment-info label {
   display: block;
   margin-bottom: 10px;
   font-weight: bold;
 }
-.container_monemm .header input, .container_monemm .assignment-info input {
+.container_monemm .header input,
+.container_monemm .assignment-info input {
   width: 100%;
   padding: 10px;
   margin-bottom: 20px;
@@ -95,7 +98,9 @@
 .container_monemm .feedback h3 {
   text-align: center;
 }
-.container_monemm .button, .container_monemm .btnA, .container_monemm .btnB {
+.container_monemm .button,
+.container_monemm .btnA,
+.container_monemm .btnB {
   padding: 10px 18px;
   border: none;
   cursor: pointer;
@@ -107,7 +112,7 @@
   color: white;
 }
 .container_monemm .btnA {
-  background-color: #DFECFC;
+  background-color: #dfecfc;
   color: var(--textColor);
   margin-right: 0.5px;
 }
@@ -133,10 +138,13 @@
     text-align: center;
     margin-top: 0.5rem;
   }
-  .container_monemm .monem, .container_monemm .feedback {
+  .container_monemm .monem,
+  .container_monemm .feedback {
     display: block;
   }
-  .container_monemm .header, .container_monemm .xray_image, .container_monemm .assignment-info {
+  .container_monemm .header,
+  .container_monemm .xray_image,
+  .container_monemm .assignment-info {
     width: 100%;
     margin: 0;
   }
@@ -164,10 +172,13 @@
     text-align: center;
     margin-top: 0.5rem;
   }
-  .container_monemm .monem, .container_monemm .feedback {
+  .container_monemm .monem,
+  .container_monemm .feedback {
     display: block;
   }
-  .container_monemm .header, .container_monemm .xray_image, .container_monemm .assignment-info {
+  .container_monemm .header,
+  .container_monemm .xray_image,
+  .container_monemm .assignment-info {
     width: 100%;
     margin: 0;
   }
@@ -193,7 +204,9 @@
   .container_monemm .header .submit_images {
     width: 90%;
   }
-  .container_monemm .header, .container_monemm .xray_image, .container_monemm .assignment-info {
+  .container_monemm .header,
+  .container_monemm .xray_image,
+  .container_monemm .assignment-info {
     margin: 0;
   }
   .container_monemm .assignment-submission-text2 {
@@ -217,7 +230,9 @@
     text-align: center;
     margin-top: 0.5rem;
   }
-  .container_monemm .header, .container_monemm .xray_image, .container_monemm .assignment-info {
+  .container_monemm .header,
+  .container_monemm .xray_image,
+  .container_monemm .assignment-info {
     margin: 0;
   }
   .container_monemm .assignment-submission-text2 {
@@ -241,7 +256,9 @@
     text-align: center;
     margin-top: 0.5rem;
   }
-  .container_monemm .header, .container_monemm .xray_image, .container_monemm .assignment-info {
+  .container_monemm .header,
+  .container_monemm .xray_image,
+  .container_monemm .assignment-info {
     margin: 0;
   }
   .container_monemm .assignment-submission-text2 {
@@ -256,4 +273,51 @@
   .container_monemm .feedback h3 {
     text-align: center;
   }
-}/*# sourceMappingURL=submit_page.css.map */
+} /*# sourceMappingURL=submit_page.css.map */
+/* Assignment Card */
+.container_monemm .AssCard {
+  box-shadow: 0px 5px 13px 0px rgba(0, 0, 0, 0.25);
+  margin-top: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px;
+  cursor: pointer;
+
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+.container_monemm.AssCard .info {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.container_monemm .AssCard .info .name {
+  font-size: 20px;
+  font-weight: bold;
+  text-transform: capitalize;
+  color: var(--mainText);
+}
+.container_monemm .AssCard .info .Details {
+  color: var(--secondaryText);
+}
+.container_monemm .AssCard .grade {
+  font-size: 20px;
+  font-weight: bold;
+  color: var(--secondaryText);
+}
+.container_monemm .AssCard .state {
+  padding: 16px;
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  text-transform: capitalize;
+  border-radius: 8px;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  -ms-border-radius: 8px;
+  -o-border-radius: 8px;
+}

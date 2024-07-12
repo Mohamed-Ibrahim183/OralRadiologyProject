@@ -26,7 +26,8 @@ const style = {
 
 export default function BasicModal({
   open,
-  dispatch,
+  handleOpen,
+  handleClose,
   selectedUser,
   setChanges,
 }) {
@@ -62,7 +63,7 @@ export default function BasicModal({
     <div>
       <Modal
         open={open}
-        onClose={() => dispatch("closeEditModal")}
+        onClose={() => handleClose()}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >

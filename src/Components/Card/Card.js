@@ -2,15 +2,15 @@ import React, { useState } from "react";
 import "./Card.css";
 import Attr from "./Attr";
 
-const Card = (props) => {
-  const images = props.images2;
+const Card = ({ images, assignmentName, Features }) => {
+  // const images = props.images;
   const [imageIndex, setImageIndex] = useState(0);
   // const AssImage = images[imageIndex];
-  const AssImage = images[imageIndex]["image"];
-  const Features = props.Features;
+  const AssImage = images[imageIndex];
+  // const Features = props.Features;
 
-  const content = Features.map(function (ele, index) {
-    return <Attr key={index} Key={ele.key} Value={ele.value} />;
+  const Attributes = Object.keys(Features).map(function (ele, index) {
+    return <Attr key={index} Key={ele} Value={Features[ele]} />;
   });
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -31,6 +31,8 @@ const Card = (props) => {
     );
   };
 
+  // console.log("images:", images);
+  // return;
   return (
     <div className="container AssCard">
       <div className="Card">
@@ -42,8 +44,10 @@ const Card = (props) => {
             ></i>
             <img
               className="image"
-              src={"http://localhost:3000" + AssImage}
-              alt={props.Name}
+              src={
+                "http://localhost/Projects/OralRadiology/" + AssImage["Path"]
+              }
+              alt={AssImage["Category"]}
               onClick={toggleModal}
             />
             <i
@@ -52,12 +56,12 @@ const Card = (props) => {
             ></i>
           </div>
           <div className="status">
-            <span className="AssName">{props.Name}</span>
+            <span className="AssName">{assignmentName}</span>
 
-            <span className="cat">{images[imageIndex]["category"]}</span>
+            <span className="cat">{AssImage["Category"]}</span>
           </div>
         </div>
-        <div className="attrs">{content}</div>
+        <div className="attrs">{Attributes}</div>
       </div>
       {isModalOpen && (
         <div className="modal" onClick={toggleModal}>
@@ -70,7 +74,7 @@ const Card = (props) => {
                 className="modal-image image"
                 style={{ width: "600px", height: "600px" }}
                 src={AssImage}
-                alt={props.Name}
+                alt={assignmentName}
               />
               <button className="modal-button" onClick={previous}>
                 Previous

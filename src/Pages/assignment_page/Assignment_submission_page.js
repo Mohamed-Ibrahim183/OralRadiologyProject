@@ -8,6 +8,7 @@ import IconButton from "@mui/material/IconButton";
 import { ArrowBackIos, ArrowForwardIos, Delete } from "@mui/icons-material";
 import { Box, Button, Fade, Menu, MenuItem } from "@mui/material";
 import { axiosMethods } from "../Controller";
+import AssignmentCard from "../StudentDashBoard/AssignmentCard";
 
 const AssignmentSubmission = () => {
   const [assignmentInfo, setAssignmentInfo] = useState({});
@@ -15,6 +16,7 @@ const AssignmentSubmission = () => {
   const [files, setFiles] = useState([]);
   const [categories, setCategories] = useState({});
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [update, setUpdate] = useState(0);
 
   useEffect(() => {
     const fetchAssignmentInfo = async () => {
@@ -23,11 +25,14 @@ const AssignmentSubmission = () => {
         console.error("Assignment ID is not set in session storage.");
         return;
       }
-      const url = `http://localhost/Projects/OralRadiology/AssignmentLogic.php/GetAssignment?assignmentId=${assignmentId}`;
-      await axios
-        .get(url)
-        .then((res) => setAssignmentInfo(res.data))
-        .catch((error) => console.error(error));
+      new axiosMethods()
+        .get("http://localhost/Projects/OralRadiology/AssignmentLogic.php", {
+          Action: "fetchAssignment",
+          assignmentId: assignmentId,
+        })
+        .then((res) => {
+          setAssignmentInfo(res.msg);
+        });
     };
 
     fetchAssignmentInfo();
@@ -76,14 +81,35 @@ const AssignmentSubmission = () => {
 
     const assignmentId = searchParams.get("assignmentId");
     const studentId = searchParams.get("userId");
+    let flagCategories = true;
+    Object.keys(categories).forEach((ele) => {
+      if (categories[ele] === "") flagCategories = false;
+    });
+    if (flagCategories === false) {
+      alert("You must fill the categories of each Film before submit");
+      return;
+    }
 
     try {
+      let lastSubmission = -1;
+      async function saveSubmission() {
+        await new axiosMethods()
+          .post(
+            "http://localhost/Projects/OralRadiology/AssignmentLogic.php/newSubmission",
+            { studentId, assignmentId }
+          )
+          .then((res) => {
+            lastSubmission = res.msg;
+          });
+      }
+      await saveSubmission();
       for (let i = 0; i < files.length; i++) {
         const formData = new FormData();
         formData.append("assignmentId", assignmentId);
         formData.append("StudentId", studentId);
         formData.append("file", files[i]);
         formData.append("category", categories[files[i].name]);
+        formData.append("submission", lastSubmission);
 
         new axiosMethods()
           .post(
@@ -98,16 +124,12 @@ const AssignmentSubmission = () => {
           });
       }
 
-      new axiosMethods()
-        .post(
-          "http://localhost/Projects/OralRadiology/AssignmentLogic.php/newSubmission",
-          { studentId, assignmentId }
-        )
-        .then((res) => console.log("ss", res.msg));
       alert("Files uploaded successfully.");
     } catch (error) {
       console.error("Error uploading files:", error);
       alert("Failed to upload files.");
+    } finally {
+      setUpdate(update + 1);
     }
   };
 
@@ -214,9 +236,43 @@ const AssignmentSubmission = () => {
         </div>
         {/* <Feedback /> */}
       </div>
+      <Submissions assignment={assignmentInfo} update={update} />
     </>
   );
 };
+function Submissions({ assignment, update }) {
+  const [submissions, setSubmissions] = useState([]);
+  useEffect(() => {
+    new axiosMethods()
+      .get("http://localhost/Projects/OralRadiology/AssignmentLogic.php", {
+        Action: "GetSubmissionByUserAndAssignment",
+        userId: sessionStorage.getItem("userId"),
+        assignmentId: sessionStorage.getItem("assignmentId"),
+      })
+      .then((res) => setSubmissions(res.msg));
+  }, [update]);
+
+  return (
+    <div className="container_monemm">
+      {submissions.length > 0 &&
+        Array.isArray(submissions) &&
+        submissions.map((sub) => {
+          return (
+            <AssignmentCard
+              key={`${sub.Id}${sub.studentId}${sub.assignmentId}${sub.submitTime}`}
+              name={assignment.Name || "Assignment Name"}
+              // state="Good"
+              grade={
+                `${sub.Grade["Total"]} / ${sub.Grade["count"] * 100}` || "Grade"
+              }
+              info={`Topic: ${assignment.Topic} | SubmitTime:${sub.submitTime}`}
+              col="#0082e6"
+            />
+          );
+        })}
+    </div>
+  );
+}
 
 const Header = ({
   assignmentInfo,

@@ -16,6 +16,7 @@ function GradingPage() {
   const [error, setError] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [currentStudentId, setCurrentStudentId] = useState(null);
+  const [submission, setSubmission] = useState(null);
 
   useEffect(() => {
     if (!assignmentId) {
@@ -42,12 +43,9 @@ function GradingPage() {
             // Initialize data from response
             const initializedData = responseData.map((record) => ({
               ...record,
-              Grade: record.Grade ?? 0, // Default to 0 if Grade is null or undefined
               Comment: record.Comment ?? "", // Default to empty string if Comment is null or undefined
             }));
             setData(initializedData);
-            // console.log("initializedData:", initializedData);
-            // sessionStorage.setItem("ProfileImgs", responseData.PersonalImage);
           } else {
             // Fail
             setError(res.error);
@@ -88,8 +86,9 @@ function GradingPage() {
     sessionStorage.setItem("submissionData", JSON.stringify(sessionData));
   };
 
-  const handleOpenModal = (studentId) => {
-    setCurrentStudentId(studentId);
+  const handleOpenModal = (submission) => {
+    // setCurrentStudentId(studentId);
+    setSubmission(submission);
     setShowModal(true);
   };
 
@@ -97,44 +96,9 @@ function GradingPage() {
     setShowModal(false);
   };
 
-  const handleSaveAll = () => {
-    const submissionData =
-      JSON.parse(sessionStorage.getItem("submissionData")) || {};
-    const dataToSend = Object.entries(submissionData).map(
-      ([studentId, { grade, comment }]) => ({
-        assignmentId: assignmentId,
-        studentId: studentId,
-        grade: grade,
-        comment: comment,
-      })
-    );
+  if (sessionStorage["Type"] !== "Professor") return <Navigate to="/" />;
 
-    new axiosMethods()
-      .post(
-        "http://localhost/Projects/OralRadiology/UpdateSubmission.php",
-        submissionData
-      )
-      .then((res) => {
-        if (res && res.data && res.data.success) {
-          alert("Submissions saved successfully!");
-        } else {
-          console.error("Error response from server:", res); // Log the error response
-          alert("Failed to save submissions. Please try again.");
-        }
-      })
-      .catch((error) => {
-        console.error("Error saving submissions:", error);
-        alert("An error occurred while saving submissions.");
-      });
-  };
-
-  if (sessionStorage["Type"] !== "Professor") {
-    return <Navigate to="/" />;
-  }
-
-  if (error) {
-    return <p>Error: {error}</p>;
-  }
+  if (error) return <p>Error: {error}</p>;
 
   return (
     <>
@@ -151,13 +115,15 @@ function GradingPage() {
                   record={{
                     profilePic: `http://localhost/Projects/OralRadiology/${record.PersonalImage}`,
                     name: record.Name,
+                    ID: record.Id,
                     IDD: record.MSAId,
                     email: record.Email,
                     status: record.Type,
-                    joiningDate: record.submitTime,
+                    Time: record.submitTime,
                     Grade: record.Grade,
                     Comment: record.Comment,
-                    openModal: () => handleOpenModal(record.Id),
+                    openModal: () => handleOpenModal(record.submission),
+                    ...data,
                   }}
                   onGradeChange={handleGradeChange}
                   onCommentChange={handleCommentChange}
@@ -170,7 +136,8 @@ function GradingPage() {
       <ViewSubmissionsModal
         show={showModal}
         handleClose={handleCloseModal}
-        studentId={currentStudentId}
+        // studentId={currentStudentId}
+        submission={submission}
         assignmentId={assignmentId}
       />
     </>

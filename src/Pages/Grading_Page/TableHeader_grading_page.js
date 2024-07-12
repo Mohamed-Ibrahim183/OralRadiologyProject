@@ -8,10 +8,10 @@ function TableHeaderGradingPage() {
         <th>ID</th>
         <th>Email</th>
         {/* <th>Status</th> */}
-        {/* <th>Grade</th> */}
-        {/* <th>Submission Date</th> */}
+        <th>Grade</th>
+        <th>Submission Time</th>
         <th>File submissions</th>
-        {/* <th>Last modified</th> */}
+        {/* <th>submitted Time</th> */}
         {/* <th>FeedBack comments</th> */}
       </tr>
     </thead>

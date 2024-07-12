@@ -13,7 +13,11 @@ const AssignmentCard = ({ col, name, info, state, grade, maxGrade }) => {
         <h3 className="name">{name}</h3>
         {info && <span className="Details">{info}</span>}
       </div>
-      {grade && <div className="grade">{/* <span>{grade}/100</span> */}</div>}
+      {grade && (
+        <div className="grade">
+          <span>{grade}</span>
+        </div>
+      )}
       {state && (
         <div className="state" style={stateStyle}>
           {state}

@@ -98,7 +98,8 @@
   margin-left: 430px;
 }
 .fullPage .cardAssignment {
-  height: 300px;
+  margin-bottom: 24px;
+  max-height: 300px;
   overflow-y: auto;
 }
 .cardAssignment::-webkit-scrollbar {
@@ -147,15 +148,19 @@
   cursor: pointer;
 }
 @media screen and (max-width: 1080px) {
-  .fullPage .userProf {
+  /* .fullPage .userProf {
     width: 100%;
     margin-top: -720px;
+  } */
+  .fullPage .upper {
+    display: flex;
+    flex-direction: column;
   }
   .fullPage .container.AssignmentSection {
     width: 100%;
     height: 100%;
-    margin-top: 400px;
-    float: none;
+    /* margin-top: 400px; */
+    /* float: none; */
   }
   .fullPage .container.AssignmentSection h5 {
     color: #7b7b7b;

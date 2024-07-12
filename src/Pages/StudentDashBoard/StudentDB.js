@@ -17,12 +17,39 @@ const StudentDB = () => {
   const UserId = sessionStorage["userId"];
 
   const [assignments, setAssignments] = useState([]);
+  const [submissions, setSubmissions] = useState([]);
+
+  const [Error, setError] = useState("");
 
   useEffect(() => {
     new axiosMethods()
-      .get("http://localhost/Projects/OralRadiology/AssignmentLogic.php/GetAll")
+      .get("http://localhost/Projects/OralRadiology/AssignmentLogic.php", {
+        Action: "GetAssignmentsForUser",
+        userId: UserId,
+      })
       .then((res) => {
-        setAssignments(res.msg);
+        // console.log("New Endpoint", res.msg);
+        if (res.msg["Err"] === 1)
+          setError("User is not in a Group Please contact to the Admin");
+        else {
+          setAssignments(res.msg);
+        }
+      });
+  }, [UserId]);
+
+  useEffect(() => {
+    new axiosMethods()
+      .get("http://localhost/Projects/OralRadiology/AssignmentLogic.php", {
+        Action: "GetSubmissionById",
+        userId: UserId,
+      })
+      .then((res) => {
+        // console.log("New Endpoint", res.msg);
+        if (res.msg["Err"] === 1)
+          setError("User is not in a Group Please contact to the Admin");
+        else {
+          setSubmissions(res.msg);
+        }
       });
   }, [UserId]);
 
@@ -43,24 +70,30 @@ const StudentDB = () => {
               <h2 className="sectionTitle">My Assignments</h2>
             </div>
             <div className="cardAssignment">
-              {assignments.map((assignment, i) => (
-                <Link
-                  key={i}
-                  to={{
-                    pathname: "/student/submit",
-                    search: `?userId=${UserId}&assignmentId=${assignment.Id}`,
-                  }}
-                  onClick={() => handleAssignmentClick(assignment.Id)}
-                >
-                  <AssignmentCard
-                    name={assignment.Name}
-                    // state="Good"
-                    info={`Topic: ${assignment.Topic}`}
-                    // grade="60"
-                    col="#0082e6"
-                  ></AssignmentCard>
-                </Link>
-              ))}
+              {assignments.length > 0 &&
+                Array.isArray(assignments) &&
+                assignments.map((assignment, i) => (
+                  <Link
+                    key={i}
+                    to={{
+                      pathname: "/student/submit",
+                      search: `?userId=${UserId}&assignmentId=${assignment.Id}`,
+                    }}
+                    onClick={() => handleAssignmentClick(assignment.Id)}
+                  >
+                    <AssignmentCard
+                      name={assignment.Name}
+                      // state="Good"
+                      // grade="60"
+                      info={`Topic: ${assignment.Topic}`}
+                      col="#0082e6"
+                    ></AssignmentCard>
+                  </Link>
+                ))}
+              {Error !== "" && <p>{Error}</p>}
+              {Error === "" && assignments.length === 0 && (
+                <p>There is no assignments yet</p>
+              )}
             </div>
           </div>
 

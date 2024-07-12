@@ -79,19 +79,21 @@ function GroupsData() {
   const renderTableBody = () => {
     return (
       <TableBody>
-        {groups.map((row) => (
-          <TableRow
-            key={row.Assignment + row.open}
-            sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-          >
-            <TableCell component="th" scope="row">
-              {row.group}
-            </TableCell>
-            <TableCell align="center">{row.Assignment}</TableCell>
-            <TableCell align="center">{row.openTime}</TableCell>
-            <TableCell align="center">{row.closeTime}</TableCell>
-          </TableRow>
-        ))}
+        {groups.length > 0 &&
+          Array.isArray(groups) &&
+          groups.map((row) => (
+            <TableRow
+              key={row.Assignment + row.open}
+              sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+            >
+              <TableCell component="th" scope="row">
+                {row.group}
+              </TableCell>
+              <TableCell align="center">{row.Assignment}</TableCell>
+              <TableCell align="center">{row.openTime}</TableCell>
+              <TableCell align="center">{row.closeTime}</TableCell>
+            </TableRow>
+          ))}
       </TableBody>
     );
   };
