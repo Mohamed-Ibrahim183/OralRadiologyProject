@@ -13,13 +13,19 @@ import {
   Toolbar,
   Tooltip,
   Typography,
+  Drawer,
+  List,
+  ListItem,
+  ListItemText,
 } from "@mui/material";
+import MenuIcon from "@mui/icons-material/Menu";
 import logo from "./logo.png";
 
 const Navbar = () => {
   const [Links, setLinks] = useState(null);
   const userType = sessionStorage["Type"];
   const [anchorElUser, setAnchorElUser] = useState(null);
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
@@ -27,6 +33,10 @@ const Navbar = () => {
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
+  };
+
+  const handleDrawerToggle = () => {
+    setMobileOpen(!mobileOpen);
   };
 
   useEffect(() => {
@@ -79,6 +89,34 @@ const Navbar = () => {
 
   if (!Links) return null;
 
+  const drawer = (
+    <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
+      <Typography variant="h6" sx={{ my: 2 }}>
+        <Link to="/" style={{ color: "inherit", textDecoration: "none" }}>
+          <Avatar
+            src={logo}
+            alt="Oral Radiology"
+            sx={{
+              width: 80,
+              height: 80,
+              marginLeft: "auto",
+              marginRight: "auto",
+            }}
+            className="OralLogo"
+          />
+          Oral Radiology
+        </Link>
+      </Typography>
+      <List>
+        {Links.navLinks.map((ele, index) => (
+          <ListItem button key={index} component={Link} to={ele.link}>
+            <ListItemText primary={ele.Text} />
+          </ListItem>
+        ))}
+      </List>
+    </Box>
+  );
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar
@@ -87,7 +125,20 @@ const Navbar = () => {
         style={{ position: "relative" }}
       >
         <Toolbar>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            edge="start"
+            onClick={handleDrawerToggle}
+            sx={{ mr: 2, display: { sm: "none" } }}
+          >
+            <MenuIcon />
+          </IconButton>
+          <Typography
+            variant="h6"
+            component="div"
+            sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
+          >
             <Link to="/" style={{ color: "white" }}>
               <Typography
                 variant="h5"
@@ -106,7 +157,7 @@ const Navbar = () => {
           <Box
             sx={{
               color: "white",
-              display: "flex",
+              display: { xs: "none", sm: "flex" },
               justifyContent: "space-around",
               alignItems: "center",
               gap: 2,
@@ -161,6 +212,22 @@ const Navbar = () => {
           <DarkMode />
         </Toolbar>
       </AppBar>
+      <Box component="nav">
+        <Drawer
+          variant="temporary"
+          open={mobileOpen}
+          onClose={handleDrawerToggle}
+          ModalProps={{
+            keepMounted: true,
+          }}
+          sx={{
+            display: { xs: "block", sm: "none" },
+            "& .MuiDrawer-paper": { boxSizing: "border-box", width: "240px" },
+          }}
+        >
+          {drawer}
+        </Drawer>
+      </Box>
     </Box>
   );
 };

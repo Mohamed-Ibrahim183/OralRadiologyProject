@@ -1,33 +1,29 @@
 :root {
-  --mainBackGround: #F5FBF9;
+  --mainBackGround: #f5fbf9;
   --mainColor: #0082e6;
   --secondText: #65b4f1;
   --textColor: var(--mainColor);
   --headerColor: #0082e6;
-  --text-monem:rgb(20, 19, 19);
-  --btnB:#2450f1;
-  --btnB-hover:#14319b;
+  --text-monem: rgb(20, 19, 19);
+  --btnB: #2450f1;
+  --btnB-hover: #14319b;
   --sidebar-expanded-margin: 200px;
   --sidebar-default-margin: 70px;
   --mainText: black;
   --secondaryText: #777;
 }
 
-[theme=Dark] {
+[theme="Dark"] {
   --mainColor: #4d8ba8;
   --mainBackGround: #1b343c;
   --secondText: #65b4f1;
   --textColor: #96bdcf;
   --headerColor: #4d8ba8;
-  --text-monem:rgb(230, 230, 230);
-  --btnB:#4d8ba8;
-  --btnB-hover:#356981;
+  --text-monem: rgb(230, 230, 230);
+  --btnB: #4d8ba8;
+  --btnB-hover: #356981;
   --mainText: white;
   --secondaryText: #a9a9a9;
-}
-
-ul li ul li a {
-  transition: all 0.5s ease;
 }
 
 nav.secondary-Navigation {
@@ -68,7 +64,8 @@ nav.secondary-Navigation ul li a {
   border-radius: 3px;
   text-transform: uppercase;
 }
-nav.secondary-Navigation ul li a.active, nav.secondary-Navigation ul li a:hover {
+nav.secondary-Navigation ul li a.active,
+nav.secondary-Navigation ul li a:hover {
   background: var(--secondText);
   transition: 0.5s;
 }
@@ -119,7 +116,8 @@ nav.secondary-Navigation #check {
   nav.secondary-Navigation ul li a {
     font-size: 20px;
   }
-  nav.secondary-Navigation ul li a:hover, nav.secondary-Navigation ul li a.active {
+  nav.secondary-Navigation ul li a:hover,
+  nav.secondary-Navigation ul li a.active {
     background: none;
     color: var(--headerColor);
   }
@@ -190,4 +188,4 @@ nav.secondary-Navigation #check {
   position: absolute !important;
   z-index: 100;
   color: red !important;
-}/*# sourceMappingURL=Nav.css.map */
+} /*# sourceMappingURL=Nav.css.map */

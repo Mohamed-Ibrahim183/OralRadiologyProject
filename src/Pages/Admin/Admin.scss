@@ -6,13 +6,24 @@ $sidebar-expanded-margin: 200px;
 $default-margin: 70px;
 $stats-gap: 20px;
 
-// Global styles can be defined outside any class if needed
-
 // MainPage styles
 .MainPage {
   background-color: $admin-background-color;
+
   .AdminBody {
     background-color: $admin-background-color;
+  }
+  .AdminWrapper {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  @media (max-width: 768px) {
+    .AdminWrapper {
+      flex-direction: column;
+      align-self: center;
+    }
   }
 
   .Charts {
@@ -37,7 +48,8 @@ $stats-gap: 20px;
     }
   }
 
-  & { // This seems redundant, double-check if this is necessary. If it's a mistake, it can be removed or corrected.
+  & {
+    // This seems redundant, double-check if this is necessary. If it's a mistake, it can be removed or corrected.
     position: relative;
   }
 
@@ -50,8 +62,4 @@ $stats-gap: 20px;
     // margin-left: $default-margin;
     transition: all $transition-time;
   }
-
-  // .openSideBar {
-  //   margin-left: $sidebar-expanded-margin !important;
-  // }
 }

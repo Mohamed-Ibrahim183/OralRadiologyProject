@@ -112,6 +112,9 @@
   margin-top: 40px;
 } /*# sourceMappingURL=StudentDB.css.map */
 .fullProfessorPage .calender {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   float: right;
   margin-top: 50px;
   box-shadow: 0px 5px 13px 0px rgba(0, 0, 0, 0.45);
@@ -141,7 +144,7 @@
 }
 @media screen and (max-width: 1080px) {
   .fullProfessorPage .upper {
-    flex-direction: column;
+    flex-direction: column-reverse;
   }
   .fullProfessorPage .container.AssignmentSection {
     width: 100%;
@@ -154,6 +157,12 @@
   }
   .fullProfessorPage .calender {
     margin-right: 6px;
+  }
+  .fullProfessorPage .calender {
+    width: 100%;
+  }
+  .react-calendar {
+    width: 100%;
   }
 }
 
