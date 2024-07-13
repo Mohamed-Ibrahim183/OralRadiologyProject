@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from "react";
-// import "./StudentDB.css";
-
 import AssignmentCard from "./AssignmentCard";
 import Chart from "./Chart";
 import Calendar from "react-calendar";
@@ -17,8 +15,9 @@ const StudentDB = () => {
   const UserId = sessionStorage["userId"];
 
   const [assignments, setAssignments] = useState([]);
+  const [filteredAssignments, setFilteredAssignments] = useState([]);
   const [submissions, setSubmissions] = useState([]);
-
+  const [filter, setFilter] = useState("All");
   const [Error, setError] = useState("");
 
   useEffect(() => {
@@ -28,9 +27,8 @@ const StudentDB = () => {
         userId: UserId,
       })
       .then((res) => {
-        // console.log("New Endpoint", res.msg);
         if (res.msg["Err"] === 1)
-          setError("User is not in a Group Please contact to the Admin");
+          setError("User is not in a Group. Please contact the Admin.");
         else {
           setAssignments(res.msg);
         }
@@ -44,17 +42,74 @@ const StudentDB = () => {
         userId: UserId,
       })
       .then((res) => {
-        // console.log("New Endpoint", res.msg);
         if (res.msg["Err"] === 1)
-          setError("User is not in a Group Please contact to the Admin");
+          setError("User is not in a Group. Please contact the Admin.");
         else {
           setSubmissions(res.msg);
         }
       });
   }, [UserId]);
 
+  useEffect(() => {
+    filterAssignments();
+  }, [assignments, filter]);
+
+  useEffect(() => {
+    const userId = sessionStorage.getItem("userId");
+
+    if (userId) {
+      new axiosMethods()
+
+        .get("http://localhost/Projects/OralRadiology/AssignmentLogic.php", {
+          params: {
+            Action: "GetSubmissionByUser",
+            userId: userId,
+          },
+        })
+        .then((res) => {
+          console.log("Response data:", res.data); // Log the entire response
+          if (res.data) {
+            setSubmissions(res.data);
+            alert("Submissions fetched successfully!");
+          } else {
+            console.error("Response data is undefined or empty.");
+          }
+        })
+        .catch((error) => {
+          console.error("There was an error fetching the submissions!", error);
+        });
+    } else {
+      console.error("User ID is null!");
+    }
+  }, []);
+
+  const filterAssignments = () => {
+    const now = new Date();
+    let filtered = [];
+
+    if (filter === "Completed") {
+      filtered = assignments.filter(
+        (assignment) =>
+          new Date(assignment.open) <= now && new Date(assignment.close) < now
+      );
+    } else if (filter === "Inprogress") {
+      filtered = assignments.filter(
+        (assignment) =>
+          new Date(assignment.open) <= now && new Date(assignment.close) >= now
+      );
+    } else if (filter === "Upcoming") {
+      filtered = assignments.filter(
+        (assignment) => new Date(assignment.open) > now
+      );
+    } else {
+      filtered = assignments;
+    }
+
+    setFilteredAssignments(filtered);
+  };
+
   const handleAssignmentClick = (assignmentId) => {
-    sessionStorage.setItem("assignmentId", assignmentId); // Change this to 'assignmentId' to match your PHP
+    sessionStorage.setItem("assignmentId", assignmentId);
   };
 
   if (sessionStorage["Type"] !== "Student") {
@@ -68,11 +123,45 @@ const StudentDB = () => {
           <div className="container AssignmentSection">
             <div className="BBBBBB">
               <h2 className="sectionTitle">My Assignments</h2>
+              <div className="filterOptions">
+                <span
+                  className={`Filteroption ${
+                    filter === "All" ? "selected" : ""
+                  }`}
+                  onClick={() => setFilter("All")}
+                >
+                  All
+                </span>
+                <span
+                  className={`Filteroption ${
+                    filter === "Completed" ? "selected" : ""
+                  }`}
+                  onClick={() => setFilter("Completed")}
+                >
+                  Completed
+                </span>
+                <span
+                  className={`Filteroption ${
+                    filter === "Inprogress" ? "selected" : ""
+                  }`}
+                  onClick={() => setFilter("Inprogress")}
+                >
+                  Inprogress
+                </span>
+                <span
+                  className={`Filteroption ${
+                    filter === "Upcoming" ? "selected" : ""
+                  }`}
+                  onClick={() => setFilter("Upcoming")}
+                >
+                  Upcoming
+                </span>
+              </div>
             </div>
             <div className="cardAssignment">
-              {assignments.length > 0 &&
-                Array.isArray(assignments) &&
-                assignments.map((assignment, i) => (
+              {filteredAssignments.length > 0 &&
+                Array.isArray(filteredAssignments) &&
+                filteredAssignments.map((assignment, i) => (
                   <Link
                     key={i}
                     to={{
@@ -83,16 +172,14 @@ const StudentDB = () => {
                   >
                     <AssignmentCard
                       name={assignment.Name}
-                      // state="Good"
-                      // grade="60"
                       info={`Topic: ${assignment.Topic}`}
                       col="#0082e6"
                     ></AssignmentCard>
                   </Link>
                 ))}
               {Error !== "" && <p>{Error}</p>}
-              {Error === "" && assignments.length === 0 && (
-                <p>There is no assignments yet</p>
+              {Error === "" && filteredAssignments.length === 0 && (
+                <p>There are no assignments yet</p>
               )}
             </div>
           </div>

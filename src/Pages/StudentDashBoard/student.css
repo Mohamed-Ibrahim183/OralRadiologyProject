@@ -97,7 +97,20 @@
 }
 .fullPage .BBBBBB {
   display: flex;
-  align-items: first baseline;
+  flex-direction: column;
+}
+
+.fullPage .BBBBBB .filterOptions .Filteroption {
+  margin-right: 10px;
+  margin-left: 5px;
+  cursor: pointer;
+  color: #979797;
+  font-weight: 700;
+  font-size: 14px;
+}
+.fullPage .BBBBBB .filterOptions .selected {
+  font-weight: bolder;
+  color: var(--text-monem);
 }
 .fullPage .container.AssignmentSection h5 {
   color: #7b7b7b;
