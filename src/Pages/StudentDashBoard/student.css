@@ -112,6 +112,23 @@
   font-weight: bolder;
   color: var(--text-monem);
 }
+.AssignmentSection .BBBBBB .FilterandSorting {
+  display: flex;
+  width: 120%;
+}
+.AssignmentSection .BBBBBB .FilterandSorting .filterOptions {
+  margin-right: 10px;
+}
+.FilterandSorting .sortingOption {
+  margin-right: 10px;
+  cursor: pointer;
+}
+.FilterandSorting .sortingOptions .selected {
+  color: blue;
+}
+.FilterandSorting .sortingOptions {
+  margin-left: 10px;
+}
 .fullPage .container.AssignmentSection h5 {
   color: #7b7b7b;
   margin-left: 430px;

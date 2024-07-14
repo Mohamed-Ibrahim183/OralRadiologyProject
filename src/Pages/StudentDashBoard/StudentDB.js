@@ -8,6 +8,13 @@ import { Link } from "react-router-dom";
 import { Navigate } from "react-router-dom";
 import UserProfile from "../../Components/UserProfile";
 import { axiosMethods } from "../Controller";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faSortAlphaDown,
+  faSortAlphaUp,
+  faSortNumericDown,
+  faSortNumericUp,
+} from "@fortawesome/free-solid-svg-icons";
 
 const StudentDB = () => {
   const studentName = sessionStorage["Name"] || "Student";
@@ -18,6 +25,8 @@ const StudentDB = () => {
   const [filteredAssignments, setFilteredAssignments] = useState([]);
   const [submissions, setSubmissions] = useState([]);
   const [filter, setFilter] = useState("All");
+  const [sortingType, setSortingType] = useState("Name");
+  const [sortingOrder, setSortingOrder] = useState("asc");
   const [Error, setError] = useState("");
 
   useEffect(() => {
@@ -51,39 +60,10 @@ const StudentDB = () => {
   }, [UserId]);
 
   useEffect(() => {
-    filterAssignments();
-  }, [assignments, filter]);
+    filterAndSortAssignments();
+  }, [assignments, filter, sortingType, sortingOrder]);
 
-  useEffect(() => {
-    const userId = sessionStorage.getItem("userId");
-
-    if (userId) {
-      new axiosMethods()
-
-        .get("http://localhost/Projects/OralRadiology/AssignmentLogic.php", {
-          params: {
-            Action: "GetSubmissionByUser",
-            userId: userId,
-          },
-        })
-        .then((res) => {
-          console.log("Response data:", res.data); // Log the entire response
-          if (res.data) {
-            setSubmissions(res.data);
-            alert("Submissions fetched successfully!");
-          } else {
-            console.error("Response data is undefined or empty.");
-          }
-        })
-        .catch((error) => {
-          console.error("There was an error fetching the submissions!", error);
-        });
-    } else {
-      console.error("User ID is null!");
-    }
-  }, []);
-
-  const filterAssignments = () => {
+  const filterAndSortAssignments = () => {
     const now = new Date();
     let filtered = [];
 
@@ -105,11 +85,31 @@ const StudentDB = () => {
       filtered = assignments;
     }
 
+    if (sortingType === "Name") {
+      filtered.sort((a, b) => {
+        if (a.Name < b.Name) return sortingOrder === "asc" ? -1 : 1;
+        if (a.Name > b.Name) return sortingOrder === "asc" ? 1 : -1;
+        return 0;
+      });
+    } else if (sortingType === "OpenDate") {
+      filtered.sort((a, b) => {
+        if (new Date(a.open) < new Date(b.open))
+          return sortingOrder === "asc" ? -1 : 1;
+        if (new Date(a.open) > new Date(b.open))
+          return sortingOrder === "asc" ? 1 : -1;
+        return 0;
+      });
+    }
+
     setFilteredAssignments(filtered);
   };
 
   const handleAssignmentClick = (assignmentId) => {
     sessionStorage.setItem("assignmentId", assignmentId);
+  };
+
+  const toggleSortingOrder = () => {
+    setSortingOrder(sortingOrder === "asc" ? "desc" : "asc");
   };
 
   if (sessionStorage["Type"] !== "Student") {
@@ -123,39 +123,71 @@ const StudentDB = () => {
           <div className="container AssignmentSection">
             <div className="BBBBBB">
               <h2 className="sectionTitle">My Assignments</h2>
-              <div className="filterOptions">
-                <span
-                  className={`Filteroption ${
-                    filter === "All" ? "selected" : ""
-                  }`}
-                  onClick={() => setFilter("All")}
-                >
-                  All
-                </span>
-                <span
-                  className={`Filteroption ${
-                    filter === "Completed" ? "selected" : ""
-                  }`}
-                  onClick={() => setFilter("Completed")}
-                >
-                  Completed
-                </span>
-                <span
-                  className={`Filteroption ${
-                    filter === "Inprogress" ? "selected" : ""
-                  }`}
-                  onClick={() => setFilter("Inprogress")}
-                >
-                  Inprogress
-                </span>
-                <span
-                  className={`Filteroption ${
-                    filter === "Upcoming" ? "selected" : ""
-                  }`}
-                  onClick={() => setFilter("Upcoming")}
-                >
-                  Upcoming
-                </span>
+              <div className="FilterandSorting">
+                <div className="filterOptions">
+                  <span
+                    className={`Filteroption ${
+                      filter === "All" ? "selected" : ""
+                    }`}
+                    onClick={() => setFilter("All")}
+                  >
+                    All
+                  </span>
+                  <span
+                    className={`Filteroption ${
+                      filter === "Completed" ? "selected" : ""
+                    }`}
+                    onClick={() => setFilter("Completed")}
+                  >
+                    Completed
+                  </span>
+                  <span
+                    className={`Filteroption ${
+                      filter === "Inprogress" ? "selected" : ""
+                    }`}
+                    onClick={() => setFilter("Inprogress")}
+                  >
+                    Inprogress
+                  </span>
+                  <span
+                    className={`Filteroption ${
+                      filter === "Upcoming" ? "selected" : ""
+                    }`}
+                    onClick={() => setFilter("Upcoming")}
+                  >
+                    Upcoming
+                  </span>
+                </div>
+                <div className="sortingOptions">
+                  <FontAwesomeIcon
+                    icon={
+                      sortingType === "Name" && sortingOrder === "asc"
+                        ? faSortAlphaDown
+                        : faSortAlphaUp
+                    }
+                    className={`sortingOption ${
+                      sortingType === "Name" ? "selected" : ""
+                    }`}
+                    onClick={() => {
+                      setSortingType("Name");
+                      toggleSortingOrder();
+                    }}
+                  />
+                  <FontAwesomeIcon
+                    icon={
+                      sortingType === "OpenDate" && sortingOrder === "asc"
+                        ? faSortNumericDown
+                        : faSortNumericUp
+                    }
+                    className={`sortingOption ${
+                      sortingType === "OpenDate" ? "selected" : ""
+                    }`}
+                    onClick={() => {
+                      setSortingType("OpenDate");
+                      toggleSortingOrder();
+                    }}
+                  />
+                </div>
               </div>
             </div>
             <div className="cardAssignment">
