@@ -112,6 +112,38 @@ const StudentDB = () => {
     setSortingOrder(sortingOrder === "asc" ? "desc" : "asc");
   };
 
+  const getStatusProps = (assignment) => {
+    const now = new Date();
+    const openDate = new Date(assignment.open);
+    const closeDate = new Date(assignment.close);
+
+    if (openDate <= now && closeDate < now) {
+      return { state: "closed", col: "red", remaining: 0 };
+    } else if (openDate <= now && closeDate >= now) {
+      const remainingTime = (closeDate - now) / 60000; // remaining time in minutes
+      let remaining;
+
+      if (remainingTime > 1440) {
+        // more than 24 hours
+        remaining = `${Math.round(remainingTime / 1440)} days remaining`;
+      } else {
+        if (remainingTime > 60) {
+          // more than 60 minutes
+          remaining = `${Math.round(remainingTime / 60)} hours remaining`;
+        } else {
+          if (remainingTime < 60) {
+            // less than 60 minutes
+            remaining = `${Math.round(remainingTime)} minutes remaining`;
+          }
+        }
+      }
+      return { state: "inprogress", col: "blue", remaining };
+    } else if (openDate > now) {
+      return { state: "upcoming", col: "green", remaining: null };
+    }
+    return { state: "unknown", col: "grey", remaining: null };
+  };
+
   if (sessionStorage["Type"] !== "Student") {
     return <Navigate to="/" />;
   }
@@ -139,7 +171,7 @@ const StudentDB = () => {
                     }`}
                     onClick={() => setFilter("Completed")}
                   >
-                    Completed
+                    Closed
                   </span>
                   <span
                     className={`Filteroption ${
@@ -193,22 +225,29 @@ const StudentDB = () => {
             <div className="cardAssignment">
               {filteredAssignments.length > 0 &&
                 Array.isArray(filteredAssignments) &&
-                filteredAssignments.map((assignment, i) => (
-                  <Link
-                    key={i}
-                    to={{
-                      pathname: "/student/submit",
-                      search: `?userId=${UserId}&assignmentId=${assignment.Id}`,
-                    }}
-                    onClick={() => handleAssignmentClick(assignment.Id)}
-                  >
-                    <AssignmentCard
-                      name={assignment.Name}
-                      info={`Topic: ${assignment.Topic}`}
-                      col="#0082e6"
-                    ></AssignmentCard>
-                  </Link>
-                ))}
+                filteredAssignments.map((assignment, i) => {
+                  const { state, col, remaining } = getStatusProps(assignment);
+                  return (
+                    <Link
+                      key={i}
+                      to={{
+                        pathname: "/student/submit",
+                        search: `?userId=${UserId}&assignmentId=${assignment.Id}`,
+                      }}
+                      onClick={() => handleAssignmentClick(assignment.Id)}
+                    >
+                      <AssignmentCard
+                        name={assignment.Name}
+                        info={`Topic: ${assignment.Topic}`}
+                        col={col}
+                        state={state}
+                        remaining={
+                          remaining ? `${remaining} minutes remaining` : ""
+                        }
+                      ></AssignmentCard>
+                    </Link>
+                  );
+                })}
               {Error !== "" && <p>{Error}</p>}
               {Error === "" && filteredAssignments.length === 0 && (
                 <p>There are no assignments yet</p>

@@ -1,7 +1,15 @@
 import { Dns, Padding } from "@mui/icons-material";
 import React from "react";
 
-const AssignmentCard = ({ col, name, info, state, grade, maxGrade }) => {
+const AssignmentCard = ({
+  col,
+  name,
+  info,
+  state,
+  grade,
+  maxGrade,
+  remaining,
+}) => {
   const stateStyle = {
     backgroundColor: col,
   };
@@ -11,8 +19,15 @@ const AssignmentCard = ({ col, name, info, state, grade, maxGrade }) => {
   return (
     <div className="AssCard" style={label}>
       <div className="info">
-        <h3 className="name">{name}</h3>
-        {info && <span className="Details">{info}</span>}
+        <div className="infoUp">
+          <h3 className="name">{name}</h3>
+        </div>
+        <div className="infoDown">
+          {info && <span className="Details">{info}</span>}
+          <span className="openTime" style={{ marginLeft: "15px" }}>
+            {remaining}
+          </span>
+        </div>
       </div>
       {grade && (
         <div className="grade">
