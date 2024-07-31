@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import image from "./Dental_Xray.png";
 import "./submit_page.css";
-import Navbar from "../../Components/Navbar/Navbar";
-import axios from "axios";
+import "./assignmentpage.css";
+
+// import Navbar from "../../Components/Navbar/Navbar";
+// import axios from "axios";
 import { Navigate, useSearchParams } from "react-router-dom";
 import IconButton from "@mui/material/IconButton";
 import { ArrowBackIos, ArrowForwardIos, Delete } from "@mui/icons-material";
