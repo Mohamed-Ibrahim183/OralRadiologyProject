@@ -4,12 +4,10 @@ import AssignmentCard from "./AssignmentCard";
 import Chart from "./Chart";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
-// import "./Modal.css";
 
 import "./professor.css";
 import { Navigate } from "react-router-dom";
 import Modal2 from "./Modal2";
-import axios from "axios";
 import Button from "@mui/material/Button";
 import { Add } from "@mui/icons-material";
 import {
@@ -23,10 +21,17 @@ import {
   Typography,
 } from "@mui/material";
 import { Table } from "react-bootstrap";
-import { axiosMethods } from "../Controller";
 
 import BasicModalComp from "../../Components/BasicModal/BasicModalComp";
 import UserProfile from "../../Components/UserProfile";
+import {
+  addCategory,
+  deleteAssignmentDB,
+  getAllAssignmentsData,
+  getAllCategoriesData,
+  insertNewAssignment,
+} from "../../Slices/PorfessorSlice";
+import { getAssignmentsGroupsShow } from "../../Slices/PorfessorSlice";
 
 function GroupsData() {
   const [groups, setGroups] = useState([]);
@@ -38,27 +43,13 @@ function GroupsData() {
 
   useEffect(() => {
     const fetchData = (attempt = 0) => {
-      axios
-        .get(
-          "http://localhost/Projects/OralRadiology/AssignmentLogic.php/AssignmentGroupsShow"
-        )
-        .then((res) => {
-          if (res.data.length > 0) {
-            setGroups(res.data);
-          } else if (attempt < maxRetries) {
-            setTimeout(() => fetchData(attempt + 1), 1000); // Retry after 1 second
-          } else {
-            setLoadingMessage("No Groups Data");
-          }
-        })
-        .catch((error) => {
-          console.error(error);
-          if (attempt < maxRetries) {
-            setTimeout(() => fetchData(attempt + 1), 1000); // Retry after 1 second
-          } else {
-            setLoadingMessage("No Groups Data");
-          }
-        });
+      getAssignmentsGroupsShow().then((res) => {
+        if (res.msg.length > 0) setGroups(res.msg);
+        else if (attempt < maxRetries)
+          setTimeout(() => fetchData(attempt + 1), 1000);
+        // Retry after 1 second
+        else setLoadingMessage("No Groups Data");
+      });
     };
     fetchData();
   }, []);
@@ -134,19 +125,16 @@ function AddRequirementModal({ isOpen, onClose }) {
       return;
     }
     setLoading(true);
-    const url =
-      "http://localhost/Projects/OralRadiology/AssignmentLogic.php/InsertAssignment";
-    let fData = new FormData();
-    fData.append("Name", assignmentName);
-    fData.append("Topic", topicName);
-    fData.append("maxLimitImages", parseInt(maxImages, 10));
-    fData.append("ProfessorId", parseInt(userId, 10));
-    axios
-      .post(url, fData)
-      .then((res) => {
-        if (res.data === "Inserted") alert("Assignment Added Successfully");
-      })
-      .catch((error) => console.error(error));
+    insertNewAssignment({
+      Name: assignmentName,
+      Topic: topicName,
+      maxLimitImages: parseInt(maxImages, 10),
+      ProfessorId: parseInt(userId, 10),
+    }).then((res) =>
+      res.msg === "Inserted"
+        ? alert("The New Assignment Inserted Successfully")
+        : null
+    );
     setLoading(false);
     onClose();
   };
@@ -221,12 +209,7 @@ const ProfessorDB = () => {
   const [updateAssignments, setUpdateAssignments] = useState(0);
 
   function DeleteAssignment(assignmentId) {
-    new axiosMethods()
-      .post(
-        "http://localhost/Projects/OralRadiology/AssignmentLogic.php/DeleteAssignment",
-        { assignmentId }
-      )
-      .then((res) => console.log(res.msg));
+    deleteAssignmentDB(assignmentId);
     setUpdateAssignments(updateAssignments + 1);
   }
 
@@ -234,13 +217,7 @@ const ProfessorDB = () => {
     !storedUserId
       ? console.error("UserId not found in sessionStorage")
       : setUserId(storedUserId);
-
-    axios
-      .get("http://localhost/Projects/OralRadiology/AssignmentLogic.php/GetAll")
-      .then((res) => {
-        setAssignments(res.data);
-      })
-      .catch((error) => console.error(error));
+    getAllAssignmentsData().then((res) => setAssignments(res.msg || []));
   }, [storedUserId, updateAssignments]);
 
   if (sessionStorage.getItem("Type") !== "Professor") {
@@ -262,7 +239,8 @@ const ProfessorDB = () => {
           </Button>
         </div>
         <div className="cardAssignment">
-          {assignments &&
+          {Array.isArray(assignments) &&
+            assignments.length > 0 &&
             assignments.map((assignment, i) => (
               <AssignmentCard
                 key={i}
@@ -325,26 +303,15 @@ function Categories() {
 
   const element = useRef();
   useEffect(() => {
-    new axiosMethods()
-      .get(
-        "http://localhost/Projects/OralRadiology/AssignmentLogic.php/GetCategories"
-      )
-      .then((res) => {
-        setCats(res.msg);
-      });
+    getAllCategoriesData().then((res) => setCats(res.msg));
   }, [update]);
   // if (cats.length === 0) return;
   function addNewCategory() {
-    new axiosMethods()
-      .post(
-        "http://localhost/Projects/OralRadiology/AssignmentLogic.php/addCategory",
-        { Name: element.current.value }
-      )
-      .then((res) => {
-        console.log(res.msg);
-        setUpdate(update + 1);
-        setAddCat(false);
-      });
+    addCategory({ Name: element.current.value }).then((res) => {
+      console.log(res.msg);
+      setUpdate(update + 1);
+      setAddCat(false);
+    });
   }
   function AddCategoryComp() {
     return (

@@ -1,21 +1,18 @@
 import React, { useState, useEffect } from "react";
-import Navbar from "../../Components/Navbar/Navbar";
 import { Navigate, useSearchParams } from "react-router-dom";
 import TableHeaderGradingPage from "./TableHeader_grading_page";
 import TableRowGradingPage from "./TableRow_Grading_Page";
 import ViewSubmissionsModal from "./ViewSubmissionsModal";
 import "./Grading.css";
-import { axiosMethods } from "../Controller";
+import { getSubmissionByAssignment } from "../../Slices/PorfessorSlice";
 
 function GradingPage() {
   const [searchParams, setSearchParams] = useSearchParams();
   const assignmentId = searchParams.get("assignmentId");
-  const [assignmentName, setAssignmentName] = useState("");
 
   const [data, setData] = useState([]);
   const [error, setError] = useState("");
   const [showModal, setShowModal] = useState(false);
-  const [currentStudentId, setCurrentStudentId] = useState(null);
   const [submission, setSubmission] = useState(null);
 
   useEffect(() => {
@@ -25,40 +22,24 @@ function GradingPage() {
       return;
     }
 
-    const fetchData = () => {
-      const dataSending = {
-        assignmentId: assignmentId,
-      };
+    getSubmissionByAssignment({
+      assignmentId: assignmentId,
+    }).then((res) => {
+      if (res.msg) {
+        // Success
+        const responseData = Array.isArray(res.msg) ? res.msg : [];
+        // Initialize data from response
+        const initializedData = responseData.map((record) => ({
+          ...record,
+          Comment: record.Comment ?? "", // Default to empty string if Comment is null or undefined
+        }));
+        setData(initializedData);
+      }
+      // Fail
+      else setError(res.error);
+    });
 
-      new axiosMethods()
-        .get(
-          "http://localhost/Projects/OralRadiology/AssignmentLogic.php/GetSubmissionAssignment",
-          dataSending
-        )
-        .then((res) => {
-          // console.log("res.msg:", res.msg);
-          if (res.msg) {
-            // Success
-            const responseData = Array.isArray(res.msg) ? res.msg : [];
-            // Initialize data from response
-            const initializedData = responseData.map((record) => ({
-              ...record,
-              Comment: record.Comment ?? "", // Default to empty string if Comment is null or undefined
-            }));
-            setData(initializedData);
-          } else {
-            // Fail
-            setError(res.error);
-          }
-        })
-        .catch((err) => console.error(err));
-    };
-    fetchData();
-
-    // Cleanup function
-    return () => {
-      sessionStorage.removeItem("submissionData");
-    };
+    return () => sessionStorage.removeItem("submissionData");
   }, [assignmentId]);
 
   const handleGradeChange = (studentId, newGrade) => {

@@ -2,7 +2,6 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
-import axios from "axios";
 import {
   Avatar,
   MenuItem,
@@ -10,6 +9,7 @@ import {
   FormControl,
   InputLabel,
 } from "@mui/material";
+import { getAllGroupsData } from "../../Slices/AdminSlice";
 
 const style = {
   position: "absolute",
@@ -35,13 +35,10 @@ export default function BasicModal({
   const [selectedGroup, setSelectedGroup] = React.useState("");
 
   React.useEffect(() => {
-    const url = `http://localhost/Projects/OralRadiology/GroupLogic.php/Groups`;
-    axios
-      .get(url)
-      .then((res) => {
-        setGroups(res.data);
-      })
-      .catch((error) => console.error(error));
+    async function getGroups() {
+      setGroups(await getAllGroupsData());
+    }
+    getGroups();
   }, []);
 
   if (!selectedUser) return null;
@@ -97,7 +94,7 @@ export default function BasicModal({
                   onChange={handleGroupChange}
                 >
                   {Object.keys(groups).map((ele) => {
-                    const name = groups[ele][0];
+                    const name = groups[ele].Name;
                     if (name) {
                       return (
                         <MenuItem key={ele} value={name}>

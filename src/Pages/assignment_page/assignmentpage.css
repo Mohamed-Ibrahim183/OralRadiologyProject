@@ -111,6 +111,15 @@
   }
 }
 /* Submission Cards */
+.container_monemm .AssCard {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 8px 0px;
+  padding: 16px;
+  border-radius: 16px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
 .container_monemm .AssCard .info {
   display: flex;
   flex-direction: column;
@@ -129,7 +138,10 @@
 .container_monemm .AssCard .grade {
   font-size: 20px;
   font-weight: bold;
-  color: var(--secondaryText);
+  color: white;
+  background-color: rgb(0, 130, 230);
+  padding: 16px;
+  border-radius: 16px;
 }
 .container_monemm .AssCard .state {
   padding: 16px;

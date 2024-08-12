@@ -7,7 +7,6 @@ import "./student.css";
 import { Link } from "react-router-dom";
 import { Navigate } from "react-router-dom";
 import UserProfile from "../../Components/UserProfile";
-import { axiosMethods } from "../Controller";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faSortAlphaDown,
@@ -15,6 +14,10 @@ import {
   faSortNumericDown,
   faSortNumericUp,
 } from "@fortawesome/free-solid-svg-icons";
+import {
+  getAssignmentsForUser,
+  getSubmissionById,
+} from "../../Slices/StudentSlice";
 
 const StudentDB = () => {
   const studentName = sessionStorage["Name"] || "Student";
@@ -30,79 +33,71 @@ const StudentDB = () => {
   const [Error, setError] = useState("");
 
   useEffect(() => {
-    new axiosMethods()
-      .get("http://localhost/Projects/OralRadiology/AssignmentLogic.php", {
-        Action: "GetAssignmentsForUser",
-        userId: UserId,
-      })
-      .then((res) => {
-        if (res.msg["Err"] === 1)
-          setError("User is not in a Group. Please contact the Admin.");
-        else {
-          setAssignments(res.msg);
-        }
-      });
+    getAssignmentsForUser({
+      Action: "GetAssignmentsForUser",
+      userId: UserId,
+    }).then((res) =>
+      res.msg["Err"] === 1
+        ? setError("User is not in a Group. Please contact the Admin.")
+        : setAssignments(res.msg)
+    );
   }, [UserId]);
 
   useEffect(() => {
-    new axiosMethods()
-      .get("http://localhost/Projects/OralRadiology/AssignmentLogic.php", {
-        Action: "GetSubmissionById",
-        userId: UserId,
-      })
-      .then((res) => {
-        if (res.msg["Err"] === 1)
-          setError("User is not in a Group. Please contact the Admin.");
-        else {
-          setSubmissions(res.msg);
-        }
-      });
+    getSubmissionById({
+      Action: "GetSubmissionById",
+      userId: UserId,
+    }).then((res) => {
+      res.msg["Err"] === 1
+        ? setError("User is not in a Group. Please contact the Admin.")
+        : setSubmissions(res.msg);
+    });
   }, [UserId]);
 
   useEffect(() => {
+    const filterAndSortAssignments = () => {
+      const now = new Date();
+      let filtered = [];
+
+      if (filter === "Completed") {
+        filtered = assignments.filter(
+          (assignment) =>
+            new Date(assignment.open) <= now && new Date(assignment.close) < now
+        );
+      } else if (filter === "Inprogress") {
+        filtered = assignments.filter(
+          (assignment) =>
+            new Date(assignment.open) <= now &&
+            new Date(assignment.close) >= now
+        );
+      } else if (filter === "Upcoming") {
+        filtered = assignments.filter(
+          (assignment) => new Date(assignment.open) > now
+        );
+      } else {
+        filtered = assignments;
+      }
+
+      if (sortingType === "Name") {
+        filtered.sort((a, b) => {
+          if (a.Name < b.Name) return sortingOrder === "asc" ? -1 : 1;
+          if (a.Name > b.Name) return sortingOrder === "asc" ? 1 : -1;
+          return 0;
+        });
+      } else if (sortingType === "OpenDate") {
+        filtered.sort((a, b) => {
+          if (new Date(a.open) < new Date(b.open))
+            return sortingOrder === "asc" ? -1 : 1;
+          if (new Date(a.open) > new Date(b.open))
+            return sortingOrder === "asc" ? 1 : -1;
+          return 0;
+        });
+      }
+
+      setFilteredAssignments(filtered);
+    };
     filterAndSortAssignments();
   }, [assignments, filter, sortingType, sortingOrder]);
-
-  const filterAndSortAssignments = () => {
-    const now = new Date();
-    let filtered = [];
-
-    if (filter === "Completed") {
-      filtered = assignments.filter(
-        (assignment) =>
-          new Date(assignment.open) <= now && new Date(assignment.close) < now
-      );
-    } else if (filter === "Inprogress") {
-      filtered = assignments.filter(
-        (assignment) =>
-          new Date(assignment.open) <= now && new Date(assignment.close) >= now
-      );
-    } else if (filter === "Upcoming") {
-      filtered = assignments.filter(
-        (assignment) => new Date(assignment.open) > now
-      );
-    } else {
-      filtered = assignments;
-    }
-
-    if (sortingType === "Name") {
-      filtered.sort((a, b) => {
-        if (a.Name < b.Name) return sortingOrder === "asc" ? -1 : 1;
-        if (a.Name > b.Name) return sortingOrder === "asc" ? 1 : -1;
-        return 0;
-      });
-    } else if (sortingType === "OpenDate") {
-      filtered.sort((a, b) => {
-        if (new Date(a.open) < new Date(b.open))
-          return sortingOrder === "asc" ? -1 : 1;
-        if (new Date(a.open) > new Date(b.open))
-          return sortingOrder === "asc" ? 1 : -1;
-        return 0;
-      });
-    }
-
-    setFilteredAssignments(filtered);
-  };
 
   const handleAssignmentClick = (assignmentId) => {
     sessionStorage.setItem("assignmentId", assignmentId);

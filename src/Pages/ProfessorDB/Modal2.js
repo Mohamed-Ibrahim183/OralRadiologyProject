@@ -1,34 +1,29 @@
 import React, { useEffect, useState } from "react";
 import "./Modaalll.css";
-import axios from "axios";
 import "./Modal2.css";
 import Button from "@mui/material/Button";
 import { Close, Send } from "@mui/icons-material";
 import { IconButton } from "@mui/material";
+import {
+  addNewAssignmentSlot,
+  getGroupsNamesDB,
+} from "../../Slices/PorfessorSlice";
 
 const Modal2 = ({ open, onClose, AssignmentId }) => {
   const [groups, setGroups] = useState([]);
   const [selectedGroupIndex, setSelectedGroupIndex] = useState(0);
-  const [view, setView] = useState();
 
   useEffect(() => {
-    const url = "http://localhost/Projects/OralRadiology/GroupLogic.php/";
-
-    axios
-      .get(url + "getGroupsNames")
-      .then((res) => {
-        setGroups(
-          res.data.map((group) => ({
-            name: group["Name"],
-            Id: group["Id"],
-            openTime: "",
-            closeTime: "",
-          }))
-        );
-      })
-      .catch((error) => console.error(error));
-
-    // GetGroupsData();
+    getGroupsNamesDB().then((res) => {
+      setGroups(
+        res.msg.map((group) => ({
+          name: group["Name"],
+          Id: group["Id"],
+          openTime: "",
+          closeTime: "",
+        }))
+      );
+    });
   }, []);
   if (!open) return null;
 
@@ -46,20 +41,13 @@ const Modal2 = ({ open, onClose, AssignmentId }) => {
     setGroups(updatedGroups);
   };
   function handleSave() {
-    const url =
-      "http://localhost/Projects/OralRadiology/AssignmentLogic.php/AssignmentGroup";
-    let fData = new FormData();
-    fData.append("Name", selectedGroup.name);
-    fData.append("GroupId", selectedGroup.Id);
-    fData.append("openTime", selectedGroup.openTime);
-    fData.append("closeTime", selectedGroup.closeTime);
-    fData.append("AssignmentId", AssignmentId);
-    axios
-      .post(url, fData)
-      .then((res) => {
-        console.log(res.data);
-      })
-      .catch((error) => console.error(error));
+    addNewAssignmentSlot({
+      Name: selectedGroup.name,
+      GroupId: selectedGroup.Id,
+      openTime: selectedGroup.openTime,
+      closeTime: selectedGroup.closeTime,
+      AssignmentId,
+    });
   }
 
   const selectedGroup = groups[selectedGroupIndex];

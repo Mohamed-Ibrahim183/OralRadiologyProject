@@ -1,4 +1,3 @@
-import React from "react";
 import axios from "axios";
 
 // const axiosMethods = {
@@ -46,16 +45,15 @@ class DBMethods {
   constructor() {
     this.API = new axiosMethods();
   }
-
+  getAllGroupsData() {
+    const url = "http://localhost/Projects/OralRadiology/GroupLogic.php/Groups";
+    return this.API.get(url).then((res) => res.msg);
+  }
   getType(type) {
     const url = `http://localhost/Projects/OralRadiology/userLogic.php/Users/${type}`;
     return this.API.get(url);
   }
 }
 
-const Controller = () => {
-  return <div></div>;
-};
-
 // export default Controller;
-export { Controller, axiosMethods, DBMethods };
+export { axiosMethods, DBMethods };

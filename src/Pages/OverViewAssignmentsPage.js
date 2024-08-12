@@ -1,19 +1,15 @@
 import Cards from "../Components/Card/Cards";
 import React, { useEffect, useState } from "react";
-import { axiosMethods } from "./Controller";
+// import { axiosMethods } from "./Controller";
+import { getSubmissionForUserReport } from "../Slices/StudentSlice";
 
 const OverViewAssignmentsPage = () => {
   const [submissions, setSubmissions] = useState([]);
   useEffect(() => {
-    new axiosMethods()
-      .get("http://localhost/Projects/OralRadiology/AssignmentLogic.php", {
-        Action: "GetSubmissionForUserReport",
-        StudentId: sessionStorage.getItem("userId"),
-      })
-      .then((res) => {
-        setSubmissions(res.msg);
-        console.log(res.msg);
-      });
+    getSubmissionForUserReport({
+      Action: "GetSubmissionForUserReport",
+      StudentId: sessionStorage.getItem("userId"),
+    }).then((res) => setSubmissions(res.msg));
   }, []);
   if (submissions) console.log(submissions);
   return (

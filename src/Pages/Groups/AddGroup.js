@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import "./API.css";
 import "./ADDGroup.css";
-import Navbar from "../../Components/Navbar/Navbar";
-import axios from "axios";
 import { Navigate } from "react-router-dom";
-// import Button from "@mui/material/Button";
 import { createTheme, ThemeProvider } from "@mui/material";
+import {
+  DeleteGroup,
+  getAllGroupsData,
+  insertNewGroup,
+} from "../../Slices/AdminSlice";
 
 const AddGroup = () => {
   const [rows, setRows] = useState(0);
@@ -45,28 +47,12 @@ const AddGroup = () => {
           </select>
         </div>
         <div className="section">
-          <label htmlFor={`Hour${index}`}>Hour:</label>
-          <select name={`Hour${index}`} id={`Hour${index}`}>
-            {generateOptions(0, 23).map((hour) => (
-              <option key={hour}>{hour}</option>
-            ))}
-          </select>
+          <label htmlFor={`Start${index}`}>Start Time:</label>
+          <input type="time" id={`Start${index}`} name={`Start${index}`} />
         </div>
         <div className="section">
-          <label htmlFor={`Duration${index}`}>Duration in Minutes:</label>
-          <input
-            type="number"
-            name={`Duration${index}`}
-            id={`Duration${index}`}
-          />
-        </div>
-        <div className="section">
-          <label htmlFor={`Minutes${index}`}>Minutes:</label>
-          <input
-            type="number"
-            name={`Minutes${index}`}
-            id={`Minutes${index}`}
-          />
+          <label htmlFor={`End${index}`}>End Time:</label>
+          <input type="time" id={`End${index}`} name={`End${index}`} />
         </div>
         <div className="section">
           <label htmlFor={`Room${index}`}>Room:</label>
@@ -76,43 +62,40 @@ const AddGroup = () => {
     );
   }
 
-  function handleSubmit(editFlag) {
+  async function handleSubmit(editFlag) {
     let isValid = true;
     let formDataCopy = [];
     if (editFlag === 2) {
       for (let i = 0; i < editingRows.length; i++) {
         const day = document.getElementById(`editDay${i}`).value;
-        const hour = document.getElementById(`editHour${i}`).value;
-        const duration = document.getElementById(`editDuration${i}`).value;
-        const minutes = document.getElementById(`editMinutes${i}`).value;
+        const Start = document.getElementById(`editStart${i}`).value;
+        const End = document.getElementById(`editEnd${i}`).value;
+
         const Room = document.getElementById(`editRoom${i}`).value;
         if (
           day === "" ||
-          hour === "" ||
-          duration === "" ||
-          minutes === "" ||
-          editingGroup[0] === "" ||
+          Start === "" ||
+          End === "" ||
+          editingGroup.Name === "" ||
           Room === "" ||
-          editingRows === 0
+          editingRows.length === 0
         ) {
           isValid = false;
           break;
         }
 
-        formDataCopy[i] = { day, hour, duration, minutes, Room };
+        formDataCopy[i] = { day, Start, End, Room };
       }
     } else {
       for (let i = 1; i < rows + 1; i++) {
         const day = document.getElementById(`Day${i}`).value;
-        const hour = document.getElementById(`Hour${i}`).value;
-        const duration = document.getElementById(`Duration${i}`).value;
-        const minutes = document.getElementById(`Minutes${i}`).value;
+        const Start = document.getElementById(`Start${i}`).value;
+        const End = document.getElementById(`End${i}`).value;
         const Room = document.getElementById(`Room${i}`).value;
         if (
           day === "" ||
-          hour === "" ||
-          duration === "" ||
-          minutes === "" ||
+          Start === "" ||
+          End === "" ||
           document.getElementById("GroupName").value === "" ||
           Room === "" ||
           rows === 0
@@ -121,35 +104,27 @@ const AddGroup = () => {
           break;
         }
 
-        formDataCopy[i - 1] = { day, hour, duration, minutes, Room };
+        formDataCopy[i - 1] = { day, Start, End, Room };
       }
     }
 
     if (isValid && (editingRows != null || rows > 0)) {
-      const url = `http://localhost/Projects/OralRadiology/GroupLogic.php/Insert`;
       let fData = new FormData();
 
       editFlag === 1
         ? fData.append("Name", document.getElementById("GroupName").value)
-        : fData.append("Name", editingGroup[0]);
+        : fData.append("Name", editingGroup.Name);
 
-      Object.keys(formDataCopy).map((ele) => {
-        fData.append(ele, JSON.stringify(formDataCopy[ele]));
-        return null;
-      });
-      axios
-        .post(url, fData)
-        .then((res) => console.log(`${res.data}`))
-        .catch((error) => console.error(error));
+      Object.keys(formDataCopy).map((ele) =>
+        fData.append(ele, JSON.stringify(formDataCopy[ele]))
+      );
+      console.log(await insertNewGroup(fData));
       setRows(0);
       document.getElementById("GroupName").value = "";
       setRender(render + 1);
       fetchFirst();
       alert("The Group Saved Successfully");
-    } else {
-      console.log("Please fill in all fields.");
-      alert("Please fill in all fields.");
-    }
+    } else alert("Please fill in all fields.");
   }
 
   function handleEditSubmit() {
@@ -158,21 +133,8 @@ const AddGroup = () => {
     setEditingGroup(null);
   }
 
-  function fetchFirst() {
-    const url = `http://localhost/Projects/OralRadiology/GroupLogic.php/Groups`;
-    axios
-      .get(url)
-      .then((res) => {
-        setGroups(res.data);
-      })
-      .catch((error) => console.error(error));
-  }
-
+  const fetchFirst = async () => setGroups(await getAllGroupsData());
   useEffect(() => {
-    async function s() {
-      await setGroups({});
-    }
-    s();
     fetchFirst();
   }, [render]);
 
@@ -180,52 +142,34 @@ const AddGroup = () => {
     return <Navigate to="/" />;
   }
 
-  function check(ele, key) {
-    if (Array.isArray(ele) && ele.length > 0) {
-      let s = "";
-      s = ele.map((e) => {
-        return e[key] + " ";
-      });
-      return s;
-    }
-
-    return "NO";
-  }
-
-  function Delete(index) {
-    const url = `http://localhost/Projects/OralRadiology/GroupLogic.php/Delete`;
-    let fData = new FormData();
-    fData.append("id", index);
-    axios
-      .post(url, fData)
-      .then((res) => {
-        console.log(res.data);
-      })
-      .catch((error) => console.error(error));
+  async function Delete(index) {
+    console.log(await DeleteGroup(index));
     setRender(render + 1);
     fetchFirst();
   }
 
-  const content = Object.entries(groups).map(([key, group]) => {
+  const content = groups.map((group, index) => {
     return (
-      <tr key={key}>
-        <td>{key}</td>
-        <td>{group[0] || "no name"}</td>
-        <td>{check(group.slice(1), "Day")}</td>
-        <td>{check(group.slice(1), "Hour")}</td>
-        <td>{check(group.slice(1), "Minute")}</td>
-        <td>{check(group.slice(1), "DurationInMinutes")}</td>
-        <td>{check(group.slice(1), "Room")}</td>
+      <tr key={group.Id}>
+        <td>{group.Id}</td>
+        <td>{group.Name || "-_-"}</td>
+        {group.Slots[0] && (
+          <React.Fragment key={group.Slots[0].Id}>
+            <td> {group.Slots[0].StartTime}</td>
+            <td> {group.Slots[0].EndTime}</td>
+            <td> {group.Slots[0].Room}</td>
+          </React.Fragment>
+        )}
         <td>
-          <button className="Del" onClick={() => Delete(key)}>
+          <button className="Del" onClick={() => Delete(group.Id)}>
             Delete
           </button>
           <button
             className="Edit"
             onClick={() => {
               setEditingGroup(group);
-              setEditingRows(group.slice(1));
-              setEditingGroupIndex(key);
+              setEditingRows(group.Slots);
+              setEditingGroupIndex(group.Id);
             }}
           >
             Edit
@@ -247,7 +191,7 @@ const AddGroup = () => {
     const addNewSlot = () => {
       setEditingRows([
         ...editingRows,
-        { Day: "", Hour: "", DurationInMinutes: "", Minute: "", Room: "" },
+        { Day: "", Start: "", End: "", Room: "" },
       ]);
     };
 
@@ -259,7 +203,7 @@ const AddGroup = () => {
 
     return (
       <div className="AddGroup">
-        <h3>Editing Group {editingGroup[0]}</h3>
+        <h3>Editing Group {editingGroup.Name}</h3>
         {editingRows.map((row, index) => (
           <div className="row" key={index}>
             <div className="section">
@@ -283,37 +227,22 @@ const AddGroup = () => {
               </select>
             </div>
             <div className="section">
-              <label htmlFor={`editHour${index}`}>Hour:</label>
-              <select
-                name={`editHour${index}`}
-                id={`editHour${index}`}
-                defaultValue={row.Hour}
-              >
-                {generateOptions(0, 23).map((hour) => (
-                  <option key={hour}>{hour}</option>
-                ))}
-              </select>
-            </div>
-            <div className="section">
-              <label htmlFor={`editDuration${index}`}>
-                Duration in Minutes:
-              </label>
+              <label htmlFor={`editStart${index}`}>Start:</label>
               <input
-                type="number"
-                name={`editDuration${index}`}
-                id={`editDuration${index}`}
-                defaultValue={row.DurationInMinutes}
+                type="time"
+                id={`editStart${index}`}
+                defaultValue={row.StartTime}
               />
             </div>
             <div className="section">
-              <label htmlFor={`editMinutes${index}`}>Minutes:</label>
+              <label htmlFor={`editEnd${index}`}>End:</label>
               <input
-                type="number"
-                name={`editMinutes${index}`}
-                id={`editMinutes${index}`}
-                defaultValue={row.Minute}
+                type="time"
+                id={`editEnd${index}`}
+                defaultValue={row.EndTime}
               />
             </div>
+
             <div className="section">
               <label htmlFor={`editRoom${index}`}>Room:</label>
               <input
@@ -355,11 +284,9 @@ const AddGroup = () => {
               <tr>
                 <th>#</th>
                 <th>Group Name</th>
-                <th>Slots Days</th>
-                <th>Slots Hours</th>
-                <th>Slots Minutes</th>
-                <th>Slots Duration</th>
-                <th>Slots Room</th>
+                <th>Start</th>
+                <th>End</th>
+                <th>Room</th>
                 <th>Actions</th>
               </tr>
             </thead>
