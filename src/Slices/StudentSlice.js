@@ -4,15 +4,18 @@ const methods = new axiosMethods();
 const server = "http://localhost/Projects/OralRadiology/";
 
 export function getAssignmentsForUser(data) {
-  return methods.get(server + "AssignmentLogic.php", data);
+  return methods.get(
+    server + "AssignmentLogic.php/GetAssignmentsForUser",
+    data
+  );
 }
 
 export function getSubmissionById(data) {
-  return methods.get(server + "AssignmentLogic.php");
+  return methods.get(server + "AssignmentLogic.php/GetSubmissionById", data);
 }
 
 export function getAssignmentData(data) {
-  return methods.get(server + "AssignmentLogic.php", data);
+  return methods.get(server + "AssignmentLogic.php/fetchAssignment", data);
 }
 
 export function makeNewSubmission(data) {
@@ -27,9 +30,15 @@ export function uploadNewAssignmentImage(data) {
 }
 
 export function getSubmissionUserAssignment(data) {
-  return methods.get(server + "AssignmentLogic.php", data);
+  return methods.get(
+    server + "AssignmentLogic.php/GetSubmissionByUserAndAssignment",
+    data
+  );
 }
 
 export function getSubmissionForUserReport(data) {
-  return methods.get(server + "AssignmentLogic.php", data);
+  return methods.get(
+    server + "AssignmentLogic.php/GetSubmissionForUserReport",
+    data
+  );
 }

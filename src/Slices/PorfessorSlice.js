@@ -1,58 +1,62 @@
 import { axiosMethods } from "../Pages/Controller";
+import { serverURL } from "./GeneralSlice";
 
 const methods = new axiosMethods();
-const server = "http://localhost/Projects/OralRadiology/";
 
 export function getAllAssignmentsData() {
-  return methods.get(server + "AssignmentLogic.php/GetAll");
+  return methods.get(serverURL + "AssignmentLogic.php/GetAll");
 }
 
 export function getAllCategoriesData() {
-  return methods.get(server + "AssignmentLogic.php/GetCategories");
+  return methods.get(serverURL + "AssignmentLogic.php/GetCategories");
 }
 export function addCategory(data) {
-  return methods.post(server + "AssignmentLogic.php/addCategory", data);
+  return methods.post(serverURL + "AssignmentLogic.php/addCategory", data);
 }
 
 export function getAssignmentsGroupsShow() {
-  return methods.get(server + "AssignmentLogic.php/AssignmentGroupsShow");
+  return methods.get(serverURL + "AssignmentLogic.php/AssignmentGroupsShow");
 }
 
 export function deleteAssignmentDB(assignmentId) {
-  return methods.post(server + "AssignmentLogic.php/DeleteAssignment", {
+  return methods.post(serverURL + "AssignmentLogic.php/DeleteAssignment", {
     assignmentId,
   });
 }
 
 export function insertNewAssignment(data) {
-  return methods.post(server + "AssignmentLogic.php/InsertAssignment", data);
+  return methods.post(serverURL + "AssignmentLogic.php/InsertAssignment", data);
 }
 
 export function addNewAssignmentSlot(data) {
-  return methods.post(server + "AssignmentLogic.php/AssignmentGroup", data);
+  return methods.post(serverURL + "AssignmentLogic.php/AssignmentGroup", data);
 }
 
 export function getGroupsNamesDB() {
-  return methods.get(server + "GroupLogic.php/getGroupsNames");
+  return methods.get(serverURL + "GroupLogic.php/getGroupsNames");
 }
 
 export function getTotalUsersType(Type) {
-  return methods.post(server + "userLogic.php/GetTotalUsersType", { Type });
+  return methods.post(serverURL + "userLogic.php/GetTotalUsersType", { Type });
 }
 export function getSubmissionByAssignment(data) {
   return methods.get(
-    server + "AssignmentLogic.php/GetSubmissionAssignment",
+    serverURL + "AssignmentLogic.php/GetSubmissionAssignment",
     data
   );
 }
 
 export function getAssignmentImages(data) {
   return methods.get(
-    server + "AssignmentLogic.php/FetchAssignmentImages",
+    serverURL + "AssignmentLogic.php/FetchAssignmentImages",
     data
   );
 }
 
 export function evaluateAssignmentImage(data) {
-  return methods.post(server + "AssignmentLogic.php/EvaluateImage", data);
+  return methods.post(serverURL + "AssignmentLogic.php/EvaluateImage", data);
 }
+
+// export function getAssignmentById(assignmentId){
+//   return methods.get(serverURL + "AssignmentLogic.php/GetAssignment", )
+// }

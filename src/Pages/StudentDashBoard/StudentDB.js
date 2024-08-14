@@ -34,7 +34,6 @@ const StudentDB = () => {
 
   useEffect(() => {
     getAssignmentsForUser({
-      Action: "GetAssignmentsForUser",
       userId: UserId,
     }).then((res) =>
       res.msg["Err"] === 1
@@ -45,7 +44,6 @@ const StudentDB = () => {
 
   useEffect(() => {
     getSubmissionById({
-      Action: "GetSubmissionById",
       userId: UserId,
     }).then((res) => {
       res.msg["Err"] === 1

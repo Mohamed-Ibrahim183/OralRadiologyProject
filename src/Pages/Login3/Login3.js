@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import "./Login3.css";
-import axios from "axios";
 import { ContextData } from "../../ContextData";
 import { useNavigate } from "react-router-dom";
+import { serverURL, userLogin } from "../../Slices/GeneralSlice";
 
 function Login3() {
   const [identifier, setIdentifier] = useState("");
@@ -19,30 +19,27 @@ function Login3() {
       return;
     }
 
-    const url = "http://localhost/Projects/OralRadiology/userLogic.php/Login";
-    let fData = new FormData();
-    fData.append("identifier", identifier);
-    fData.append("password", password);
-
-    axios
-      .post(url, fData)
+    userLogin({
+      identifier,
+      password,
+    })
       .then((res) => {
-        if (typeof res.data === "object") {
-          sessionStorage.setItem("userId", res.data.Id);
-          sessionStorage.setItem("MSAId", res.data.MSAId);
-          sessionStorage.setItem("Name", res.data.Name);
-          sessionStorage.setItem("Email", res.data.Email);
-          sessionStorage.setItem("Type", res.data.Type);
-          sessionStorage.setItem(
-            "PersonalImage",
-            "http://localhost/Projects/OralRadiology/" + res.data.PersonalImage
+        if (typeof res.msg === "object") {
+          const data = {
+            userId: res.msg.Id,
+            MSAId: res.msg.MSAId,
+            Name: res.msg.Name,
+            Email: res.msg.Email,
+            Type: res.msg.Type,
+            PersonalImage: serverURL + res.msg.PersonalImage,
+          };
+          Object.keys(data).forEach((key) =>
+            sessionStorage.setItem(key, data[key])
           );
-          setUserType(res.data.Type);
-          sessionStorage.setItem("full", JSON.stringify(res.data));
-          conData.dispatch({ type: "setUser", payload: res.data });
-        } else {
-          alert(res.data);
-        }
+          setUserType(res.msg.Type);
+          sessionStorage.setItem("full", JSON.stringify(res.msg));
+          conData.dispatch({ type: "setUser", payload: res.msg });
+        } else alert(res.msg);
       })
       .catch((err) => {
         alert("Login Error With Server" + err.message);

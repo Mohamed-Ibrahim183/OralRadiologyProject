@@ -130,11 +130,7 @@ function AddRequirementModal({ isOpen, onClose }) {
       Topic: topicName,
       maxLimitImages: parseInt(maxImages, 10),
       ProfessorId: parseInt(userId, 10),
-    }).then((res) =>
-      res.msg === "Inserted"
-        ? alert("The New Assignment Inserted Successfully")
-        : null
-    );
+    }).then((res) => console.log(res.msg));
     setLoading(false);
     onClose();
   };

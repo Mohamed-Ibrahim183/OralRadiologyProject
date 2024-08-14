@@ -32,7 +32,6 @@ const AssignmentSubmission = () => {
         return;
       }
       await getAssignmentData({
-        Action: "fetchAssignment",
         assignmentId: assignmentId,
       }).then((res) => setAssignmentInfo(res.msg));
     };
@@ -223,7 +222,6 @@ function Submissions({ assignment, update }) {
   const [submissions, setSubmissions] = useState([]);
   useEffect(() => {
     getSubmissionUserAssignment({
-      Action: "GetSubmissionByUserAndAssignment",
       userId: sessionStorage.getItem("userId"),
       assignmentId: sessionStorage.getItem("assignmentId"),
     }).then((res) => setSubmissions(res.msg));

@@ -35,10 +35,11 @@ export default function BasicModal({
   const [selectedGroup, setSelectedGroup] = React.useState("");
 
   React.useEffect(() => {
-    async function getGroups() {
-      setGroups(await getAllGroupsData());
-    }
-    getGroups();
+    // async function getGroups() {
+    //   setGroups(await getAllGroupsData());
+    // }
+    // getGroups();
+    getAllGroupsData().then((res) => setGroups(res.msg));
   }, []);
 
   if (!selectedUser) return null;

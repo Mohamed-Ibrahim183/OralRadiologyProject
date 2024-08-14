@@ -7,7 +7,6 @@ const OverViewAssignmentsPage = () => {
   const [submissions, setSubmissions] = useState([]);
   useEffect(() => {
     getSubmissionForUserReport({
-      Action: "GetSubmissionForUserReport",
       StudentId: sessionStorage.getItem("userId"),
     }).then((res) => setSubmissions(res.msg));
   }, []);

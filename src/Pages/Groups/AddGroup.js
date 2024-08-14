@@ -118,7 +118,7 @@ const AddGroup = () => {
       Object.keys(formDataCopy).map((ele) =>
         fData.append(ele, JSON.stringify(formDataCopy[ele]))
       );
-      console.log(await insertNewGroup(fData));
+      insertNewGroup(fData);
       setRows(0);
       document.getElementById("GroupName").value = "";
       setRender(render + 1);
@@ -133,7 +133,9 @@ const AddGroup = () => {
     setEditingGroup(null);
   }
 
-  const fetchFirst = async () => setGroups(await getAllGroupsData());
+  function fetchFirst() {
+    getAllGroupsData().then((res) => setGroups(res.msg));
+  }
   useEffect(() => {
     fetchFirst();
   }, [render]);
@@ -143,7 +145,7 @@ const AddGroup = () => {
   }
 
   async function Delete(index) {
-    console.log(await DeleteGroup(index));
+    DeleteGroup(index);
     setRender(render + 1);
     fetchFirst();
   }
