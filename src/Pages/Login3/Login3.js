@@ -3,6 +3,7 @@ import "./Login3.css";
 import { ContextData } from "../../ContextData";
 import { useNavigate } from "react-router-dom";
 import { serverURL, userLogin } from "../../Slices/GeneralSlice";
+import toast from "react-hot-toast";
 
 function Login3() {
   const [identifier, setIdentifier] = useState("");
@@ -24,7 +25,10 @@ function Login3() {
       password,
     })
       .then((res) => {
+        // console.log(res.msg);
         if (typeof res.msg === "object") {
+          if (res.msg.Id != null)
+            toast(`Welcome ${res.msg.Name} to Oral Radiology System.`);
           const data = {
             userId: res.msg.Id,
             MSAId: res.msg.MSAId,

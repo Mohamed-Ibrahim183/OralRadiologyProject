@@ -31,6 +31,7 @@
     "react-chartjs-2": "^5.2.0",
     "react-chatbot-kit": "^2.2.2",
     "react-dom": "^18.2.0",
+    "react-hot-toast": "^2.4.1",
     "react-lazy-load-image-component": "^1.6.0",
     "react-loading": "^2.0.3",
     "react-login-page": "^1.0.4",
