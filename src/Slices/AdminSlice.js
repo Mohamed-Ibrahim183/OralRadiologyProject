@@ -33,3 +33,7 @@ export function deleteUserFromDB(userId) {
 export function insertNewUser(data) {
   return methods.post(serverURL + "userLogic.php/Insert", data);
 }
+
+export function insertByMSAId(data) {
+  return methods.post(serverURL + "userLogic.php/InsertMSAId", data);
+}

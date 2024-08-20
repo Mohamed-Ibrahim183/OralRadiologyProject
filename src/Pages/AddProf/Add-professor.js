@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import "./AddProf.css";
 import File from "./data3.json";
 import { Navigate } from "react-router-dom";
-import { insertNewUser } from "../../Slices/AdminSlice";
+import { insertByMSAId, insertNewUser } from "../../Slices/AdminSlice";
 
 export default function AddUser() {
   const [data, setData] = useState([]);
@@ -38,9 +38,11 @@ export default function AddUser() {
   }
   function handleSubmit(e) {
     e.preventDefault();
-    let fData = new FormData();
-    Object.keys(finalData).forEach((key) => fData.append(key, finalData[key]));
-    insertNewUser(fData).then((res) => console.log(res.msg));
+    // let fData = new FormData();
+    // Object.keys(finalData).forEach((key) => fData.append(key, finalData[key]));
+    // insertNewUser(fData).then((res) => console.log(res.msg));
+    console.log("finalData:", finalData);
+    insertByMSAId(finalData).then((res) => console.log(res.msg));
   }
 
   return (
