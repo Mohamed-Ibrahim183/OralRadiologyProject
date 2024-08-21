@@ -31,11 +31,19 @@ import {
   getAllCategoriesData,
   insertNewAssignment,
 } from "../../Slices/PorfessorSlice";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+import {
+  faSortAlphaDown,
+  faSortAlphaUp,
+  faSortNumericDown,
+  faSortNumericUp,
+} from "@fortawesome/free-solid-svg-icons";
 import { getAssignmentsGroupsShow } from "../../Slices/PorfessorSlice";
 
 function GroupsData() {
+  const [isModalOpen, setModalOpen] = useState(false);
   const [groups, setGroups] = useState([]);
-  const [showGroups, setShowGroups] = useState(false);
   const [loadingMessage, setLoadingMessage] = useState(
     "Loading Groups Data..."
   );
@@ -90,28 +98,33 @@ function GroupsData() {
   };
 
   return (
-    <>
+    <div>
       <Button
         variant="contained"
         color="primary"
-        onClick={() => setShowGroups(!showGroups)}
+        onClick={() => setModalOpen(true)}
+        className="profDB_UpperButton"
       >
-        {showGroups ? "Hide" : "Show"} Groups & Assignments
+        Groups & Assignments
       </Button>
-      {showGroups ? (
-        <TableContainer component={Paper}>
-          <Table aria-label="simple table">
-            {renderTableHeader()}
-            {renderTableBody()}
-          </Table>
-        </TableContainer>
-      ) : (
-        ""
-      )}
-      {!groups.length && <div>{loadingMessage}</div>}
-    </>
+      <BasicModalComp
+        openModal={isModalOpen}
+        closeModal={() => setModalOpen(false)}
+      >
+        <div className="GroupsModal">
+          <TableContainer component={Paper} className="GroupsModalContent">
+            <Table aria-label="simple table">
+              {renderTableHeader()}
+              {renderTableBody()}
+            </Table>
+          </TableContainer>
+          {!groups.length && <div>{loadingMessage}</div>}
+        </div>
+      </BasicModalComp>
+    </div>
   );
 }
+
 function AddRequirementModal({ isOpen, onClose }) {
   const [assignmentName, setAssignmentName] = useState("");
   const [topicName, setTopicName] = useState("");
@@ -202,7 +215,12 @@ const ProfessorDB = () => {
   const [assignments, setAssignments] = useState([]);
   const [userId, setUserId] = useState(storedUserId);
   const [showCats, setShowCats] = useState(false);
+
   const [updateAssignments, setUpdateAssignments] = useState(0);
+  const [filter, setFilter] = useState("All");
+  const [sortingType, setSortingType] = useState("Name");
+  const [sortingOrder, setSortingOrder] = useState("asc");
+  const [filteredAssignments, setFilteredAssignments] = useState([]);
 
   function DeleteAssignment(assignmentId) {
     deleteAssignmentDB(assignmentId);
@@ -216,50 +234,205 @@ const ProfessorDB = () => {
     getAllAssignmentsData().then((res) => setAssignments(res.msg || []));
   }, [storedUserId, updateAssignments]);
 
-  if (sessionStorage.getItem("Type") !== "Professor") {
-    return <Navigate to="/" />;
-  }
+  useEffect(() => {
+    const filterAndSortAssignments = () => {
+      const now = new Date();
+      let filtered = [];
+
+      if (filter === "Completed") {
+        filtered = assignments.filter(
+          (assignment) =>
+            new Date(assignment.open) <= now && new Date(assignment.close) < now
+        );
+      } else if (filter === "Inprogress") {
+        filtered = assignments.filter(
+          (assignment) =>
+            new Date(assignment.open) <= now &&
+            new Date(assignment.close) >= now
+        );
+      } else if (filter === "Upcoming") {
+        filtered = assignments.filter(
+          (assignment) => new Date(assignment.open) > now
+        );
+      } else {
+        filtered = assignments;
+      }
+
+      if (sortingType === "Name") {
+        filtered.sort((a, b) => {
+          if (a.Name < b.Name) return sortingOrder === "asc" ? -1 : 1;
+          if (a.Name > b.Name) return sortingOrder === "asc" ? 1 : -1;
+          return 0;
+        });
+      } else if (sortingType === "OpenDate") {
+        filtered.sort((a, b) => {
+          if (new Date(a.open) < new Date(b.open))
+            return sortingOrder === "asc" ? -1 : 1;
+          if (new Date(a.open) > new Date(b.open))
+            return sortingOrder === "asc" ? 1 : -1;
+          return 0;
+        });
+      }
+
+      setFilteredAssignments(filtered);
+    };
+    filterAndSortAssignments();
+  }, [assignments, filter, sortingType, sortingOrder]);
+  const toggleSortingOrder = () => {
+    setSortingOrder(sortingOrder === "asc" ? "desc" : "asc");
+  };
+
+  const getStatusProps = (assignment) => {
+    const now = new Date();
+    const openDate = new Date(assignment.open);
+    const closeDate = new Date(assignment.close);
+
+    if (openDate <= now && closeDate < now) {
+      return { state: "closed", col: "red", remaining: 0 };
+    } else if (openDate <= now && closeDate >= now) {
+      const remainingTime = (closeDate - now) / 60000; // remaining time in minutes
+      let remaining;
+
+      if (remainingTime > 1440) {
+        // more than 24 hours
+        remaining = `${Math.round(remainingTime / 1440)} days remaining`;
+      } else {
+        if (remainingTime > 60) {
+          // more than 60 minutes
+          remaining = `${Math.round(remainingTime / 60)} hours remaining`;
+        } else {
+          if (remainingTime < 60) {
+            // less than 60 minutes
+            remaining = `${Math.round(remainingTime)} minutes remaining`;
+          }
+        }
+      }
+      return { state: "inprogress", col: "blue", remaining };
+    } else if (openDate > now) {
+      return { state: "upcoming", col: "green", remaining: null };
+    }
+    return { state: "unknown", col: "grey", remaining: null };
+  };
+
   const AssignmentsContainer = () => {
+    const [categoriesModal, setCategoriesModal] = useState(false);
+    if (sessionStorage.getItem("Type") !== "Professor") {
+      return <Navigate to="/" />;
+    }
     return (
       <div className="container AssignmentSection">
-        <GroupsData />
-        <div className="BBBBBB">
-          <h2 className="sectionTitle">My Assignments</h2>
+        <div className="profDB_UpperButtons">
+          <GroupsData />
           <Button
             variant="contained"
-            color="secondary"
+            color="primary"
             onClick={() => setModalOpen(true)}
             endIcon={<Add />}
+            className="profDB_UpperButton"
           >
             Add Requirement
           </Button>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={() => setCategoriesModal(!categoriesModal)}
+            className="profDB_UpperButton"
+          >
+            Categories
+          </Button>
+        </div>
+        <BasicModalComp
+          openModal={categoriesModal}
+          closeModal={() => setCategoriesModal(false)}
+        >
+          {<Categories />}
+        </BasicModalComp>
+        <div className="BBBBBB">
+          <h2 className="sectionTitle">My Requirements</h2>
+          <div className="FilterandSorting">
+            {/* <div className="filterOptions">
+              <span
+                className={`Filteroption ${filter === "All" ? "selected" : ""}`}
+                onClick={() => setFilter("All")}
+              >
+                All
+              </span>
+              <span
+                className={`Filteroption ${
+                  filter === "Completed" ? "selected" : ""
+                }`}
+                onClick={() => setFilter("Completed")}
+              >
+                Closed
+              </span>
+              <span
+                className={`Filteroption ${
+                  filter === "Inprogress" ? "selected" : ""
+                }`}
+                onClick={() => setFilter("Inprogress")}
+              >
+                Inprogress
+              </span>
+              <span
+                className={`Filteroption ${
+                  filter === "Upcoming" ? "selected" : ""
+                }`}
+                onClick={() => setFilter("Upcoming")}
+              >
+                Upcoming
+              </span>
+            </div> */}
+            <div className="sortingOptions">
+              <FontAwesomeIcon
+                icon={
+                  sortingType === "Name" && sortingOrder === "asc"
+                    ? faSortAlphaDown
+                    : faSortAlphaUp
+                }
+                className={`sortingOption ${
+                  sortingType === "Name" ? "selected" : ""
+                }`}
+                onClick={() => {
+                  setSortingType("Name");
+                  toggleSortingOrder();
+                }}
+              />
+              <FontAwesomeIcon
+                icon={
+                  sortingType === "OpenDate" && sortingOrder === "asc"
+                    ? faSortNumericDown
+                    : faSortNumericUp
+                }
+                className={`sortingOption ${
+                  sortingType === "OpenDate" ? "selected" : ""
+                }`}
+                onClick={() => {
+                  setSortingType("OpenDate");
+                  toggleSortingOrder();
+                }}
+              />
+            </div>
+          </div>
         </div>
         <div className="cardAssignment">
-          {Array.isArray(assignments) &&
-            assignments.length > 0 &&
-            assignments.map((assignment, i) => (
+          {Array.isArray(filteredAssignments) &&
+            filteredAssignments.length > 0 &&
+            filteredAssignments.map((assignment, i) => (
               <AssignmentCard
                 key={i}
                 userId={userId}
                 assignmentId={assignment.Id}
                 onDelete={DeleteAssignment}
-                name={"Name: " + assignment.Name}
+                name={assignment.Name}
                 info={`Topic: ${assignment.Topic}`}
                 toPage={`/professor/Grading_Page?assignmentId=${assignment.Id}`}
               />
             ))}
         </div>
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={() => setShowCats(!showCats)}
-        >
-          {showCats ? "Hide Categories" : "Show Categories"}
-        </Button>
-        {showCats && <Categories />}
       </div>
     );
   };
+
   return (
     <>
       <AddRequirementModal
@@ -348,39 +521,31 @@ function Categories() {
     );
   }
   return (
-    <Box>
+    <div className="cateogriesModal">
       {addCat && <AddCategoryComp />}
-      {cats.length > 0 && (
-        <TableContainer component={Paper} sx={{ width: "fit-content" }}>
-          <Table aria-label="simple table">
-            <TableHead>
-              <TableRow>
-                <TableCell align="center">Category Name</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {cats.map((row) => (
-                <TableRow
-                  key={row.Name + row.Id}
-                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                >
-                  <TableCell align="center">{row.Name}</TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      )}
+      <div className="categoriesList">
+        <h3 className="categoriesListTitle">Categories</h3>
+        <div className="categoriesListItems">
+          {cats.map((cat) => (
+            <p className="categoriesListItem" key={cat.Id}>
+              <div>{cat.Name}</div>
+              <div className="closebtn">X</div>
+            </p>
+          ))}
+        </div>
+      </div>
+
       <Button
         variant="outlined"
-        color="secondary"
+        color="primary"
         onClick={() => {
           setAddCat(!addCat);
         }}
+        className="addCategoryBtn"
       >
         Add Category
       </Button>
-    </Box>
+    </div>
   );
 }
 

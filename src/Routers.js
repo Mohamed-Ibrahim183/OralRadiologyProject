@@ -14,7 +14,7 @@ import AddGroup from "./Pages/Groups/AddGroup";
 import Login3 from "./Pages/Login3/Login3";
 import Users from "./Pages/Users/Users";
 import Dashboard from "./Pages/Dashboard";
-
+import ModalPOP from "./Components/ModalPOP";
 const routes = [
   {
     path: "/",
@@ -68,6 +68,11 @@ const routes = [
   {
     path: "/Login3",
     element: <Login3 />,
+    errorElement: <NotFound />,
+  },
+  {
+    path: "/ModalPOP",
+    element: <ModalPOP />,
     errorElement: <NotFound />,
   },
 ];

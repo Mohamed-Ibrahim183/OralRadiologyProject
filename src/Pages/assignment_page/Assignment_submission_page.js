@@ -23,6 +23,7 @@ const AssignmentSubmission = () => {
   const [categories, setCategories] = useState({});
   const [currentIndex, setCurrentIndex] = useState(0);
   const [update, setUpdate] = useState(0);
+  const state = sessionStorage.getItem("state");
 
   useEffect(() => {
     const fetchAssignmentInfo = async () => {
@@ -143,6 +144,7 @@ const AssignmentSubmission = () => {
   };
 
   const AssignmentInfo = () => {
+    const remainingTime = sessionStorage.getItem("RemainingTime");
     return (
       <>
         <div className="assignment-info">
@@ -150,36 +152,75 @@ const AssignmentSubmission = () => {
             {assignmentInfo.Name} SUBMISSION
           </h2>
           <label htmlFor="submission-status">SUBMISSION STATUS</label>
-          <input type="text" id="submission-status" disabled />
+          <input
+            type="text"
+            id="submission-status"
+            value={state}
+            style={{
+              color:
+                state === "closed"
+                  ? "red"
+                  : state === "inprogress"
+                  ? "green"
+                  : "defaultColor",
+            }}
+            disabled
+          />
           <label htmlFor="grading-status">GRADING STATUS</label>
           <input type="text" id="grading-status" disabled />
           <label htmlFor="time-remaining">TIME REMAINING</label>
-          <input type="text" id="time-remaining" disabled />
-          <label htmlFor="file-upload">UPLOAD FILM</label>
           <input
-            type="file"
-            id="file-upload"
-            multiple
-            onChange={handleFileChange}
+            type="text"
+            id="time-remaining"
+            value={remainingTime}
+            style={{
+              color:
+                state === "closed"
+                  ? "red"
+                  : state === "inprogress"
+                  ? "green"
+                  : "defaultColor",
+            }}
+            disabled
           />
-          <ul>
-            {files.map((file, index) => (
-              <li key={index}>
-                {file.name}{" "}
-                <button onClick={() => deleteFile(index)}>Delete</button>
-              </li>
-            ))}
-          </ul>
-          <button
-            className="button btnA"
-            type="button"
-            onClick={deleteLastFile}
-          >
-            DELETE ALL
-          </button>
-          <button className="button btnB" type="button" onClick={handleSubmit}>
-            CONFIRM
-          </button>
+          {state === "inprogress" && (
+            <label htmlFor="file-upload">UPLOAD FILM</label>
+          )}
+          {state === "closed" && (
+            <label htmlFor="file-upload">UPLOAD Closed</label>
+          )}
+          {state === "inprogress" && (
+            <div className="upoladLogics">
+              <input
+                type="file"
+                id="file-upload"
+                multiple
+                onChange={handleFileChange}
+              />
+              <ul>
+                {files.map((file, index) => (
+                  <li key={index}>
+                    {file.name}{" "}
+                    <button onClick={() => deleteFile(index)}>Delete</button>
+                  </li>
+                ))}
+              </ul>
+              <button
+                className="button btnA"
+                type="button"
+                onClick={deleteLastFile}
+              >
+                DELETE ALL
+              </button>
+              <button
+                className="button btnB"
+                type="button"
+                onClick={handleSubmit}
+              >
+                CONFIRM
+              </button>
+            </div>
+          )}
         </div>
       </>
     );

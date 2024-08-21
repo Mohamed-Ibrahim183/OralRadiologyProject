@@ -40,11 +40,109 @@
   width: 60%;
   margin-top: 10px;
 }
+.fullProfessorPage .BBBBBB {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.fullProfessorPage .BBBBBB .filterOptions .Filteroption {
+  margin-right: 10px;
+  margin-left: 5px;
+  cursor: pointer;
+  color: #979797;
+  font-weight: 700;
+  font-size: 14px;
+}
+.fullProfessorPage .BBBBBB .filterOptions .selected {
+  font-weight: bolder;
+  color: var(--text-monem);
+}
+.fullProfessorPage .AssignmentSection .BBBBBB .FilterandSorting {
+  display: flex;
+  width: 120%;
+  margin-left: 140px;
+}
+.fullProfessorPage .AssignmentSection .BBBBBB .FilterandSorting .filterOptions {
+  margin-right: 10px;
+}
+.fullProfessorPage .FilterandSorting .sortingOption {
+  margin-right: 10px;
+  cursor: pointer;
+}
+.fullProfessorPage .FilterandSorting .sortingOptions .selected {
+  color: blue;
+}
+.fullProfessorPage .FilterandSorting .sortingOptions {
+  margin-left: 10px;
+}
+
+.fullProfessorPage .container.AssignmentSection .profDB_UpperButtons {
+  display: flex;
+}
+.fullProfessorPage
+  .container.AssignmentSection
+  .profDB_UpperButtons
+  .profDB_UpperButton {
+  margin-right: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+.GroupsModal {
+  width: 40vw;
+  height: 60vh;
+}
+.GroupsModal .GroupsModalContent {
+  height: 96%;
+  overflow-y: scroll;
+}
+.cateogriesModal {
+  width: 50vw;
+  height: 60vh;
+}
+.cateogriesModal .categoriesList {
+  height: 90%;
+  overflow-y: scroll;
+  margin-bottom: 4px;
+}
+.cateogriesModal .categoriesList .categoriesListItems {
+  padding: 10px;
+  margin-bottom: 2px;
+}
+.cateogriesModal .categoriesList .categoriesListItems .categoriesListItem {
+  padding: 10px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  background-color: var(--mainBackGround);
+  color: var(--secondaryText);
+  border: var(--btnB) 2px solid;
+  border-radius: 15px;
+  font-weight: 1000;
+  display: flex;
+  justify-content: space-between;
+}
+.cateogriesModal .categoriesList .categoriesListTitle {
+  text-align: center;
+  margin-bottom: 3px;
+  margin-top: 3px;
+}
+.cateogriesModal .addCategoryBtn {
+  width: 100%;
+}
+.cateogriesModal .closebtn {
+  color: rgba(0, 0, 0, 0.826);
+}
+.cateogriesModal .closebtn:hover {
+  font-weight: bold;
+  color: black;
+  scale: 1.03;
+}
+
 .fullProfessorPage .container.AssignmentSection .sectionTitle {
   font-size: 25px;
   font-weight: bold;
   padding: 16px 0 8px;
   color: var(--mainText);
+  width: 100%;
 }
 .fullProfessorPage .container.AssignmentSection .AssCard {
   box-shadow: 0px 5px 13px 0px var(--shadow);
@@ -95,11 +193,7 @@
   -ms-border-radius: 8px;
   -o-border-radius: 8px;
 }
-.fullProfessorPage .BBBBBB {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
+
 .fullProfessorPage .container.AssignmentSection h5 {
   color: #7b7b7b;
   margin-top: 20px;

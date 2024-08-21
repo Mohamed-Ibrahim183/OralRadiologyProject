@@ -1,4 +1,4 @@
-.Modal2Group{
+.Modal2Group {
   position: fixed;
   top: 0;
   left: 0;
@@ -9,7 +9,7 @@
   justify-content: center;
   align-items: center;
 
-  .ModalContent{
+  .ModalContent {
     width: 600px;
     // background-color: white;
     // height: 300px;
@@ -19,14 +19,14 @@
     // flex-direction: column;
     // gap: 20px;
   }
-  .main{
+  .main {
     display: flex;
     gap: 20px;
-    .left{
+    .left {
       width: 500px;
     }
   }
-  button{
+  button {
     display: inline;
     width: 100px;
   }

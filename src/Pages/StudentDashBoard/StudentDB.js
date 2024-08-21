@@ -113,30 +113,93 @@ const StudentDB = () => {
     if (openDate <= now && closeDate < now) {
       return { state: "closed", col: "red", remaining: 0 };
     } else if (openDate <= now && closeDate >= now) {
-      const remainingTime = (closeDate - now) / 60000; // remaining time in minutes
+      let remainingTime = (closeDate - now) / 1000; // remaining time in seconds
+
+      const days = Math.floor(remainingTime / (24 * 60 * 60));
+      remainingTime %= 24 * 60 * 60;
+
+      const hours = Math.floor(remainingTime / (60 * 60));
+      remainingTime %= 60 * 60;
+
+      const minutes = Math.floor(remainingTime / 60);
+      const seconds = Math.floor(remainingTime % 60);
+
       let remaining;
 
-      if (remainingTime > 1440) {
-        // more than 24 hours
-        remaining = `${Math.round(remainingTime / 1440)} days remaining`;
+      if (days > 0) {
+        remaining = `${days} days`;
+      } else if (hours > 0) {
+        remaining = `${hours} hours, ${minutes} minutes`;
+      } else if (minutes > 0) {
+        remaining = `${minutes} minutes`;
       } else {
-        if (remainingTime > 60) {
-          // more than 60 minutes
-          remaining = `${Math.round(remainingTime / 60)} hours remaining`;
-        } else {
-          if (remainingTime < 60) {
-            // less than 60 minutes
-            remaining = `${Math.round(remainingTime)} minutes remaining`;
-          }
-        }
+        remaining = `${seconds} seconds`;
       }
-      return { state: "inprogress", col: "blue", remaining };
+
+      return { state: "inprogress", col: "green", remaining };
     } else if (openDate > now) {
-      return { state: "upcoming", col: "green", remaining: null };
+      return { state: "upcoming", col: "blue", remaining: null };
     }
     return { state: "unknown", col: "grey", remaining: null };
   };
+  const putRemaininginSession = (assignment) => {
+    const now = new Date();
+    const openDate = new Date(assignment.open);
+    const closeDate = new Date(assignment.close);
+    if (openDate <= now && closeDate < now) {
+      // Time since the task has closed
+      let timeSinceClosed = (now - closeDate) / 1000; // time since closed in seconds
 
+      const days = Math.floor(timeSinceClosed / (24 * 60 * 60));
+      timeSinceClosed %= 24 * 60 * 60;
+
+      const hours = Math.floor(timeSinceClosed / (60 * 60));
+      timeSinceClosed %= 60 * 60;
+
+      const minutes = Math.floor(timeSinceClosed / 60);
+      const seconds = Math.floor(timeSinceClosed % 60);
+
+      let closedTime;
+
+      if (days > 0) {
+        closedTime = `closed from ${days} days`;
+      } else if (hours > 0) {
+        closedTime = `closed from ${hours} hours, ${minutes} minutes`;
+      } else if (minutes > 0) {
+        closedTime = `closed from ${minutes} minutes`;
+      } else {
+        closedTime = `closed from ${seconds} seconds`;
+      }
+
+      sessionStorage.setItem("RemainingTime", closedTime);
+    } else if (openDate <= now && closeDate > now) {
+      let remainingTime = (closeDate - now) / 1000; // remaining time in seconds
+
+      const days = Math.floor(remainingTime / (24 * 60 * 60));
+      remainingTime %= 24 * 60 * 60;
+
+      const hours = Math.floor(remainingTime / (60 * 60));
+      remainingTime %= 60 * 60;
+
+      const minutes = Math.floor(remainingTime / 60);
+      const seconds = Math.floor(remainingTime % 60);
+
+      let remaining;
+
+      if (days > 0) {
+        remaining = `${days} days`;
+      } else if (hours > 0) {
+        remaining = `${hours} hours, ${minutes} minutes`;
+      } else if (minutes > 0) {
+        remaining = `${minutes} minutes`;
+      } else {
+        remaining = `${seconds} seconds`;
+      }
+      sessionStorage.setItem("RemainingTime", remaining);
+    } else {
+      sessionStorage.setItem("RemainingTime", "Task is not yet due");
+    }
+  };
   if (sessionStorage["Type"] !== "Student") {
     return <Navigate to="/" />;
   }
@@ -227,16 +290,18 @@ const StudentDB = () => {
                         pathname: "/student/submit",
                         search: `?userId=${UserId}&assignmentId=${assignment.Id}`,
                       }}
-                      onClick={() => handleAssignmentClick(assignment.Id)}
+                      onClick={() => {
+                        handleAssignmentClick(assignment.Id);
+                        sessionStorage.setItem("state", state);
+                        putRemaininginSession(assignment);
+                      }}
                     >
                       <AssignmentCard
                         name={assignment.Name}
                         info={`Topic: ${assignment.Topic}`}
                         col={col}
                         state={state}
-                        remaining={
-                          remaining ? `${remaining} minutes remaining` : ""
-                        }
+                        remaining={remaining ? `${remaining}  remaining` : ""}
                       ></AssignmentCard>
                     </Link>
                   );
