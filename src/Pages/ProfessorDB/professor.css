@@ -14,6 +14,7 @@
   --chartBack: rgba(255, 255, 255, 0.277);
   --currentDay: #a2d1fd;
   --profile: #a2d1fd;
+  --shadow: rgba(0, 0, 0, 0.256);
 }
 [theme="Dark"] {
   --mainColor: #4d8ba8;
@@ -28,6 +29,7 @@
   --secondaryText: #a9a9a9;
   --currentDay: #ffd269;
   --profile: #4d8ba8;
+  --shadow: rgba(255, 255, 255, 0.256);
 }
 .fullProfessorPage {
   padding-top: 16px;
@@ -36,6 +38,7 @@
 }
 .fullProfessorPage .container.AssignmentSection {
   width: 60%;
+  margin-top: 10px;
 }
 .fullProfessorPage .container.AssignmentSection .sectionTitle {
   font-size: 25px;
@@ -44,12 +47,17 @@
   color: var(--mainText);
 }
 .fullProfessorPage .container.AssignmentSection .AssCard {
-  box-shadow: 0px 5px 13px 0px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 5px 13px 0px var(--shadow);
   margin-top: 24px;
+  margin-bottom: 7px;
+  margin-right: 3px;
+  margin-left: 2px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 8px;
+  border: 1px solid #345ff0;
+
   border-radius: 10px;
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
@@ -112,6 +120,9 @@
   margin-top: 40px;
 } /*# sourceMappingURL=StudentDB.css.map */
 .fullProfessorPage .calender {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   float: right;
   margin-top: 50px;
   box-shadow: 0px 5px 13px 0px rgba(0, 0, 0, 0.45);
@@ -141,7 +152,7 @@
 }
 @media screen and (max-width: 1080px) {
   .fullProfessorPage .upper {
-    flex-direction: column;
+    flex-direction: column-reverse;
   }
   .fullProfessorPage .container.AssignmentSection {
     width: 100%;
@@ -154,6 +165,12 @@
   }
   .fullProfessorPage .calender {
     margin-right: 6px;
+  }
+  .fullProfessorPage .calender {
+    width: 100%;
+  }
+  .react-calendar {
+    width: 100%;
   }
 }
 

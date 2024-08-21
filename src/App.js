@@ -13,6 +13,7 @@ import Home from "./Pages/Home/Home";
 import Login3 from "./Pages/Login3/Login3";
 import NotFound from "./Pages/NotFound";
 import { ContextData } from "./ContextData";
+import { Toaster } from "react-hot-toast";
 
 // Lazy load the group components
 const AdminPages = lazy(() => import("./Routes/AdminPages"));
@@ -61,6 +62,9 @@ function App() {
         dispatch,
       }}
     >
+      <div>
+        <Toaster position="top-center" reverseOrder={false} />
+      </div>
       <RouterProvider
         router={createBrowserRouter(
           createRoutesFromElements(

@@ -10,11 +10,10 @@
   --overlay-bg-start: #2b80ff;
   --overlay-bg-end: #41b9ff;
   --overlay-text-color: #ffffff;
-
 }
 @import url("https://fonts.googleapis.com/css?family=Montserrat:400,800");
 
-.noScroll{
+.noScroll {
   overflow: hidden;
 }
 
@@ -247,4 +246,52 @@
   background-repeat: no-repeat;
   /* background-color: rgb(245, 245, 245); */
   background-blend-mode: multiply;
+}
+@media only screen and (max-width: 600px) {
+  .bigContainer {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+  }
+
+  .form-container.sign-in-container {
+    width: 100%;
+  }
+
+  .overlay-container {
+    position: relative;
+    width: 100%;
+    height: auto;
+  }
+
+  .overlay {
+    width: 50%;
+    display: none;
+  }
+
+  .overlay-panel {
+    width: 100%;
+    height: auto;
+  }
+
+  .overlay-left,
+  .overlay-right {
+    width: 100%;
+  }
+
+  .container.right-panel-active .overlay-container {
+    transform: none;
+  }
+
+  .container.right-panel-active .overlay {
+    transform: none;
+  }
+
+  .container.right-panel-active .overlay-left {
+    transform: none;
+  }
+
+  .container.right-panel-active .overlay-right {
+    transform: none;
+  }
 }

@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from "react";
 
 import "./ViewSubmissionsModal.css";
-import { axiosMethods } from "../Controller";
+// import { axiosMethods } from "../Controller";
 import Button from "@mui/material/Button";
 import BasicModalComp from "../../Components/BasicModal/BasicModalComp";
+import {
+  evaluateAssignmentImage,
+  getAssignmentImages,
+} from "../../Slices/PorfessorSlice";
 
 const ViewSubmissionsModal = ({ show, handleClose, submission }) => {
   const [images, setImages] = useState([]);
@@ -12,15 +16,7 @@ const ViewSubmissionsModal = ({ show, handleClose, submission }) => {
 
   useEffect(() => {
     if (!submission) return;
-    new axiosMethods()
-      .get(
-        "http://localhost/Projects/OralRadiology/AssignmentLogic.php/FetchAssignmentImages",
-        { submission }
-      )
-      .then((res) => {
-        console.log("Images:", res.msg);
-        setImages(res.msg);
-      });
+    getAssignmentImages({ submission }).then((res) => setImages(res.msg));
   }, [submission]);
 
   const openImageViewer = (index) => {
@@ -42,15 +38,10 @@ const ViewSubmissionsModal = ({ show, handleClose, submission }) => {
     );
   };
   function EvaluateImage() {
-    new axiosMethods()
-      .post(
-        "http://localhost/Projects/OralRadiology/AssignmentLogic.php/EvaluateImage",
-        {
-          ImageId: images[currentImageIndex].Id,
-          Grade: images[currentImageIndex].Grade,
-        }
-      )
-      .then((res) => console.log(res.msg));
+    evaluateAssignmentImage({
+      ImageId: images[currentImageIndex].Id,
+      Grade: images[currentImageIndex].Grade,
+    });
   }
 
   if (!show) {

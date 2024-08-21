@@ -55,6 +55,7 @@ function AdminPage() {
             <div className="stats-row">{cards}</div>
             <div className="chart-row">{/* <Chart /> */}</div>
           </div>
+
           <Box
             sx={{
               display: "flex",
@@ -63,8 +64,10 @@ function AdminPage() {
             }}
           >
             {/* Slider */}
-            <Mail />
-            <Calendar />
+            <div className="AdminWrapper">
+              <Mail />
+              <Calendar />
+            </div>
           </Box>
         </div>
       </div>

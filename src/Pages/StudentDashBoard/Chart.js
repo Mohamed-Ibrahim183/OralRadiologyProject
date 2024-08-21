@@ -10,7 +10,7 @@ import {
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
 
-import { axiosMethods } from "../Controller";
+import { getAllAssignmentsData } from "../../Slices/PorfessorSlice";
 
 ChartJS.register(
   CategoryScale,
@@ -29,11 +29,7 @@ const ChartComponent = () => {
   const [assignments, setAssignments] = useState([]);
 
   useEffect(() => {
-    new axiosMethods()
-      .get("http://localhost/Projects/OralRadiology/AssignmentLogic.php/GetAll")
-      .then((res) => {
-        setAssignments(res.msg);
-      });
+    getAllAssignmentsData().then((res) => setAssignments(res.msg));
   }, []);
 
   // useEffect to set the color based on the theme

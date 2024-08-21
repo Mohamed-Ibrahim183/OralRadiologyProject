@@ -1,14 +1,20 @@
 import React, { useState, useEffect } from "react";
 import image from "./Dental_Xray.png";
 import "./submit_page.css";
-import Navbar from "../../Components/Navbar/Navbar";
-import axios from "axios";
+import "./assignmentpage.css";
+
 import { Navigate, useSearchParams } from "react-router-dom";
 import IconButton from "@mui/material/IconButton";
-import { ArrowBackIos, ArrowForwardIos, Delete } from "@mui/icons-material";
+import { ArrowBackIos, ArrowForwardIos } from "@mui/icons-material";
 import { Box, Button, Fade, Menu, MenuItem } from "@mui/material";
-import { axiosMethods } from "../Controller";
 import AssignmentCard from "../StudentDashBoard/AssignmentCard";
+import {
+  getAssignmentData,
+  getSubmissionUserAssignment,
+  makeNewSubmission,
+  uploadNewAssignmentImage,
+} from "../../Slices/StudentSlice";
+import { getAllCategoriesData } from "../../Slices/PorfessorSlice";
 
 const AssignmentSubmission = () => {
   const [assignmentInfo, setAssignmentInfo] = useState({});
@@ -25,18 +31,14 @@ const AssignmentSubmission = () => {
         console.error("Assignment ID is not set in session storage.");
         return;
       }
-      new axiosMethods()
-        .get("http://localhost/Projects/OralRadiology/AssignmentLogic.php", {
-          Action: "fetchAssignment",
-          assignmentId: assignmentId,
-        })
-        .then((res) => {
-          setAssignmentInfo(res.msg);
-        });
+      await getAssignmentData({
+        assignmentId: assignmentId,
+      }).then((res) => setAssignmentInfo(res.msg));
     };
 
     fetchAssignmentInfo();
   }, []);
+  // console.log(assignmentInfo);
 
   if (sessionStorage["Type"] !== "Student") {
     return <Navigate to="/" />;
@@ -93,35 +95,27 @@ const AssignmentSubmission = () => {
     try {
       let lastSubmission = -1;
       async function saveSubmission() {
-        await new axiosMethods()
-          .post(
-            "http://localhost/Projects/OralRadiology/AssignmentLogic.php/newSubmission",
-            { studentId, assignmentId }
-          )
-          .then((res) => {
-            lastSubmission = res.msg;
-          });
+        await makeNewSubmission({ studentId, assignmentId }).then(
+          (res) => (lastSubmission = res.msg)
+        );
       }
       await saveSubmission();
       for (let i = 0; i < files.length; i++) {
-        const formData = new FormData();
-        formData.append("assignmentId", assignmentId);
-        formData.append("StudentId", studentId);
-        formData.append("file", files[i]);
-        formData.append("category", categories[files[i].name]);
-        formData.append("submission", lastSubmission);
+        console.log("before");
+        console.log(files[i]);
 
-        new axiosMethods()
-          .post(
-            "http://localhost/Projects/OralRadiology/AssignmentLogic.php/UploadAssignmentImage",
-            formData
-          )
-          .then((res) => {
-            console.log(res.msg);
-            setFiles([]);
-            setCategories([]);
-            setCurrentIndex(0);
-          });
+        uploadNewAssignmentImage({
+          assignmentId,
+          StudentId: studentId,
+          file: files[i],
+          category: categories[files[i].name],
+          submission: lastSubmission,
+        }).then((res) => {
+          console.log(res.msg);
+          setFiles([]);
+          setCategories([]);
+          setCurrentIndex(0);
+        });
       }
 
       alert("Files uploaded successfully.");
@@ -191,21 +185,6 @@ const AssignmentSubmission = () => {
     );
   };
 
-  const Feedback = () => {
-    return (
-      <div className="feedback">
-        <h3>FEEDBACK</h3>
-        <label htmlFor="grade">GRADE</label>
-        <input type="text" id="grade" disabled />
-
-        <label htmlFor="grade-on">GRADE ON</label>
-        <input type="text" id="grade-on" disabled />
-
-        <label htmlFor="grade-by">GRADE BY</label>
-        <input type="text" id="grade-by" disabled />
-      </div>
-    );
-  };
   function DeleteFilm() {
     const newFiles = files.filter((_, i) => i !== currentIndex);
     setFiles(newFiles);
@@ -234,7 +213,6 @@ const AssignmentSubmission = () => {
           />
           <AssignmentInfo />
         </div>
-        {/* <Feedback /> */}
       </div>
       <Submissions assignment={assignmentInfo} update={update} />
     </>
@@ -243,13 +221,10 @@ const AssignmentSubmission = () => {
 function Submissions({ assignment, update }) {
   const [submissions, setSubmissions] = useState([]);
   useEffect(() => {
-    new axiosMethods()
-      .get("http://localhost/Projects/OralRadiology/AssignmentLogic.php", {
-        Action: "GetSubmissionByUserAndAssignment",
-        userId: sessionStorage.getItem("userId"),
-        assignmentId: sessionStorage.getItem("assignmentId"),
-      })
-      .then((res) => setSubmissions(res.msg));
+    getSubmissionUserAssignment({
+      userId: sessionStorage.getItem("userId"),
+      assignmentId: sessionStorage.getItem("assignmentId"),
+    }).then((res) => setSubmissions(res.msg));
   }, [update]);
 
   return (
@@ -287,13 +262,7 @@ const Header = ({
   const [anchorEl, setAnchorEl] = useState(null);
   const [cats, setCats] = useState([]);
   useEffect(() => {
-    new axiosMethods()
-      .get(
-        "http://localhost/Projects/OralRadiology/AssignmentLogic.php/GetCategories"
-      )
-      .then((res) => {
-        setCats(res.msg);
-      });
+    getAllCategoriesData().then((res) => setCats(res.msg));
   }, []);
   const openMenuCats = Boolean(anchorEl);
 

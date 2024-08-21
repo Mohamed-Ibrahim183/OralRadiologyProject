@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
 import "./users2.css";
-import Navbar from "../../Components/Navbar/Navbar";
-import axios from "axios";
 import { Navigate } from "react-router-dom";
 import BasicModal from "./Edit";
 import {
@@ -18,9 +16,12 @@ import {
   Typography,
 } from "@mui/material";
 import { Cancel, Delete } from "@mui/icons-material";
-import { DBMethods, axiosMethods } from "../Controller";
 import BasicModalComp from "../../Components/BasicModal/BasicModalComp";
-const Methods = new DBMethods();
+import {
+  changeUserGroup,
+  deleteUserFromDB,
+  getUsersOfType,
+} from "../../Slices/AdminSlice";
 
 const Users = () => {
   const [open, setOpen] = useState(false);
@@ -91,36 +92,22 @@ const Users = () => {
     setView(content);
   }
 
-  function handleSaveChanges() {
-    if (!changes) return;
-    setBeforeSubmitModal(true);
-  }
-
   function handleSaveChanges2() {
     if (!changes) return;
-    const url =
-      "http://localhost/Projects/OralRadiology/GroupLogic.php/Changes";
     let fData = new FormData();
     Object.keys(changes).forEach((ele) => {
       fData.append(ele, changes[ele].Group);
     });
-    axios
-      .post(url, fData)
-      .then((res) => {
-        console.log(res.data);
-        setBeforeSubmitModal(false);
-        setRender(render + 1);
-        setChanges([]);
-      })
-      .catch((error) => console.error(error));
-  }
-
-  function handleType(e) {
-    setType(e.target.value);
+    changeUserGroup(fData).then((res) => {
+      console.log(res.msg);
+      setBeforeSubmitModal(false);
+      setRender(render + 1);
+      setChanges([]);
+    });
   }
 
   useEffect(() => {
-    Methods.getType(Type).then((res) =>
+    getUsersOfType(Type).then((res) =>
       res.msg !== "" ? FrontView(res.msg) : null
     );
   }, [Type, render]);
@@ -181,16 +168,11 @@ const Users = () => {
   );
 
   function deleteUserDB(userId) {
-    new axiosMethods()
-      .get("http://localhost/Projects/OralRadiology/userLogic.php/Delete", {
-        userId,
-      })
-      .then((res) => {
-        console.log(res.msg);
-        setDeleteModal(false);
-        setRender((prevRender) => prevRender + 1); // Trigger re-render
-      })
-      .catch((error) => console.error(error));
+    deleteUserFromDB(userId).then((res) => {
+      console.log(res.msg);
+      setDeleteModal(false);
+      setRender((prevRender) => prevRender + 1);
+    });
   }
 
   const deleteModalContent = () => {
@@ -264,7 +246,7 @@ const Users = () => {
           className="select"
           name="Type"
           id="Type"
-          onChange={handleType}
+          onChange={(e) => setType(e.target.value)}
           value={Type}
         >
           <option value="Student">Student</option>
@@ -299,7 +281,10 @@ const Users = () => {
           fullWidth
           variant="contained"
           color="primary"
-          onClick={handleSaveChanges}
+          onClick={() => {
+            if (!changes) return;
+            setBeforeSubmitModal(true);
+          }}
         >
           Save Changes
         </Button>

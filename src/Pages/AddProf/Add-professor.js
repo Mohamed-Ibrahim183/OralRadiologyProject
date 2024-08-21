@@ -2,18 +2,14 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import "./AddProf.css";
 import File from "./data3.json";
-import NavAdmin from "../../Components/AdminNav2/NavAdmin";
-import axios from "axios";
 import { Navigate } from "react-router-dom";
+import { insertByMSAId, insertNewUser } from "../../Slices/AdminSlice";
 
 export default function AddUser() {
   const [data, setData] = useState([]);
   const [finalData, setFinalData] = useState({ Type: "Student" });
   useEffect(() => {
-    // document.body.classList.add("PageBody");
     setData(File);
-    // Remove the class from the body element when the component unmounts
-    // return () => document.body.classList.remove("PageBody");
   }, []);
 
   if (sessionStorage["Type"] !== "Admin") {
@@ -42,31 +38,20 @@ export default function AddUser() {
   }
   function handleSubmit(e) {
     e.preventDefault();
-    let fData = new FormData();
-    Object.keys(finalData).forEach((key) => fData.append(key, finalData[key]));
-    const url = "http://localhost/Projects/OralRadiology/userLogic.php/Insert";
-    axios
-      .post(url, fData)
-      .then((res) => console.log(res.data))
-      .catch((error) => console.log(error));
+    // let fData = new FormData();
+    // Object.keys(finalData).forEach((key) => fData.append(key, finalData[key]));
+    // insertNewUser(fData).then((res) => console.log(res.msg));
+    console.log("finalData:", finalData);
+    insertByMSAId(finalData).then((res) => console.log(res.msg));
   }
 
   return (
     <>
-      {/* <NavAdmin open={true} /> */}
-
       <div className="container AddProf">
         <h1 className="form-title">Add User</h1>
         <hr className="title-line"></hr>
         <form action="" method="POST" onSubmit={handleSubmit}>
           <div className="main-user-info">{content}</div>
-          <input
-            type="file"
-            name="personalImage"
-            onChange={(e) =>
-              setFinalData({ ...finalData, personalImage: e.target.files[0] })
-            }
-          />
           <div className="main-user-info">
             <select
               name="Type"

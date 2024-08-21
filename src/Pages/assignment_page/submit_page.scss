@@ -1,9 +1,9 @@
-@use '../../_Variables.scss' as *;
+@use "../../_Variables.scss" as *;
 
 // Define color variables
 $border-color: #ddd;
 $button-color: white;
-$btnA-background-color: #DFECFC;
+$btnA-background-color: #dfecfc;
 $btnA-hover-background-color: #cacdfb;
 $btnB-background-color: var(--btnB);
 $btnB-hover-background-color: var(--btnB-hover);
@@ -17,12 +17,13 @@ $text-color: var(--textColor);
   width: 80%;
   margin: auto;
   padding: 20px;
-  background-color:var(--mainBackGround);
+  background-color: var(--mainBackGround);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.12);
   display: flex;
   flex-direction: column;
-  color:var(--text-monem);
-  .header, .assignment-info {
+  color: var(--text-monem);
+  .header,
+  .assignment-info {
     padding: 20px;
     label {
       display: block;
@@ -36,8 +37,7 @@ $text-color: var(--textColor);
       border: 1px solid $border-color;
     }
   }
-  .header
-{
+  .header {
     text-align: center;
     width: 35%;
     float: left;
@@ -46,12 +46,12 @@ $text-color: var(--textColor);
       margin-left: 8%;
       margin-top: -15px;
     }
-    .submit_images{
-        transform: scale(0.6);
-        margin-left: -70px;
-        margin-top: -79px;
+    .submit_images {
+      transform: scale(0.6);
+      margin-left: -70px;
+      margin-top: -79px;
     }
-}
+  }
   .monem {
     display: flex;
   }
@@ -78,7 +78,9 @@ $text-color: var(--textColor);
       text-align: center;
     }
   }
-  .button, .btnA, .btnB {
+  .button,
+  .btnA,
+  .btnB {
     padding: 10px 18px;
     border: none;
     cursor: pointer;
@@ -108,50 +110,9 @@ $text-color: var(--textColor);
   }
 }
 
-@media only screen and (max-width: 480px){
-.container_monemm {
-  width: 100%; 
-  margin: 0;
-  .header {
-    .submit_images {
-      img {
-      }
-    }
-    p {
-      text-align: center; 
-      margin-top: 0.5rem; 
-    }
-  }
-  .monem, .feedback {
-    display: block; 
-  }
-}
-.container_monemm {
-  .header, .xray_image, .assignment-info {
-    width: 100%;
-    margin: 0;
-  }
-  .assignment-submission-text2 {
-    display: block;
-    text-align: center;
-  }
-  .assignment-submission-text {
-    display: none;
-  }
-  .assignment-info {
-    width: 90%;
-    padding: 20px;
-  }
-  .feedback {
-    h3 {
-      text-align: center;
-    }
-  }
-}
-}
-@media only screen and (max-width: 650px){
+@media only screen and (max-width: 480px) {
   .container_monemm {
-    width: 100%; 
+    width: 100%;
     margin: 0;
     .header {
       .submit_images {
@@ -159,16 +120,19 @@ $text-color: var(--textColor);
         }
       }
       p {
-        text-align: center; 
-        margin-top: 0.5rem; 
+        text-align: center;
+        margin-top: 0.5rem;
       }
     }
-    .monem, .feedback {
-      display: block; 
+    .monem,
+    .feedback {
+      display: block;
     }
   }
   .container_monemm {
-    .header, .xray_image, .assignment-info {
+    .header,
+    .xray_image,
+    .assignment-info {
       width: 100%;
       margin: 0;
     }
@@ -190,21 +154,65 @@ $text-color: var(--textColor);
     }
   }
 }
-@media only screen and (max-width: 780px){
+@media only screen and (max-width: 650px) {
   .container_monemm {
-    width: 100%; 
+    width: 100%;
+    margin: 0;
+    .header {
+      .submit_images {
+        img {
+        }
+      }
+      p {
+        text-align: center;
+        margin-top: 0.5rem;
+      }
+    }
+    .monem,
+    .feedback {
+      display: block;
+    }
+  }
+  .container_monemm {
+    .header,
+    .xray_image,
+    .assignment-info {
+      width: 100%;
+      margin: 0;
+    }
+    .assignment-submission-text2 {
+      display: block;
+      text-align: center;
+    }
+    .assignment-submission-text {
+      display: none;
+    }
+    .assignment-info {
+      width: 90%;
+      padding: 20px;
+    }
+    .feedback {
+      h3 {
+        text-align: center;
+      }
+    }
+  }
+}
+@media only screen and (max-width: 780px) {
+  .container_monemm {
+    width: 100%;
     .header {
       .submit_images {
         width: 90%;
         img {
         }
       }
-
     }
-
   }
   .container_monemm {
-    .header, .xray_image, .assignment-info {
+    .header,
+    .xray_image,
+    .assignment-info {
       margin: 0;
     }
     .assignment-submission-text2 {
@@ -223,28 +231,27 @@ $text-color: var(--textColor);
     }
   }
 }
-@media only screen and (max-width: 960px){
+@media only screen and (max-width: 960px) {
   .container_monemm {
-    width: 100%; 
+    width: 100%;
     .header {
-      
-  
       .submit_images {
-        
         img {
         }
       }
       p {
-        text-align: center; 
-        margin-top: 0.5rem; 
+        text-align: center;
+        margin-top: 0.5rem;
       }
     }
-    .monem, .feedback {
+    .monem,
+    .feedback {
     }
   }
   .container_monemm {
-    
-    .header, .xray_image, .assignment-info {
+    .header,
+    .xray_image,
+    .assignment-info {
       margin: 0;
     }
     .assignment-submission-text2 {
@@ -263,28 +270,27 @@ $text-color: var(--textColor);
     }
   }
 }
-@media only screen and (max-width: 1100px){
+@media only screen and (max-width: 1100px) {
   .container_monemm {
-    width: 100%; 
+    width: 100%;
     .header {
-      
-  
       .submit_images {
-        
         img {
         }
       }
       p {
-        text-align: center; 
-        margin-top: 0.5rem; 
+        text-align: center;
+        margin-top: 0.5rem;
       }
     }
-    .monem, .feedback {
+    .monem,
+    .feedback {
     }
   }
   .container_monemm {
-    
-    .header, .xray_image, .assignment-info {
+    .header,
+    .xray_image,
+    .assignment-info {
       margin: 0;
     }
     .assignment-submission-text2 {
