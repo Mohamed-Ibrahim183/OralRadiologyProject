@@ -1,32 +1,33 @@
 :root {
-  --mainBackGround: #F5FBF9;
+  --mainBackGround: #f5fbf9;
   --mainColor: #0082e6;
   --secondText: #65b4f1;
   --textColor: var(--mainColor);
   --headerColor: #0082e6;
-  --text-monem:rgb(20, 19, 19);
-  --btnB:#2450f1;
-  --btnB-hover:#14319b;
+  --text-monem: rgb(20, 19, 19);
+  --btnB: #2450f1;
+  --btnB-hover: #14319b;
   --sidebar-expanded-margin: 200px;
   --sidebar-default-margin: 70px;
   --mainText: black;
   --secondaryText: #777;
 }
 
-[theme=Dark] {
+[theme="Dark"] {
   --mainColor: #4d8ba8;
   --mainBackGround: #1b343c;
   --secondText: #65b4f1;
   --textColor: #96bdcf;
   --headerColor: #4d8ba8;
-  --text-monem:rgb(230, 230, 230);
-  --btnB:#4d8ba8;
-  --btnB-hover:#356981;
+  --text-monem: rgb(230, 230, 230);
+  --btnB: #4d8ba8;
+  --btnB-hover: #356981;
   --mainText: white;
   --secondaryText: #a9a9a9;
 }
 
-.Profile .container .Information .informationTitle, .Profile .container .personalImage .ImageTitle {
+.Profile .container .Information .informationTitle,
+.Profile .container .personalImage .ImageTitle {
   background-color: #f8f8f9;
   color: #87777d;
   padding: 10px;
@@ -35,7 +36,8 @@
   font-weight: bold;
 }
 
-.Profile .container .Information, .Profile .container .personalImage {
+.Profile .container .Information,
+.Profile .container .personalImage {
   background-color: white;
   display: flex;
   flex-direction: column;
@@ -43,7 +45,8 @@
   overflow: hidden;
 }
 
-.Profile .container .Information .InformationContent .mainContent .SubmitData, .Profile .container .personalImage .imageContent .SubImage {
+.Profile .container .Information .InformationContent .mainContent .SubmitData,
+.Profile .container .personalImage .imageContent .SubImage {
   outline: none;
   border: none;
   background-color: #0061f2;
@@ -111,11 +114,24 @@
     grid-template-columns: 1fr;
   }
 }
-.Profile .container .Information .InformationContent .mainContent form .section {
+.Profile
+  .container
+  .Information
+  .InformationContent
+  .mainContent
+  form
+  .section {
   display: flex;
   flex-direction: column;
 }
-.Profile .container .Information .InformationContent .mainContent form .section input {
+.Profile
+  .container
+  .Information
+  .InformationContent
+  .mainContent
+  form
+  .section
+  input {
   margin-left: 5px;
   padding: 5px;
   outline: none;
@@ -139,4 +155,12 @@
 .Profile .container .Information .InformationContent .mainContent .SubmitData {
   padding: 5px 10px;
   font-weight: 500;
-}/*# sourceMappingURL=Profile.css.map */
+} /*# sourceMappingURL=Profile.css.map */
+.Profile .container {
+  display: flex;
+}
+@media (max-width: 960px) {
+  .Profile .container {
+    flex-direction: column;
+  }
+}
