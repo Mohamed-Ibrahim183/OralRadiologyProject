@@ -1,5 +1,5 @@
-@import './breakpoints';
-@import '../../Variables';
+@import "./breakpoints";
+@import "../../Variables";
 
 %SectionTitle {
   background-color: #f8f8f9;
@@ -26,6 +26,7 @@
   margin-top: 20px;
   padding: 5px;
   font-weight: bold;
+  cursor: pointer;
 }
 .Profile {
   color: var(--text-monem);
@@ -35,8 +36,8 @@
   align-items: center;
   .container {
     // display: flex;
-    @include md(){
-      width: 90% !important; 
+    @include md() {
+      width: 90% !important;
       margin: auto;
     }
     display: grid;
@@ -75,13 +76,12 @@
       background-color: var(--mainBackGround);
       .InformationContent {
         padding: 10px;
-        .mainContent{
-          form{
-
+        .mainContent {
+          form {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 25px;
-            @include lg(){
+            @include lg() {
               grid-template-columns: 1fr;
             }
             .section {
@@ -100,7 +100,17 @@
               }
             }
           }
-          .SubmitData{
+          .newPassword {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            margin: 10px 0px;
+            input {
+              padding: 5px;
+              border-radius: 10px;
+            }
+          }
+          .SubmitData {
             @extend %SubmitBtn;
             padding: 5px 10px;
             font-weight: 500;

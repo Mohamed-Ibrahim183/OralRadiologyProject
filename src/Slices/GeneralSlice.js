@@ -9,3 +9,6 @@ export function userLogin(data) {
 export function changesInUserProfile(data) {
   return methods.post(serverURL + "userLogic.php/ChangeUserProfile", data);
 }
+export function changePassword(data) {
+  return methods.post(serverURL + "userLogic.php/changePassword", data);
+}

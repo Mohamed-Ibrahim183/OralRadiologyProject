@@ -52,6 +52,7 @@
   margin-top: 20px;
   padding: 5px;
   font-weight: bold;
+  cursor: pointer;
 }
 
 .Profile {
@@ -124,6 +125,16 @@
   -moz-border-radius: 6px;
   -ms-border-radius: 6px;
   -o-border-radius: 6px;
+}
+.Profile .container .Information .InformationContent .mainContent .newPassword {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin: 10px 0px;
+}
+.Profile .container .Information .InformationContent .mainContent .newPassword input {
+  padding: 5px;
+  border-radius: 10px;
 }
 .Profile .container .Information .InformationContent .mainContent .SubmitData {
   padding: 5px 10px;

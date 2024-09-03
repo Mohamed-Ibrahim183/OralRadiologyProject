@@ -1,7 +1,10 @@
 import React, { useRef, useReducer, useState } from "react";
 import axios from "axios";
 import "./Profile.css";
-import { changesInUserProfile } from "../../Slices/GeneralSlice";
+import {
+  changePassword,
+  changesInUserProfile,
+} from "../../Slices/GeneralSlice";
 
 const initialState = {
   MSAId: sessionStorage.getItem("MSAId") || "",
@@ -26,6 +29,7 @@ const Profile = () => {
   const [personalImag, setPersonalImag] = useState(
     sessionStorage.getItem("PersonalImage")
   );
+  const [pass, setPass] = useState("");
   const placeImage = useRef();
 
   const formFields = [
@@ -54,6 +58,13 @@ const Profile = () => {
       placeholder: "Group Name",
     },
   ];
+  function handleChangePassword(e) {
+    e.preventDefault();
+    changePassword({
+      password: pass,
+      Id: sessionStorage.getItem("userId"),
+    }).then((res) => console.log(res.msg));
+  }
 
   function settingFile(event) {
     const url =
@@ -116,31 +127,47 @@ const Profile = () => {
         <div className="Information">
           <span className="informationTitle">Account Details</span>
           <div className="InformationContent">
-            <form id="AccData" onSubmit={updateUser}>
-              {formFields.map((field) => (
-                <div className="section" key={field.name}>
-                  <label htmlFor={field.name}>{field.text}</label>
-                  <input
-                    type={field.type || "text"}
-                    name={field.name}
-                    id={field.name}
-                    placeholder={field.placeholder}
-                    value={state[field.name]}
-                    onChange={(e) =>
-                      dispatch({
-                        type: "SET_FIELD",
-                        field: field.name,
-                        value: e.target.value,
-                      })
-                    }
-                    disabled={field.name === "MSAId" || field.name === "Group"}
-                  />
-                </div>
-              ))}
-              <button className="SubmitData" type="submit">
-                Save Changes
-              </button>
-            </form>
+            <div className="mainContent">
+              <form id="AccData" onSubmit={updateUser}>
+                {formFields.map((field) => (
+                  <div className="section" key={field.name}>
+                    <label htmlFor={field.name}>{field.text}</label>
+                    <input
+                      type={field.type || "text"}
+                      name={field.name}
+                      id={field.name}
+                      placeholder={field.placeholder}
+                      value={state[field.name]}
+                      onChange={(e) =>
+                        dispatch({
+                          type: "SET_FIELD",
+                          field: field.name,
+                          value: e.target.value,
+                        })
+                      }
+                      disabled={
+                        field.name === "MSAId" || field.name === "Group"
+                      }
+                    />
+                  </div>
+                ))}
+                <button className="SubmitData" type="submit">
+                  Save Changes
+                </button>
+              </form>
+              <form className="newPassword" onSubmit={handleChangePassword}>
+                <input
+                  className="pass"
+                  type="password"
+                  placeholder="Write Your New Password"
+                  value={pass}
+                  onChange={(e) => setPass(e.target.value)}
+                />
+                <button type="submit" className="SubmitData">
+                  Change Password
+                </button>
+              </form>
+            </div>
           </div>
         </div>
       </div>
