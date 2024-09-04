@@ -22,9 +22,7 @@ function GradingPage() {
       return;
     }
 
-    getSubmissionByAssignment({
-      assignmentId: assignmentId,
-    }).then((res) => {
+    getSubmissionByAssignment(assignmentId).then((res) => {
       if (res.msg) {
         // Success
         const responseData = Array.isArray(res.msg) ? res.msg : [];

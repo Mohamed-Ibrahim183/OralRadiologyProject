@@ -11,6 +11,7 @@ import {
 import { Bar } from "react-chartjs-2";
 
 import { getAllAssignmentsData } from "../../Slices/PorfessorSlice";
+import { studentReport } from "../../Slices/StudentSlice";
 
 ChartJS.register(
   CategoryScale,
@@ -27,11 +28,12 @@ const ChartComponent = () => {
   const [titleColor, setTitleColor] = useState("#5D6D7E");
 
   const [assignments, setAssignments] = useState([]);
+  const [submissions, setSubmissions] = useState([]);
 
   useEffect(() => {
     getAllAssignmentsData().then((res) => setAssignments(res.msg));
   }, []);
-
+  // console.log(assignments);
   // useEffect to set the color based on the theme
   useEffect(() => {
     const theme = localStorage.getItem("Theme");
@@ -43,19 +45,30 @@ const ChartComponent = () => {
       setTitleColor("black");
     }
   }, []);
+  useEffect(() => {
+    studentReport(sessionStorage.getItem("userId")).then((res) =>
+      setSubmissions(res.msg)
+    );
+  }, []);
 
   const data = {
-    labels: assignments.map((assignment) => assignment.Name),
+    labels: submissions.map((sub) => sub.Name),
     datasets: [
       {
         label: "Your Grades",
-        data: [140, 160, 160, 150, 170, 180, 175], // Placeholder values; adjust according to your data
+        data:
+          Array.isArray(submissions) && submissions.length > 0
+            ? submissions.map((sub) => sub.StudentGrade)
+            : [], // Placeholder values; adjust according to your data
         backgroundColor: "#FFD269",
         barThickness: 25,
       },
       {
         label: "Average Grades",
-        data: [160, 190, 190, 180, 170, 190, 175], // Placeholder values; adjust according to your data
+        data:
+          Array.isArray(submissions) && submissions.length > 0
+            ? submissions.map((sub) => sub.AVGGrades)
+            : [], // Placeholder values; adjust according to your data
         backgroundColor: "#A2D1FD",
         barThickness: 25,
       },

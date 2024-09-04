@@ -39,10 +39,10 @@ export function getGroupsNamesDB() {
 export function getTotalUsersType(Type) {
   return methods.post(serverURL + "userLogic.php/GetTotalUsersType", { Type });
 }
-export function getSubmissionByAssignment(data) {
+export function getSubmissionByAssignment(assignmentId) {
   return methods.get(
     serverURL + "AssignmentLogic.php/GetSubmissionAssignment",
-    data
+    { assignmentId: assignmentId }
   );
 }
 
@@ -57,6 +57,8 @@ export function evaluateAssignmentImage(data) {
   return methods.post(serverURL + "AssignmentLogic.php/EvaluateImage", data);
 }
 
-// export function getAssignmentById(assignmentId){
-//   return methods.get(serverURL + "AssignmentLogic.php/GetAssignment", )
-// }
+export function getProfessorReport() {
+  return methods.get(
+    serverURL + "AssignmentLogic.php/GetAssignmentSubmissionReport"
+  );
+}

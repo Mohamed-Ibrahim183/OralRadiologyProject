@@ -42,3 +42,10 @@ export function getSubmissionForUserReport(data) {
     data
   );
 }
+
+export function studentReport(studentId) {
+  return methods.get(
+    server + "AssignmentLogic.php/GetAssignmentSubmissionStudentReport",
+    { Id: studentId }
+  );
+}
