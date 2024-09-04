@@ -53,6 +53,7 @@ const AssignmentSubmission = () => {
       initialCategories[file.name] = "";
     });
     setCategories(initialCategories);
+    console.log(categories);
   };
 
   const deleteFile = (index) => {

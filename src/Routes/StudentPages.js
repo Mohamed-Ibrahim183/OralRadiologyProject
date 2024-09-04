@@ -3,6 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import OverViewAssignmentsPage from "../Pages/OverViewAssignmentsPage";
 import AssignmentSubmission from "../Pages/assignment_page/Assignment_submission_page";
 import Dashboard from "../Pages/Dashboard";
+import AssignmentPage2 from "../Pages/assignment_page2/assignmentPage2";
 
 function StudentPages() {
   return (
@@ -12,6 +13,14 @@ function StudentPages() {
         element={
           <Suspense fallback={<div>Loading...</div>}>
             <AssignmentSubmission />
+          </Suspense>
+        }
+      />
+       <Route
+        path="submit2"
+        element={
+          <Suspense fallback={<div>Loading...</div>}>
+            <AssignmentPage2 />
           </Suspense>
         }
       />
