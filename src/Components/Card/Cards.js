@@ -53,7 +53,7 @@ const Cards = ({ submissions }) => {
                 assignmentName={sub.assignmentName}
                 Features={{
                   submitTime: sub.submitTime,
-                  Grade: `${sub.Grade["Total"]}/${sub.Grade["count"] * 100}`,
+                  Grade: `${sub.Grade["Total"]}/${sub.Grade["count"] * 10}`,
                   DoctorComment: sub.DoctorsNote,
                 }}
                 // DoctorsComment={sub.DoctorsNote}

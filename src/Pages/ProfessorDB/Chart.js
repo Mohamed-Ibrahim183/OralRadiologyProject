@@ -10,7 +10,7 @@ import {
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
 import {
-  getAllAssignmentsData,
+  getProfessorReport,
   getTotalUsersType,
 } from "../../Slices/PorfessorSlice";
 
@@ -28,9 +28,9 @@ const ChartComponent = () => {
   const [labelColor, setLabelColor] = useState("#283747");
   const [titleColor, setTitleColor] = useState("#5D6D7E");
 
-  const [assignments, setAssignments] = useState([]);
   const [countUsers, setCountUsers] = useState(0);
 
+  const [submissions, setSubmissions] = useState([]);
   useEffect(() => {
     const theme = localStorage.getItem("Theme");
     if (theme === "Dark") {
@@ -42,28 +42,26 @@ const ChartComponent = () => {
     }
   }, []);
   useEffect(() => {
-    getAllAssignmentsData().then((res) => setAssignments(res.msg || []));
-
+    getProfessorReport().then((res) => setSubmissions(res.msg));
     getTotalUsersType("Student").then((res) => setCountUsers(res.msg));
   }, []);
+
   const data = {
-    labels: Array.isArray(assignments)
-      ? assignments.map((ele) => {
-          return ele.Name;
-        })
+    labels: Array.isArray(submissions)
+      ? submissions.map((ele) => ele.Name)
       : [],
     datasets: [
       {
         label: "Students Uploaded Assignments",
-        data: Array.isArray(assignments)
-          ? assignments.map((ele) => ele.Submitted)
+        data: Array.isArray(submissions)
+          ? submissions.map((ele) => ele.SubmissionCount || 0)
           : [],
         backgroundColor: "#FFD269",
         barThickness: 25,
       },
       {
         label: "Total Students",
-        data: Array.from({ length: assignments.length }, (_) => countUsers),
+        data: Array.from({ length: submissions.length }, (_) => countUsers),
         backgroundColor: "#A2D1FD",
         barThickness: 25,
       },

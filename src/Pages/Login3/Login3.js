@@ -27,8 +27,9 @@ function Login3() {
       .then((res) => {
         // console.log(res.msg);
         if (typeof res.msg === "object") {
-          if (res.msg.Id != null)
-            toast(`Welcome ${res.msg.Name} to Oral Radiology System.`);
+          if (res.msg.Id === undefined) throw new Error(res.msg.Error);
+
+          toast(`Welcome ${res.msg.Name} to Oral Radiology System.`);
           const data = {
             userId: res.msg.Id,
             MSAId: res.msg.MSAId,
@@ -46,7 +47,7 @@ function Login3() {
         } else alert(res.msg);
       })
       .catch((err) => {
-        alert("Login Error With Server" + err.message);
+        alert(err.message);
         console.error("Login Error:", err);
       });
   }

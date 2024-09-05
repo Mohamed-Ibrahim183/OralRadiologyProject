@@ -279,7 +279,7 @@ function Submissions({ assignment, update }) {
               name={assignment.Name || "Assignment Name"}
               // state="Good"
               grade={
-                `${sub.Grade["Total"]} / ${sub.Grade["count"] * 100}` || "Grade"
+                `${sub.Grade["Total"]} / ${sub.Grade["count"] * 10}` || "Grade"
               }
               info={`Topic: ${assignment.Topic} | SubmitTime:${sub.submitTime}`}
               col="#0082e6"
