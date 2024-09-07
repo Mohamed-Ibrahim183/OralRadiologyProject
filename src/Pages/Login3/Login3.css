@@ -238,7 +238,11 @@
   .container.right-panel-active .overlay-right {
     transform: translateX(20%);
   }
-
+  .loginErrorMessage {
+    color: red;
+    font-size: 14px;
+    margin-bottom: 45px;
+  }
   background-image: url("img2.jpg");
   background-color: #222b2e;
   background-position: 0px -200px;

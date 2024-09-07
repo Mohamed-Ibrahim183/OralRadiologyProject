@@ -19,6 +19,7 @@ export function getAssignmentData(data) {
 }
 
 export function makeNewSubmission(data) {
+  console.log("Dataaaaaaa:" + data);
   return methods.post(server + "AssignmentLogic.php/newSubmission", data);
 }
 

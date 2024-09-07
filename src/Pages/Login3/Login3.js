@@ -47,6 +47,8 @@ function Login3() {
         } else alert(res.msg);
       })
       .catch((err) => {
+        document.getElementById("loginErrorMessage").textContent =
+          "*" + err.message;
         alert(err.message);
         console.error("Login Error:", err);
       });
@@ -58,12 +60,8 @@ function Login3() {
     }
   }, [userType, Navigator]);
 
-  const togglePasswordVisibility = () => {
-    setPasswordShown(!passwordShown);
-  };
-
   return (
-    <div className="noScroll">
+    <div className="noScroll container">
       <div className="login3">
         <h1>Welcome to MSA Oral Radiology</h1>
         <div className="container" id="container">
@@ -86,23 +84,9 @@ function Login3() {
                   onChange={(e) => setPassword(e.target.value)}
                   required
                 />
-                <div style={{ position: "relative" }}>
-                  <button
-                    type="button"
-                    onClick={togglePasswordVisibility}
-                    style={{
-                      position: "absolute",
-                      left: 50,
-                      bottom: 10,
-                      background: "transparent",
-                      color: "Black",
-                      border: "none",
-                      cursor: "pointer",
-                    }}
-                  >
-                    {passwordShown ? "Hide" : "Show"}
-                  </button>
-                </div>
+
+                <span id="loginErrorMessage" style={{ color: "red" }}></span>
+
                 <button>Sign In</button>
               </form>
             </div>

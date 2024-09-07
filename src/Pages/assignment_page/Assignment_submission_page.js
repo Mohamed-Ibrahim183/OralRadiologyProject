@@ -34,7 +34,10 @@ const AssignmentSubmission = () => {
       }
       await getAssignmentData({
         assignmentId: assignmentId,
-      }).then((res) => setAssignmentInfo(res.msg));
+      }).then((res) => {
+        setAssignmentInfo(res.msg);
+        //console.log(res.msg);
+      });
     };
 
     fetchAssignmentInfo();

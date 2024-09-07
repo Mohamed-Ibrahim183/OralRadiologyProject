@@ -146,6 +146,7 @@ const StudentDB = () => {
     const now = new Date();
     const openDate = new Date(assignment.open);
     const closeDate = new Date(assignment.close);
+
     if (openDate <= now && closeDate < now) {
       // Time since the task has closed
       let timeSinceClosed = (now - closeDate) / 1000; // time since closed in seconds
@@ -172,6 +173,9 @@ const StudentDB = () => {
       }
 
       sessionStorage.setItem("RemainingTime", closedTime);
+      sessionStorage.setItem("days", days);
+      sessionStorage.setItem("hours", hours);
+      sessionStorage.setItem("minutes", minutes);
     } else if (openDate <= now && closeDate > now) {
       let remainingTime = (closeDate - now) / 1000; // remaining time in seconds
 
@@ -195,11 +199,19 @@ const StudentDB = () => {
       } else {
         remaining = `${seconds} seconds`;
       }
+
       sessionStorage.setItem("RemainingTime", remaining);
+      sessionStorage.setItem("days", days);
+      sessionStorage.setItem("hours", hours);
+      sessionStorage.setItem("minutes", minutes);
     } else {
       sessionStorage.setItem("RemainingTime", "Task is not yet due");
+      sessionStorage.setItem("days", 0);
+      sessionStorage.setItem("hours", 0);
+      sessionStorage.setItem("minutes", 0);
     }
   };
+
   if (sessionStorage["Type"] !== "Student") {
     return <Navigate to="/" />;
   }
@@ -287,7 +299,7 @@ const StudentDB = () => {
                     <Link
                       key={i}
                       to={{
-                        pathname: "/student/submit",
+                        pathname: "/student/submit2",
                         search: `?userId=${UserId}&assignmentId=${assignment.Id}`,
                       }}
                       onClick={() => {
