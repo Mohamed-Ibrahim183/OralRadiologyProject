@@ -9,8 +9,11 @@
   justify-content: center;
   align-items: center;
 }
+.CloseButton {
+}
 .Modal2Group .ModalContent {
   width: 600px;
+  width: 100%;
 }
 .Modal2Group .main {
   display: flex;
@@ -21,5 +24,9 @@
 }
 .Modal2Group button {
   display: inline;
-  width: 100px;
-}/*# sourceMappingURL=Modal2.css.map */
+  color: #0082e6;
+  border-color: #0082e6;
+  width: 100%;
+}
+
+/*# sourceMappingURL=Modal2.css.map */
