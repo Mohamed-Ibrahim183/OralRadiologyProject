@@ -22,6 +22,8 @@ import {
   deleteUserFromDB,
   getUsersOfType,
 } from "../../Slices/AdminSlice";
+import { resetPassword, serverURL } from "../../Slices/GeneralSlice";
+import toast from "react-hot-toast";
 
 const Users = () => {
   const [open, setOpen] = useState(false);
@@ -33,6 +35,8 @@ const Users = () => {
   const [render, setRender] = useState(1);
   const [deleteUser, setDeleteUser] = useState(null);
   const [deleteModal, setDeleteModal] = useState(false);
+  const [resetPass, setResetPass] = useState(false);
+  const [resetUser, setResetUser] = useState(null);
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => {
@@ -52,7 +56,7 @@ const Users = () => {
         <td>{ele.Id}</td>
         <td>
           <Avatar
-            src={"http://localhost/Projects/OralRadiology/" + ele.PersonalImage}
+            src={serverURL + ele.PersonalImage}
             alt={ele.Name}
             sx={{
               m: "auto",
@@ -75,7 +79,7 @@ const Users = () => {
               setOpen(true);
             }}
           >
-            Edit
+            Change Group
           </button>
           <button
             className="button del"
@@ -85,6 +89,15 @@ const Users = () => {
             }}
           >
             Delete
+          </button>
+          <button
+            className="button edit"
+            onClick={() => {
+              setResetPass(true);
+              setResetUser(ele);
+            }}
+          >
+            Reset Password
           </button>
         </td>
       </tr>
@@ -137,10 +150,7 @@ const Users = () => {
                 <TableCell align="center">{key}</TableCell>
                 <TableCell align="center">
                   <Avatar
-                    src={
-                      "http://localhost/Projects/OralRadiology/" +
-                      changes[key].Image
-                    }
+                    src={serverURL + changes[key].Image}
                     alt={changes[key].Name}
                     sx={{
                       m: "auto",
@@ -187,10 +197,7 @@ const Users = () => {
         </Typography>
         <Box sx={{ display: "flex", alignItems: "center", mt: 2 }}>
           <Avatar
-            src={
-              "http://localhost/Projects/oralRadiology/" +
-              deleteUser.PersonalImage
-            }
+            src={serverURL + deleteUser.PersonalImage}
             alt={deleteUser.Name}
             sx={{ width: 80, height: 80, objectFit: "cover" }}
           />
@@ -234,6 +241,88 @@ const Users = () => {
     <>
       {finalModal()}
       {deleteModalContent()}
+      {resetPass && (
+        <BasicModalComp
+          openModal={resetPass}
+          closeModal={() => setResetPass(false)}
+        >
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+              m: 2,
+            }}
+          >
+            <Box>
+              <Typography variant="subtitle1" color="inherit">
+                Are you Want to Reset Password For User:
+                <Typography
+                  variant="body1"
+                  color="inherit"
+                  sx={{ display: "flex", alignItems: "center", m: 2 }}
+                >
+                  {resetUser.Name}
+                  <Avatar
+                    src={serverURL + resetUser.PersonalImage}
+                    alt={resetUser.Name}
+                    sx={{
+                      m: "auto",
+                      width: "75px",
+                      height: "75px",
+                      objectFit: "cover",
+                    }}
+                  />
+                </Typography>
+              </Typography>
+            </Box>
+
+            <Box
+              sx={{
+                my: 2,
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                gap: 4,
+              }}
+            >
+              <Button
+                variant="contained"
+                color="warning"
+                endIcon={<Cancel />}
+                onClick={() => {
+                  setResetUser(null);
+                  resetPass(false);
+                }}
+              >
+                Cancel
+              </Button>
+              <Button
+                variant="contained"
+                color="error"
+                // endIcon={<Delete />}
+                onClick={() => {
+                  resetPassword(resetUser.Id);
+                  toast(
+                    `USER: ${resetUser.Name} Has Reset The Password to "pass" Successfully!`,
+                    {
+                      type: "success",
+                    }
+                  );
+                  setResetUser(null);
+                  setResetPass(false);
+                }}
+              >
+                Reset Password
+              </Button>
+            </Box>
+            <Typography variant="body1" color="inherit">
+              Note: Password will reset to be "pass"
+            </Typography>
+          </Box>
+        </BasicModalComp>
+      )}
       <BasicModal
         open={open}
         handleOpen={handleOpen}

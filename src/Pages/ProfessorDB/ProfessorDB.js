@@ -27,6 +27,7 @@ import UserProfile from "../../Components/UserProfile";
 import {
   addCategory,
   deleteAssignmentDB,
+  editCategory,
   getAllAssignmentsData,
   getAllCategoriesData,
   insertNewAssignment,
@@ -40,6 +41,7 @@ import {
   faSortNumericUp,
 } from "@fortawesome/free-solid-svg-icons";
 import { getAssignmentsGroupsShow } from "../../Slices/PorfessorSlice";
+import toast from "react-hot-toast";
 
 function GroupsData() {
   const [isModalOpen, setModalOpen] = useState(false);
@@ -469,6 +471,10 @@ function Categories() {
   const [cats, setCats] = useState([]); // categories
   const [addCat, setAddCat] = useState(false);
   const [update, setUpdate] = useState(0);
+  const [editCatModal, setEditCatModal] = useState(false);
+  const [deleteCatModal, setDeleteCatModal] = useState(false);
+  const [workingCategory, setWorkingCategory] = useState(null);
+  const [newName, setNewName] = useState("");
 
   const element = useRef();
   useEffect(() => {
@@ -523,14 +529,67 @@ function Categories() {
   return (
     <div className="cateogriesModal">
       {addCat && <AddCategoryComp />}
+      {editCatModal && (
+        <BasicModalComp
+          openModal={editCatModal}
+          closeModal={() => setEditCatModal(false)}
+        >
+          <Typography variant="subtitle1" color="inherit">
+            Are You want to Re name the {workingCategory.Name}
+          </Typography>
+          <form
+            onSubmit={() => {
+              editCategory(workingCategory.Id).then((res) =>
+                console.log(res.msg)
+              );
+              setEditCatModal(false);
+              toast("Category edited successfully", {
+                type: "success",
+              });
+            }}
+            style={{ display: "flex", flexDirection: "column", gap: "20px" }}
+          >
+            <input
+              type="text"
+              placeholder="Name of the category"
+              value={newName}
+              onChange={(e) => setNewName(e.target.value)}
+            />
+            <Button variant="contained" color="primary">
+              Re Name category
+            </Button>
+          </form>
+        </BasicModalComp>
+      )}
       <div className="categoriesList">
         <h3 className="categoriesListTitle">Categories</h3>
         <div className="categoriesListItems">
           {cats.map((cat) => (
-            <p className="categoriesListItem" key={cat.Id}>
-              <div>{cat.Name}</div>
-              <div className="closebtn">X</div>
-            </p>
+            <div className="categoriesListItem" key={cat.Id}>
+              <p>{cat.Name}</p>
+              <div>
+                <Button
+                  variant="outlined"
+                  color="secondary"
+                  onClick={() => {
+                    setEditCatModal(true);
+                    setWorkingCategory(cat);
+                  }}
+                >
+                  Edit
+                </Button>
+                <Button
+                  variant="outlined"
+                  color="error"
+                  onClick={() => {
+                    setDeleteCatModal(true);
+                    setWorkingCategory(cat);
+                  }}
+                >
+                  Delete
+                </Button>
+              </div>
+            </div>
           ))}
         </div>
       </div>

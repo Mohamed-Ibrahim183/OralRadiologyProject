@@ -1,35 +1,17 @@
-import React, { useState } from "react";
-import { useEffect } from "react";
+import React, { useRef, useState } from "react";
+
 import "./AddProf.css";
-import File from "./data3.json";
+
 import { Navigate } from "react-router-dom";
-import { insertByMSAId, insertNewUser } from "../../Slices/AdminSlice";
+import { insertByMSAId } from "../../Slices/AdminSlice";
+import toast from "react-hot-toast";
 
 export default function AddUser() {
-  const [data, setData] = useState([]);
   const [finalData, setFinalData] = useState({ Type: "Student" });
-  useEffect(() => {
-    setData(File);
-  }, []);
-
+  const inputField = useRef();
   if (sessionStorage["Type"] !== "Admin") {
     return <Navigate to="/" />;
   }
-
-  const content = data.map(function (ele) {
-    return (
-      <div className="user-input-box" key={ele.name}>
-        <label htmlFor={ele.name}>{ele.text}:</label>
-        <input
-          type={ele.type}
-          id={ele.name}
-          name={ele.name}
-          placeholder={ele.placeholder}
-          onChange={(e) => change(ele.name)}
-        />
-      </div>
-    );
-  });
   function change(name) {
     setFinalData((prev) => ({
       ...prev,
@@ -38,11 +20,26 @@ export default function AddUser() {
   }
   function handleSubmit(e) {
     e.preventDefault();
-    // let fData = new FormData();
-    // Object.keys(finalData).forEach((key) => fData.append(key, finalData[key]));
-    // insertNewUser(fData).then((res) => console.log(res.msg));
-    console.log("finalData:", finalData);
-    insertByMSAId(finalData).then((res) => console.log(res.msg));
+    if (finalData.MSAId) {
+      insertByMSAId(finalData);
+      inputField.current.value = "";
+      toast(
+        `User with MSAId:${finalData.MSAId}  Inserted To Database Successfully!`,
+        {
+          Type: "Success",
+          icon: "👍",
+        }
+      );
+    } else {
+      toast("Please Enter MSAId", {
+        type: "error",
+        icon: "🚫",
+      });
+    }
+    setFinalData((prev) => ({
+      ...prev,
+      MSAId: "", // Clear MSAId but keep Type as "Student" or the selected option
+    }));
   }
 
   return (
@@ -51,7 +48,19 @@ export default function AddUser() {
         <h1 className="form-title">Add User</h1>
         <hr className="title-line"></hr>
         <form action="" method="POST" onSubmit={handleSubmit}>
-          <div className="main-user-info">{content}</div>
+          <div className="main-user-info">
+            <div className="user-input-box">
+              <label htmlFor="MSAId">MSAId:</label>
+              <input
+                ref={inputField}
+                type="text"
+                id="MSAId"
+                name="MSAId"
+                placeholder="Enter MSAId"
+                onChange={(e) => change("MSAId")}
+              />
+            </div>
+          </div>
           <div className="main-user-info">
             <select
               name="Type"
@@ -64,7 +73,6 @@ export default function AddUser() {
               <option value="Admin">Admin</option>
             </select>
           </div>
-
           <input type="submit" value="Add User" />
         </form>
       </div>

@@ -62,3 +62,15 @@ export function getProfessorReport() {
     serverURL + "AssignmentLogic.php/GetAssignmentSubmissionReport"
   );
 }
+export function editCategory(categoryId, newName) {
+  return methods.post(serverURL + "AssignmentLogic.php/EditCategory", {
+    categoryId,
+    newName,
+  });
+}
+
+export function deleteCategory(categoryId) {
+  return methods.post(serverURL + "AssignmentLogic.php/DeleteCategory", {
+    categoryId,
+  });
+}

@@ -4,23 +4,5 @@
     "name": "MSAId",
     "placeholder": "Enter Your ID",
     "text": "MSA ID"
-  },
-  {
-    "type": "password",
-    "name": "Password",
-    "placeholder": "Enter Your Password",
-    "text": "New Password"
-  },
-  {
-    "type": "text",
-    "name": "Name",
-    "placeholder": "Enter Your Full Name",
-    "text": "Your Name"
-  },
-  {
-    "type": "email",
-    "name": "Email",
-    "placeholder": "Enter Your MSA Email Address",
-    "text": "Email"
   }
 ]

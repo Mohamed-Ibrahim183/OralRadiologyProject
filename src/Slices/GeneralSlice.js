@@ -12,3 +12,9 @@ export function changesInUserProfile(data) {
 export function changePassword(data) {
   return methods.post(serverURL + "userLogic.php/changePassword", data);
 }
+
+export function resetPassword(user) {
+  return methods.get(serverURL + "userLogic.php/resetPassword", {
+    userId: user,
+  });
+}
