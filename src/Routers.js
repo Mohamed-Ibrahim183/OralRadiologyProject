@@ -15,6 +15,7 @@ import Login3 from "./Pages/Login3/Login3";
 import Users from "./Pages/Users/Users";
 import Dashboard from "./Pages/Dashboard";
 import ModalPOP from "./Components/ModalPOP";
+import AssignmentPage2 from "./Pages/assignment_page2/assignmentPage2";
 const routes = [
   {
     path: "/",
@@ -40,6 +41,11 @@ const routes = [
   {
     path: "/submit",
     element: <AssignmentSubmission />,
+    errorElement: <NotFound />,
+  },
+  {
+    path: "/submit2",
+    element: <AssignmentPage2 />,
     errorElement: <NotFound />,
   },
   {
