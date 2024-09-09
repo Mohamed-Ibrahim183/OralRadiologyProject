@@ -70,7 +70,7 @@ export function editCategory(categoryId, newName) {
 }
 
 export function deleteCategory(categoryId) {
-  return methods.post(serverURL + "AssignmentLogic.php/DeleteCategory", {
-    categoryId,
+  return methods.get(serverURL + "AssignmentLogic.php/DeleteCategory", {
+    Id: categoryId,
   });
 }

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useReducer } from "react";
 // import Modal from "./Modal";
 import AssignmentCard from "./AssignmentCard";
 import Chart from "./Chart";
@@ -27,6 +27,7 @@ import UserProfile from "../../Components/UserProfile";
 import {
   addCategory,
   deleteAssignmentDB,
+  deleteCategory,
   editCategory,
   getAllAssignmentsData,
   getAllCategoriesData,
@@ -468,29 +469,64 @@ const ProfessorDB = () => {
 };
 
 function Categories() {
-  const [cats, setCats] = useState([]); // categories
-  const [addCat, setAddCat] = useState(false);
-  const [update, setUpdate] = useState(0);
-  const [editCatModal, setEditCatModal] = useState(false);
-  const [deleteCatModal, setDeleteCatModal] = useState(false);
-  const [workingCategory, setWorkingCategory] = useState(null);
-  const [newName, setNewName] = useState("");
+  const initialState = {
+    cats: [],
+    update: 0,
+    addCatModal: false,
+    editCatModal: false,
+    deleteCatModal: false,
+    newCatName: "",
+    workingCat: {},
+  };
+  function catsReducer(state, action) {
+    switch (action.type) {
+      case "setCategories":
+        return { ...state, cats: action.payload };
+      case "update":
+        return { ...state, update: state.update + 1 };
+      case "updateDefault":
+        return {
+          ...state,
+          update: state.update + 1,
+          addCatModal: false,
+          editCatModal: false,
+          deleteCatModal: false,
+          newCatName: "",
+        };
+      case "openAddCatModal":
+        return { ...state, addCatModal: true };
+      case "openDeleteCatModal":
+        return { ...state, deleteCatModal: true, workingCat: action.payload };
+      case "openEditCatModal":
+        return { ...state, editCatModal: true, workingCat: action.payload };
+      case "setWorkingCat":
+        return { ...state, workingCat: action.payload };
+      case "setNewName":
+        return { ...state, newCatName: action.payload };
+      default:
+        return state;
+    }
+  }
+  const [state, dispatch] = useReducer(catsReducer, initialState);
 
   const element = useRef();
   useEffect(() => {
-    getAllCategoriesData().then((res) => setCats(res.msg));
-  }, [update]);
-  // if (cats.length === 0) return;
+    getAllCategoriesData().then((res) =>
+      dispatch({ type: "setCategories", payload: res.msg })
+    );
+  }, [state.update]);
+
   function addNewCategory() {
-    addCategory({ Name: element.current.value }).then((res) => {
-      console.log(res.msg);
-      setUpdate(update + 1);
-      setAddCat(false);
-    });
+    addCategory({ Name: element.current.value }).then((res) =>
+      dispatch({ type: "updateDefault" })
+    );
   }
   function AddCategoryComp() {
     return (
-      <BasicModalComp openModal={addCat} closeModal={() => setAddCat(false)}>
+      <BasicModalComp
+        openModal={state.addCatModal}
+        closeModal={() => dispatch({ type: "updateDefault" })}
+      >
         <Box
           sx={{
             display: "flex",
@@ -518,7 +554,7 @@ function Categories() {
           <Button
             variant="outlined"
             color="error"
-            onClick={() => setAddCat(false)}
+            onClick={() => dispatch({ type: "updateDefault" })}
           >
             Cancel
           </Button>
@@ -526,55 +562,92 @@ function Categories() {
       </BasicModalComp>
     );
   }
+  function editingCategoryModal() {
+    return (
+      <BasicModalComp
+        openModal={state.editCatModal}
+        closeModal={() => dispatch({ type: "updateDefault" })}
+      >
+        <Typography variant="subtitle1" color="inherit">
+          Are You want to Re name the {state.workingCat.Name}
+        </Typography>
+        <form
+          onSubmit={() => {
+            editCategory(state.workingCat.Id, state.newCatName);
+            dispatch({ type: "updateDefault" });
+            toast("Category edited successfully", {
+              type: "success",
+            });
+          }}
+          style={{ display: "flex", flexDirection: "column", gap: "20px" }}
+        >
+          <input
+            type="text"
+            placeholder="Name of the category"
+            value={state.newCatName}
+            onChange={(e) =>
+              dispatch({ type: "setNewName", payload: e.target.value })
+            }
+          />
+          <Button variant="contained" color="primary" type="submit">
+            Re Name category
+          </Button>
+        </form>
+      </BasicModalComp>
+    );
+  }
+  function deletingCategoryModal() {
+    return (
+      <BasicModalComp
+        openModal={state.deleteCatModal}
+        closeModal={() => dispatch({ type: "updateDefault" })}
+      >
+        <Box sx={{ m: 2 }}>
+          <Typography variant="subtitle1" color="inherit">
+            Are You want to Delete the {state.workingCat.Name} Category?
+          </Typography>
+          <Box sx={{ display: "flex", gap: 4, m: 1 }}>
+            <Button
+              variant="outlined"
+              color="warning"
+              onClick={() => dispatch({ type: "updateDefault" })}
+            >
+              Cancel
+            </Button>
+            <Button
+              variant="contained"
+              color="error"
+              onClick={() => {
+                deleteCategory(state.workingCat.Id).then((res) =>
+                  dispatch({ type: "updateDefault" })
+                );
+              }}
+            >
+              Delete Category
+            </Button>
+          </Box>
+        </Box>
+      </BasicModalComp>
+    );
+  }
   return (
     <div className="cateogriesModal">
-      {addCat && <AddCategoryComp />}
-      {editCatModal && (
-        <BasicModalComp
-          openModal={editCatModal}
-          closeModal={() => setEditCatModal(false)}
-        >
-          <Typography variant="subtitle1" color="inherit">
-            Are You want to Re name the {workingCategory.Name}
-          </Typography>
-          <form
-            onSubmit={() => {
-              editCategory(workingCategory.Id).then((res) =>
-                console.log(res.msg)
-              );
-              setEditCatModal(false);
-              toast("Category edited successfully", {
-                type: "success",
-              });
-            }}
-            style={{ display: "flex", flexDirection: "column", gap: "20px" }}
-          >
-            <input
-              type="text"
-              placeholder="Name of the category"
-              value={newName}
-              onChange={(e) => setNewName(e.target.value)}
-            />
-            <Button variant="contained" color="primary">
-              Re Name category
-            </Button>
-          </form>
-        </BasicModalComp>
-      )}
+      {state.addCatModal && <AddCategoryComp />}
+      {state.editCatModal && editingCategoryModal()}
+      {state.deleteCatModal && deletingCategoryModal()}
       <div className="categoriesList">
         <h3 className="categoriesListTitle">Categories</h3>
         <div className="categoriesListItems">
-          {cats.map((cat) => (
+          {state.cats.map((cat) => (
             <div className="categoriesListItem" key={cat.Id}>
               <p>{cat.Name}</p>
               <div>
                 <Button
                   variant="outlined"
                   color="secondary"
-                  onClick={() => {
-                    setEditCatModal(true);
-                    setWorkingCategory(cat);
-                  }}
+                  onClick={() =>
+                    dispatch({ type: "openEditCatModal", payload: cat })
+                  }
                 >
                   Edit
                 </Button>
@@ -582,8 +655,7 @@ function Categories() {
                   variant="outlined"
                   color="error"
                   onClick={() => {
-                    setDeleteCatModal(true);
-                    setWorkingCategory(cat);
+                    dispatch({ type: "openDeleteCatModal", payload: cat });
                   }}
                 >
                   Delete
@@ -598,7 +670,7 @@ function Categories() {
         variant="outlined"
         color="primary"
         onClick={() => {
-          setAddCat(!addCat);
+          dispatch({ type: "openAddCatModal" });
         }}
         className="addCategoryBtn"
       >
