@@ -90,6 +90,7 @@
 .GroupsModal {
   width: 40vw;
   height: 60vh;
+  width: 100%;
 }
 .GroupsModal .GroupsModalContent {
   height: 96%;

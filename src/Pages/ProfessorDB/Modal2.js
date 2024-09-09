@@ -57,9 +57,14 @@ const Modal2 = ({ open, onClose, AssignmentId }) => {
         <div className="ModalContent" onClick={(e) => e.stopPropagation()}>
           <div className="Left"></div>
           <div className="Right">
-            <IconButton onClick={onClose} className="CloseButton">
-              <Close />
+            <IconButton
+              onClick={onClose}
+              style={{ width: "20%" }}
+              className="CloseButton"
+            >
+              <Close style={{ marginRight: "40%" }} />
             </IconButton>
+            <br></br>
             <section>
               <label htmlFor="Groups">Select the Group</label>
               <select

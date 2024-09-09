@@ -1,113 +1,101 @@
 :root {
-  --mainBackGround: #F5FBF9;
-  --mainColor: #0082e6;
-  --secondText: #65b4f1;
-  --textColor: var(--mainColor);
-  --headerColor: #0082e6;
-  --text-monem:rgb(20, 19, 19);
-  --btnB:#2450f1;
-  --btnB-hover:#14319b;
-  --sidebar-expanded-margin: 200px;
-  --sidebar-default-margin: 70px;
-  --mainText: black;
-  --secondaryText: #777;
+  --main-background: #f5fbf9;
+  --main-color: #0082e6;
+  --second-text: #65b4f1;
+  --text-color: var(--main-color);
+  --header-color: #0082e6;
+  --text-monem: rgb(20, 19, 19);
+  --btn-background: #2450f1;
+  --btn-hover-background: #14319b;
+  --main-text-color: black;
+  --secondary-text-color: #777;
 }
 
-[theme=Dark] {
-  --mainColor: #4d8ba8;
-  --mainBackGround: #1b343c;
-  --secondText: #65b4f1;
-  --textColor: #96bdcf;
-  --headerColor: #4d8ba8;
-  --text-monem:rgb(230, 230, 230);
-  --btnB:#4d8ba8;
-  --btnB-hover:#356981;
-  --mainText: white;
-  --secondaryText: #a9a9a9;
+[theme="Dark"] {
+  --main-color: #4d8ba8;
+  --main-background: #1b343c;
+  --second-text: #65b4f1;
+  --text-color: #96bdcf;
+  --header-color: #4d8ba8;
+  --text-monem: rgb(230, 230, 230);
+  --btn-background: #4d8ba8;
+  --btn-hover-background: #356981;
+  --main-text-color: white;
+  --secondary-text-color: #a9a9a9;
 }
 
-.PageBody {
+body {
   font-family: Arial, sans-serif;
   background-image: url("./images/profile.png");
   background-repeat: no-repeat;
   background-size: cover;
 }
 
-.container.AddProf {
+.container-add-prof {
   width: 80%;
   max-width: 600px;
   margin: 50px auto;
-  background-color: var(--mainBackGround);
-  color: var(--mainColor);
+  background-color: var(--main-background);
+  color: var(--main-color);
   padding: 20px;
   border-radius: 5px;
   box-shadow: -2px 0px 34px 3px rgba(0, 0, 0, 0.75);
-  -webkit-box-shadow: -2px 0px 34px 3px rgba(0, 0, 0, 0.75);
-  -moz-box-shadow: -2px 0px 34px 3px rgba(0, 0, 0, 0.75);
   display: flex;
   flex-direction: column;
 }
-.container.AddProf .form-title {
+
+.container-add-prof .form-title {
   font-size: 24px;
   font-weight: bold;
   margin-bottom: 20px;
 }
-.container.AddProf .title-line {
+
+.container-add-prof .title-line {
   width: 100%;
   height: 1px;
   background-color: #ccc;
   margin-bottom: 20px;
 }
-.container.AddProf input::-moz-placeholder {
-  background-color: var(--mainColor);
-  color: white;
-}
-.container.AddProf input, .container.AddProf input::placeholder {
-  background-color: var(--mainColor);
-  color: white;
-}
-.container.AddProf .main-user-info {
+
+.container-add-prof .user-info {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  flex-direction: column;
 }
-.container.AddProf .user-input-box {
-  width: calc(50% - 10px);
+
+.container-add-prof .input-box {
   margin-bottom: 20px;
 }
-.container.AddProf label {
-  display: block;
+
+.container-add-prof label {
   font-weight: bold;
   margin-bottom: 5px;
+  display: block;
 }
-.container.AddProf input[type=text],
-.container.AddProf input[type=email],
-.container.AddProf input[type=password],
-.container.AddProf input[type=date],
-.container.AddProf select,
-.container.AddProf textarea,
-.container.AddProf input[type=file] {
+
+.container-add-prof input[type="text"],
+.container-add-prof select {
   width: 100%;
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
 }
-.container.AddProf select {
-  height: 40px;
-}
-.container.AddProf .form-submit-btn {
+
+.container-add-prof .submit-btn-container {
   text-align: center;
   margin-top: 20px;
 }
-.container.AddProf input[type=submit] {
-  background-color: #4caf50;
+
+.container-add-prof .submit-btn {
+  background-color: var(--btn-background);
   color: white;
   padding: 10px 20px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  width: 100%;
 }
-.container.AddProf input[type=submit]:hover {
-  background-color: #45a049;
-}/*# sourceMappingURL=AddProf.css.map */
+
+.container-add-prof .submit-btn:hover {
+  background-color: var(--btn-hover-background);
+}

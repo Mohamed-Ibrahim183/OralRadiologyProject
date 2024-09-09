@@ -55,7 +55,7 @@ const AssignmentCard = (props) => {
           onClick={handleOpenModal2}
           endIcon={<AddCircleOutlineIcon />}
         >
-          Add Group Slots
+          Add Slots
         </Button>
       </div>
     </div>

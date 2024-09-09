@@ -10,6 +10,7 @@
   align-items: center;
   justify-content: space-between;
 }
+
 @media (max-width: 768px) {
   .MainPage .AdminWrapper {
     flex-direction: column;
@@ -44,4 +45,4 @@
 .MainPage .AdminSection {
   padding: 10px 1%;
   transition: all 0.5s;
-}/*# sourceMappingURL=Admin.css.map */
+} /*# sourceMappingURL=Admin.css.map */
