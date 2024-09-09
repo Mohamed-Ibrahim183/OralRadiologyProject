@@ -1,51 +1,46 @@
+/* Global Styles */
 html {
   font-family: "Arial", sans-serif;
   scroll-behavior: smooth;
-  /* font-size: 10px; b3d eznk ya youssef pasha bs da m2sr 3la hagat fe pages tanya - monem*/
 }
 
-/* sets */
 :root {
-  --monemmonem: hsl(218, 70%, 18%);
+  --primary-color: hsl(218, 70%, 18%);
+  --secondary-color: hsl(225, 68%, 53%);
 }
 :root {
-  .HomePage .scroll-container::-webkit-scrollbar {
-    height: 1.5rem;
-  }
-
-  .scroll-container::-webkit-scrollbar-track,
-  .scroll-container::-webkit-scrollbar-thumb {
-    border-radius: 50px;
-  }
-
-  .scroll-container::-webkit-scrollbar-thumb:hover {
-    background-color: hsl(209, 100%, 49%);
-  }
-
-  .scroll-container::-webkit-scrollbar-button {
-    width: calc(22% - 25px);
-  }
-
-  ::-webkit-scrollbar {
-    width: 10px;
-  }
-
-  ::-webkit-scrollbar-track {
-    background-color: hsl(0, 0%, 80%);
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background-color: hsl(209, 100%, 49%);
-  }
-
-  ::-webkit-scrollbar-thumb:hover {
-    background-color: hsl(210, 26%, 11%);
-  }
+  --mainBackGround: #f5fbf9;
+  --mainColor: #0082e6;
+  --secondText: #65b4f1;
+  --textColor: var(--mainColor);
+  --headerColor: #0082e6;
+  --text-monem: rgb(20, 19, 19);
+  --btnB: #266bf5c1;
+  --btnB-hover: #266bf5;
+  --sidebar-expanded-margin: 200px;
+  --sidebar-default-margin: 70px;
+  --mainText: black;
+  --secondaryText: #777;
+  --chartBack: rgba(255, 255, 255, 0.277);
+  --currentDay: #a2d1fd;
+  --profile: #a2d1fd;
+  --shadow: rgba(0, 0, 0, 0.256);
 }
 [theme="Dark"] {
-  --monemmonem: white;
+  --mainColor: #4d8ba8;
+  --mainBackGround: #1b343c;
+  --secondText: #65b4f1;
+  --textColor: #96bdcf;
+  --headerColor: #4d8ba8;
+  --text-monem: rgb(230, 230, 230);
+  --btnB: #4d8ba8;
+  --btnB-hover: #356981;
+  --mainText: white;
+  --secondaryText: #a9a9a9;
+  --currentDay: #ffd269;
+  --profile: #4d8ba8;
+  --shadow: rgba(255, 255, 255, 0.256);
 }
-
 *,
 *::before,
 *::after {
@@ -54,285 +49,209 @@ html {
   box-sizing: border-box;
 }
 
-.body {
+body {
   color: hsl(0, 0%, 47%);
-  font-size: 1.5rem;
+  font-size: 1.6rem;
+  /* background-color: rgb(255, 255, 255); */
 }
-
-.HomePage .PageBody {
-  font-family: Arial, sans-serif;
-  background-position: static;
-  background-blend-mode: hue;
-  background-color: rgb(255, 255, 255);
-  background-repeat: no-repeat;
-  background-size: cover;
+.HomePage {
+  background-color: var(--mainBackGround);
 }
+/* HomePage Layout */
 .HomePage .parent {
-  margin: -2rem 1rem 30rem 1rem;
-  padding: 2rem 2rem;
-  text-align: center;
-  margin-bottom: -1px;
-  margin-bottom: 150px;
-}
-.HomePage .child {
-  display: inline-block;
-  padding: 1rem 1rem;
-  vertical-align: middle;
+  display: flex;
+  flex-direction: column;
   align-items: center;
-}
-.HomePage .title-line {
-  margin-top: 200px;
-}
-.HomePage .scrollbar-item {
-  min-width: calc(33.33% - 20px);
-}
-.HomePage .bg-image {
-  background-color: #0e264f;
-  padding-bottom: 30rem;
-}
-.HomePage .video {
-  /* background-image: url("https://www.google.com/url?sa=i&url=https%3A%2F%2Fthink3dimaging.com%2F&psig=AOvVaw2_jtiONyR1J7gepS23USfn&ust=1711284495415000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCKikp9a1ioUDFQAAAAAdAAAAABAE"); */
-  padding-block: 0;
-  margin-block-end: -250px;
-  margin-top: 50px;
-}
-.HomePage input,
-.HomePage button {
-  background: none;
-  border: none;
-  font: inherit;
-}
-.HomePage address {
-  font-style: normal;
-}
-.HomePage .section-subtitle {
-  color: hsl(225, 68%, 53%);
-  font-family: "Arial", sans-serif;
-  font-size: 1.8rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  margin-top: -2px;
-  margin-top: 100px;
-  margin-bottom: 50px;
+  margin: 2rem 0;
+  text-align: center;
 }
 
-.HomePage .h1,
-.HomePage .h2,
-.HomePage .h3 {
-  font-family: "Arial", sans-serif;
-  line-height: 1.2;
+.HomePage .hero-title {
+  font-size: 5rem;
+  color: var(--text-monem);
+  margin-bottom: 1rem;
 }
-.HomePage .h1 {
-  color: hsl(218, 70%, 18%);
-  font-size: 3.6rem;
-}
-.HomePage .h2,
-.HomePage .h3 {
-  color: hsl(217, 100%, 12%);
-}
-.HomePage .h2 {
-  font-size: 4rem;
-}
-.HomePage .h3 {
-  font-size: 2.2rem;
-}
-.HomePage .btn {
+
+.HomePage .img1 {
+  width: 100%;
+  max-width: 400px;
   margin-top: 2rem;
+}
+
+/* Video Section */
+.HomePage .bg-image {
+  background-color: var(--btnB);
+  padding: 2rem 0;
+}
+
+.HomePage .video {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Human Section */
+.HomePage .Human {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  margin: 2rem 0;
+}
+
+.HomePage .doctor-content {
+  max-width: 50%;
+}
+
+.HomePage .doctor-content .section-subtitle {
+  text-transform: capitalize;
+  margin-bottom: 1rem;
+}
+.HomePage .doctor-content .section-title {
+  font-size: 2rem;
+}
+
+/* Buttons */
+.HomePage .btn {
+  display: inline-block;
   background-image: linear-gradient(
     90deg,
     hsl(201, 92%, 47%) 0%,
     hsl(225, 68%, 53%) 100%
   );
   color: white;
+  padding: 1rem 2rem;
   font-size: 1.6rem;
-  width: 300px;
-  text-transform: uppercase;
-  padding: 20px 30px;
-  text-align: center;
   border-radius: 4px;
-  box-shadow: 0px 10px 30px hsla(0, 0%, 0%, 0.1);
-}
-.HomePage .btn:is(:hover, :focus) {
-  --deg: -90deg;
-}
-.HomePage .w-100 {
-  width: 80%;
-  height: 80%;
-}
-.HomePage .text-center {
+  margin-top: 2rem;
   text-align: center;
 }
-.HomePage .card-text,
-.HomePage .header-top,
-.HomePage .header-bottom {
-  display: none;
-}
-
-@keyframes slideIn {
-  0% {
-    transform: translateY(0);
-  }
-  100% {
-    transform: translateY(100%);
-  }
-}
-
-.HomePage .header-bottom > .container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 20px;
-}
-.HomePage .doctor {
-  background-color: hsl(218, 70%, 18%);
-  margin-top: 500px;
-}
-.HomePage .doctor-banner {
-  margin-block-end: 50px;
-}
-.HomePage .doctor-content .section-subtitle {
-  text-transform: capitalize;
-  margin-top: -30px;
-  margin-bottom: -1px;
-  margin-bottom: 13px;
-}
-.HomePage .section-title {
-  color: var(--monemmonem);
-  font-size: 3.2rem;
-  margin-block-end: 30px;
-}
-.HomePage .doctor-content .center1 {
-  margin-top: 10px;
-}
-
-.HomePage .doctor .btn {
-  max-width: max-content;
-}
-.HomePage .Human {
-  display: flex;
-  align-items: center;
-  margin-top: 20rem;
-  gap: 15px;
-  line-height: 1.6;
-  margin-top: -1px;
-  margin-top: 30px;
-  margin-bottom: -24rem;
-}
-.HomePage .hero-title {
-  font-size: 7rem;
-  color: var(--monemmonem);
-  margin-top: -10px;
-  margin-bottom: -1px;
-  margin-bottom: 2px;
-}
+/* Scrollable  Gallery */
 .HomePage .scroll-container {
   display: flex;
-  background-color: #0d254f;
-  overflow: auto;
-  overflow-y: hidden;
-  white-space: nowrap;
-  padding: 10px;
+  gap: 1rem;
+  overflow-x: scroll;
+  padding: 1rem;
+  scroll-snap-type: x mandatory; /* Snap to each image */
+  scroll-padding: 1rem;
+  margin-bottom: 6rem;
+  background-color: var(--btnB);
 }
+
 .HomePage .scroll-container img {
-  border-radius: 50px;
-  padding: 0rem;
-  width: 600px;
-  margin-bottom: 50px;
-  white-space: var(--white);
-  height: 400px;
-  transform: scale(0.8);
+  width: 100%;
+  max-width: 300px;
+  min-width: 230px;
+  object-fit: cover;
+  max-height: 160px;
+  border-radius: 10px;
+  transition: transform 0.3s ease-in-out;
+  scroll-snap-align: center;
 }
 
-.HomePage .space {
-  background-color: #0d254f;
-  padding-top: 50px;
-}
 .HomePage .scroll-container img:hover {
-  transform: scale(0.9);
-  transition: ease-in 0.24s;
+  transform: scale(1.1); /* Zoom effect on hover */
 }
-
-.HomePage .scroll-container::-webkit-scrollbar {
-  height: 1.5rem;
+.HomePage .scroll-container p {
+  /* margin-left: 2%;
+  display: none; */
 }
-
-.HomePage .scroll-container::-webkit-scrollbar-track,
-.HomePage .scroll-container::-webkit-scrollbar-thumb {
-  border-radius: 50px;
-}
-
-.HomePage .scroll-container::-webkit-scrollbar-thumb:hover {
-  background-color: hsl(209, 100%, 49%);
-}
-
-.HomePage .scroll-container::-webkit-scrollbar-button {
-  width: calc(22% - 25px);
-}
-
-.HomePage ::-webkit-scrollbar {
-  width: 10px;
-}
-
-.HomePage ::-webkit-scrollbar-track {
-  background-color: hsl(0, 0%, 80%);
-}
-
-.HomePage ::-webkit-scrollbar-thumb {
-  background-color: hsl(209, 100%, 49%);
-}
-
-.HomePage ::-webkit-scrollbar-thumb:hover {
-  background-color: hsl(210, 26%, 11%);
-}
-
-.HomePage .mg-30 {
-  margin-top: 30rem;
-  margin-bottom: 30rem;
-}
-
-.HomePage .img1 {
-  position: relative;
-  width: 300px;
-}
-
-@media (max-width: 100em) {
-  .HomePage .w-100 {
-    width: 30%;
-    height: 30%;
-    margin: 0 auto;
+/* Responsive Layouts */
+/* For Large Screens - Show 4 Images */
+@media (min-width: 1200px) {
+  .HomePage .scroll-container {
+    max-width: 1200px; /* Set a max width */
   }
-  .HomePage .Human {
-    display: block;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
+}
 
-    .HomePage .btn {
-      display: block;
-      margin: 0 auto;
-    }
+/* For Medium Screens - Show 3 Images */
+@media (max-width: 768px) {
+  .HomePage .scroll-container img {
+    max-width: 250px; /* Adjust image size */
   }
+}
+
+/* For Small Screens - Show 2 Images */
+@media (max-width: 576px) {
+  .HomePage .scroll-container img {
+    max-width: 150px; /* Adjust image size for smaller screens */
+  }
+}
+
+/* Footer */
+.HomePage footer {
+  margin-top: 5rem;
+}
+
+/* Media Queries */
+/* Large Screen Adjustments */
+@media (min-width: 1200px) {
+  .HomePage .img2 {
+    max-width: 400px; /* Larger image for large screens */
+  }
+}
+
+@media (max-width: 1200px) {
   .HomePage .hero-title {
     font-size: 4rem;
   }
-  .HomePage .scroll-container img {
-    transform: scale(0.8);
-    gap: 1px;
+
+  .HomePage .doctor-content {
+    max-width: 60%;
   }
 }
 
-.HomePage bodY {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+/* Medium Screen Adjustments */
+@media (max-width: 768px) {
+  .HomePage .Human {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .HomePage .doctor-content {
+    max-width: 100%;
+  }
+
+  .HomePage .img1 {
+    max-width: 300px;
+  }
+
+  .HomePage .video {
+    width: 90%;
+  }
+
+  .HomePage .scroll-container img {
+    max-width: 250px;
+  }
+
+  .HomePage .img2 {
+    max-width: 250px; /* Smaller image for medium screens */
+  }
 }
-.HomePage .center {
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+
+/* Small Screen Adjustments */
+@media (max-width: 576px) {
+  .HomePage .hero-title {
+    font-size: 3rem;
+  }
+
+  .HomePage .doctor-content .section-subtitle {
+    font-size: 1.6rem;
+  }
+
+  .HomePage .btn {
+    font-size: 1.4rem;
+    padding: 0.8rem 1.6rem;
+  }
+
+  .HomePage .img2 {
+    max-width: 200px; /* Smaller image for small screens */
+  }
 }
-.HomePage .bg-image {
-  /* display: none; */
-  margin-top: -100px;
+
+/* Specific Adjustments for OralRadiologyInfoSection */
+.HomePage .img2 {
+  width: 100%;
+  max-width: 300px; /* Default reduced size */
+  height: auto;
+  margin: 0 auto;
 }

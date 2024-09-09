@@ -1,27 +1,27 @@
 :root {
-  --mainBackGround: #F5FBF9;
+  --mainBackGround: #f5fbf9;
   --mainColor: #0082e6;
   --secondText: #65b4f1;
   --textColor: var(--mainColor);
   --headerColor: #0082e6;
-  --text-monem:rgb(20, 19, 19);
-  --btnB:#2450f1;
-  --btnB-hover:#14319b;
+  --text-monem: rgb(20, 19, 19);
+  --btnB: #2450f1;
+  --btnB-hover: #14319b;
   --sidebar-expanded-margin: 200px;
   --sidebar-default-margin: 70px;
   --mainText: black;
   --secondaryText: #777;
 }
 
-[theme=Dark] {
+[theme="Dark"] {
   --mainColor: #4d8ba8;
   --mainBackGround: #1b343c;
   --secondText: #65b4f1;
   --textColor: #96bdcf;
   --headerColor: #4d8ba8;
-  --text-monem:rgb(230, 230, 230);
-  --btnB:#4d8ba8;
-  --btnB-hover:#356981;
+  --text-monem: rgb(230, 230, 230);
+  --btnB: #4d8ba8;
+  --btnB-hover: #356981;
   --mainText: white;
   --secondaryText: #a9a9a9;
 }
@@ -31,10 +31,13 @@
   margin: auto;
   overflow: hidden;
 }
-.monem2_admin h1, .monem2_admin h2 {
+.monem2_admin h1,
+.monem2_admin h2 {
   color: var(--textColor);
 }
-.monem2_admin #searchh, .monem2_admin .grade_num, .monem2_admin .FeedBack {
+.monem2_admin #searchh,
+.monem2_admin .grade_num,
+.monem2_admin .FeedBack {
   background-color: rgba(221, 221, 221, 0.4156862745);
 }
 .monem2_admin #searchhh {
@@ -67,7 +70,8 @@
   color: white;
   text-align: left;
 }
-.monem2_admin .table th, .monem2_admin .table td {
+.monem2_admin .table th,
+.monem2_admin .table td {
   padding: 12px 15px;
 }
 .monem2_admin .table tbody tr {
@@ -83,7 +87,9 @@
   .monem2_admin .table .thead {
     display: none;
   }
-  .monem2_admin .table .table tbody, .monem2_admin .table .table tr, .monem2_admin .table .table td {
+  .monem2_admin .table .table tbody,
+  .monem2_admin .table .table tr,
+  .monem2_admin .table .table td {
     display: block;
     width: 100%;
   }
@@ -117,16 +123,19 @@
   margin-left: 10px;
   display: inline-block;
 }
-.monem2_admin .pen, .monem2_admin .basket {
+.monem2_admin .pen,
+.monem2_admin .basket {
   width: 20px;
   height: 20px;
   border-radius: 20%;
   color: white;
 }
-.monem2_admin .pen.pen, .monem2_admin .basket.pen {
+.monem2_admin .pen.pen,
+.monem2_admin .basket.pen {
   background-color: #1c37d0;
 }
-.monem2_admin .pen.basket, .monem2_admin .basket.basket {
+.monem2_admin .pen.basket,
+.monem2_admin .basket.basket {
   background-color: red;
 }
 .monem2_admin .oooo {
@@ -173,29 +182,49 @@
 .monem2_admin .grade_button:focus {
   outline: none;
 }
+.GradingGradeInput {
+  width: 70px;
+}
+.GradingViewSumbissionBtn {
+  background-color: var(--btnB);
+  border: none;
+  color: white;
+  padding: 7px;
+}
+.GradingViewSumbissionBtn:hover {
+  background-color: var(--btnB-hover);
+}
 @media (max-width: 480px) {
-  .monem2_admin h1, .monem2_admin h2 {
+  .monem2_admin h1,
+  .monem2_admin h2 {
     font-size: 20px;
   }
   .monem2_admin .oooo h2 {
     margin-right: 1rem;
   }
-  .monem2_admin .table, .monem2_admin .right, .monem2_admin #searchh {
+  .monem2_admin .table,
+  .monem2_admin .right,
+  .monem2_admin #searchh {
     width: 100%;
   }
-  .monem2_admin .grade_num, .monem2_admin .FeedBack {
+  .monem2_admin .grade_num,
+  .monem2_admin .FeedBack {
     width: 100%;
   }
   .monem2_admin .right {
     margin-top: 1rem;
     float: none;
   }
+  .GradingGradeInput {
+    width: 55px;
+  }
 }
 @media (min-width: 768px) and (max-width: 1024px) {
-  .monem2_admin h1, .monem2_admin h2 {
+  .monem2_admin h1,
+  .monem2_admin h2 {
     font-size: 24px;
   }
   .monem2_admin .oooo h2 {
     margin-right: 2rem;
   }
-}/*# sourceMappingURL=Grading.css.map */
+} /*# sourceMappingURL=Grading.css.map */

@@ -90,11 +90,15 @@ const Gallery = [
 function ImageGallerySection() {
   return (
     <section
+      id="ImageGallerySection"
       className="section bg-dark has-bg-image"
       aria-label="Image Gallery"
     >
       <div className="mg-30">
-        <p className="section-subtitle">Sample Oral Radiology Films</p>
+        <p className="section-subtitle " style={{ marginLeft: "10px" }}>
+          {" "}
+          Sample Oral Radiology Films
+        </p>
         <div className="scroll-container">
           {Gallery.map((image, i) => (
             <LazyLoadImage

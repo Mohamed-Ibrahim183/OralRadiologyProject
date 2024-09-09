@@ -6,7 +6,7 @@ import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 
 import "./professor.css";
-import { Navigate } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import Modal2 from "./Modal2";
 import Button from "@mui/material/Button";
 import { Add } from "@mui/icons-material";
@@ -134,9 +134,12 @@ function AddRequirementModal({ isOpen, onClose }) {
   const [maxImages, setMaxImages] = useState("");
   const userId = sessionStorage["userId"];
   const [loading, setLoading] = useState(false); // State to handle loading status
-
+  const [categories, setcategories] = useState([]);
+  const [selectedCategories, setSelectedCategories] = useState([]);
   const saveAssignment = async () => {
-    if (!assignmentName || !topicName || !maxImages) {
+    console.log(selectedCategories);
+
+    if (!assignmentName || !topicName) {
       alert("Please fill in all fields.");
       return;
     }
@@ -150,6 +153,12 @@ function AddRequirementModal({ isOpen, onClose }) {
     setLoading(false);
     onClose();
   };
+  useEffect(() => {
+    getAllCategoriesData().then((res) => {
+      setcategories(res.msg);
+      //console.log(res.msg);
+    });
+  }, []);
 
   if (!isOpen) return null;
 
@@ -158,38 +167,82 @@ function AddRequirementModal({ isOpen, onClose }) {
       <BasicModalComp openModal={isOpen} closeModal={onClose}>
         <div className="modal">
           <div className="modal-content">
-            <h2 style={{ marginBottom: "10px" }}>Add Requirement</h2>
+            <h2 style={{ marginBottom: "10px" }}>New Requirement</h2>
             <form onSubmit={(e) => e.preventDefault()}>
               <div className="form-group">
-                <section>
-                  <label htmlFor="requirementName">Requirement Name:</label>
+                <section className="AddRequirementModal-InputItem">
+                  <label htmlFor="requirementName">Name</label>
                   <input
                     type="text"
                     id="requirementName"
                     name="requirementName"
                     value={assignmentName}
+                    className="Inputt"
+                    placeholder="Requirement Name"
                     onChange={(e) => setAssignmentName(e.target.value)}
                   />
                 </section>
-                <section>
-                  <label htmlFor="topicName">Topic Name:</label>
+                <section className="AddRequirementModal-InputItem">
+                  <label htmlFor="topicName">Add a comment</label>
                   <input
                     type="text"
                     id="topicName"
                     name="topicName"
+                    className="Inputt"
+                    placeholder="Write a comment"
                     value={topicName}
                     onChange={(e) => setTopicName(e.target.value)}
                   />
                 </section>
-                <section>
+                {/* <section className="AddRequirementModal-InputItem">
                   <label htmlFor="maxImages">Maximum Number of Images:</label>
                   <input
                     type="number"
                     id="maxImages"
                     name="maxImages"
+                    className="Inputt"
                     value={maxImages}
                     onChange={(e) => setMaxImages(e.target.value)}
                   />
+                </section> */}
+                {/* //Mon3m working here */}
+                <section className="AddRequirementModal-InputItem">
+                  <label htmlFor="topicName">Category</label>
+                  <div className="Inputt-requirementCateogries">
+                    {categories.map((cat) => (
+                      <div key={cat.Id}>
+                        <input
+                          type="checkbox"
+                          id={`checkcat-${cat.Id}`}
+                          value={cat.Id}
+                          style={{ marginRight: "8px" }}
+                          checked={selectedCategories.some(
+                            (selected) => selected.Id === cat.Id
+                          )}
+                          onChange={(e) => {
+                            // console.log(selectedCategories);
+                            if (e.target.checked) {
+                              setSelectedCategories([
+                                ...selectedCategories,
+                                cat,
+                              ]); // Add the whole category object
+                            } else {
+                              setSelectedCategories(
+                                selectedCategories.filter(
+                                  (selected) => selected.Id !== cat.Id
+                                ) // Remove based on the Id
+                              );
+                            }
+                          }}
+                        />
+                        <label htmlFor={`checkcat-${cat.Id}`}>{cat.Name}</label>
+                      </div>
+                    ))}
+                  </div>
+                </section>
+                <section className="AddRequirementModal-InputItem">
+                  <label htmlFor="week">Week</label>
+                  <input type="num" id="week" name="week" className="Inputt" />
                 </section>
               </div>
               <button
@@ -326,15 +379,18 @@ const ProfessorDB = () => {
       <div className="container AssignmentSection">
         <div className="profDB_UpperButtons">
           <GroupsData />
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={() => setModalOpen(true)}
-            endIcon={<Add />}
-            className="profDB_UpperButton"
-          >
-            Add Requirement
-          </Button>
+          <Link to="/professor/NewAssignment">
+            <Button
+              variant="contained"
+              color="primary"
+              // onClick={() => setModalOpen(true)}
+              // endIcon={<Add />}
+
+              className="profDB_UpperButton"
+            >
+              Add Requirement
+            </Button>
+          </Link>
           <Button
             variant="contained"
             color="primary"

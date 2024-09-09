@@ -16,6 +16,7 @@ import Users from "./Pages/Users/Users";
 import Dashboard from "./Pages/Dashboard";
 import ModalPOP from "./Components/ModalPOP";
 import AssignmentPage2 from "./Pages/assignment_page2/assignmentPage2";
+import NewAssignment from "./Pages/ProfessorDB/NewAssignment";
 const routes = [
   {
     path: "/",
@@ -79,6 +80,11 @@ const routes = [
   {
     path: "/ModalPOP",
     element: <ModalPOP />,
+    errorElement: <NotFound />,
+  },
+  {
+    path: "/NewAssignment",
+    element: <NewAssignment />,
     errorElement: <NotFound />,
   },
 ];

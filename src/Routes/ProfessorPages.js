@@ -3,7 +3,7 @@ import { Route, Routes } from "react-router-dom";
 // import GradingPage from "../Pages/Grading_Page/Grading_Page";
 import Dashboard from "../Pages/Dashboard";
 import GradingPage from "../Pages/Grading_Page/Grading_Page";
-
+import NewAssignment from "../Pages/ProfessorDB/NewAssignment";
 // const GradingPage = lazy(() => import("./Grading_Page/Grading_Page"));
 
 function ProfessorPages() {
@@ -22,6 +22,14 @@ function ProfessorPages() {
         element={
           <Suspense fallback={<div>Loading...</div>}>
             <Dashboard />
+          </Suspense>
+        }
+      />
+      <Route
+        path="NewAssignment"
+        element={
+          <Suspense fallback={<div>Loading...</div>}>
+            <NewAssignment />
           </Suspense>
         }
       />

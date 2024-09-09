@@ -26,7 +26,7 @@ const AssignmentCard = (props) => {
     sessionStorage.setItem("userId", props.userId);
     sessionStorage.setItem("assignmentId", props.assignmentId); // Lowercase "a"
   };
-
+  //console.log(props.toPage);
   return (
     <div className="AssCard" style={label}>
       <Link to={props.toPage} onClick={handleClick}>
@@ -48,7 +48,7 @@ const AssignmentCard = (props) => {
           onClose={handleCloseModal2}
           AssignmentId={props.assignmentId}
         />
-        <Button
+        {/* <Button
           sx={{ colo: "white" }}
           variant="contained"
           color="primary"
@@ -56,7 +56,7 @@ const AssignmentCard = (props) => {
           endIcon={<AddCircleOutlineIcon />}
         >
           Add Slots
-        </Button>
+        </Button> */}
       </div>
     </div>
   );
