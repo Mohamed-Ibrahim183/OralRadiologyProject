@@ -17,16 +17,18 @@ function NewAssignment() {
   const [weekNum, setweekNum] = useState();
   const saveAssignment = async () => {
     console.log(selectedCategories);
-    if (!assignmentName || !topicName || selectedCategories) {
+    if (!assignmentName || !topicName || !selectedCategories) {
       alert("Please fill in all fields.");
       return;
     }
     setLoading(true);
+    const categoryIds = selectedCategories.map((cat) => cat.Id);
+    console.log(categoryIds);
     insertNewAssignment({
-      name: assignmentName,
-      topic: topicName,
-      professorId: parseInt(userId, 10),
-      categories: selectedCategories,
+      Name: assignmentName,
+      Topic: topicName,
+      ProfessorId: parseInt(userId, 10),
+      categories: categoryIds,
       weekNum: weekNum,
     }).then((res) => console.log(res.msg));
     setLoading(false);

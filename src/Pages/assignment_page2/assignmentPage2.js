@@ -66,11 +66,41 @@ const AssignmentPage2 = () => {
     }
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (uploadedFiles.length === 0) {
       alert("Please upload files for all categories.");
-    } else {
-      // Submit All
+      return;
+    }
+
+    const assignmentId = sessionStorage.getItem("assignmentId");
+    const studentId = sessionStorage.getItem("userId");
+
+    try {
+      let lastSubmission = -1;
+
+      // Save the submission
+      async function saveSubmission() {
+        await makeNewSubmission({ studentId, assignmentId }).then((res) => {
+          lastSubmission = res.msg;
+        });
+      }
+      await saveSubmission();
+
+      // Upload files
+      for (let i = 0; i < uploadedFiles.length; i++) {
+        await uploadNewAssignmentImage({
+          assignmentId,
+          StudentId: studentId,
+          file: uploadedFiles[i].file,
+          category: uploadedFiles[i].categoryName,
+          submission: lastSubmission,
+        });
+      }
+
+      alert("Files uploaded successfully.");
+    } catch (error) {
+      console.error("Error uploading files:", error);
+      alert("Failed to upload files.");
     }
   };
 
