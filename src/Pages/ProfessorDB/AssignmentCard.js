@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import Button from "@mui/material/Button";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import { Delete } from "@mui/icons-material";
-
+import EditIcon from "@mui/icons-material/Edit";
 const AssignmentCard = (props) => {
   // props.assignmentId
   const label = {
@@ -35,28 +35,29 @@ const AssignmentCard = (props) => {
           <span className="Details">{props.info}</span>
         </div>
       </Link>
-      <Button
+      {/* <Button
         variant="outlined"
         color="error"
         onClick={() => props.onDelete(props.assignmentId)}
       >
         Delete <Delete />
-      </Button>
+      </Button> */}
       <div className="grade">
         <Modal2
           open={isModal2Open}
           onClose={handleCloseModal2}
           AssignmentId={props.assignmentId}
         />
-        {/* <Button
-          sx={{ colo: "white" }}
-          variant="contained"
-          color="primary"
-          onClick={handleOpenModal2}
-          endIcon={<AddCircleOutlineIcon />}
-        >
-          Add Slots
-        </Button> */}
+        <Link to="/professor/NewAssignment">
+          <Button
+            sx={{ colo: "white" }}
+            variant="contained"
+            color="primary"
+            endIcon={<EditIcon />}
+          >
+            Edit
+          </Button>
+        </Link>
       </div>
     </div>
   );

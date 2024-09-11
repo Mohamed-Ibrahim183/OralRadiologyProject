@@ -386,7 +386,7 @@ const ProfessorDB = () => {
       <div className="container AssignmentSection">
         <div className="profDB_UpperButtons">
           <GroupsData />
-          <Link to="/professor/NewAssignment">
+          {/* <Link to="/professor/NewAssignment">
             <Button
               variant="contained"
               color="primary"
@@ -397,7 +397,7 @@ const ProfessorDB = () => {
             >
               Add Requirement
             </Button>
-          </Link>
+          </Link> */}
           <Button
             variant="contained"
             color="primary"

@@ -55,7 +55,8 @@ const Navbar = () => {
         setLinks({
           navLinks: [
             { Text: "Dashboard", link: "/professor/Dashboard" },
-            { Text: "Grading Page", link: "/professor/Grading_Page" },
+            // { Text: "Grading Page", link: "/professor/Grading_Page" },
+            { Text: "New Requirement", link: "/professor/NewAssignment" },
           ],
         });
         break;
@@ -63,7 +64,7 @@ const Navbar = () => {
         setLinks({
           navLinks: [
             { Text: "Requirements", link: "/student/Assignments" },
-            { Text: "Upload", link: "/student/submit" },
+            // { Text: "Upload", link: "/student/submit" },
             { Text: "Dashboard", link: "/student/Dashboard" },
           ],
         });
@@ -162,13 +163,31 @@ const Navbar = () => {
               gap: 2,
             }}
           >
-            {Links.navLinks.map((ele, index) => (
-              <Button color="inherit" key={index}>
-                <Link style={{ color: "inherit" }} to={ele.link}>
-                  {ele.Text}
-                </Link>
-              </Button>
-            ))}
+            {Links.navLinks.map((ele, index) =>
+              userType === "Professor" && ele.Text === "New Requirement" ? (
+                <Button
+                  variant="contained" // You can choose "contained", "outlined", or "text" for the style
+                  color="primary"
+                  key={index}
+                >
+                  <Link
+                    style={{ color: "inherit", textDecoration: "none" }}
+                    to={ele.link}
+                  >
+                    {ele.Text}
+                  </Link>
+                </Button>
+              ) : (
+                <Button color="inherit" key={index}>
+                  <Link
+                    style={{ color: "inherit", textDecoration: "none" }}
+                    to={ele.link}
+                  >
+                    {ele.Text}
+                  </Link>
+                </Button>
+              )
+            )}
           </Box>
           {sessionStorage["PersonalImage"] && (
             <Tooltip title="Open Menu" sx={{ mx: 2 }}>

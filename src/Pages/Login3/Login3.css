@@ -1,5 +1,4 @@
 :root {
-  --background-color: #f6f5f7;
   --text-color: #333;
   --button-bg-color: #2bb1ff;
   --button-border-color: #2bb1ff;
@@ -10,7 +9,9 @@
   --overlay-bg-start: #2b80ff;
   --overlay-bg-end: #41b9ff;
   --overlay-text-color: #ffffff;
+  --mainBackGround: #f5fbf9;
 }
+
 @import url("https://fonts.googleapis.com/css?family=Montserrat:400,800");
 
 .noScroll {
@@ -20,7 +21,6 @@
 .login3 {
   overflow: hidden;
   box-sizing: border-box;
-
   background: var(--background-color);
   display: flex;
   justify-content: center;
@@ -28,13 +28,10 @@
   flex-direction: column;
   font-family: "Montserrat", sans-serif;
   height: 100vh;
-  /* margin: -20px 0 50px; */
 
   h1 {
     font-weight: bold;
     margin: 0;
-
-    /* for dark mode */
     color: white;
   }
 
@@ -88,7 +85,7 @@
   }
 
   form {
-    background-color: var(--container-bg-color);
+    background-color: var(--mainBackGround);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -155,7 +152,6 @@
       opacity: 0;
       z-index: 1;
     }
-
     50%,
     100% {
       opacity: 1;
@@ -163,7 +159,6 @@
     }
   }
 
-  /* the left contatiner */
   .overlay-container {
     position: absolute;
     top: 0;
@@ -238,24 +233,27 @@
   .container.right-panel-active .overlay-right {
     transform: translateX(20%);
   }
-  .loginErrorMessage {
+
+  #loginErrorMessage {
     color: red;
     font-size: 14px;
-    margin-bottom: 45px;
+    margin-bottom: 6px;
+    margin-top: 6px;
   }
+
   background-image: url("img2.jpg");
   background-color: #222b2e;
   background-position: 0px -200px;
   background-size: cover;
   background-repeat: no-repeat;
-  /* background-color: rgb(245, 245, 245); */
   background-blend-mode: multiply;
 }
+
 @media only screen and (max-width: 600px) {
   .bigContainer {
     display: flex;
     flex-direction: row;
-    width: 100%;
+    width: 90%;
   }
 
   .form-container.sign-in-container {
@@ -297,5 +295,10 @@
 
   .container.right-panel-active .overlay-right {
     transform: none;
+  }
+
+  .login3 h1 {
+    font-size: 24px;
+    text-align: center;
   }
 }
