@@ -209,35 +209,38 @@ function AddRequirementModal({ isOpen, onClose }) {
                 <section className="AddRequirementModal-InputItem">
                   <label htmlFor="topicName">Category</label>
                   <div className="Inputt-requirementCateogries">
-                    {categories.map((cat) => (
-                      <div key={cat.Id}>
-                        <input
-                          type="checkbox"
-                          id={`checkcat-${cat.Id}`}
-                          value={cat.Id}
-                          style={{ marginRight: "8px" }}
-                          checked={selectedCategories.some(
-                            (selected) => selected.Id === cat.Id
-                          )}
-                          onChange={(e) => {
-                            // console.log(selectedCategories);
-                            if (e.target.checked) {
-                              setSelectedCategories([
-                                ...selectedCategories,
-                                cat,
-                              ]); // Add the whole category object
-                            } else {
-                              setSelectedCategories(
-                                selectedCategories.filter(
-                                  (selected) => selected.Id !== cat.Id
-                                ) // Remove based on the Id
-                              );
-                            }
-                          }}
-                        />
-                        <label htmlFor={`checkcat-${cat.Id}`}>{cat.Name}</label>
-                      </div>
-                    ))}
+                    {Array.isArray(categories) &&
+                      categories.map((cat) => (
+                        <div key={cat.Id}>
+                          <input
+                            type="checkbox"
+                            id={`checkcat-${cat.Id}`}
+                            value={cat.Id}
+                            style={{ marginRight: "8px" }}
+                            checked={selectedCategories.some(
+                              (selected) => selected.Id === cat.Id
+                            )}
+                            onChange={(e) => {
+                              // console.log(selectedCategories);
+                              if (e.target.checked) {
+                                setSelectedCategories([
+                                  ...selectedCategories,
+                                  cat,
+                                ]); // Add the whole category object
+                              } else {
+                                setSelectedCategories(
+                                  selectedCategories.filter(
+                                    (selected) => selected.Id !== cat.Id
+                                  ) // Remove based on the Id
+                                );
+                              }
+                            }}
+                          />
+                          <label htmlFor={`checkcat-${cat.Id}`}>
+                            {cat.Name}
+                          </label>
+                        </div>
+                      ))}
                   </div>
                 </section>
                 <section className="AddRequirementModal-InputItem">
@@ -314,22 +317,25 @@ const ProfessorDB = () => {
         filtered = assignments;
       }
 
-      if (sortingType === "Name") {
-        filtered.sort((a, b) => {
-          if (a.Name < b.Name) return sortingOrder === "asc" ? -1 : 1;
-          if (a.Name > b.Name) return sortingOrder === "asc" ? 1 : -1;
-          return 0;
-        });
-      } else if (sortingType === "OpenDate") {
-        filtered.sort((a, b) => {
-          if (new Date(a.open) < new Date(b.open))
-            return sortingOrder === "asc" ? -1 : 1;
-          if (new Date(a.open) > new Date(b.open))
-            return sortingOrder === "asc" ? 1 : -1;
-          return 0;
-        });
+      if (Array.isArray(filtered)) {
+        if (sortingType === "Name") {
+          filtered.sort((a, b) => {
+            if (a.Name < b.Name) return sortingOrder === "asc" ? -1 : 1;
+            if (a.Name > b.Name) return sortingOrder === "asc" ? 1 : -1;
+            return 0;
+          });
+        } else if (sortingType === "OpenDate") {
+          filtered.sort((a, b) => {
+            if (new Date(a.open) < new Date(b.open))
+              return sortingOrder === "asc" ? -1 : 1;
+            if (new Date(a.open) > new Date(b.open))
+              return sortingOrder === "asc" ? 1 : -1;
+            return 0;
+          });
+        }
+      } else {
+        console.error("Filtered is not an array:", filtered);
       }
-
       setFilteredAssignments(filtered);
     };
     filterAndSortAssignments();
@@ -694,31 +700,32 @@ function Categories() {
       <div className="categoriesList">
         <h3 className="categoriesListTitle">Categories</h3>
         <div className="categoriesListItems">
-          {state.cats.map((cat) => (
-            <div className="categoriesListItem" key={cat.Id}>
-              <p>{cat.Name}</p>
-              <div>
-                <Button
-                  variant="outlined"
-                  color="secondary"
-                  onClick={() =>
-                    dispatch({ type: "openEditCatModal", payload: cat })
-                  }
-                >
-                  Edit
-                </Button>
-                <Button
-                  variant="outlined"
-                  color="error"
-                  onClick={() => {
-                    dispatch({ type: "openDeleteCatModal", payload: cat });
-                  }}
-                >
-                  Delete
-                </Button>
+          {Array.isArray(state.cats) &&
+            state.cats.map((cat) => (
+              <div className="categoriesListItem" key={cat.Id}>
+                <p>{cat.Name}</p>
+                <div>
+                  <Button
+                    variant="outlined"
+                    color="secondary"
+                    onClick={() =>
+                      dispatch({ type: "openEditCatModal", payload: cat })
+                    }
+                  >
+                    Edit
+                  </Button>
+                  <Button
+                    variant="outlined"
+                    color="error"
+                    onClick={() => {
+                      dispatch({ type: "openDeleteCatModal", payload: cat });
+                    }}
+                  >
+                    Delete
+                  </Button>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
         </div>
       </div>
 

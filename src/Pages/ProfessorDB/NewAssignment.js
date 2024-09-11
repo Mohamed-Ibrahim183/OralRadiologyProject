@@ -6,32 +6,42 @@ import {
   getAllCategoriesData,
   insertNewAssignment,
 } from "../../Slices/PorfessorSlice";
+import { Alert } from "bootstrap";
+
 function NewAssignment() {
   const [assignmentName, setAssignmentName] = useState("");
   const [topicName, setTopicName] = useState("");
-  const [maxImages, setMaxImages] = useState("");
   const userId = sessionStorage["userId"];
   const [loading, setLoading] = useState(false);
   const [categories, setCategories] = useState([]);
   const [selectedCategories, setSelectedCategories] = useState([]);
-  const [weekNum, setweekNum] = useState();
+  const [selectedWeeks, setSelectedWeeks] = useState([]);
+
   const saveAssignment = async () => {
-    console.log(selectedCategories);
-    if (!assignmentName || !topicName || !selectedCategories) {
+    //console.log(selectedWeeks);
+    // console.log(selectedCategories);
+    if (
+      !assignmentName ||
+      !topicName ||
+      !selectedCategories.length ||
+      !selectedWeeks.length
+    ) {
       alert("Please fill in all fields.");
       return;
     }
     setLoading(true);
     const categoryIds = selectedCategories.map((cat) => cat.Id);
-    console.log(categoryIds);
     insertNewAssignment({
       Name: assignmentName,
       Topic: topicName,
       ProfessorId: parseInt(userId, 10),
       categories: categoryIds,
-      weekNum: weekNum,
+      weekNum: selectedWeeks,
     }).then((res) => console.log(res.msg));
     setLoading(false);
+    alert("Requirement uploaded successfuly");
+    const UploadedSuccessfuly = document.getElementById("UploadedSuccessfuly");
+    UploadedSuccessfuly.textContent = "Requirement uploaded successfuly";
   };
 
   useEffect(() => {
@@ -39,6 +49,16 @@ function NewAssignment() {
       setCategories(res.msg);
     });
   }, []);
+
+  const handleWeekChange = (week) => {
+    if (selectedWeeks.includes(week)) {
+      setSelectedWeeks(selectedWeeks.filter((w) => w !== week));
+    } else {
+      setSelectedWeeks([...selectedWeeks, week]);
+    }
+  };
+
+  const weeks = Array.from({ length: 14 }, (_, i) => i + 1); // Weeks 1 to 12
 
   return (
     <div className="newAssignmentPage-container">
@@ -73,45 +93,66 @@ function NewAssignment() {
             <div className="newAssignmentPage-inputItem">
               <label htmlFor="categorySelection">Categories</label>
               <div className="newAssignmentPage-categoryList">
-                {categories.map((cat) => (
-                  <div key={cat.Id}>
-                    <input
-                      type="checkbox"
-                      id={`category-${cat.Id}`}
-                      style={{ marginRight: "7px" }}
-                      value={cat.Id}
-                      checked={selectedCategories.some(
-                        (selected) => selected.Id === cat.Id
-                      )}
-                      onChange={(e) => {
-                        if (e.target.checked) {
-                          setSelectedCategories([...selectedCategories, cat]);
-                        } else {
-                          setSelectedCategories(
-                            selectedCategories.filter(
-                              (selected) => selected.Id !== cat.Id
-                            )
-                          );
-                        }
-                      }}
-                    />
-                    <label htmlFor={`category-${cat.Id}`}>{cat.Name}</label>
-                  </div>
-                ))}
+                {Array.isArray(categories) &&
+                  categories.map((cat) => (
+                    <div key={cat.Id}>
+                      <input
+                        type="checkbox"
+                        id={`category-${cat.Id}`}
+                        style={{ marginRight: "7px" }}
+                        value={cat.Id}
+                        checked={selectedCategories.some(
+                          (selected) => selected.Id === cat.Id
+                        )}
+                        onChange={(e) => {
+                          if (e.target.checked) {
+                            setSelectedCategories([...selectedCategories, cat]);
+                          } else {
+                            setSelectedCategories(
+                              selectedCategories.filter(
+                                (selected) => selected.Id !== cat.Id
+                              )
+                            );
+                          }
+                        }}
+                      />
+                      <label htmlFor={`category-${cat.Id}`}>{cat.Name}</label>
+                    </div>
+                  ))}
               </div>
             </div>
             <div className="newAssignmentPage-inputItem">
-              <label htmlFor="weekNumber">Week Number</label>
-              <input
-                type="number"
-                id="weekNumber"
-                name="weekNumber"
-                onChange={(e) => {
-                  setweekNum(parseInt(e.target.value));
-                }}
-                className="newAssignmentPage-inputField"
-                placeholder="Enter week number"
-              />
+              <label htmlFor="weekNumber">Week Numbers</label>
+              <div className="newAssignmentPage-weekList">
+                <div className="newAssignmentPage-weekColumn">
+                  {weeks.slice(0, 6).map((week) => (
+                    <div key={week}>
+                      <input
+                        type="checkbox"
+                        id={`week-${week}`}
+                        value={week}
+                        checked={selectedWeeks.includes(week)}
+                        onChange={() => handleWeekChange(week)}
+                      />
+                      <label htmlFor={`week-${week}`}>Week {week}</label>
+                    </div>
+                  ))}
+                </div>
+                <div className="newAssignmentPage-weekColumn">
+                  {weeks.slice(6, 12).map((week) => (
+                    <div key={week}>
+                      <input
+                        type="checkbox"
+                        id={`week-${week}`}
+                        value={week}
+                        checked={selectedWeeks.includes(week)}
+                        onChange={() => handleWeekChange(week)}
+                      />
+                      <label htmlFor={`week-${week}`}>Week {week}</label>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
           <button
@@ -123,6 +164,7 @@ function NewAssignment() {
             {loading ? "Saving..." : "Save"}
           </button>
         </form>
+        <span id="UploadedSuccessfuly"></span>
       </div>
     </div>
   );

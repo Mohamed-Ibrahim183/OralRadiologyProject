@@ -102,7 +102,20 @@
   border-radius: 4px;
   padding: 10px;
 }
-
+.newAssignmentPage-container
+  .newAssignmentPage-content
+  .newAssignmentPage-weekList {
+  margin-left: 10px;
+  margin-top: 10px;
+  max-height: 100px;
+  overflow-y: auto;
+  border: 1px solid rgba(128, 128, 128, 0.478);
+  border-radius: 4px;
+  padding: 10px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Two equal-width columns */
+  gap: 10px; /* Space between items */
+}
 /* Submit Button */
 .newAssignmentPage-container
   .newAssignmentPage-content
@@ -134,4 +147,10 @@
     padding-left: 30%;
     padding-right: 30%;
   }
+}
+#UploadedSuccessfuly {
+  width: 100%;
+  text-align: center;
+  color: rgb(29, 217, 29);
+  margin-top: 20px;
 }

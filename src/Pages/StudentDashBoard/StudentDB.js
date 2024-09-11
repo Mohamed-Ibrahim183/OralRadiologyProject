@@ -48,7 +48,7 @@ const StudentDB = () => {
     }).then((res) => {
       res.msg["Err"] === 1
         ? setError("User is not in a Group. Please contact the Admin.")
-        : setSubmissions(res.msg);
+        : setSubmissions(Array.isArray(res.msg) ? res.msg : []);
     });
   }, [UserId]);
 
@@ -76,20 +76,24 @@ const StudentDB = () => {
         filtered = assignments;
       }
 
-      if (sortingType === "Name") {
-        filtered.sort((a, b) => {
-          if (a.Name < b.Name) return sortingOrder === "asc" ? -1 : 1;
-          if (a.Name > b.Name) return sortingOrder === "asc" ? 1 : -1;
-          return 0;
-        });
-      } else if (sortingType === "OpenDate") {
-        filtered.sort((a, b) => {
-          if (new Date(a.open) < new Date(b.open))
-            return sortingOrder === "asc" ? -1 : 1;
-          if (new Date(a.open) > new Date(b.open))
-            return sortingOrder === "asc" ? 1 : -1;
-          return 0;
-        });
+      if (Array.isArray(filtered)) {
+        if (sortingType === "Name") {
+          filtered.sort((a, b) => {
+            if (a.Name < b.Name) return sortingOrder === "asc" ? -1 : 1;
+            if (a.Name > b.Name) return sortingOrder === "asc" ? 1 : -1;
+            return 0;
+          });
+        } else if (sortingType === "OpenDate") {
+          filtered.sort((a, b) => {
+            if (new Date(a.open) < new Date(b.open))
+              return sortingOrder === "asc" ? -1 : 1;
+            if (new Date(a.open) > new Date(b.open))
+              return sortingOrder === "asc" ? 1 : -1;
+            return 0;
+          });
+        }
+      } else {
+        console.error("Filtered is not an array:", filtered);
       }
 
       setFilteredAssignments(filtered);
