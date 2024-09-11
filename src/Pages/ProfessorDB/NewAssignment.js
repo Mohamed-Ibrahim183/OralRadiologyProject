@@ -6,7 +6,8 @@ import {
   getAllCategoriesData,
   insertNewAssignment,
 } from "../../Slices/PorfessorSlice";
-import { Alert } from "bootstrap";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 function NewAssignment() {
   const [assignmentName, setAssignmentName] = useState("");
@@ -16,17 +17,16 @@ function NewAssignment() {
   const [categories, setCategories] = useState([]);
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [selectedWeeks, setSelectedWeeks] = useState([]);
+  const navigator = useNavigate();
 
   const saveAssignment = async () => {
-    //console.log(selectedWeeks);
-    // console.log(selectedCategories);
     if (
       !assignmentName ||
       !topicName ||
       !selectedCategories.length ||
       !selectedWeeks.length
     ) {
-      alert("Please fill in all fields.");
+      toast.error("You Must Fill In All Fields");
       return;
     }
     setLoading(true);
@@ -39,15 +39,21 @@ function NewAssignment() {
       weekNum: selectedWeeks,
     }).then((res) => console.log(res.msg));
     setLoading(false);
-    alert("Requirement uploaded successfuly");
-    const UploadedSuccessfuly = document.getElementById("UploadedSuccessfuly");
-    UploadedSuccessfuly.textContent = "Requirement uploaded successfuly";
+    toast("Requirement uploaded successfully", {
+      type: "success",
+    });
+    navigator("/professor/Dashboard");
   };
 
   useEffect(() => {
+
     getAllCategoriesData().then((res) => {
       setCategories(res.msg);
     });
+    // check if edit or insert
+    if(sessionStorage.getItem("editAssignment")){
+      // get the assignment data
+    }
   }, []);
 
   const handleWeekChange = (week) => {
@@ -58,7 +64,7 @@ function NewAssignment() {
     }
   };
 
-  const weeks = Array.from({ length: 14 }, (_, i) => i + 1); // Weeks 1 to 12
+  const weeks = Array.from({ length: 20 }, (_, i) => i + 1); // Weeks 1 to 12
 
   return (
     <div className="newAssignmentPage-container">
@@ -125,7 +131,7 @@ function NewAssignment() {
               <label htmlFor="weekNumber">Week Numbers</label>
               <div className="newAssignmentPage-weekList">
                 <div className="newAssignmentPage-weekColumn">
-                  {weeks.slice(0, 6).map((week) => (
+                  {weeks.slice(0, 8).map((week) => (
                     <div key={week}>
                       <input
                         type="checkbox"
@@ -139,7 +145,7 @@ function NewAssignment() {
                   ))}
                 </div>
                 <div className="newAssignmentPage-weekColumn">
-                  {weeks.slice(6, 12).map((week) => (
+                  {weeks.slice(8, 16).map((week) => (
                     <div key={week}>
                       <input
                         type="checkbox"
@@ -164,7 +170,6 @@ function NewAssignment() {
             {loading ? "Saving..." : "Save"}
           </button>
         </form>
-        <span id="UploadedSuccessfuly"></span>
       </div>
     </div>
   );

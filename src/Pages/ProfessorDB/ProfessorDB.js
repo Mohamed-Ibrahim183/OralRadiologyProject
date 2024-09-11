@@ -9,7 +9,7 @@ import "./professor.css";
 import { Link, Navigate } from "react-router-dom";
 import Modal2 from "./Modal2";
 import Button from "@mui/material/Button";
-import { Add } from "@mui/icons-material";
+import { Edit } from "@mui/icons-material";
 import {
   Box,
   Paper,
@@ -416,38 +416,6 @@ const ProfessorDB = () => {
         <div className="BBBBBB">
           <h2 className="sectionTitle">My Requirements</h2>
           <div className="FilterandSorting">
-            {/* <div className="filterOptions">
-              <span
-                className={`Filteroption ${filter === "All" ? "selected" : ""}`}
-                onClick={() => setFilter("All")}
-              >
-                All
-              </span>
-              <span
-                className={`Filteroption ${
-                  filter === "Completed" ? "selected" : ""
-                }`}
-                onClick={() => setFilter("Completed")}
-              >
-                Closed
-              </span>
-              <span
-                className={`Filteroption ${
-                  filter === "Inprogress" ? "selected" : ""
-                }`}
-                onClick={() => setFilter("Inprogress")}
-              >
-                Inprogress
-              </span>
-              <span
-                className={`Filteroption ${
-                  filter === "Upcoming" ? "selected" : ""
-                }`}
-                onClick={() => setFilter("Upcoming")}
-              >
-                Upcoming
-              </span>
-            </div> */}
             <div className="sortingOptions">
               <FontAwesomeIcon
                 icon={
@@ -481,8 +449,7 @@ const ProfessorDB = () => {
           </div>
         </div>
         <div className="cardAssignment">
-          {Array.isArray(filteredAssignments) &&
-            filteredAssignments.length > 0 &&
+          {validArray(filteredAssignments) &&
             filteredAssignments.map((assignment, i) => (
               <AssignmentCard
                 key={i}
@@ -701,7 +668,7 @@ function Categories() {
       <div className="categoriesList">
         <h3 className="categoriesListTitle">Categories</h3>
         <div className="categoriesListItems">
-          {Array.isArray(state.cats) &&
+          {validArray(state.cats) &&
             state.cats.map((cat) => (
               <div className="categoriesListItem" key={cat.Id}>
                 <p>{cat.Name}</p>
@@ -729,7 +696,6 @@ function Categories() {
             ))}
         </div>
       </div>
-
       <Button
         variant="outlined"
         color="primary"
