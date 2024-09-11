@@ -168,7 +168,7 @@
   background-color: #1980e6;
   color: #ffffff;
   border: none;
-  padding: 10px 20px;
+  padding: 10px 10px;
   font-size: 14px;
   cursor: pointer;
   border-radius: 9px;
@@ -212,6 +212,9 @@
 .closed-indicator {
   color: #d9534f;
   font-weight: bold;
+  margin-left: 10px;
+  font-size: 15px;
+  text-decoration: underline;
 }
 @media only screen and (min-width: 600px) {
   .AssignmentPage2-container {

@@ -52,7 +52,9 @@ const ChartComponent = () => {
   }, []);
 
   const data = {
-    labels: submissions.map((sub) => sub.Name),
+    labels: Array.isArray(submissions)
+      ? submissions.map((sub) => sub.Name)
+      : [],
     datasets: [
       {
         label: "Your Grades",

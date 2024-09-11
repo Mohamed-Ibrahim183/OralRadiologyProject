@@ -16,13 +16,14 @@ const AssignmentPage2 = () => {
   const [categories, setCategories] = useState([]);
   const [uploadedFiles, setUploadedFiles] = useState([]);
 
-  useEffect(() => {
-    const fetchCategories = async () => {
-      const res = await getAllCategoriesData();
-      setCategories(res.msg);
-    };
-    fetchCategories();
-  }, []);
+  // useEffect(() => {
+  //   const fetchCategories = async () => {
+  //     const res = await getAllCategoriesData();
+  //     setCategories(Array.isArray(res.msg) ? res.msg : []);
+  //     console.log(categories);
+  //   };
+  //   fetchCategories();
+  // }, []);
 
   useEffect(() => {
     const fetchAssignmentInfo = async () => {
@@ -33,6 +34,11 @@ const AssignmentPage2 = () => {
       }
       const res = await getAssignmentData({ assignmentId });
       setAssignmentInfo(res.msg);
+      setCategories(
+        Array.isArray(res.msg.categories) ? res.msg.categories : []
+      );
+      //console.log(assignmentInfo);
+      console.log(categories);
     };
     fetchAssignmentInfo();
   }, []);
@@ -66,11 +72,41 @@ const AssignmentPage2 = () => {
     }
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (uploadedFiles.length === 0) {
       alert("Please upload files for all categories.");
-    } else {
-      // Submit All
+      return;
+    }
+
+    const assignmentId = sessionStorage.getItem("assignmentId");
+    const studentId = sessionStorage.getItem("userId");
+
+    try {
+      let lastSubmission = -1;
+
+      // Save the submission
+      async function saveSubmission() {
+        await makeNewSubmission({ studentId, assignmentId }).then((res) => {
+          lastSubmission = res.msg;
+        });
+      }
+      await saveSubmission();
+
+      // Upload files
+      for (let i = 0; i < uploadedFiles.length; i++) {
+        await uploadNewAssignmentImage({
+          assignmentId,
+          StudentId: studentId,
+          file: uploadedFiles[i].file,
+          category: uploadedFiles[i].categoryName,
+          submission: lastSubmission,
+        });
+      }
+      //sessionStorage.setItem("state", "submitted");
+      alert("Files uploaded successfully.");
+    } catch (error) {
+      console.error("Error uploading files:", error);
+      alert("Failed to upload files.");
     }
   };
 
@@ -81,7 +117,27 @@ const AssignmentPage2 = () => {
   const remainingDays = sessionStorage.getItem("days") || 0;
   const remainingHours = sessionStorage.getItem("hours") || 0;
   const remainingMinutes = sessionStorage.getItem("minutes") || 0;
-  const isClosed = sessionStorage.getItem("state").includes("closed");
+  const state = sessionStorage.getItem("state");
+  let buttonname = "";
+  let TimeLeftText = "";
+  let isClosed = true;
+  if (state === "inprogress") {
+    isClosed = false;
+    buttonname = "Upload";
+    TimeLeftText = "";
+  } else if (state === "upcoming") {
+    isClosed = true;
+    buttonname = "Upcoming";
+    TimeLeftText = "Not opened yet";
+  } else if (state === "submitted") {
+    buttonname = "Submitted";
+    isClosed = true;
+    TimeLeftText = "";
+  } else {
+    buttonname = "Closed";
+    isClosed = true;
+    TimeLeftText = "Closed";
+  }
 
   const getDeadlineMessage = () => {
     if (isClosed) {
@@ -117,25 +173,30 @@ const AssignmentPage2 = () => {
         <section className="criteria-section">
           <h2 className="assignment-section-title">Criteria</h2>
           <div className="assignment-criteria">
-            {categories.map((cat) => (
-              <label
-                className="criteria-item"
-                id={`criteria${cat.Id}`}
-                key={cat.Id}
-              >
-                <input type="checkbox" className="criteria-checkbox" disabled />
-                <p className="criteria-text">
-                  Upload a photo of the {cat.Name}
-                </p>
-              </label>
-            ))}
+            {Array.isArray(categories) &&
+              categories.map((cat) => (
+                <label
+                  className="criteria-item"
+                  id={`criteria${cat.categoryId}`}
+                  key={cat.categoryId}
+                >
+                  <input
+                    type="checkbox"
+                    className="criteria-checkbox"
+                    disabled
+                  />
+                  <p className="criteria-text">
+                    Upload a photo of the {cat.categoryName}
+                  </p>
+                </label>
+              ))}
           </div>
         </section>
 
         <section className="time-left-section">
           <h2 className="assignment-section-title">
             Time Left
-            {isClosed && <span className="closed-indicator"> CLOSED</span>}
+            {<span className="closed-indicator">{TimeLeftText}</span>}
           </h2>
           <div className="time-left">
             {["days", "hours", "minutes"].map((unit) => (
@@ -154,9 +215,9 @@ const AssignmentPage2 = () => {
         <section className="categories-section">
           <h2 className="assignment-section-title">Categories</h2>
           {categories.map((cat) => (
-            <div className="category-item" key={cat.Id}>
+            <div className="category-item" key={cat.categoryId}>
               <div className="category-info">
-                <p className="category-title">{cat.Name}</p>
+                <p className="category-title">{cat.categoryName}</p>
                 <p className="category-deadline">
                   Due in {remainingDays} days, {remainingHours} hours,{" "}
                   {remainingMinutes} minutes
@@ -164,21 +225,25 @@ const AssignmentPage2 = () => {
               </div>
               <input
                 type="file"
-                id={`file-upload-${cat.Id}`}
+                id={`file-upload-${cat.categoryId}`}
                 className="file-input"
-                onChange={(event) => handleUpload(event, cat.Id, cat.Name)}
+                onChange={(event) =>
+                  handleUpload(event, cat.categoryId, cat.categoryName)
+                }
               />
               <button
                 className="upload-button"
                 onClick={() => {
-                  if (!isClosed) {
-                    document.getElementById(`file-upload-${cat.Id}`)?.click();
+                  if (!isClosed && state === "inprogress") {
+                    document
+                      .getElementById(`file-upload-${cat.categoryId}`)
+                      ?.click();
                   }
                 }}
                 style={{ backgroundColor: isClosed ? "red" : "" }}
                 disabled={isClosed}
               >
-                {isClosed ? "Closed" : "Upload"}
+                {buttonname}
               </button>
             </div>
           ))}
@@ -191,7 +256,7 @@ const AssignmentPage2 = () => {
             disabled={isClosed}
             style={{ backgroundColor: isClosed ? "gray" : "#1980e6" }}
           >
-            {isClosed ? "Closed" : "Submit All"}
+            {buttonname}
           </button>
         </div>
       </div>
