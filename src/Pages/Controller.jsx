@@ -1,9 +1,9 @@
 import axios from "axios";
 
-// const axiosMethods = {
-//   get: axios.get(),
-// }
-// http://localhost/Projects/OralRadiology/
+export function validArray(array) {
+  return Array.isArray(array) && array.length > 0;
+}
+
 class axiosMethods {
   get(url, params = {}) {
     return axios

@@ -43,6 +43,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { getAssignmentsGroupsShow } from "../../Slices/PorfessorSlice";
 import toast from "react-hot-toast";
+import { validArray } from "../Controller";
 
 function GroupsData() {
   const [isModalOpen, setModalOpen] = useState(false);
@@ -694,31 +695,32 @@ function Categories() {
       <div className="categoriesList">
         <h3 className="categoriesListTitle">Categories</h3>
         <div className="categoriesListItems">
-          {state.cats.map((cat) => (
-            <div className="categoriesListItem" key={cat.Id}>
-              <p>{cat.Name}</p>
-              <div>
-                <Button
-                  variant="outlined"
-                  color="secondary"
-                  onClick={() =>
-                    dispatch({ type: "openEditCatModal", payload: cat })
-                  }
-                >
-                  Edit
-                </Button>
-                <Button
-                  variant="outlined"
-                  color="error"
-                  onClick={() => {
-                    dispatch({ type: "openDeleteCatModal", payload: cat });
-                  }}
-                >
-                  Delete
-                </Button>
+          {validArray(state.cats) &&
+            state.cats.map((cat) => (
+              <div className="categoriesListItem" key={cat.Id}>
+                <p>{cat.Name}</p>
+                <div>
+                  <Button
+                    variant="outlined"
+                    color="secondary"
+                    onClick={() =>
+                      dispatch({ type: "openEditCatModal", payload: cat })
+                    }
+                  >
+                    Edit
+                  </Button>
+                  <Button
+                    variant="outlined"
+                    color="error"
+                    onClick={() => {
+                      dispatch({ type: "openDeleteCatModal", payload: cat });
+                    }}
+                  >
+                    Delete
+                  </Button>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
         </div>
       </div>
 
