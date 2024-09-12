@@ -5,7 +5,6 @@ import Button from "@mui/material/Button";
 import { Delete, Edit } from "@mui/icons-material";
 
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
-import { Delete } from "@mui/icons-material";
 import EditIcon from "@mui/icons-material/Edit";
 const AssignmentCard = (props) => {
   // props.assignmentId
@@ -33,7 +32,7 @@ const AssignmentCard = (props) => {
         Delete <Delete />
       </Button> */}
       <div className="grade">
-        <Button
+        {/* <Button
           sx={{ color: "white" }}
           variant="contained"
           color="primary"
@@ -43,18 +42,22 @@ const AssignmentCard = (props) => {
           endIcon={<Edit />}
         >
           Edit Assignment
-        </Button>
-        <Modal2
+        </Button> */}
+        {/* <Modal2
           open={isModal2Open}
           onClose={handleCloseModal2}
           AssignmentId={props.assignmentId}
-        />
+        /> */}
         <Link to="/professor/NewAssignment">
           <Button
             sx={{ colo: "white" }}
             variant="contained"
             color="primary"
             endIcon={<EditIcon />}
+            onClick={() => {
+              sessionStorage.setItem("editAssignment", props.assignmentId);
+              sessionStorage.setItem("actionType", "edit");
+            }}
           >
             Edit
           </Button>

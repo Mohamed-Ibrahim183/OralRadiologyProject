@@ -169,6 +169,9 @@ const Navbar = () => {
                   variant="contained" // You can choose "contained", "outlined", or "text" for the style
                   color="primary"
                   key={index}
+                  onClick={() => {
+                    sessionStorage.setItem("actionType", "insert");
+                  }}
                 >
                   <Link
                     style={{ color: "inherit", textDecoration: "none" }}
