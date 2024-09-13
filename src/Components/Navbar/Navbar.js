@@ -170,7 +170,7 @@ const Navbar = () => {
                   color="primary"
                   key={index}
                   onClick={() => {
-                    sessionStorage.setItem("actionType", "insert");
+                    //   sessionStorage.setItem("actionType", "insert");
                   }}
                 >
                   <Link

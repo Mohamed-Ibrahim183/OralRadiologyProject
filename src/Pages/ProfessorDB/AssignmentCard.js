@@ -48,7 +48,7 @@ const AssignmentCard = (props) => {
           onClose={handleCloseModal2}
           AssignmentId={props.assignmentId}
         /> */}
-        <Link to="/professor/NewAssignment">
+        <Link to="/professor/EditAssignment">
           <Button
             sx={{ colo: "white" }}
             variant="contained"
@@ -56,7 +56,6 @@ const AssignmentCard = (props) => {
             endIcon={<EditIcon />}
             onClick={() => {
               sessionStorage.setItem("editAssignment", props.assignmentId);
-              sessionStorage.setItem("actionType", "edit");
             }}
           >
             Edit
