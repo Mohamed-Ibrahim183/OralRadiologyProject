@@ -45,4 +45,15 @@
 .MainPage .AdminSection {
   padding: 10px 1%;
   transition: all 0.5s;
-} /*# sourceMappingURL=Admin.css.map */
+}
+@media (max-width: 768px) {
+  .MainPage .AdminWrapper {
+    width: 100%;
+  }
+  .MainPage .AdminWrapper .mail-form {
+    padding-left: 0px;
+    margin-left: -160px;
+    width: 55%;
+  }
+}
+/*# sourceMappingURL=Admin.css.map */

@@ -298,7 +298,7 @@ const AddGroup = () => {
             <label htmlFor="GroupName">Enter Group Name:</label>
             <input type="text" name="GroupName" id="GroupName" />
             <button className="NEW" onClick={() => setRows(rows + 1)}>
-              Add New Slot
+              Add Slot
             </button>
           </div>
           <div className="main">

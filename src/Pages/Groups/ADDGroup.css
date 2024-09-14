@@ -69,13 +69,18 @@
 }
 .AddGroup .section1 {
   margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
 }
 .AddGroup .section1 label {
   display: block;
   margin-bottom: 5px;
   font-weight: bold;
+  text-align: left;
+  display: flex;
+  align-items: start;
 }
-.AddGroup .section1 input[type=text] {
+.AddGroup .section1 input[type="text"] {
   width: 100%;
   padding: 10px;
   border: 1px solid #ddd;
@@ -117,8 +122,8 @@
   font-weight: bold;
 }
 .AddGroup .row .section select,
-.AddGroup .row .section input[type=number],
-.AddGroup .row .section input[type=text] {
+.AddGroup .row .section input[type="number"],
+.AddGroup .row .section input[type="text"] {
   width: 100%;
   padding: 8px;
   border: 1px solid #ddd;
@@ -153,14 +158,14 @@
   cursor: not-allowed;
 }
 
-[theme=Dark] .AddGroup {
+[theme="Dark"] .AddGroup {
   background-color: #151b20;
 }
-[theme=Dark] tbody tr:nth-child(even) {
+[theme="Dark"] tbody tr:nth-child(even) {
   background-color: #2c3845;
   color: white;
 }
-[theme=Dark] tbody tr:nth-child(odd) {
+[theme="Dark"] tbody tr:nth-child(odd) {
   background-color: #202932;
   color: white;
-}/*# sourceMappingURL=ADDGroup.css.map */
+} /*# sourceMappingURL=ADDGroup.css.map */
