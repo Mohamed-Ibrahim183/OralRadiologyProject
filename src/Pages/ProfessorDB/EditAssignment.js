@@ -20,27 +20,34 @@ function EditAssignment() {
   const [selectedWeeks, setSelectedWeeks] = useState([]);
   const navigator = useNavigate();
   const assignmentId = parseInt(sessionStorage.getItem("editAssignment"));
-  const saveAssignment = async () => {
-    if (
-      // !assignmentName ||
-      // !topicName ||
-      // !selectedCategories.length ||
-      // !selectedWeeks.length
-      false
-    ) {
-      toast.error("You Must Fill In All Fields");
-      return;
-    }
-    setLoading(true);
-    const categoryIds = selectedCategories.map((cat) => cat.Id);
-    getSingleAssignmentData(assignmentId);
-    setLoading(false);
-    toast("Requirement uploaded successfully", {
-      type: "success",
-    });
-    navigator("/professor/Dashboard");
-  };
+  const [assignmentData, setAssignmentData] = useState({});
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true);
+      try {
+        // Make sure to pass the assignmentId in the request
+        const response = await getSingleAssignmentData(assignmentId);
 
+        console.log(response.msg);
+
+        if (response.msg) {
+          setAssignmentData(response.msg);
+        } else {
+          toast.error("Failed to retrieve assignment data");
+        }
+      } catch (error) {
+        console.error("Error:", error);
+        toast.error("An error occurred");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    // Call the async function
+    fetchData();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [assignmentId]); // Add assignmentId as a dependency
   useEffect(() => {
     getAllCategoriesData().then((res) => {
       setCategories(res.msg);
@@ -60,6 +67,27 @@ function EditAssignment() {
   };
 
   const weeks = Array.from({ length: 20 }, (_, i) => i + 1); // Weeks 1 to 12
+  const saveAssignment = async () => {
+    if (
+      // !assignmentName ||
+      // !topicName ||
+      // !selectedCategories.length ||
+      // !selectedWeeks.length
+      false
+    ) {
+      toast.error("You Must Fill In All Fields");
+      return;
+    }
+    setLoading(true);
+    try {
+      navigator("/professor/Dashboard");
+    } catch (error) {
+      console.error("Error:", error);
+      toast.error("An error occurred");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="newAssignmentPage-container">
@@ -73,7 +101,7 @@ function EditAssignment() {
                 type="text"
                 id="assignmentName"
                 name="assignmentName"
-                value={assignmentName}
+                value={assignmentData.Name || ""}
                 className="newAssignmentPage-inputField"
                 placeholder="Enter assignment name"
                 onChange={(e) => setAssignmentName(e.target.value)}
@@ -85,7 +113,7 @@ function EditAssignment() {
                 type="text"
                 id="topicName"
                 name="topicName"
-                value={topicName}
+                value={assignmentData.Topic || ""}
                 className="newAssignmentPage-inputField"
                 placeholder="Enter comments"
                 onChange={(e) => setTopicName(e.target.value)}
@@ -102,9 +130,12 @@ function EditAssignment() {
                         id={`category-${cat.Id}`}
                         style={{ marginRight: "7px" }}
                         value={cat.Id}
-                        checked={selectedCategories.some(
-                          (selected) => selected.Id === cat.Id
-                        )}
+                        checked={
+                          assignmentData.categories &&
+                          assignmentData.categories.some(
+                            (cattt) => parseInt(cattt.categoryId) === cat.Id
+                          )
+                        }
                         onChange={(e) => {
                           if (e.target.checked) {
                             setSelectedCategories([...selectedCategories, cat]);
@@ -132,7 +163,10 @@ function EditAssignment() {
                         type="checkbox"
                         id={`week-${week}`}
                         value={week}
-                        checked={selectedWeeks.includes(week)}
+                        checked={
+                          assignmentData.weeks &&
+                          assignmentData.weeks.some((cattt) => cattt === week)
+                        }
                         onChange={() => handleWeekChange(week)}
                       />
                       <label htmlFor={`week-${week}`}>Week {week}</label>
@@ -146,7 +180,10 @@ function EditAssignment() {
                         type="checkbox"
                         id={`week-${week}`}
                         value={week}
-                        checked={selectedWeeks.includes(week)}
+                        checked={
+                          assignmentData.weeks &&
+                          assignmentData.weeks.some((cattt) => cattt === week)
+                        }
                         onChange={() => handleWeekChange(week)}
                       />
                       <label htmlFor={`week-${week}`}>Week {week}</label>

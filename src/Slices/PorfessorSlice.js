@@ -7,10 +7,10 @@ export function getAllAssignmentsData() {
   return methods.get(serverURL + "AssignmentLogic.php/GetAll");
 }
 export function getSingleAssignmentData(assignmentId) {
-  return (
-    methods.get(serverURL + "AssignmentLogic.php/getSingleAssignmentData"),
-    { assignmentId: assignmentId }
+  return methods.get(
+    `${serverURL}AssignmentLogic.php/getSingleAssignmentData?assignmentId=${assignmentId}`
   );
+  //  { assignmentId: assignmentId }
 }
 export function getAllCategoriesData() {
   return methods.get(serverURL + "AssignmentLogic.php/GetCategories");
