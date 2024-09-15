@@ -24,13 +24,13 @@ const AssignmentCard = (props) => {
           <span className="Details">{props.info}</span>
         </div>
       </Link>
-      {/* <Button
+      <Button
         variant="outlined"
         color="error"
         onClick={() => props.onDelete(props.assignmentId)}
       >
         Delete <Delete />
-      </Button> */}
+      </Button>
       <div className="grade">
         {/* <Button
           sx={{ color: "white" }}

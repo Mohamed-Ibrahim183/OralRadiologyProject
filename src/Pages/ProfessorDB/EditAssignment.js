@@ -4,7 +4,7 @@ import "./NewAssignmentPage.css"; // Updated CSS file name
 
 import {
   getAllCategoriesData,
-  insertNewAssignment,
+  UpdateAssignment,
   getSingleAssignmentData,
 } from "../../Slices/PorfessorSlice";
 import toast from "react-hot-toast";
@@ -13,25 +13,31 @@ import { useNavigate } from "react-router-dom";
 function EditAssignment() {
   const [assignmentName, setAssignmentName] = useState("");
   const [topicName, setTopicName] = useState("");
+  const [selectedCategories, setSelectedCategories] = useState([]);
+  const [selectedWeeks, setSelectedWeeks] = useState([]);
   const userId = sessionStorage["userId"];
   const [loading, setLoading] = useState(false);
   const [categories, setCategories] = useState([]);
-  const [selectedCategories, setSelectedCategories] = useState([]);
-  const [selectedWeeks, setSelectedWeeks] = useState([]);
   const navigator = useNavigate();
   const assignmentId = parseInt(sessionStorage.getItem("editAssignment"));
   const [assignmentData, setAssignmentData] = useState({});
+
+  // Fetch assignment data on mount
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
       try {
-        // Make sure to pass the assignmentId in the request
         const response = await getSingleAssignmentData(assignmentId);
-
+        console.log("First getted data");
         console.log(response.msg);
 
         if (response.msg) {
-          setAssignmentData(response.msg);
+          setAssignmentName(response.msg.Name);
+          setTopicName(response.msg.Topic);
+          setSelectedCategories(
+            response.msg.categories.map((cat) => parseInt(cat.categoryId)) // Initialize categories
+          );
+          setSelectedWeeks(response.msg.weeks);
         } else {
           toast.error("Failed to retrieve assignment data");
         }
@@ -43,21 +49,28 @@ function EditAssignment() {
       }
     };
 
-    // Call the async function
     fetchData();
+  }, [assignmentId]);
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [assignmentId]); // Add assignmentId as a dependency
+  // Fetch all categories
   useEffect(() => {
     getAllCategoriesData().then((res) => {
       setCategories(res.msg);
     });
-    // check if edit or insert
-    if (sessionStorage.getItem("editAssignment")) {
-      // get the assignment data
-    }
   }, []);
 
+  // Handle category selection
+  const handleCategoryChange = (categoryId) => {
+    if (selectedCategories.includes(categoryId)) {
+      setSelectedCategories(
+        selectedCategories.filter((id) => id !== categoryId)
+      );
+    } else {
+      setSelectedCategories([...selectedCategories, categoryId]);
+    }
+  };
+
+  // Handle week selection
   const handleWeekChange = (week) => {
     if (selectedWeeks.includes(week)) {
       setSelectedWeeks(selectedWeeks.filter((w) => w !== week));
@@ -66,25 +79,38 @@ function EditAssignment() {
     }
   };
 
-  const weeks = Array.from({ length: 20 }, (_, i) => i + 1); // Weeks 1 to 12
+  const weeks = Array.from({ length: 20 }, (_, i) => i + 1); // Weeks 1 to 20
+
   const saveAssignment = async () => {
-    if (
-      // !assignmentName ||
-      // !topicName ||
-      // !selectedCategories.length ||
-      // !selectedWeeks.length
-      false
-    ) {
+    if (false) {
+      // This condition is for validation if needed
       toast.error("You Must Fill In All Fields");
       return;
     }
     setLoading(true);
     try {
+      // Save logic here
+      UpdateAssignment({
+        Id: assignmentId,
+        Name: assignmentName,
+        Topic: topicName,
+        categories: selectedCategories.map((cat) => parseInt(cat)),
+        weeks: selectedWeeks,
+      });
+
       navigator("/professor/Dashboard");
     } catch (error) {
       console.error("Error:", error);
       toast.error("An error occurred");
     } finally {
+      console.log("Updated assignment Data");
+      console.log({
+        Id: assignmentId,
+        Name: assignmentName,
+        Topic: topicName,
+        categories: selectedCategories.map((cat) => parseInt(cat)),
+        weeks: selectedWeeks,
+      });
       setLoading(false);
     }
   };
@@ -101,10 +127,10 @@ function EditAssignment() {
                 type="text"
                 id="assignmentName"
                 name="assignmentName"
-                value={assignmentData.Name || ""}
+                value={assignmentName} // Use local state
                 className="newAssignmentPage-inputField"
                 placeholder="Enter assignment name"
-                onChange={(e) => setAssignmentName(e.target.value)}
+                onChange={(e) => setAssignmentName(e.target.value)} // Update local state
               />
             </div>
             <div className="newAssignmentPage-inputItem">
@@ -113,10 +139,10 @@ function EditAssignment() {
                 type="text"
                 id="topicName"
                 name="topicName"
-                value={assignmentData.Topic || ""}
+                value={topicName} // Use local state
                 className="newAssignmentPage-inputField"
                 placeholder="Enter comments"
-                onChange={(e) => setTopicName(e.target.value)}
+                onChange={(e) => setTopicName(e.target.value)} // Update local state
               />
             </div>
             <div className="newAssignmentPage-inputItem">
@@ -130,23 +156,8 @@ function EditAssignment() {
                         id={`category-${cat.Id}`}
                         style={{ marginRight: "7px" }}
                         value={cat.Id}
-                        checked={
-                          assignmentData.categories &&
-                          assignmentData.categories.some(
-                            (cattt) => parseInt(cattt.categoryId) === cat.Id
-                          )
-                        }
-                        onChange={(e) => {
-                          if (e.target.checked) {
-                            setSelectedCategories([...selectedCategories, cat]);
-                          } else {
-                            setSelectedCategories(
-                              selectedCategories.filter(
-                                (selected) => selected.Id !== cat.Id
-                              )
-                            );
-                          }
-                        }}
+                        checked={selectedCategories.includes(cat.Id)} // Use selectedCategories state
+                        onChange={() => handleCategoryChange(cat.Id)} // Handle category change
                       />
                       <label htmlFor={`category-${cat.Id}`}>{cat.Name}</label>
                     </div>
@@ -157,16 +168,13 @@ function EditAssignment() {
               <label htmlFor="weekNumber">Week Numbers</label>
               <div className="newAssignmentPage-weekList">
                 <div className="newAssignmentPage-weekColumn">
-                  {weeks.slice(0, 8).map((week) => (
+                  {weeks.slice(0, 10).map((week) => (
                     <div key={week}>
                       <input
                         type="checkbox"
                         id={`week-${week}`}
                         value={week}
-                        checked={
-                          assignmentData.weeks &&
-                          assignmentData.weeks.some((cattt) => cattt === week)
-                        }
+                        checked={selectedWeeks.includes(week)}
                         onChange={() => handleWeekChange(week)}
                       />
                       <label htmlFor={`week-${week}`}>Week {week}</label>
@@ -174,16 +182,13 @@ function EditAssignment() {
                   ))}
                 </div>
                 <div className="newAssignmentPage-weekColumn">
-                  {weeks.slice(8, 16).map((week) => (
+                  {weeks.slice(10).map((week) => (
                     <div key={week}>
                       <input
                         type="checkbox"
                         id={`week-${week}`}
                         value={week}
-                        checked={
-                          assignmentData.weeks &&
-                          assignmentData.weeks.some((cattt) => cattt === week)
-                        }
+                        checked={selectedWeeks.includes(week)}
                         onChange={() => handleWeekChange(week)}
                       />
                       <label htmlFor={`week-${week}`}>Week {week}</label>

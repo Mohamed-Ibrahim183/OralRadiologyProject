@@ -32,6 +32,10 @@ export function deleteAssignmentDB(assignmentId) {
 export function insertNewAssignment(data) {
   return methods.post(serverURL + "AssignmentLogic.php/InsertAssignment", data);
 }
+export function UpdateAssignment(data) {
+  console.log(data);
+  return methods.post(serverURL + "AssignmentLogic.php/UpdateAssignment", data);
+}
 
 export function addNewAssignmentSlot(data) {
   return methods.post(serverURL + "AssignmentLogic.php/AssignmentGroup", data);
