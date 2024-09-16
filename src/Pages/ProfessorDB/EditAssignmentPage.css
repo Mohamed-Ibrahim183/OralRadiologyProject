@@ -33,7 +33,7 @@
   --shadow: rgba(255, 255, 255, 0.256);
 }
 /* Container */
-.newAssignmentPage-container .newAssignmentPage-content {
+.editAssignmentPage-container .editAssignmentPage-content {
   display: flex;
   padding: 5%;
   flex-direction: column;
@@ -42,7 +42,7 @@
 }
 
 /* Content */
-.newAssignmentPage-container .newAssignmentPage-content {
+.editAssignmentPage-container .editAssignmentPage-content {
   padding: 20px;
   background-color: var(--mainBackGround);
   border-radius: 8px;
@@ -50,38 +50,38 @@
 }
 
 /* Title */
-.newAssignmentPage-container
-  .newAssignmentPage-content
-  .newAssignmentPage-title {
+.editAssignmentPage-container
+  .editAssignmentPage-content
+  .editAssignmentPage-title {
   font-size: 1.5em;
   margin-bottom: 15px;
 }
 
 /* Form Group */
-.newAssignmentPage-container
-  .newAssignmentPage-content
-  .newAssignmentPage-formGroup {
+.editAssignmentPage-container
+  .editAssignmentPage-content
+  .editAssignmentPage-formGroup {
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
 
 /* Input Item */
-.newAssignmentPage-container
-  .newAssignmentPage-content
-  .newAssignmentPage-formGroup
-  .newAssignmentPage-inputItem {
+.editAssignmentPage-container
+  .editAssignmentPage-content
+  .editAssignmentPage-formGroup
+  .editAssignmentPage-inputItem {
   display: flex;
   flex-direction: column;
   width: 100%;
 }
 
 /* Input Field */
-.newAssignmentPage-container
-  .newAssignmentPage-content
-  .newAssignmentPage-formGroup
-  .newAssignmentPage-inputItem
-  .newAssignmentPage-inputField {
+.editAssignmentPage-container
+  .editAssignmentPage-content
+  .editAssignmentPage-formGroup
+  .editAssignmentPage-inputItem
+  .editAssignmentPage-inputField {
   margin-top: 6px;
   border-radius: 7px;
   border: 1px solid rgba(170, 169, 169, 0.823);
@@ -90,11 +90,11 @@
 }
 
 /* Category List */
-.newAssignmentPage-container
-  .newAssignmentPage-content
-  .newAssignmentPage-formGroup
-  .newAssignmentPage-inputItem
-  .newAssignmentPage-categoryList {
+.editAssignmentPage-container
+  .editAssignmentPage-content
+  .editAssignmentPage-formGroup
+  .editAssignmentPage-inputItem
+  .editAssignmentPage-categoryList {
   margin-top: 10px;
   max-height: 100px;
   overflow-y: auto;
@@ -102,9 +102,9 @@
   border-radius: 4px;
   padding: 10px;
 }
-.newAssignmentPage-container
-  .newAssignmentPage-content
-  .newAssignmentPage-weekList {
+.editAssignmentPage-container
+  .editAssignmentPage-content
+  .editAssignmentPage-weekList {
   margin-left: 10px;
   margin-top: 10px;
   max-height: 100px;
@@ -116,34 +116,61 @@
   grid-template-columns: repeat(2, 1fr); /* Two equal-width columns */
   gap: 10px; /* Space between items */
 }
+.editAssignmentPage-container
+  .editAssignmentPage-content
+  .editAssignmentPage-weekList
+  input {
+  margin-right: 10px;
+}
 /* Submit Button */
-.newAssignmentPage-container
-  .newAssignmentPage-content
-  .newAssignmentPage-submitButton {
+.editAssignmentPage-container
+  .editAssignmentPage-content
+  .editAssignmentPage-submitButton {
   background-color: #65b4f1;
   padding: 10px;
   border: none;
   border-radius: 5px;
   font-size: 1rem;
-  width: 100%;
+  width: 49.5%;
   margin-top: 20px;
   cursor: pointer;
   color: white;
 }
-
-.newAssignmentPage-container
-  .newAssignmentPage-content
-  .newAssignmentPage-submitButton:hover {
+.editAssignmentPage-container
+  .editAssignmentPage-content
+  .editAssignmentPage-deleteButton {
+  background-color: rgb(233, 86, 86);
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  width: 49.5%;
+  margin-top: 20px;
+  cursor: pointer;
+  color: white;
+}
+.editAssignmentPage-buttonGroup {
+  display: flex;
+  justify-content: space-between;
+}
+.editAssignmentPage-container
+  .editAssignmentPage-content
+  .editAssignmentPage-submitButton:hover {
   background-color: #379fef;
 }
+.editAssignmentPage-container
+  .editAssignmentPage-content
+  .editAssignmentPage-deleteButton:hover {
+  background-color: red;
+}
 @media screen and (min-width: 600px) {
-  .newAssignmentPage-container .newAssignmentPage-content {
+  .editAssignmentPage-container .editAssignmentPage-content {
     padding-left: 20%;
     padding-right: 20%;
   }
 }
 @media screen and (min-width: 1000px) {
-  .newAssignmentPage-container .newAssignmentPage-content {
+  .editAssignmentPage-container .editAssignmentPage-content {
     padding-left: 30%;
     padding-right: 30%;
   }
@@ -153,4 +180,61 @@
   text-align: center;
   color: rgb(29, 217, 29);
   margin-top: 20px;
+}
+/* Modal styles */
+.editAssignmentPage-modal {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 400px;
+  max-width: 90%;
+  margin: 0 auto;
+  position: relative;
+  text-align: center;
+}
+
+.editAssignmentPage-modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.editAssignmentPage-modal h2 {
+  font-size: 22px;
+  margin-bottom: 20px;
+}
+
+.editAssignmentPage-modal p {
+  margin-bottom: 20px;
+}
+
+.editAssignmentPage-modalButtons {
+  display: flex;
+  justify-content: space-around;
+}
+
+.modal-confirmButton,
+.modal-cancelButton {
+  padding: 8px 16px;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.modal-confirmButton {
+  background-color: #4caf50;
+  color: white;
+}
+
+.modal-cancelButton {
+  background-color: #f44336;
+  color: white;
 }

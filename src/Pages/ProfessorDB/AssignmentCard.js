@@ -2,7 +2,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Button from "@mui/material/Button";
-import { Delete, Edit } from "@mui/icons-material";
+import { Delete, Edit, Grade, Grading } from "@mui/icons-material";
 
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import EditIcon from "@mui/icons-material/Edit";
@@ -18,19 +18,21 @@ const AssignmentCard = (props) => {
   };
   return (
     <div className="AssCard" style={label}>
+      <div className="info">
+        <h3 className="name">{props.name}</h3>
+        <span className="Details">{props.info}</span>
+      </div>
       <Link to={props.toPage} onClick={handleClick}>
-        <div className="info">
-          <h3 className="name">{props.name}</h3>
-          <span className="Details">{props.info}</span>
-        </div>
+        <Button
+          variant="contained"
+          color="success"
+          className="assignmentCardBtns"
+        >
+          <div className="assignmentCardBtnsText">Grade</div>
+          <Grading />
+        </Button>
       </Link>
-      <Button
-        variant="outlined"
-        color="error"
-        onClick={() => props.onDelete(props.assignmentId)}
-      >
-        Delete <Delete />
-      </Button>
+
       <div className="grade">
         {/* <Button
           sx={{ color: "white" }}
@@ -53,12 +55,13 @@ const AssignmentCard = (props) => {
             sx={{ colo: "white" }}
             variant="contained"
             color="primary"
-            endIcon={<EditIcon />}
+            className="assignmentCardBtns"
             onClick={() => {
               sessionStorage.setItem("editAssignment", props.assignmentId);
             }}
           >
-            Edit
+            <div className="assignmentCardBtnsText">Edit</div>
+            <EditIcon />
           </Button>
         </Link>
       </div>

@@ -32,6 +32,7 @@ import {
   getAllAssignmentsData,
   getAllCategoriesData,
   insertNewAssignment,
+  getstartweek,
 } from "../../Slices/PorfessorSlice";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -281,7 +282,7 @@ const ProfessorDB = () => {
   const [sortingType, setSortingType] = useState("Name");
   const [sortingOrder, setSortingOrder] = useState("asc");
   const [filteredAssignments, setFilteredAssignments] = useState([]);
-
+  const [startWeek, setStartWeek] = useState();
   function DeleteAssignment(assignmentId) {
     deleteAssignmentDB(assignmentId);
     setUpdateAssignments(updateAssignments + 1);
@@ -345,6 +346,17 @@ const ProfessorDB = () => {
     setSortingOrder(sortingOrder === "asc" ? "desc" : "asc");
   };
 
+  const getstartweeek = () => {
+    getstartweek()
+      .then((res) => setStartWeek(res.msg[0].Day || ""))
+      .catch((err) => console.log(err))
+      .finally(() => {});
+  };
+  //console.log(startWeek);
+  useEffect(() => {
+    getstartweeek();
+  }, []);
+
   const getStatusProps = (assignment) => {
     const now = new Date();
     const openDate = new Date(assignment.open);
@@ -379,6 +391,8 @@ const ProfessorDB = () => {
 
   const AssignmentsContainer = () => {
     const [categoriesModal, setCategoriesModal] = useState(false);
+    const [startWeekModal, setStartWeekModal] = useState(false);
+
     if (sessionStorage.getItem("Type") !== "Professor") {
       return <Navigate to="/" />;
     }
@@ -406,12 +420,40 @@ const ProfessorDB = () => {
           >
             Categories
           </Button>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={() => {
+              setStartWeekModal(!startWeekModal);
+            }}
+            className="profDB_UpperButton"
+          >
+            Start Week
+          </Button>
         </div>
         <BasicModalComp
           openModal={categoriesModal}
           closeModal={() => setCategoriesModal(false)}
         >
           {<Categories />}
+        </BasicModalComp>
+        <BasicModalComp
+          openModal={startWeekModal}
+          closeModal={() => setStartWeekModal(false)}
+        >
+          <div className="startWeekModal">
+            <label>
+              <h3>Start Week</h3>
+            </label>
+            <br></br>
+            <input
+              type="date"
+              value={
+                startWeek ? new Date(startWeek).toISOString().substr(0, 10) : ""
+              }
+              onChange={(e) => setStartWeek(e.target.value)}
+            />
+          </div>
         </BasicModalComp>
         <div className="BBBBBB">
           <h2 className="sectionTitle">My Requirements</h2>

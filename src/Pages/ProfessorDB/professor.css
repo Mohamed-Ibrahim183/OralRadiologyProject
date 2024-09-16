@@ -172,9 +172,10 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
+  margin-left: 12px;
 }
 .fullProfessorPage .container.AssignmentSection .AssCard .info .name {
-  font-size: 20px;
+  font-size: 25px;
   font-weight: bold;
   text-transform: capitalize;
   color: var(--mainText);
@@ -251,6 +252,41 @@
 }
 .fullProfessorPage .userProfile p {
   margin-top: 10px;
+}
+.assignmentCardBtns {
+  margin-left: 5px;
+}
+.startWeekModal {
+  min-width: 240px;
+  min-height: 300px;
+  padding-left: 5%;
+  padding-right: 5%;
+  padding-top: 5%;
+}
+@media screen and (max-width: 600px) {
+  .fullProfessorPage .container.AssignmentSection .AssCard .info .name {
+    font-size: larger;
+  }
+}
+@media screen and (max-width: 520px) {
+  .assignmentCardBtnsText {
+    display: none;
+  }
+  .assignmentCardBtns {
+    padding-left: 0px;
+    padding-right: 0px;
+    margin-left: 5px;
+  }
+  .fullProfessorPage .container.AssignmentSection .AssCard .info {
+    margin-left: 0px;
+  }
+  .fullProfessorPage .container.AssignmentSection .AssCard .info .name {
+    font-size: large;
+    margin-bottom: 0px;
+  }
+  .fullProfessorPage .container.AssignmentSection .AssCard .info .Details {
+    margin-top: -7px;
+  }
 }
 @media screen and (max-width: 1080px) {
   .fullProfessorPage .upper {

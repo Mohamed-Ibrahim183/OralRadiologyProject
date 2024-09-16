@@ -15,6 +15,9 @@ export function getSingleAssignmentData(assignmentId) {
 export function getAllCategoriesData() {
   return methods.get(serverURL + "AssignmentLogic.php/GetCategories");
 }
+export function getstartweek() {
+  return methods.get(serverURL + "AssignmentLogic.php/getstartweek");
+}
 export function addCategory(data) {
   return methods.post(serverURL + "AssignmentLogic.php/addCategory", data);
 }
