@@ -260,84 +260,95 @@ const AddGroup = () => {
 
   const editGroupForm = () => {
     if (!editingGroup) return null;
-    console.log("editingGroup:", editingGroup);
+    // console.log("editingGroup:", editingGroup);
 
     const addNewSlot = () => {
-      setRenderedEditRows();
+      if (renderedEditRows.length === 0) {
+        setRenderedEditRows((prev) => [
+          ...prev,
+          ...Array.from({ length: editingRows.length }, (_, index) => index),
+        ]);
+      }
+      setRenderedEditRows((prev) => [...prev, editingRows.length]);
       setEditingRows([
         ...editingRows,
         { Day: "", Start: "", End: "", Room: "" },
       ]);
     };
+    console.log(renderedEditRows);
 
     return (
       <div className="AddGroup">
         <h3>Editing Group {editingGroup.Name}</h3>
-        {editingRows.map((row, index) => (
-          <div className={`row`} id={`row${index}`} key={index}>
-            <div className="section">
-              <label htmlFor={`editDay${index}`}>Day:</label>
-              <select
-                name={`editDay${index}`}
-                id={`editDay${index}`}
-                defaultValue={row.Day}
-              >
-                {[
-                  "Sunday",
-                  "Monday",
-                  "Tuesday",
-                  "Wednesday",
-                  "Thursday",
-                  "Friday",
-                  "Saturday",
-                ].map((day) => (
-                  <option key={day}>{day}</option>
-                ))}
-              </select>
-            </div>
-            <div className="section">
-              <label htmlFor={`editStart${index}`}>Start:</label>
-              <input
-                type="time"
-                id={`editStart${index}`}
-                defaultValue={row.StartTime}
-              />
-            </div>
-            <div className="section">
-              <label htmlFor={`editEnd${index}`}>End:</label>
-              <input
-                type="time"
-                id={`editEnd${index}`}
-                defaultValue={row.EndTime}
-              />
-            </div>
+        {validArray(editingRows) &&
+          editingRows.map((row, index) => (
+            <div className={`row`} id={`row${index}`} key={index}>
+              <div className="section">
+                <label htmlFor={`editDay${index}`}>Day:</label>
+                <select
+                  name={`editDay${index}`}
+                  id={`editDay${index}`}
+                  defaultValue={row.Day}
+                >
+                  {[
+                    "Sunday",
+                    "Monday",
+                    "Tuesday",
+                    "Wednesday",
+                    "Thursday",
+                    "Friday",
+                    "Saturday",
+                  ].map((day) => (
+                    <option key={day}>{day}</option>
+                  ))}
+                </select>
+              </div>
+              <div className="section">
+                <label htmlFor={`editStart${index}`}>Start:</label>
+                <input
+                  type="time"
+                  id={`editStart${index}`}
+                  defaultValue={row.StartTime}
+                />
+              </div>
+              <div className="section">
+                <label htmlFor={`editEnd${index}`}>End:</label>
+                <input
+                  type="time"
+                  id={`editEnd${index}`}
+                  defaultValue={row.EndTime}
+                />
+              </div>
 
-            <div className="section">
-              <label htmlFor={`editRoom${index}`}>Room:</label>
-              <input
-                type="text"
-                name={`editRoom${index}`}
-                id={`editRoom${index}`}
-                defaultValue={row.Room}
-              />
+              <div className="section">
+                <label htmlFor={`editRoom${index}`}>Room:</label>
+                <input
+                  type="text"
+                  name={`editRoom${index}`}
+                  id={`editRoom${index}`}
+                  defaultValue={row.Room}
+                />
+              </div>
+              <div className="Action">
+                <Button
+                  variant="outlined"
+                  color="error"
+                  onClick={() => {
+                    setRenderedEditRows((prev) =>
+                      prev.filter((row) => row !== index)
+                    );
+                    console.log(editingRows);
+                    // document.getElementById(`row${index}`).remove();
+                    if (editingRows.length > 0) {
+                      setEditingRows(editingRows.slice(0, -1));
+                    }
+                  }}
+                >
+                  Remove Slot
+                </Button>
+              </div>
             </div>
-            <div className="Action">
-              <Button
-                variant="outlined"
-                color="error"
-                onClick={() => {
-                  setRenderedEditRows((prev) =>
-                    prev.filter((row) => row !== index)
-                  );
-
-                  document.getElementById(`row${index}`).remove();
-                }}
-              >
-                Remove Slot
-              </Button>
-            </div>
-          </div>
-        ))}
+          ))}
         <div className="Buttons">
           <button className="MainButton sub" onClick={handleEditSubmit}>
             Save Changes
@@ -356,7 +367,7 @@ const AddGroup = () => {
     );
   };
 
-  console.log("rows:", rows);
+  // console.log("rows:", rows);
   return (
     <>
       <ThemeProvider theme={Theme}>
