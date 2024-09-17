@@ -18,6 +18,12 @@ export function getAllCategoriesData() {
 export function getstartweek() {
   return methods.get(serverURL + "AssignmentLogic.php/getstartweek");
 }
+export function updateStartWeek(newStartWeek) {
+  return methods.post(
+    serverURL + "AssignmentLogic.php/updateStartWeek",
+    newStartWeek
+  );
+}
 export function addCategory(data) {
   return methods.post(serverURL + "AssignmentLogic.php/addCategory", data);
 }
