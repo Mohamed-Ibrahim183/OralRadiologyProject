@@ -257,11 +257,38 @@
   margin-left: 5px;
 }
 .startWeekModal {
-  min-width: 240px;
+  min-width: 260px;
   min-height: 300px;
   padding-left: 5%;
   padding-right: 5%;
   padding-top: 5%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.startWeekModal .changeStartWeek {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: 100%;
+}
+.startWeekModal .cancelStartWeek {
+  background-color: gray;
+  width: 100%;
+}
+.startWeekModal .buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.startWeekModal .startWeekModalInput {
+  width: 100%;
+  padding: 8px;
+  border-radius: 8px;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  -ms-border-radius: 8px;
+  -o-border-radius: 8px;
 }
 @media screen and (max-width: 600px) {
   .fullProfessorPage .container.AssignmentSection .AssCard .info .name {

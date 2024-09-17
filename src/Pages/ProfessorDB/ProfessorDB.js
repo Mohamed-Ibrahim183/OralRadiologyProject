@@ -4,7 +4,7 @@ import AssignmentCard from "./AssignmentCard";
 import Chart from "./Chart";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
-
+import Modal from "react-responsive-modal";
 import "./professor.css";
 import { Link, Navigate } from "react-router-dom";
 import Modal2 from "./Modal2";
@@ -33,6 +33,7 @@ import {
   getAllCategoriesData,
   insertNewAssignment,
   getstartweek,
+  updateStartWeek,
 } from "../../Slices/PorfessorSlice";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -283,6 +284,8 @@ const ProfessorDB = () => {
   const [sortingOrder, setSortingOrder] = useState("asc");
   const [filteredAssignments, setFilteredAssignments] = useState([]);
   const [startWeek, setStartWeek] = useState();
+  const [oldStartWeek, setOldStartWeek] = useState();
+
   function DeleteAssignment(assignmentId) {
     deleteAssignmentDB(assignmentId);
     setUpdateAssignments(updateAssignments + 1);
@@ -348,9 +351,18 @@ const ProfessorDB = () => {
 
   const getstartweeek = () => {
     getstartweek()
-      .then((res) => setStartWeek(res.msg[0].Day || ""))
+      .then((res) => {
+        setStartWeek(res.msg[0].Day || "");
+        setOldStartWeek(res.msg[0].Day || "");
+      })
       .catch((err) => console.log(err))
       .finally(() => {});
+  };
+  const handleStartWeekChange = () => {
+    // console.log("start week changed");
+    updateStartWeek(String(startWeek))
+      .then((res) => console.log(res.msg))
+      .catch((err) => console.error(err));
   };
   //console.log(startWeek);
   useEffect(() => {
@@ -392,6 +404,8 @@ const ProfessorDB = () => {
   const AssignmentsContainer = () => {
     const [categoriesModal, setCategoriesModal] = useState(false);
     const [startWeekModal, setStartWeekModal] = useState(false);
+    const openStartWeekChangeModal = () => setStartWeekModal(true);
+    const closeStartWeekChangeModal = () => setStartWeekModal(false);
 
     if (sessionStorage.getItem("Type") !== "Professor") {
       return <Navigate to="/" />;
@@ -442,17 +456,46 @@ const ProfessorDB = () => {
           closeModal={() => setStartWeekModal(false)}
         >
           <div className="startWeekModal">
-            <label>
-              <h3>Start Week</h3>
-            </label>
-            <br></br>
-            <input
-              type="date"
-              value={
-                startWeek ? new Date(startWeek).toISOString().substr(0, 10) : ""
-              }
-              onChange={(e) => setStartWeek(e.target.value)}
-            />
+            <div className="upperPart">
+              <label>
+                <h3>Start Week</h3>
+              </label>
+              <br></br>
+              <input
+                type="date"
+                value={
+                  startWeek
+                    ? new Date(startWeek).toISOString().substr(0, 10)
+                    : ""
+                }
+                className="startWeekModalInput"
+                onChange={(e) => setStartWeek(e.target.value)}
+              />
+            </div>
+            <div className="buttons">
+              <Button
+                className="changeStartWeek"
+                variant="contained"
+                color="primary"
+                onClick={() => {
+                  setOldStartWeek(startWeek);
+                  handleStartWeekChange();
+                  setStartWeekModal(false);
+                }}
+              >
+                Change Start Week
+              </Button>
+              <Button
+                className="cancelStartWeek"
+                variant="contained"
+                onClick={() => {
+                  setStartWeek(oldStartWeek);
+                  setStartWeekModal(false);
+                }}
+              >
+                Cancel
+              </Button>
+            </div>
           </div>
         </BasicModalComp>
         <div className="BBBBBB">
