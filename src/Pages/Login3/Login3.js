@@ -29,7 +29,9 @@ function Login3() {
         if (typeof res.msg === "object") {
           if (res.msg.Id === undefined) throw new Error(res.msg.Error);
 
-          toast(`Welcome ${res.msg.Name} to Oral Radiology System.`);
+          toast.success(`Welcome ${res.msg.Name} to Oral Radiology System.`, {
+            duration: 2000,
+          });
           const data = {
             userId: res.msg.Id,
             MSAId: res.msg.MSAId,
