@@ -95,7 +95,9 @@ const AddGroup2 = () => {
         fData.append(`Slot${index}`, JSON.stringify(ele));
       });
 
-      insertNewGroup(fData);
+      insertNewGroup(fData)
+        .then((res) => console.log(res.msg))
+        .catch((err) => console.error(err));
       dispatch({ type: "clearSlots" });
       document.getElementById("GroupName").value = "";
       toast.success("Group Saved Successfully");
