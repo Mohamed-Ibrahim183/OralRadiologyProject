@@ -7,7 +7,7 @@ import "react-calendar/dist/Calendar.css";
 import Modal from "react-responsive-modal";
 import "./professor.css";
 import { Link, Navigate } from "react-router-dom";
-import Modal2 from "./Modal2";
+import Modal2 from "./Modal2/Modal2";
 import Button from "@mui/material/Button";
 import {
   Box,

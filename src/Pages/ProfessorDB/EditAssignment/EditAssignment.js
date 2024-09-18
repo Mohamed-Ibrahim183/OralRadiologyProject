@@ -7,7 +7,7 @@ import {
   UpdateAssignment,
   getSingleAssignmentData,
   deleteAssignmentDB,
-} from "../../Slices/PorfessorSlice";
+} from "../../../Slices/PorfessorSlice";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 

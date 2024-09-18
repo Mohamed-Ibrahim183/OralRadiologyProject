@@ -7,7 +7,7 @@ import { IconButton } from "@mui/material";
 import {
   addNewAssignmentSlot,
   getGroupsNamesDB,
-} from "../../Slices/PorfessorSlice";
+} from "../../../Slices/PorfessorSlice.js";
 
 const Modal2 = ({ open, onClose, AssignmentId }) => {
   const [groups, setGroups] = useState([]);
