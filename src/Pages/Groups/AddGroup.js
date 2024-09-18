@@ -9,6 +9,7 @@ import { Button } from "@mui/material";
 import "./API.css";
 import "./ADDGroup.css";
 import toast from "react-hot-toast";
+import { Navigate } from "react-router-dom";
 
 const initialState = {
   groups: [],
@@ -20,7 +21,8 @@ const AddGroup2 = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const [lastIndex, setLastIndex] = useState(0);
 
-  console.log("once");
+  // console.log("once");
+
   function reducer(state, action) {
     switch (action.type) {
       case "setGroups":
@@ -231,6 +233,7 @@ const AddGroup2 = () => {
     }
     return isValid;
   }
+  if (sessionStorage["Type"] !== "Admin") return <Navigate to="/" />;
 
   return (
     <>
