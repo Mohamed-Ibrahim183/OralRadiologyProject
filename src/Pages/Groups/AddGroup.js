@@ -99,6 +99,9 @@ const AddGroup2 = () => {
       dispatch({ type: "clearSlots" });
       document.getElementById("GroupName").value = "";
       toast.success("Group Saved Successfully");
+      getAllGroupsData().then((res) =>
+        dispatch({ type: "setGroups", payload: res.msg })
+      );
     } else toast.error("Please Fill In All Fields");
   }
 
@@ -153,7 +156,6 @@ const AddGroup2 = () => {
 
   // Function to generate slot rows
   function generateRow(slot, index) {
-    if (!slot.Id) dispatch({ type: "render" });
     return (
       <div className={`row`} id={`row${index}`} key={slot.id}>
         <div className="section">
@@ -207,7 +209,7 @@ const AddGroup2 = () => {
           <Button
             variant="outlined"
             color="error"
-            onClick={() => dispatch({ type: "removeSlot", id: slot.id })} // Remove by id
+            onClick={() => dispatch({ type: "removeSlot", id: slot.id })}
           >
             Remove Slot
           </Button>
