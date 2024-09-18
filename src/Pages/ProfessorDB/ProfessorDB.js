@@ -9,7 +9,6 @@ import "./professor.css";
 import { Link, Navigate } from "react-router-dom";
 import Modal2 from "./Modal2";
 import Button from "@mui/material/Button";
-import { Edit } from "@mui/icons-material";
 import {
   Box,
   Paper,

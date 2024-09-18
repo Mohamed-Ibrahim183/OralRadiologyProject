@@ -184,7 +184,11 @@ const AddGroup = () => {
         fData.append(`Slot${index}`, JSON.stringify(ele));
       });
 
-      insertNewGroup(fData);
+      insertNewGroup(fData)
+        .then((res) => console.log(res.msg))
+        .then((data) => console.log("Response from backend:", data))
+        .catch((err) => console.error("Error:", err));
+
       setRows(0);
       setRenderedRows([]);
       document.getElementById("GroupName").value = "";
