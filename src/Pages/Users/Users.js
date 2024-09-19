@@ -1,7 +1,7 @@
-import React, { useEffect, useReducer, useState } from "react";
+import React, { useEffect, useReducer } from "react";
 import "./users2.css";
 import { Navigate } from "react-router-dom";
-import BasicModal from "./Edit";
+
 import {
   Avatar,
   Box,
@@ -19,7 +19,7 @@ import {
   Select,
   MenuItem,
 } from "@mui/material";
-import { Cancel, Delete, PlaylistAddOutlined } from "@mui/icons-material";
+import { Cancel, Delete } from "@mui/icons-material";
 import BasicModalComp from "../../Components/BasicModal/BasicModalComp";
 import {
   changeUserGroup,
@@ -93,12 +93,6 @@ const Users = () => {
         return { ...state, render: state.render + 1 };
     }
   }
-
-  const [changes, setChanges] = useState([]);
-
-  const [render, setRender] = useState(1);
-
-  console.log("Render Once");
 
   useEffect(() => {
     document.body.classList.add("TableBody");
