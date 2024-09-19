@@ -5,7 +5,7 @@ import "./NewAssignmentPage.css"; // Updated CSS file name
 import {
   getAllCategoriesData,
   insertNewAssignment,
-} from "../../Slices/PorfessorSlice";
+} from "../../../Slices/PorfessorSlice";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
@@ -46,12 +46,11 @@ function NewAssignment() {
   };
 
   useEffect(() => {
-
     getAllCategoriesData().then((res) => {
       setCategories(res.msg);
     });
     // check if edit or insert
-    if(sessionStorage.getItem("editAssignment")){
+    if (sessionStorage.getItem("editAssignment")) {
       // get the assignment data
     }
   }, []);
