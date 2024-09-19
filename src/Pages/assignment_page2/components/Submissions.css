@@ -1,0 +1,83 @@
+:root {
+  --mainBackGround: #f5fbf9;
+  --mainColor: #0082e6;
+  --secondText: #65b4f1;
+  --textColor: var(--mainColor);
+  --headerColor: #0082e6;
+  --text-monem: rgb(20, 19, 19);
+  --btnB: #2450f1;
+  --btnB-hover: #14319b;
+  --mainText: black;
+  --secondaryText: #777;
+  --chartBack: rgba(255, 255, 255, 0.277);
+  --currentday: #a2d1fd;
+  --profile: #a2d1fd;
+  --shadow: rgba(0, 0, 0, 0.256);
+}
+
+[theme="Dark"] {
+  --mainColor: #4d8ba8;
+  --mainBackGround: #1b343c;
+  --secondText: #65b4f1;
+  --textColor: #96bdcf;
+  --headerColor: #4d8ba8;
+  --text-monem: rgb(230, 230, 230);
+  --btnB: #4d8ba8;
+  --btnB-hover: #356981;
+  --mainText: white;
+  --secondaryText: #a9a9a9;
+  --currentday: #699eff;
+  --profile: #4d8ba8;
+  --shadow: rgba(255, 255, 255, 0.256);
+}
+.submissions-container {
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.assignment-section-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 16px;
+}
+
+.submission-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  margin-bottom: 12px;
+  background-color: #fff;
+  border-radius: 6px;
+  border: 1px solid #e0e0e0;
+}
+
+.upperPart {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+.lowerPart {
+  width: 100%;
+}
+.submission-name {
+  font-size: 18px;
+  color: #555;
+  margin-bottom: 7px;
+  /* width: 60%; */
+}
+.submission-grade {
+  height: 100%;
+  align-self: start;
+  font-size: 16px;
+  color: #444;
+
+  /* width: 50%; */
+}
+
+.submission-grade span {
+  font-weight: bold;
+  color: #333;
+  width: 20%;
+}

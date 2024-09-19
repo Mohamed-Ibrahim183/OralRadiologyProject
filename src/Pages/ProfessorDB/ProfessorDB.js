@@ -541,7 +541,7 @@ const ProfessorDB = () => {
                 assignmentId={assignment.Id}
                 onDelete={DeleteAssignment}
                 name={assignment.Name}
-                info={`Topic: ${assignment.Topic}`}
+                info={`${assignment.Topic}`}
                 toPage={`/professor/Grading_Page?assignmentId=${assignment.Id}`}
               />
             ))}

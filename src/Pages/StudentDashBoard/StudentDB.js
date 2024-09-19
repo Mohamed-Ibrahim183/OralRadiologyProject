@@ -31,15 +31,76 @@ const StudentDB = () => {
   const [sortingType, setSortingType] = useState("Name");
   const [sortingOrder, setSortingOrder] = useState("asc");
   const [Error, setError] = useState("");
+  const processAssignments = (assignments) => {
+    // Group assignments by Id
+    const groupedAssignments = assignments.reduce((acc, assignment) => {
+      if (!acc[assignment.Id]) {
+        acc[assignment.Id] = [];
+      }
+      acc[assignment.Id].push(assignment);
+      return acc;
+    }, {});
+
+    const processedAssignments = Object.values(groupedAssignments).map(
+      (group) => {
+        // Sort by open date (earliest first)
+        group.sort((a, b) => new Date(a.open) - new Date(b.open));
+
+        // Check for assignments where open has passed but close is in the future
+        const openPassedCloseFuture = group.filter(
+          (assignment) =>
+            new Date(assignment.open) < new Date() &&
+            new Date(assignment.close) > new Date()
+        );
+
+        if (openPassedCloseFuture.length > 0) {
+          // If there's an assignment with open passed and close in the future, keep it
+          return openPassedCloseFuture[0];
+        }
+
+        // Check for assignments with open and close both upcoming
+        const allOpenInFuture = group.filter(
+          (assignment) => new Date(assignment.open) > new Date()
+        );
+
+        if (allOpenInFuture.length > 0) {
+          // If all opens are in the future, leave the one with the earliest open
+          return allOpenInFuture[0];
+        }
+
+        // Otherwise, check for assignments where open and close have both passed
+        const passedAssignments = group.filter(
+          (assignment) =>
+            new Date(assignment.open) < new Date() &&
+            new Date(assignment.close) < new Date()
+        );
+
+        if (passedAssignments.length > 0) {
+          // If there are passed assignments, keep the one with the latest close
+          passedAssignments.sort(
+            (a, b) => new Date(b.close) - new Date(a.close)
+          );
+          return passedAssignments[0];
+        }
+
+        // If there's no other condition met, return the first assignment
+        return group[0];
+      }
+    );
+
+    return processedAssignments;
+  };
 
   useEffect(() => {
-    getAssignmentsForUser({
-      userId: UserId,
-    }).then((res) =>
-      res.msg["Err"] === 1
-        ? setError("User is not in a Group. Please contact the Admin.")
-        : setAssignments(res.msg)
-    );
+    getAssignmentsForUser({ userId: UserId }).then((res) => {
+      if (res.msg["Err"] === 1) {
+        setError("User is not in a Group. Please contact the Admin.");
+      } else {
+        const processedAssignments = processAssignments(res.msg);
+        setAssignments(processedAssignments);
+      }
+      console.log(res.msg);
+    });
   }, [UserId]);
 
   useEffect(() => {
@@ -150,7 +211,8 @@ const StudentDB = () => {
     const now = new Date();
     const openDate = new Date(assignment.open);
     const closeDate = new Date(assignment.close);
-
+    sessionStorage.setItem("openDate", openDate);
+    sessionStorage.setItem("closeDate", closeDate);
     if (openDate <= now && closeDate < now) {
       // Time since the task has closed
       let timeSinceClosed = (now - closeDate) / 1000; // time since closed in seconds
@@ -175,11 +237,6 @@ const StudentDB = () => {
       } else {
         closedTime = `closed from ${seconds} seconds`;
       }
-
-      sessionStorage.setItem("RemainingTime", closedTime);
-      sessionStorage.setItem("days", days);
-      sessionStorage.setItem("hours", hours);
-      sessionStorage.setItem("minutes", minutes);
     } else if (openDate <= now && closeDate > now) {
       let remainingTime = (closeDate - now) / 1000; // remaining time in seconds
 
@@ -203,16 +260,7 @@ const StudentDB = () => {
       } else {
         remaining = `${seconds} seconds`;
       }
-
-      sessionStorage.setItem("RemainingTime", remaining);
-      sessionStorage.setItem("days", days);
-      sessionStorage.setItem("hours", hours);
-      sessionStorage.setItem("minutes", minutes);
     } else {
-      sessionStorage.setItem("RemainingTime", "Task is not yet due");
-      sessionStorage.setItem("days", 0);
-      sessionStorage.setItem("hours", 0);
-      sessionStorage.setItem("minutes", 0);
     }
   };
 
@@ -314,7 +362,7 @@ const StudentDB = () => {
                     >
                       <AssignmentCard
                         name={assignment.Name}
-                        info={`Topic: ${assignment.Topic}`}
+                        info={`${assignment.Topic}`}
                         col={col}
                         state={state}
                         remaining={remaining ? `${remaining}  remaining` : ""}

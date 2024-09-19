@@ -24,6 +24,7 @@ function GradingPage() {
 
     getSubmissionByAssignment(assignmentId).then((res) => {
       if (res.msg) {
+        console.log(res.msg);
         // Success
         const responseData = Array.isArray(res.msg) ? res.msg : [];
         // Initialize data from response
