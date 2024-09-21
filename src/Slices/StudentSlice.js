@@ -36,7 +36,12 @@ export function getSubmissionUserAssignment(data) {
     data
   );
 }
-
+export function getSubmissionUserAssignmentWeek(data) {
+  return methods.get(
+    server + "AssignmentLogic.php/getSubmissionUserAssignmentWeek",
+    data
+  );
+}
 export function getSubmissionForUserReport(data) {
   return methods.get(
     server + "AssignmentLogic.php/GetSubmissionForUserReport",

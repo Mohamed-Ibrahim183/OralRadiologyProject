@@ -18,7 +18,7 @@ import {
   getAssignmentsForUser,
   getSubmissionById,
 } from "../../Slices/StudentSlice";
-
+import AssignmentPage2 from "../assignment_page2/assignmentPage2";
 const StudentDB = () => {
   const studentName = sessionStorage["Name"] || "Student";
   const personalImage = sessionStorage["PersonalImage"];
@@ -31,6 +31,8 @@ const StudentDB = () => {
   const [sortingType, setSortingType] = useState("Name");
   const [sortingOrder, setSortingOrder] = useState("asc");
   const [Error, setError] = useState("");
+  const [selectedAssignment, setSelectedAssignment] = useState(null); // State to track selected assignment
+
   const processAssignments = (assignments) => {
     // Group assignments by Id
     const groupedAssignments = assignments.reduce((acc, assignment) => {
@@ -90,16 +92,23 @@ const StudentDB = () => {
 
     return processedAssignments;
   };
-
+  if (sessionStorage.getItem("state")) {
+    sessionStorage.removeItem("state");
+  }
+  sessionStorage.removeItem("state");
+  sessionStorage.removeItem("submitted");
+  sessionStorage.removeItem("isClosed");
+  // sessionStorage.removeItem("AssignmentData");
+  // sessionStorage.removeItem("assignmentId");
   useEffect(() => {
     getAssignmentsForUser({ userId: UserId }).then((res) => {
       if (res.msg["Err"] === 1) {
         setError("User is not in a Group. Please contact the Admin.");
       } else {
         const processedAssignments = processAssignments(res.msg);
-        setAssignments(processedAssignments);
+        setAssignments(res.msg);
+        console.log(res.msg);
       }
-      console.log(res.msg);
     });
   }, [UserId]);
 
@@ -162,8 +171,23 @@ const StudentDB = () => {
     filterAndSortAssignments();
   }, [assignments, filter, sortingType, sortingOrder]);
 
-  const handleAssignmentClick = (assignmentId) => {
-    sessionStorage.setItem("assignmentId", assignmentId);
+  const handleAssignmentClick = (assignment) => {
+    sessionStorage.setItem("assignmentId", assignment.Id);
+
+    // Create the new search query
+    const searchParams = new URLSearchParams();
+    searchParams.set("userId", UserId);
+    searchParams.set("assignmentId", assignment.Id);
+
+    // Use pushState to update the URL with both pathname and search params
+    const newUrl = {
+      pathname: "/student/submit2",
+      search: `?${searchParams.toString()}`,
+    };
+
+    window.history.pushState(null, "", newUrl.pathname + newUrl.search);
+
+    setSelectedAssignment(assignment);
   };
 
   const toggleSortingOrder = () => {
@@ -207,6 +231,13 @@ const StudentDB = () => {
     }
     return { state: "unknown", col: "grey", remaining: null };
   };
+  if (selectedAssignment) {
+    return (
+      <AssignmentPage2
+        assignment={selectedAssignment} // Pass the selected assignment as a prop
+      />
+    );
+  }
   const putRemaininginSession = (assignment) => {
     const now = new Date();
     const openDate = new Date(assignment.open);
@@ -348,26 +379,19 @@ const StudentDB = () => {
                 filteredAssignments.map((assignment, i) => {
                   const { state, col, remaining } = getStatusProps(assignment);
                   return (
-                    <Link
+                    <div
                       key={i}
-                      to={{
-                        pathname: "/student/submit2",
-                        search: `?userId=${UserId}&assignmentId=${assignment.Id}`,
-                      }}
-                      onClick={() => {
-                        handleAssignmentClick(assignment.Id);
-                        sessionStorage.setItem("state", state);
-                        putRemaininginSession(assignment);
-                      }}
+                      className="assignmentCardWrapper"
+                      onClick={() => handleAssignmentClick(assignment)} // Call the click handler
                     >
                       <AssignmentCard
                         name={assignment.Name}
-                        info={`${assignment.Topic}`}
+                        info={`week ${assignment.week_num} `}
                         col={col}
                         state={state}
                         remaining={remaining ? `${remaining}  remaining` : ""}
                       ></AssignmentCard>
-                    </Link>
+                    </div>
                   );
                 })}
               {Error !== "" && <p>{Error}</p>}

@@ -1,19 +1,35 @@
-import React, { useState, useEffect } from "react";
-import { Navigate } from "react-router-dom";
+import React, { useState, useEffect, Navigate } from "react";
+import CryptoJS from "crypto-js";
 import {
   getAssignmentData,
   makeNewSubmission,
   uploadNewAssignmentImage,
-  getSubmissionUserAssignment,
 } from "../../Slices/StudentSlice";
+import {
+  getSubmissionUserAssignment,
+  getSubmissionUserAssignmentWeek,
+} from "../../Slices/StudentSlice";
+import AssignmentInfoSection from "./components/AssignmentInfoSection";
 import "./assignmentPage2.css";
-import AssignmentCard from "../StudentDashBoard/AssignmentCard";
 import CriteriaSection from "./components/CriteriaSection";
 import TimeLeftSection from "./components/TimeLeftSection";
 import CategoriesSection from "./components/CategoriesSection";
 import Submissions from "./components/Submissions";
 
-const AssignmentPage2 = () => {
+/////////////////////////////////////////////////////////////////////////
+// Encrypt and decrypt functions
+const SECRET_KEY = "Abo_el_Mana3eeeeeeeem343rfetvrfdncy54erncgfd";
+const encryptData = (data) => {
+  return CryptoJS.AES.encrypt(JSON.stringify(data), SECRET_KEY).toString();
+};
+const decryptData = (encryptedData) => {
+  const bytes = CryptoJS.AES.decrypt(encryptedData, SECRET_KEY);
+  return JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
+};
+
+const AssignmentPage2 = ({ assignment }) => {
+  // console.log(assignment);
+  const [assignmentData, setAssignmentData] = useState(null);
   const [assignmentInfo, setAssignmentInfo] = useState({});
   const [categories, setCategories] = useState([]);
   const [uploadedFiles, setUploadedFiles] = useState([]);
@@ -23,45 +39,115 @@ const AssignmentPage2 = () => {
     minutes: 0,
     seconds: 0,
   });
-  const [state, setState] = useState(""); // Manage state from open/close dates
+  const [state, setState] = useState("");
   const [update, setUpdate] = useState(0);
 
-  const closeDate = new Date(sessionStorage.getItem("closeDate"));
-  const openDate = new Date(sessionStorage.getItem("openDate"));
-  const assignmentId = sessionStorage.getItem("assignmentId");
+  const closeDate = assignmentData ? new Date(assignmentData.close) : null;
+  const openDate = assignmentData ? new Date(assignmentData.open) : null;
+  const assignmentId = assignmentData?.Id || "N/A";
   const studentId = sessionStorage.getItem("userId");
+  const [submitted, setSubmitted] = useState(false);
+
+  // Save assignment data to session storage in an encrypted way
+  useEffect(() => {
+    if (assignment) {
+      const encryptedAssignment = encryptData(assignment);
+      sessionStorage.setItem("AssignmentData", encryptedAssignment);
+      setAssignmentData(assignment);
+    }
+  }, [assignment]);
 
   useEffect(() => {
+    const encryptedAssignment = sessionStorage.getItem("AssignmentData");
+    const savedState = sessionStorage.getItem("state");
+    const isClosedStored = sessionStorage.getItem("isClosed") === "true";
+    const submittedStored = sessionStorage.getItem("submitted") === "true";
+
+    if (encryptedAssignment) {
+      const decryptedAssignment = decryptData(encryptedAssignment);
+      setAssignmentData(decryptedAssignment);
+    }
+
+    if (savedState) {
+      setState(savedState);
+    }
+
+    if (submittedStored) {
+      setSubmitted(true);
+    }
+
+    if (isClosedStored) {
+      setUpdate((prev) => prev + 1);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!assignmentData) return;
+
     const timer = setInterval(() => {
-      calculateTimeLeft();
-    }, 1000);
+      if (!submitted || state !== "submitted") {
+        calculateTimeLeft();
+        fetchSubmissionStatus();
+        console.log("Ffffffff");
+      }
+    }, 3000);
 
     fetchAssignmentInfo();
 
     return () => clearInterval(timer); // Cleanup interval on component unmount
-  }, []);
+  }, [assignmentData]);
+
+  const fetchSubmissionStatus = async () => {
+    try {
+      const res = await getSubmissionUserAssignmentWeek({
+        userId: sessionStorage.getItem("userId"),
+        assignmentId: sessionStorage.getItem("assignmentId"),
+        weekNum: assignmentData.week_num,
+      });
+      setSubmitted(res.msg);
+      if (res.msg === true) {
+        updateState("submitted");
+        sessionStorage.setItem("state", "submitted");
+      }
+    } catch (err) {
+      console.error("Error fetching assignment week submission:", err);
+    }
+  };
 
   const calculateTimeLeft = () => {
+    if (!closeDate || !openDate) return;
+
     const now = new Date();
 
     if (now > closeDate) {
       const timePassed = (now - closeDate) / 1000;
       calculateRemainingTime(timePassed, true);
-      updateState("closed");
+      if (!submitted) {
+        updateState("closed");
+      }
     } else if (now >= openDate && now <= closeDate) {
       const remainingTime = (closeDate - now) / 1000;
       calculateRemainingTime(remainingTime, false);
-      updateState("inprogress");
+      if (!submitted) {
+        updateState("inprogress");
+      }
     } else if (now < openDate) {
       const timeToOpen = (openDate - now) / 1000;
       calculateRemainingTime(timeToOpen, false);
-      updateState("upcoming");
+      if (!submitted) {
+        updateState("upcoming");
+      }
     }
   };
+
   const updateState = (newState) => {
-    if (state !== newState) {
+    if (state !== newState || state !== "submitted" || !submitted) {
       setState(newState);
-      sessionStorage.setItem("state", newState); // Update sessionStorage when state changes
+      sessionStorage.setItem("state", newState); // Update sessionStorage
+    }
+    if (newState === "submitted") {
+      sessionStorage.setItem("submitted", "true");
+      sessionStorage.setItem("state", "submitted");
     }
   };
 
@@ -87,9 +173,7 @@ const AssignmentPage2 = () => {
     try {
       const res = await getAssignmentData({ assignmentId });
       setAssignmentInfo(res.msg);
-      setCategories(
-        Array.isArray(res.msg.categories) ? res.msg.categories : []
-      );
+      setCategories(res.msg.categories ? res.msg.categories : []);
     } catch (error) {
       console.error("Failed to fetch assignment data:", error);
     }
@@ -122,11 +206,14 @@ const AssignmentPage2 = () => {
     }
 
     try {
+      // Make a new submission
       const { msg: lastSubmission } = await makeNewSubmission({
         studentId,
         assignmentId,
+        weekNum: assignmentData.week_num,
       });
 
+      // Upload files
       await Promise.all(
         uploadedFiles.map((fileObj) =>
           uploadNewAssignmentImage({
@@ -139,6 +226,11 @@ const AssignmentPage2 = () => {
         )
       );
 
+      // After successful submission, set the state to "submitted"
+      updateState("submitted");
+      sessionStorage.setItem("state", "submitted");
+
+      sessionStorage.setItem("isClosed", true); // Store the isClosed state
       alert("Files uploaded successfully.");
     } catch (error) {
       console.error("Error uploading files:", error);
@@ -161,7 +253,10 @@ const AssignmentPage2 = () => {
           message: "Time left until open",
         };
       case "submitted":
-        return { buttonLabel: "Submitted", isClosed: true };
+        return {
+          buttonLabel: "Submitted",
+          isClosed: true,
+        };
       default:
         return {
           buttonLabel: "Closed",
@@ -172,53 +267,49 @@ const AssignmentPage2 = () => {
   };
 
   const { buttonLabel, isClosed, message } = renderSubmissionState();
-
+  /////////////////////////////////////////////////////////////////////////
   return (
     <div className="AssignmentPage2-container">
-      <div className="AssignmentPage2Wrapper">
-        <section className="grade-section">
-          <h2 className="assignment-section-title">Grade</h2>
-          <p className="assignment-grade">Your grade: A</p>
+      {assignmentData ? (
+        <div className="AssignmentPage2Wrapper">
+          <AssignmentInfoSection
+            timeLeft={timeLeft}
+            isClosed={isClosed}
+            message={message}
+            assignmentInfo={assignmentInfo}
+          />
 
-          <h2 className="assignment-section-title">Doctor's Comment</h2>
-          <p className="doctor-comment">
-            Great job on your assignment! Keep up the good work.
-          </p>
-        </section>
+          <CriteriaSection categories={categories} />
+          {!submitted && (
+            <TimeLeftSection
+              timeLeft={timeLeft}
+              isClosed={isClosed}
+              timeLeftMessage={message}
+              state={state}
+            />
+          )}
 
-        <h1 className="assignment-title">{assignmentInfo.Name}</h1>
-        <span className="assignment-deadline">
-          {isClosed
-            ? message
-            : `Time left: ${timeLeft.days} days, ${timeLeft.hours} hours, ${timeLeft.minutes} minutes`}
-        </span>
-
-        <CriteriaSection categories={categories} />
-        <TimeLeftSection
-          timeLeft={timeLeft}
-          isClosed={isClosed}
-          timeLeftMessage={message}
-          state={state}
-        />
-        <CategoriesSection
-          categories={categories}
-          handleFileUpload={handleFileUpload}
-          isClosed={isClosed}
-          buttonLabel={buttonLabel}
-        />
-        <div className="submit-section">
-          <button
-            className="submit-button"
-            onClick={handleSubmit}
-            disabled={isClosed}
-          >
-            {buttonLabel}
-          </button>
+          <CategoriesSection
+            categories={categories}
+            handleFileUpload={handleFileUpload}
+            isClosed={isClosed}
+            buttonLabel={buttonLabel}
+          />
+          <div className="submit-section">
+            <button
+              className="submit-button"
+              onClick={handleSubmit}
+              disabled={isClosed}
+            >
+              {buttonLabel}
+            </button>
+          </div>
+          <Submissions assignment={assignmentInfo} update={update} />
         </div>
-        <Submissions assignment={assignmentInfo} update={update} />
-      </div>
+      ) : (
+        <p>Loading assignment data...</p>
+      )}
     </div>
   );
 };
-
 export default AssignmentPage2;

@@ -1,8 +1,7 @@
-import React from "react";
-import { useEffect, useState } from "react";
-import AssignmentCard from "../../StudentDashBoard/AssignmentCard";
-import { getSubmissionUserAssignment } from "../../../Slices/StudentSlice";
+import React, { useEffect, useState } from "react";
 import "./Submissions.css";
+import { getSubmissionUserAssignment } from "../../../Slices/StudentSlice";
+
 const Submissions = ({ assignment, update }) => {
   const [submissions, setSubmissions] = useState([]);
 
@@ -13,6 +12,7 @@ const Submissions = ({ assignment, update }) => {
         assignmentId: sessionStorage.getItem("assignmentId"),
       });
       setSubmissions(res.msg);
+      console.log(res.msg);
     };
 
     fetchSubmissions();
@@ -20,41 +20,36 @@ const Submissions = ({ assignment, update }) => {
 
   return (
     <div className="Submissions-section">
-      {submissions.map((sub) => (
-        // <AssignmentCard
-        //   key={`${sub.Id}${sub.studentId}${sub.assignmentId}${sub.submitTime}`}
-        //   name={assignment.Name || "Assignment Name"}
-        //   grade={
-        //     `${sub.Grade["Total"]} / ${sub.Grade["count"] * 10}` || "Grade"
-        //   }
-        //   info={`Topic: ${assignment.Topic} | SubmitTime: ${sub.submitTime}`}
-        //   col="#0082e6"
-        // />
-        <></>
-      ))}
-      {submissions.length > 0 && (
+      {submissions.length > 0 ? (
         <div className="submissions-container">
           <h2 className="assignment-section-title">Submissions Grade</h2>
-          {submissions.map((sub, index) => (
-            <div className="submission-item" key={index}>
-              <div className="upperPart">
-                <div className="submission-name">{assignment.Name}</div>
-                <div className="submission-grade">
-                  <span>Grade:</span> {sub.Grade["Total"]} /{" "}
-                  {sub.Grade["count"] * 10}
+
+          {Array.isArray(submissions) &&
+            submissions.map((sub, index) => (
+              <div className="submission-item" key={index}>
+                <div className="upperPart">
+                  <div className="submission-name">
+                    {assignment?.Name || "Assignment Name"}
+                  </div>
+                  <div className="submission-grade">
+                    <span>Grade:</span> {sub.Grade?.Total || 0} /{" "}
+                    {(sub.Grade?.count || 1) * 10}
+                  </div>
+                </div>
+                <div className="lowerPart">
+                  <div className="weekNum">Submission week: {sub.weekNum}</div>
+                  <div className="submission-date">
+                    submitted on: <b>{sub.submitTime}</b>
+                  </div>
                 </div>
               </div>
-              <div className="lowerPart">
-                {" "}
-                <div className="submission-date">
-                  submitted on: <b>{sub.submitTime}</b>
-                </div>
-              </div>
-            </div>
-          ))}
+            ))}
         </div>
+      ) : (
+        <p>No submissions available</p>
       )}
     </div>
   );
 };
+
 export default Submissions;
