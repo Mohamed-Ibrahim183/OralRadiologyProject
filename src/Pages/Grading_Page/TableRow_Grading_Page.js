@@ -19,8 +19,7 @@ const TableRowGradingPage = ({ record, onGradeChange, onCommentChange }) => {
       <td>{record.name}</td>
       <td>{record.IDD}</td>
       <td>{record.email}</td>
-      {/* <td></td> */}
-      {/* Grade */}
+
       <td>
         <input
           type="number"
@@ -32,21 +31,11 @@ const TableRowGradingPage = ({ record, onGradeChange, onCommentChange }) => {
       </td>
       <td>{record.Time}</td>
 
-      {/* <td>{record.joiningDate}</td> */}
       <td>
         <button onClick={record.openModal} className="GradingViewSumbissionBtn">
-          {" "}
           View Submissions
         </button>
       </td>
-      {/* Feedback comment */}
-      {/* <td>
-        <input
-          type="text"
-          value={record.Comment ?? ""} // Default to empty string if Comment is null or undefined
-          onChange={handleCommentChange}
-        />
-      </td> */}
     </tr>
   );
 };
