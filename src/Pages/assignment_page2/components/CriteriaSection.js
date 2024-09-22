@@ -1,7 +1,18 @@
 // CriteriaSection.js
 import React from "react";
 
-const CriteriaSection = ({ categories }) => {
+const CriteriaSection = ({ categories, submittedcategories }) => {
+  if (Array.isArray(submittedcategories)) {
+    submittedcategories.forEach((category) => {
+      const criteriaElement = document.querySelector(
+        `#criteria${category} input`
+      );
+      if (criteriaElement) {
+        criteriaElement.checked = true;
+      }
+    });
+  }
+
   return (
     <section className="criteria-section">
       <h2 className="assignment-section-title">Criteria</h2>
