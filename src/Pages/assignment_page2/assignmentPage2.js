@@ -193,10 +193,10 @@ const AssignmentPage2 = ({ assignment }) => {
     const file = event.target.files[0];
     if (file) {
       setUploadedFiles((prevFiles) => {
-        const existingFileIndex = prevFiles.findIndex(
-          (f) => f.categoryId === categoryId
-        );
         const updatedFiles = [...prevFiles];
+        const existingFileIndex = prevFiles.findIndex(
+          (fileObj) => fileObj.categoryId === categoryId
+        );
         if (existingFileIndex >= 0) {
           updatedFiles[existingFileIndex] = { file, categoryId, categoryName };
         } else {
@@ -204,6 +204,8 @@ const AssignmentPage2 = ({ assignment }) => {
         }
         return updatedFiles;
       });
+
+      document.querySelector(`#criteria${categoryId} input`).checked = true;
     }
   };
 
