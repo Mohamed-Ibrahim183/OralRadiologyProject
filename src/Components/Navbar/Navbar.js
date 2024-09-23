@@ -56,6 +56,7 @@ const Navbar = () => {
           navLinks: [
             { Text: "Dashboard", link: "/professor/Dashboard" },
             // { Text: "Grading Page", link: "/professor/Grading_Page" },
+            { Text: "Students Grades", link: "/professor/studentsgrades" },
             { Text: "New Requirement", link: "/professor/NewAssignment" },
           ],
         });

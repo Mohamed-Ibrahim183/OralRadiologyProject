@@ -1,0 +1,87 @@
+:root {
+  --mainBackGround: #f5fbf9;
+  --text-monem: rgb(20, 19, 19);
+  --Gridfooter: #2b95e6e7;
+  --grey-100: #be3939;
+}
+
+/* Dark theme */
+[theme="Dark"] {
+  --mainBackGround: #4d8ba8;
+  --text-monem: rgb(230, 230, 230);
+  --Gridfooter: #284d5e;
+  --grey-100: #eeeeee;
+}
+
+/* Apply the styles using variables */
+.root {
+  margin: 20px;
+}
+
+.grid-container {
+  margin-top: 40px;
+  height: 75vh;
+}
+
+.MuiDataGrid-root {
+  border: none;
+}
+
+.MuiDataGrid-cell {
+  border-bottom: none;
+}
+
+.name-column--cell {
+  color: var(--text-monem);
+}
+
+.MuiDataGrid-columnHeaders {
+  background-color: var(--Gridfooter);
+  border-bottom: none;
+}
+
+.MuiDataGrid-virtualScroller {
+  background-color: var(--mainBackGround);
+}
+
+.MuiDataGrid-footerContainer {
+  border-top: none;
+  background-color: var(--Gridfooter);
+}
+
+.MuiCheckbox-root {
+  color: var(--green-accent-200) !important;
+}
+
+.access-box {
+  width: 60%;
+  margin: 0 auto;
+  padding: 5px;
+  display: flex;
+  justify-content: center;
+  border-radius: 4px;
+}
+
+.access-admin {
+  background-color: var(--green-accent-600);
+}
+
+.access-manager {
+  background-color: var(--green-accent-700);
+}
+
+.access-user {
+  background-color: var(--green-accent-700);
+}
+
+.access-typography {
+  color: var(--grey-100);
+  margin-left: 5px;
+}
+.MuiDataGrid-cell--textLeft {
+  /* width: 100%;
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: center; */
+}
