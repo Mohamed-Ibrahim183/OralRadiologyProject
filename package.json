@@ -11,6 +11,7 @@
     "@fortawesome/react-fontawesome": "^0.2.2",
     "@mui/icons-material": "^5.15.18",
     "@mui/material": "^5.15.18",
+    "@mui/x-data-grid": "^7.18.0",
     "@react-login-page/page1": "^1.0.4",
     "@react-login-page/page4": "^1.0.4",
     "@testing-library/jest-dom": "^5.17.0",

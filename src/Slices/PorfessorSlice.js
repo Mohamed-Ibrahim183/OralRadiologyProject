@@ -6,6 +6,9 @@ const methods = new axiosMethods();
 export function getAllAssignmentsData() {
   return methods.get(serverURL + "AssignmentLogic.php/GetAll");
 }
+export function getAllAssignmentsNames() {
+  return methods.get(serverURL + "AssignmentLogic.php/getAllAssignmentsNames");
+}
 export function getSingleAssignmentData(assignmentId) {
   return methods.get(
     `${serverURL}AssignmentLogic.php/getSingleAssignmentData?assignmentId=${assignmentId}`

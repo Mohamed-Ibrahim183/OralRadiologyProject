@@ -6,6 +6,7 @@ import GradingPage from "../Pages/Grading_Page/Grading_Page";
 import NewAssignment from "../Pages/ProfessorDB/NewAssignment/NewAssignment";
 // const GradingPage = lazy(() => import("./Grading_Page/Grading_Page"));
 import EditAssignment from "../Pages/ProfessorDB/EditAssignment/EditAssignment";
+import StudentsGrade from "../Pages/studentsGrades/StudentsGrade";
 function ProfessorPages() {
   return (
     <Routes>
@@ -38,6 +39,14 @@ function ProfessorPages() {
         element={
           <Suspense fallback={<div>Loading...</div>}>
             <EditAssignment />
+          </Suspense>
+        }
+      />
+      <Route
+        path="studentsgrades"
+        element={
+          <Suspense fallback={<div>Loading...</div>}>
+            <StudentsGrade />
           </Suspense>
         }
       />
