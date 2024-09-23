@@ -6,9 +6,11 @@ import { getSubmissionForUserReport } from "../Slices/StudentSlice";
 const OverViewAssignmentsPage = () => {
   const [submissions, setSubmissions] = useState([]);
   useEffect(() => {
-    getSubmissionForUserReport({
-      StudentId: sessionStorage.getItem("userId"),
-    }).then((res) => setSubmissions(res.msg));
+    getSubmissionForUserReport(sessionStorage.getItem("userId")).then((res) => {
+      setSubmissions(res.msg);
+      // console.log(res.msg);
+      console.log("res.msg:", res.msg);
+    });
   }, []);
   if (submissions) console.log(submissions);
   return (
