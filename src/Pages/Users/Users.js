@@ -29,7 +29,7 @@ import {
 } from "../../Slices/AdminSlice";
 import { resetPassword, serverURL } from "../../Slices/GeneralSlice";
 import toast from "react-hot-toast";
-import { validArray } from "../Controller";
+import { decryptData, getSession, validArray } from "../Controller";
 
 const initialState = {
   users: [],
@@ -121,7 +121,8 @@ const Users = () => {
     });
   }, [state.type, state.render]);
 
-  if (sessionStorage["Type"] !== "Admin") {
+  // if (decryptData(sessionStorage["Type"]) !== "Admin") {
+  if (getSession("Type") !== "Admin") {
     return <Navigate to="/" />;
   }
 

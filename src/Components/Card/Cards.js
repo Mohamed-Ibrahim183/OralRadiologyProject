@@ -1,38 +1,15 @@
-import React, { useEffect, useRef, useState } from "react";
-import Card from "./Card";
-import AssignmentsFile from "./assignments.json";
+import React, { useRef, useState } from "react";
+import "./Card.css";
 import { useReactToPrint } from "react-to-print";
-import "./image.css";
 
 const Cards = ({ submissions }) => {
   const toPrint = useRef();
-  const [assignments, setAssignments] = useState([]);
 
-  useEffect(() => setAssignments(Object.values(AssignmentsFile)), []);
-
-  // const content = assignments.map((assignment, index) => (
-  //   <Card
-  //     // key={index}
-  //     // Name={assignment.Name}
-  //     // Features={assignment.Features}
-  //     // images={assignment.images}
-  //     // images2={assignment.images2}
-
-  //   />
-  // ));
   const handlePrint = useReactToPrint({
     content: () => toPrint.current,
     documentTitle: "ALL Assignments Report 236671",
   });
-  useEffect(() => {
-    return () =>
-      document.querySelectorAll("img").forEach(
-        (e) =>
-          (e.onclick = function () {
-            e.parentElement.classList.toggle("popupImage");
-          })
-      );
-  });
+
   return (
     <>
       <button
@@ -51,14 +28,13 @@ const Cards = ({ submissions }) => {
                 key={sub.Id}
                 images={sub.images}
                 assignmentName={sub.assignmentName}
+                Data={sub}
                 Features={{
                   submitTime: sub.submitTime,
                   Grade: `${sub.Grade["Total"]}/${sub.Grade["count"] * 10}`,
-                  DoctorComment: sub.DoctorsNote,
+                  // DoctorComment: sub.DoctorsNote,
+                  WeekNumber: sub.weekNum,
                 }}
-                // DoctorsComment={sub.DoctorsNote}
-                // submitTime={sub.submitTime}
-                // Grade={`${sub.Grade["Total"]}/${sub.Grade["count"] * 100}`}
               />
             );
           })}
@@ -67,4 +43,72 @@ const Cards = ({ submissions }) => {
   );
 };
 
+const Card = ({ images, assignmentName, Features, Data }) => {
+  const [imageIndex, setImageIndex] = useState(0);
+
+  const AssImage = images[imageIndex];
+
+  const Attributes = Object.keys(Features).map(function (ele, index) {
+    return <Attr key={index} Key={ele} Value={Features[ele]} />;
+  });
+
+  return (
+    <div className="container AssCard">
+      <div
+        className="Card"
+        style={Data.BestGrade ? { border: "5px solid gold" } : {}}
+      >
+        <div className="Images">
+          <div className="singleImage">
+            <i
+              className="fa-solid fa-caret-down left-Arrow"
+              onClick={() =>
+                setImageIndex((prev) =>
+                  imageIndex > 0 ? imageIndex - 1 : images.length - 1
+                )
+              }
+            ></i>
+            <img
+              className="image"
+              src={
+                "http://localhost/Projects/OralRadiology/" + AssImage["Path"]
+              }
+              alt={AssImage["Category"]}
+            />
+            <i
+              className="fa-solid fa-caret-down right-Arrow"
+              onClick={() =>
+                setImageIndex((prev) =>
+                  imageIndex < images.length - 1 ? imageIndex + 1 : 0
+                )
+              }
+            ></i>
+          </div>
+          <div className="status">
+            <span className="AssName">{assignmentName}</span>
+
+            <span className="cat">{AssImage["Category"]}</span>
+          </div>
+        </div>
+        <div className="attrs">
+          {Attributes}
+          {Data.BestGrade && (
+            <Attr key="bestGrade" Key="bestGrade" Value={"Best Grade"} />
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const Attr = (props) => {
+  return (
+    <>
+      <div className="Attribute">
+        <span className="Key">{props.Key}</span>
+        <span className="Value">{props.Value}</span>
+      </div>
+    </>
+  );
+};
 export default Cards;

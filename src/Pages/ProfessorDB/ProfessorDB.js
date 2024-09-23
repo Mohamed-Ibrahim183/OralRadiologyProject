@@ -44,7 +44,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { getAssignmentsGroupsShow } from "../../Slices/PorfessorSlice";
 import toast from "react-hot-toast";
-import { validArray } from "../Controller";
+import { decryptData, getSession, validArray } from "../Controller";
 
 function GroupsData() {
   const [isModalOpen, setModalOpen] = useState(false);
@@ -134,7 +134,8 @@ function AddRequirementModal({ isOpen, onClose }) {
   const [assignmentName, setAssignmentName] = useState("");
   const [topicName, setTopicName] = useState("");
   const [maxImages, setMaxImages] = useState("");
-  const userId = sessionStorage["userId"];
+  const userId = getSession("userId");
+  // const userId = decryptData(sessionStorage["userId"]);
   const [loading, setLoading] = useState(false); // State to handle loading status
   const [categories, setcategories] = useState([]);
   const [selectedCategories, setSelectedCategories] = useState([]);
@@ -267,9 +268,12 @@ function AddRequirementModal({ isOpen, onClose }) {
 }
 
 const ProfessorDB = () => {
-  const professorName = sessionStorage.getItem("Name") || "Professor";
-  const professorImage = sessionStorage.getItem("PersonalImage");
-  const storedUserId = sessionStorage.getItem("userId");
+  const professorName = getSession("Name") || "Professor";
+  // decryptData(sessionStorage.getItem("Name")) || "Professor";
+  const professorImage = getSession("PersonalImage");
+  // const professorImage = decryptData(sessionStorage.getItem("PersonalImage"));
+  const storedUserId = getSession("userId");
+  // const storedUserId = decryptData(sessionStorage.getItem("userId"));
 
   const [isModalOpen, setModalOpen] = useState(false);
   const [isModal2Open, setModal2Open] = useState(false);
@@ -406,9 +410,10 @@ const ProfessorDB = () => {
     const openStartWeekChangeModal = () => setStartWeekModal(true);
     const closeStartWeekChangeModal = () => setStartWeekModal(false);
 
-    if (sessionStorage.getItem("Type") !== "Professor") {
-      return <Navigate to="/" />;
-    }
+    // if (decryptData(sessionStorage.getItem("Type")) !== "Professor") {
+    // if (getSession("Type") !== "Professor") {
+    //   return <Navigate to="/" />;
+    // }
     return (
       <div className="container AssignmentSection">
         <div className="profDB_UpperButtons">

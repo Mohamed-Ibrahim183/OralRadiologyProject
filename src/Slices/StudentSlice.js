@@ -49,10 +49,10 @@ export function getSubmittedAssignmentCategories(data) {
     data
   );
 }
-export function getSubmissionForUserReport(data) {
+export function getSubmissionForUserReport(StudentId) {
   return methods.get(
     server + "AssignmentLogic.php/GetSubmissionForUserReport",
-    data
+    { StudentId }
   );
 }
 
@@ -60,5 +60,16 @@ export function studentReport(studentId) {
   return methods.get(
     server + "AssignmentLogic.php/GetAssignmentSubmissionStudentReport",
     { Id: studentId }
+  );
+}
+
+export function getBestGrade(studentId, assignmentId) {
+  // this endPoint will return Array[Total:number, count:Number] or -1 if there is not submissions for this student at this assignment
+  return methods.get(
+    server + "AssignmentLogic.php/getBestGradeStudentAssignment",
+    {
+      assignmentId,
+      studentId,
+    }
   );
 }

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Navigate } from "react-router-dom";
-import CryptoJS from "crypto-js";
 import {
   getAssignmentData,
   makeNewSubmission,
@@ -14,17 +13,7 @@ import TimeLeftSection from "./components/TimeLeftSection";
 import CategoriesSection from "./components/CategoriesSection";
 import Submissions from "./components/Submissions";
 import "./assignmentPage2.css";
-
-// Constants
-const SECRET_KEY = "Abo_el_Mana3eeeeeeeem343rfetvrfdncy54erncgfd";
-
-// Helper functions
-const encryptData = (data) =>
-  CryptoJS.AES.encrypt(JSON.stringify(data), SECRET_KEY).toString();
-const decryptData = (encryptedData) => {
-  const bytes = CryptoJS.AES.decrypt(encryptedData, SECRET_KEY);
-  return JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
-};
+import { decryptData, encryptData } from "../Controller";
 
 const AssignmentPage2 = ({ assignment }) => {
   const [assignmentData, setAssignmentData] = useState(null);
@@ -48,12 +37,14 @@ const AssignmentPage2 = ({ assignment }) => {
   const assignmentId = assignmentData?.Id || "N/A";
 
   // Store assignment data securely in session storage
+
   useEffect(() => {
     if (assignment) {
       const encryptedAssignment = encryptData(assignment);
       sessionStorage.setItem("AssignmentData", encryptedAssignment);
       setAssignmentData(assignment);
     }
+    return () => sessionStorage.removeItem("AssignmentData");
   }, [assignment]);
 
   // Load encrypted data and states from session storage

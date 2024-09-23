@@ -4,6 +4,7 @@ import { ContextData } from "../../ContextData";
 import { useNavigate } from "react-router-dom";
 import { serverURL, userLogin } from "../../Slices/GeneralSlice";
 import toast from "react-hot-toast";
+import { encryptData, setSession } from "../Controller";
 
 function Login3() {
   const [identifier, setIdentifier] = useState("");
@@ -40,11 +41,13 @@ function Login3() {
             Type: res.msg.Type,
             PersonalImage: serverURL + res.msg.PersonalImage,
           };
-          Object.keys(data).forEach((key) =>
-            sessionStorage.setItem(key, data[key])
+          Object.keys(data).forEach(
+            (key) => setSession(key, data[key])
+            // sessionStorage.setItem(key, encryptData(data[key]))
           );
           setUserType(res.msg.Type);
-          sessionStorage.setItem("full", JSON.stringify(res.msg));
+          // sessionStorage.setItem("full", encryptData(JSON.stringify(res.msg)));
+          setSession("full", JSON.stringify(res.msg));
           conData.dispatch({ type: "setUser", payload: res.msg });
         } else alert(res.msg);
       })
