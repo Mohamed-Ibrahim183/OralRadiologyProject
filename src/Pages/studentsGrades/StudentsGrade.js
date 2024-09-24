@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Box } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import { getAllAssignmentsNames } from "../../Slices/PorfessorSlice";
-import { mockDataTeam } from "./mockdata";
+import { mockDataTeam } from "./mockdata"; // Ensure mock data is imported correctly
 import "./StudentsGrade.css";
 
 const StudentsGrade = () => {
