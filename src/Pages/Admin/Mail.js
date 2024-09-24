@@ -9,7 +9,7 @@ import {
   Typography,
   Autocomplete,
 } from "@mui/material";
-import { axiosMethods } from "../Controller";
+import { axiosMethods, decryptData, getSession } from "../Controller";
 import emailjs from "@emailjs/browser";
 
 function Mail() {
@@ -97,7 +97,8 @@ function Mail() {
         "template_r8ll4fg",
         {
           to_name: user.Name,
-          from_name: sessionStorage["Name"],
+          from_name: getSession("Name"),
+          // from_name: decryptData(sessionStorage["Name"]),
           message: message,
           to_Email: user.Email,
         },
@@ -119,7 +120,8 @@ function Mail() {
               "template_r8ll4fg",
               {
                 to_name: element.Name,
-                from_name: sessionStorage["Name"],
+                from_name: getSession("Name"),
+                // from_name: decryptData(sessionStorage["Name"]),
                 message: message,
                 to_Email: element.Email,
               },

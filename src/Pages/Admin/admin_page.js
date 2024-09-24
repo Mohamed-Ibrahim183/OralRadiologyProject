@@ -8,9 +8,11 @@ import Mail from "./Mail.js";
 
 import { Navigate } from "react-router-dom";
 import { Box } from "@mui/material";
+import { decryptData, getSession } from "../Controller.jsx";
 
 function AdminPage() {
-  if (sessionStorage["Type"] !== "Admin") {
+  // if (decryptData(sessionStorage["Type"]) !== "Admin") {
+  if (getSession("Type") !== "Admin") {
     return <Navigate to="/" />;
   }
   const cardsData = [

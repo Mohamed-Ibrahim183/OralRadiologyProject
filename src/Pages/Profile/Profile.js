@@ -5,12 +5,23 @@ import {
   changePassword,
   changesInUserProfile,
 } from "../../Slices/GeneralSlice";
+import {
+  decryptData,
+  encryptData,
+  getSession,
+  setSession,
+} from "../Controller";
 
 const initialState = {
-  MSAId: sessionStorage.getItem("MSAId") || "",
-  username: sessionStorage.getItem("Name") || "",
-  Email: sessionStorage.getItem("Email") || "",
-  Group: sessionStorage.getItem("Group") || "",
+  MSAId: getSession("MSAId"),
+  username: getSession("Name"),
+  Email: getSession("Email"),
+  Group: getSession("Group"),
+
+  // MSAId: decryptData(sessionStorage.getItem("MSAId")) || "",
+  // username: decryptData(sessionStorage.getItem("Name")) || "",
+  // Email: decryptData(sessionStorage.getItem("Email")) || "",
+  // Group: decryptData(sessionStorage.getItem("Group")) || "",
 };
 
 function reducer(state, action) {
@@ -27,7 +38,8 @@ function reducer(state, action) {
 const Profile = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const [personalImag, setPersonalImag] = useState(
-    sessionStorage.getItem("PersonalImage")
+    getSession("PersonalImage")
+    // decryptData(sessionStorage.getItem("PersonalImage"))
   );
   const [pass, setPass] = useState("");
   const placeImage = useRef();
@@ -62,7 +74,8 @@ const Profile = () => {
     e.preventDefault();
     changePassword({
       password: pass,
-      Id: sessionStorage.getItem("userId"),
+      Id: getSession("userId"),
+      // Id: decryptData(sessionStorage.getItem("userId")),
     }).then((res) => console.log(res.msg));
   }
 
@@ -70,7 +83,8 @@ const Profile = () => {
     const url =
       "http://localhost/Projects/OralRadiology/userLogic.php/UpdateImage";
     let fData = new FormData();
-    fData.append("Id", sessionStorage.getItem("userId"));
+    fData.append("Id", getSession("userId"));
+    // fData.append("Id", decryptData(sessionStorage.getItem("userId")));
     fData.append("MSAId", state.MSAId);
     fData.append("Profile", event.target.files[0]);
     axios
@@ -81,7 +95,8 @@ const Profile = () => {
           res.data +
           "?t=" +
           Math.random();
-        sessionStorage.setItem("PersonalImage", newImageUrl);
+        setSession("PersonalImage", newImageUrl);
+        // sessionStorage.setItem("PersonalImage", encryptData(newImageUrl));
         setPersonalImag(newImageUrl);
       })
       .catch((error) => console.error(error));
@@ -92,8 +107,10 @@ const Profile = () => {
     changesInUserProfile(state).then((res) => {
       console.log(res.msg);
       if (res.msg === "UPDATED") {
-        sessionStorage.setItem("Email", state.Email);
-        sessionStorage.setItem("Name", state.username);
+        setSession("Email", state.Email);
+        setSession("Name", state.username);
+        // sessionStorage.setItem("Email", encryptData(state.Email));
+        // sessionStorage.setItem("Name", encryptData(state.username));
       }
     });
   }

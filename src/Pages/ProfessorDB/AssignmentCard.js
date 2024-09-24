@@ -6,6 +6,7 @@ import { Delete, Edit, Grade, Grading } from "@mui/icons-material";
 
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import EditIcon from "@mui/icons-material/Edit";
+import { encryptData } from "../Controller";
 const AssignmentCard = (props) => {
   // props.assignmentId
   const label = {
@@ -13,8 +14,8 @@ const AssignmentCard = (props) => {
   };
 
   const handleClick = () => {
-    sessionStorage.setItem("userId", props.userId);
-    sessionStorage.setItem("assignmentId", props.assignmentId); // Lowercase "a"
+    sessionStorage.setItem("userId", encryptData(props.userId));
+    sessionStorage.setItem("assignmentId", encryptData(props.assignmentId)); // Lowercase "a"
   };
   return (
     <div className="AssCard" style={label}>
@@ -57,7 +58,10 @@ const AssignmentCard = (props) => {
             color="primary"
             className="assignmentCardBtns"
             onClick={() => {
-              sessionStorage.setItem("editAssignment", props.assignmentId);
+              sessionStorage.setItem(
+                "editAssignment",
+                encryptData(props.assignmentId)
+              );
             }}
           >
             <div className="assignmentCardBtnsText">Edit</div>

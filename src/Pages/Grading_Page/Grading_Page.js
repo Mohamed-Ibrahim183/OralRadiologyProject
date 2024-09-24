@@ -14,7 +14,14 @@ import {
 import "./Grading.css";
 import { getSubmissionByAssignment } from "../../Slices/PorfessorSlice";
 import { serverURL } from "../../Slices/GeneralSlice";
-import { validArray } from "../Controller";
+import {
+  decryptData,
+  encryptData,
+  getSession,
+  removeSessionKey,
+  setSession,
+  validArray,
+} from "../Controller";
 import { getAssignmentData } from "../../Slices/StudentSlice";
 import toast from "react-hot-toast";
 
@@ -91,7 +98,8 @@ function GradingPage() {
           });
     });
 
-    return () => sessionStorage.removeItem("submissionData");
+    return () => removeSessionKey("submissionData");
+    // return () => sessionStorage.removeItem("submissionData");
   }, [assignmentId, state.render]);
 
   useEffect(() => {
@@ -119,13 +127,15 @@ function GradingPage() {
   };
 
   const updateSessionData = (studentId, newData) => {
-    const sessionData =
-      JSON.parse(sessionStorage.getItem("submissionData")) || {};
+    const sessionData = JSON.parse(getSession("submissionData")) || {};
+    // JSON.parse(decryptData(sessionStorage.getItem("submissionData"))) || {};
     sessionData[studentId] = { ...sessionData[studentId], ...newData };
-    sessionStorage.setItem("submissionData", JSON.stringify(sessionData));
+    // sessionStorage.setItem("submissionData", encryptData(JSON.stringify(sessionData)));
+    setSession("submissionData", JSON.stringify(sessionData));
   };
 
-  if (sessionStorage["Type"] !== "Professor") return <Navigate to="/" />;
+  // if (decryptData(sessionStorage["Type"]) !== "Professor")
+  if (getSession("Type") !== "Professor") return <Navigate to="/" />;
 
   if (error) return <p>Error: {error}</p>;
 

@@ -19,10 +19,20 @@ import {
   getSubmissionById,
 } from "../../Slices/StudentSlice";
 import AssignmentPage2 from "../assignment_page2/assignmentPage2";
+import {
+  decryptData,
+  encryptData,
+  getSession,
+  removeSessionKey,
+  setSession,
+} from "../Controller";
 const StudentDB = () => {
-  const studentName = sessionStorage["Name"] || "Student";
-  const personalImage = sessionStorage["PersonalImage"];
-  const UserId = sessionStorage["userId"];
+  const studentName = getSession("Name") || "Student";
+  const personalImage = getSession("PersonalImage");
+  const UserId = getSession("userId");
+  // const studentName = decryptData(sessionStorage["Name"]) || "Student";
+  // const personalImage = decryptData(sessionStorage["PersonalImage"]);
+  // const UserId = decryptData(sessionStorage["userId"]);
 
   const [assignments, setAssignments] = useState([]);
   const [filteredAssignments, setFilteredAssignments] = useState([]);
@@ -92,12 +102,20 @@ const StudentDB = () => {
 
     return processedAssignments;
   };
-  if (sessionStorage.getItem("state")) {
-    sessionStorage.removeItem("state");
+  // if (decryptData(sessionStorage.getItem("state"))) {
+  if (getSession("state")) {
+    // sessionStorage.removeItem("state");
+    removeSessionKey("state");
   }
-  sessionStorage.removeItem("state");
-  sessionStorage.removeItem("submitted");
-  sessionStorage.removeItem("isClosed");
+  // sessionStorage.removeItem("state");
+  // sessionStorage.removeItem("submitted");
+  // sessionStorage.removeItem("isClosed");
+  removeSessionKey("state");
+  removeSessionKey("submitted");
+  removeSessionKey("isClosed");
+  // sessionStorage.removeItem("state");
+  // sessionStorage.removeItem("submitted");
+  // sessionStorage.removeItem("isClosed");
   // sessionStorage.removeItem("AssignmentData");
   // sessionStorage.removeItem("assignmentId");
   useEffect(() => {
@@ -172,7 +190,9 @@ const StudentDB = () => {
   }, [assignments, filter, sortingType, sortingOrder]);
 
   const handleAssignmentClick = (assignment) => {
-    sessionStorage.setItem("assignmentId", assignment.Id);
+    setSession("assignmentId", assignment.Id);
+
+    // sessionStorage.setItem("assignmentId", encryptData(assignment.Id));
 
     // Create the new search query
     const searchParams = new URLSearchParams();
@@ -242,8 +262,10 @@ const StudentDB = () => {
     const now = new Date();
     const openDate = new Date(assignment.open);
     const closeDate = new Date(assignment.close);
-    sessionStorage.setItem("openDate", openDate);
-    sessionStorage.setItem("closeDate", closeDate);
+    setSession("openData", openDate);
+    setSession("closeData", closeDate);
+    // sessionStorage.setItem("openDate", encryptData(openDate));
+    // sessionStorage.setItem("closeDate", encryptData(closeDate));
     if (openDate <= now && closeDate < now) {
       // Time since the task has closed
       let timeSinceClosed = (now - closeDate) / 1000; // time since closed in seconds
@@ -295,7 +317,8 @@ const StudentDB = () => {
     }
   };
 
-  if (sessionStorage["Type"] !== "Student") {
+  // if (decryptData(sessionStorage["Type"]) !== "Student") {
+  if (getSession("Type") !== "Student") {
     return <Navigate to="/" />;
   }
 
