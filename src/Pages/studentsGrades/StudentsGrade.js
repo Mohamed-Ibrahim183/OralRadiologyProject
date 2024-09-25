@@ -48,13 +48,15 @@ const StudentsGrade = () => {
 
   // Generate rows with student assignment data
 
-  return "";
+  // return "";
   // !!comment From MOHAMED uncomment those lines if you want to continue work in this page because those lines make error in teh project!!
-  // <Box className="root">
-  //   <Box className="grid-container">
-  //     <DataGrid rows={mockDataTeam} columns={columns} autoHeight />
-  //   </Box>
-  // </Box>
+  return (
+    <Box className="root">
+      <Box className="grid-container">
+        <DataGrid rows={mockDataTeam} columns={columns} autoHeight />
+      </Box>
+    </Box>
+  );
 };
 
 export default StudentsGrade;

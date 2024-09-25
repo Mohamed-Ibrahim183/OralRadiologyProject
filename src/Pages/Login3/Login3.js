@@ -4,7 +4,7 @@ import { ContextData } from "../../ContextData";
 import { useNavigate } from "react-router-dom";
 import { serverURL, userLogin } from "../../Slices/GeneralSlice";
 import toast from "react-hot-toast";
-import { encryptData, setSession } from "../Controller";
+import { encryptData, getSession, setSession } from "../Controller";
 
 function Login3() {
   const [identifier, setIdentifier] = useState("");
@@ -49,6 +49,9 @@ function Login3() {
           // sessionStorage.setItem("full", encryptData(JSON.stringify(res.msg)));
           setSession("full", JSON.stringify(res.msg));
           conData.dispatch({ type: "setUser", payload: res.msg });
+
+          console.log('getSession("full"):', getSession("full"));
+          console.log('getSession("Type"):', getSession("Type"));
         } else alert(res.msg);
       })
       .catch((err) => {

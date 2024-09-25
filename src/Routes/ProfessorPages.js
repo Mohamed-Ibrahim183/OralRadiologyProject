@@ -1,10 +1,10 @@
 import React, { Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
 // import GradingPage from "../Pages/Grading_Page/Grading_Page";
+// const GradingPage = lazy(() => import("./Grading_Page/Grading_Page"));
 import Dashboard from "../Pages/Dashboard";
 import GradingPage from "../Pages/Grading_Page/Grading_Page";
 import NewAssignment from "../Pages/ProfessorDB/NewAssignment/NewAssignment";
-// const GradingPage = lazy(() => import("./Grading_Page/Grading_Page"));
 import EditAssignment from "../Pages/ProfessorDB/EditAssignment/EditAssignment";
 import StudentsGrade from "../Pages/studentsGrades/StudentsGrade";
 function ProfessorPages() {
