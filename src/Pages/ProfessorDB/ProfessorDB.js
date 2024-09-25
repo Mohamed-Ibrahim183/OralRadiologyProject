@@ -371,6 +371,8 @@ const ProfessorDB = () => {
   useEffect(() => {
     getstartweeek();
   }, []);
+  console.log("Rendered");
+  console.log(getSession("Type"));
 
   const getStatusProps = (assignment) => {
     const now = new Date();
@@ -764,7 +766,7 @@ function Categories() {
                 <div>
                   <Button
                     variant="outlined"
-                    color="secondary"
+    con                color="secondary"
                     onClick={() =>
                       dispatch({ type: "openEditCatModal", payload: cat })
                     }

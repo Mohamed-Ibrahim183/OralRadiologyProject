@@ -20,11 +20,13 @@ import {
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import logo from "./logo.png";
-import { decryptData } from "../../Pages/Controller";
+import { getSession } from "../../Pages/Controller";
+// import { decryptData } from "../../Pages/Controller";
 
 const Navbar = () => {
   const [Links, setLinks] = useState(null);
-  const userType = decryptData(sessionStorage["Type"]);
+  const userType = getSession("Type");
+  // const userType = decryptData(sessionStorage["Type"]);
   const [anchorElUser, setAnchorElUser] = useState(null);
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -194,12 +196,15 @@ const Navbar = () => {
               )
             )}
           </Box>
-          {decryptData(sessionStorage["PersonalImage"] || "") && (
+          {getSession("PersonalImage") && (
+            // {decryptData(sessionStorage["PersonalImage"] || "") && (
             <Tooltip title="Open Menu" sx={{ mx: 2 }}>
               <IconButton onClick={handleOpenUserMenu}>
                 <Avatar
-                  src={decryptData(sessionStorage["PersonalImage"])}
-                  alt={decryptData(sessionStorage["Name"])}
+                  src={getSession("PersonalImage")}
+                  alt={getSession("Name")}
+                  // src={decryptData(sessionStorage["PersonalImage"])}
+                  // alt={decryptData(sessionStorage["Name"])}
                 />
               </IconButton>
             </Tooltip>
