@@ -10,7 +10,7 @@ import {
 } from "../../../Slices/PorfessorSlice";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
-
+import { decryptData } from "../../Controller";
 function EditAssignment() {
   const [assignmentName, setAssignmentName] = useState("");
   const [topicName, setTopicName] = useState("");
@@ -21,7 +21,9 @@ function EditAssignment() {
   const [loading, setLoading] = useState(false);
   const [categories, setCategories] = useState([]);
   const navigator = useNavigate();
-  const assignmentId = parseInt(sessionStorage.getItem("editAssignment"));
+  const assignmentId = parseInt(
+    decryptData(sessionStorage.getItem("editAssignment"))
+  );
 
   useEffect(() => {
     const fetchData = async () => {

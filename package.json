@@ -51,7 +51,8 @@
     "react-slick": "^0.30.2",
     "react-to-print": "^2.15.1",
     "slick-carousel": "^1.8.1",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "xlsx": "^0.18.5"
   },
   "scripts": {
     "start": "react-scripts start",
