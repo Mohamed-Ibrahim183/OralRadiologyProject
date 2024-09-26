@@ -8,11 +8,13 @@ import {
 } from "../../../Slices/PorfessorSlice";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
-
+import { decryptData } from "../../Controller";
+//edcsxwd
 function NewAssignment() {
   const [assignmentName, setAssignmentName] = useState("");
   const [topicName, setTopicName] = useState("");
-  const userId = sessionStorage["userId"];
+  const userId = decryptData(sessionStorage.getItem("userId"));
+  console.log(userId);
   const [loading, setLoading] = useState(false);
   const [categories, setCategories] = useState([]);
   const [selectedCategories, setSelectedCategories] = useState([]);
@@ -50,7 +52,7 @@ function NewAssignment() {
       setCategories(res.msg);
     });
     // check if edit or insert
-    if (sessionStorage.getItem("editAssignment")) {
+    if (decryptData(sessionStorage.getItem("editAssignment"))) {
       // get the assignment data
     }
   }, []);

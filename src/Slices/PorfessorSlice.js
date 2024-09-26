@@ -9,18 +9,17 @@ export function getAllAssignmentsData() {
 export function getAllAssignmentsNames() {
   return methods.get(serverURL + "AssignmentLogic.php/getAllAssignmentsNames");
 }
-export function getAllStudentsAssignmentsBestGrades() {
-  return methods.get(
-    serverURL + "AssignmentLogic.php/getAllStudentsAssignmentsBestGrades"
-  );
+export function getGradesRows() {
+  console.log("getGradesRows");
+  return methods.get(serverURL + "AssignmentLogic.php/getGradesRows");
 }
+
 export function getSingleAssignmentData(assignmentId) {
   return methods.get(
     `${serverURL}AssignmentLogic.php/getSingleAssignmentData?assignmentId=${assignmentId}`
   );
   //  { assignmentId: assignmentId }
 }
-
 export function getAllCategoriesData() {
   return methods.get(serverURL + "AssignmentLogic.php/GetCategories");
 }
