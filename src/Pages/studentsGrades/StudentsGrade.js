@@ -7,7 +7,7 @@ import {
   getGradesRows,
 } from "../../Slices/PorfessorSlice";
 import "./StudentsGrade.css";
-//
+//xsazsz
 const StudentsGrade = () => {
   const [columns, setColumns] = useState([
     { field: "id", headerName: "ID", flex: 0.5 }, // Use flex for auto-width
