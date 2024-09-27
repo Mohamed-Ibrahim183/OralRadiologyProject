@@ -10,20 +10,18 @@ import {
 } from "../../../Slices/PorfessorSlice";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
-import { decryptData } from "../../Controller";
+import { getSession } from "../../Controller";
 function EditAssignment() {
   const [assignmentName, setAssignmentName] = useState("");
   const [topicName, setTopicName] = useState("");
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [selectedWeeks, setSelectedWeeks] = useState([]);
   const [isDeleteModalOpen, setDeleteModalOpen] = useState(false); // State for modal
-  const userId = sessionStorage["userId"];
+  // const userId = getSession("userId");
   const [loading, setLoading] = useState(false);
   const [categories, setCategories] = useState([]);
   const navigator = useNavigate();
-  const assignmentId = parseInt(
-    decryptData(sessionStorage.getItem("editAssignment"))
-  );
+  const assignmentId = parseInt(getSession("editAssignment"));
 
   useEffect(() => {
     const fetchData = async () => {

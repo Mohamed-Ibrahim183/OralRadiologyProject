@@ -12,7 +12,7 @@ import { Bar } from "react-chartjs-2";
 
 import { getAllAssignmentsData } from "../../Slices/PorfessorSlice";
 import { studentReport } from "../../Slices/StudentSlice";
-import { decryptData, getSession } from "../Controller";
+import { getSession } from "../Controller";
 
 ChartJS.register(
   CategoryScale,
@@ -48,9 +48,6 @@ const ChartComponent = () => {
   }, []);
   useEffect(() => {
     studentReport(getSession("userId")).then((res) => setSubmissions(res.msg));
-    // studentReport(decryptData(sessionStorage.getItem("userId"))).then((res) =>
-    //   setSubmissions(res.msg)
-    // );
   }, []);
 
   const data = {

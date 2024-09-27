@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./Submissions.css";
 import { getSubmissionUserAssignment } from "../../../Slices/StudentSlice";
+import { getSession } from "../../Controller";
 
 const Submissions = ({ assignment, update }) => {
   const [submissions, setSubmissions] = useState([]);
@@ -8,8 +9,8 @@ const Submissions = ({ assignment, update }) => {
   useEffect(() => {
     const fetchSubmissions = async () => {
       const res = await getSubmissionUserAssignment({
-        userId: sessionStorage.getItem("userId"),
-        assignmentId: sessionStorage.getItem("assignmentId"),
+        userId: getSession("userId"),
+        assignmentId: getSession("assignmentId"),
       });
       setSubmissions(res.msg);
       console.log(res.msg);

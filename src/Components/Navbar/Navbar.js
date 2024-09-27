@@ -21,12 +21,11 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 import logo from "./logo.png";
 import { getSession } from "../../Pages/Controller";
-// import { decryptData } from "../../Pages/Controller";
 
 const Navbar = () => {
   const [Links, setLinks] = useState(null);
   const userType = getSession("Type");
-  // const userType = decryptData(sessionStorage["Type"]);
+
   const [anchorElUser, setAnchorElUser] = useState(null);
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -173,9 +172,6 @@ const Navbar = () => {
                   variant="contained" // You can choose "contained", "outlined", or "text" for the style
                   color="primary"
                   key={index}
-                  onClick={() => {
-                    //   sessionStorage.setItem("actionType", "insert");
-                  }}
                 >
                   <Link
                     style={{ color: "inherit", textDecoration: "none" }}
@@ -197,14 +193,11 @@ const Navbar = () => {
             )}
           </Box>
           {getSession("PersonalImage") && (
-            // {decryptData(sessionStorage["PersonalImage"] || "") && (
             <Tooltip title="Open Menu" sx={{ mx: 2 }}>
               <IconButton onClick={handleOpenUserMenu}>
                 <Avatar
                   src={getSession("PersonalImage")}
                   alt={getSession("Name")}
-                  // src={decryptData(sessionStorage["PersonalImage"])}
-                  // alt={decryptData(sessionStorage["Name"])}
                 />
               </IconButton>
             </Tooltip>

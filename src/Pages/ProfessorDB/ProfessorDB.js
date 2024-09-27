@@ -44,7 +44,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { getAssignmentsGroupsShow } from "../../Slices/PorfessorSlice";
 import toast from "react-hot-toast";
-import { decryptData, getSession, validArray } from "../Controller";
+import { getSession, validArray } from "../Controller";
 
 function GroupsData() {
   const [isModalOpen, setModalOpen] = useState(false);
@@ -135,7 +135,6 @@ function AddRequirementModal({ isOpen, onClose }) {
   const [topicName, setTopicName] = useState("");
   const [maxImages, setMaxImages] = useState("");
   const userId = getSession("userId");
-  // const userId = decryptData(sessionStorage["userId"]);
   const [loading, setLoading] = useState(false); // State to handle loading status
   const [categories, setcategories] = useState([]);
   const [selectedCategories, setSelectedCategories] = useState([]);
@@ -269,11 +268,8 @@ function AddRequirementModal({ isOpen, onClose }) {
 
 const ProfessorDB = () => {
   const professorName = getSession("Name") || "Professor";
-  // decryptData(sessionStorage.getItem("Name")) || "Professor";
   const professorImage = getSession("PersonalImage");
-  // const professorImage = decryptData(sessionStorage.getItem("PersonalImage"));
   const storedUserId = getSession("userId");
-  // const storedUserId = decryptData(sessionStorage.getItem("userId"));
 
   const [isModalOpen, setModalOpen] = useState(false);
   const [isModal2Open, setModal2Open] = useState(false);
@@ -296,7 +292,7 @@ const ProfessorDB = () => {
 
   useEffect(() => {
     !storedUserId
-      ? console.error("UserId not found in sessionStorage")
+      ? console.error("UserId not found in session Storage")
       : setUserId(storedUserId);
     getAllAssignmentsData().then((res) => setAssignments(res.msg || []));
   }, [storedUserId, updateAssignments]);
@@ -412,26 +408,13 @@ const ProfessorDB = () => {
     const openStartWeekChangeModal = () => setStartWeekModal(true);
     const closeStartWeekChangeModal = () => setStartWeekModal(false);
 
-    // if (decryptData(sessionStorage.getItem("Type")) !== "Professor") {
-    // if (getSession("Type") !== "Professor") {
-    //   return <Navigate to="/" />;
-    // }
+    if (getSession("Type") !== "Professor") {
+      return <Navigate to="/" />;
+    }
     return (
       <div className="container AssignmentSection">
         <div className="profDB_UpperButtons">
           <GroupsData />
-          {/* <Link to="/professor/NewAssignment">
-            <Button
-              variant="contained"
-              color="primary"
-              // onClick={() => setModalOpen(true)}
-              // endIcon={<Add />}
-
-              className="profDB_UpperButton"
-            >
-              Add Requirement
-            </Button>
-          </Link> */}
           <Button
             variant="contained"
             color="primary"
@@ -766,7 +749,8 @@ function Categories() {
                 <div>
                   <Button
                     variant="outlined"
-    con                color="secondary"
+                    con
+                    color="secondary"
                     onClick={() =>
                       dispatch({ type: "openEditCatModal", payload: cat })
                     }

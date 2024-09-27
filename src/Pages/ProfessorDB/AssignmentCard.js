@@ -2,11 +2,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Button from "@mui/material/Button";
-import { Delete, Edit, Grade, Grading } from "@mui/icons-material";
+import { Grading } from "@mui/icons-material";
 
-import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import EditIcon from "@mui/icons-material/Edit";
-import { encryptData } from "../Controller";
+import { setSession } from "../Controller";
 const AssignmentCard = (props) => {
   // props.assignmentId
   const label = {
@@ -14,8 +13,8 @@ const AssignmentCard = (props) => {
   };
 
   const handleClick = () => {
-    sessionStorage.setItem("userId", encryptData(props.userId));
-    sessionStorage.setItem("assignmentId", encryptData(props.assignmentId)); // Lowercase "a"
+    setSession("userId", props.userId);
+    setSession("assignmentId", props.assignmentId); // Lowercase "a"
   };
   return (
     <div className="AssCard" style={label}>
@@ -35,22 +34,6 @@ const AssignmentCard = (props) => {
       </Link>
 
       <div className="grade">
-        {/* <Button
-          sx={{ color: "white" }}
-          variant="contained"
-          color="primary"
-          onClick={() => {
-            sessionStorage.setItem("editAssignment", props.assignmentId);
-          }}
-          endIcon={<Edit />}
-        >
-          Edit Assignment
-        </Button> */}
-        {/* <Modal2
-          open={isModal2Open}
-          onClose={handleCloseModal2}
-          AssignmentId={props.assignmentId}
-        /> */}
         <Link to="/professor/EditAssignment">
           <Button
             sx={{ colo: "white" }}
@@ -58,10 +41,7 @@ const AssignmentCard = (props) => {
             color="primary"
             className="assignmentCardBtns"
             onClick={() => {
-              sessionStorage.setItem(
-                "editAssignment",
-                encryptData(props.assignmentId)
-              );
+              setSession("editAssignment", props.assignmentId);
             }}
           >
             <div className="assignmentCardBtnsText">Edit</div>

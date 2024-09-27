@@ -4,7 +4,7 @@ import {
   getAllGroupsData,
   insertNewGroup,
 } from "../../Slices/AdminSlice";
-import { decryptData, getSession, validArray } from "../Controller";
+import { getSession, validArray } from "../Controller";
 import { Button } from "@mui/material";
 import "./API.css";
 import "./ADDGroup.css";
@@ -238,7 +238,6 @@ const AddGroup2 = () => {
     return isValid;
   }
   if (getSession("Type") !== "Admin") return <Navigate to="/" />;
-  // if (decryptData(sessionStorage["Type"] )!== "Admin") return <Navigate to="/" />;
 
   return (
     <>

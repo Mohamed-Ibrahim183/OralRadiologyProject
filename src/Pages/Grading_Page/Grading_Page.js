@@ -15,8 +15,6 @@ import "./Grading.css";
 import { getSubmissionByAssignment } from "../../Slices/PorfessorSlice";
 import { serverURL } from "../../Slices/GeneralSlice";
 import {
-  decryptData,
-  encryptData,
   getSession,
   removeSessionKey,
   setSession,
@@ -78,7 +76,7 @@ function GradingPage() {
 
   useEffect(() => {
     if (!assignmentId) {
-      console.error("AssignmentId or UserId not found in sessionStorage");
+      console.error("AssignmentId or UserId not found in session Storage");
       setError("Assignment ID or User ID missing in session storage.");
       return;
     }
@@ -99,7 +97,7 @@ function GradingPage() {
     });
 
     return () => removeSessionKey("submissionData");
-    // return () => sessionStorage.removeItem("submissionData");
+    // return () => removeSessionKey("submissionData");
   }, [assignmentId, state.render]);
 
   useEffect(() => {
@@ -128,13 +126,12 @@ function GradingPage() {
 
   const updateSessionData = (studentId, newData) => {
     const sessionData = JSON.parse(getSession("submissionData")) || {};
-    // JSON.parse(decryptData(sessionStorage.getItem("submissionData"))) || {};
+
     sessionData[studentId] = { ...sessionData[studentId], ...newData };
-    // sessionStorage.setItem("submissionData", encryptData(JSON.stringify(sessionData)));
+
     setSession("submissionData", JSON.stringify(sessionData));
   };
 
-  // if (decryptData(sessionStorage["Type"]) !== "Professor")
   if (getSession("Type") !== "Professor") return <Navigate to="/" />;
 
   if (error) return <p>Error: {error}</p>;
