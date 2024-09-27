@@ -10,8 +10,13 @@ import "./StudentsGrade.css";
 //xsazszmnnn,mbv nmvbnxfdghvjbkl;kbvucxfykchvljbn;
 const StudentsGrade = () => {
   const [columns, setColumns] = useState([
-    { field: "id", headerName: "ID", flex: 0.5 }, // Use flex for auto-width
-    { field: "name", headerName: "Name", flex: 1 },
+    { field: "id", headerName: "ID", flex: 0.5, cellClassName: "col-1-style" }, // Use flex for auto-width
+    {
+      field: "name",
+      headerName: "Name",
+      flex: 1,
+      cellClassName: "col-1-style",
+    },
   ]);
   const [rows, setRows] = useState([]);
 
