@@ -68,7 +68,214 @@
   font-size: 1rem;
   font-weight: 300;
 }
+.footer .copyrights {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+}
 
+.footer .team-member {
+  text-decoration: underline;
+  cursor: pointer;
+  position: relative;
+}
+
+.footer .modal-overlay {
+  position: fixed; /* Fixed position to cover the entire viewport */
+  top: 0;
+  left: 0;
+  width: 100vw; /* Full width */
+  height: 100vh; /* Full height */
+  background-color: rgba(0, 0, 0, 0.7); /* Darker overlay for more contrast */
+  z-index: 1000;
+  display: flex; /* Use flexbox to center the modal */
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+}
+
+.footer .modal-content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 12px; /* Slightly more rounded corners */
+  width: 400px; /* Increased width for better readability */
+  max-width: 90%;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Slightly stronger shadow */
+  text-align: center;
+  animation: fadeIn 0.3s ease; /* Added animation */
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.footer .modal-content h2 {
+  margin-bottom: 12px;
+  font-size: 24px; /* Larger font size for the title */
+  color: #333; /* Darker color for better readability */
+}
+
+.footer .modal-content p {
+  white-space: pre-line; /* Keeps the new lines in the info */
+  color: #444; /* Softer black for the text */
+  margin: 8px 0; /* Spacing between paragraphs */
+}
+
+.footer .info-text {
+  font-weight: bold; /* Highlight info text */
+  color: #555;
+  font-size: medium;
+}
+
+.footer .icon-container {
+  justify-content: center; /* Center the icons */
+  gap: 15px; /* Space between icons */
+  margin-top: 10px; /* Space above the icons */
+  width: 100%;
+}
+.footer .icon-linkk {
+  color: #0056b3;
+  background-color: rgb(243, 241, 241);
+  border-radius: 15px;
+  padding-left: 13px;
+  padding-right: 13px;
+}
+
+.footer .icon-link:hover {
+  color: #0056b3; /* Darker blue on hover */
+}
+
+/* Modal button styles */
+.footer .modal-content button {
+  margin-top: 20px;
+  padding: 12px 24px;
+  background-color: #007bff; /* Bootstrap primary color */
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* Smooth transition */
+  font-size: 16px; /* Slightly larger font */
+}
+
+.footer .modal-content button:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
+.footer .memberInfo {
+  display: flex;
+}
+.footer .rightpart {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.footer .icon-link {
+  color: #007bff; /* Bootstrap primary color */
+  text-decoration: none; /* Remove underline for cleaner look */
+  font-size: 24px; /* Increase icon size */
+  transition: color 0.3s ease; /* Smooth color transition */
+  display: flex;
+  align-items: center;
+  width: 180px;
+  overflow: hidden;
+  object-fit: cover;
+  background-color: rgb(243, 241, 241);
+  border-radius: 15px;
+  margin-bottom: 20px;
+  padding-left: 13px;
+  align-self: center;
+}
+.footer .linkk {
+  white-space: nowrap; /* Prevent text from wrapping to a new line */
+  overflow: hidden; /* Prevent overflowing content */
+  text-overflow: ellipsis;
+  font-size: small;
+}
+.footer .icon-container .icon-link .icon {
+  margin-right: 6px;
+  width: 30px;
+  transition: transform 0.3s ease;
+}
+.footer .linkedinicon {
+  width: 40px;
+  transform: scale(1.2);
+}
+
+.leftpart {
+  flex: 1;
+}
+.teamMemberPhoto {
+  width: 150px;
+  height: 150px;
+  border-radius: 20px;
+  object-fit: cover;
+}
+.icon-small-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+.two {
+  display: flex;
+  gap: 11px;
+}
+@media (max-width: 450px) {
+  .memberInfo {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .footer .icon-container .icon-link {
+    align-self: center;
+  }
+}
+@media (max-width: 654px) {
+  .copyrights p {
+    font-size: medium;
+    margin-left: 2px;
+    margin-right: 2px;
+  }
+  .one {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .two {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+  .two p {
+    margin-top: -8px;
+    font-size: 14px;
+  }
+  .copyrights {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .footer .rightpart {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+}
 .wave {
   position: absolute;
   top: -100px;

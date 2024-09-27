@@ -126,6 +126,7 @@ body {
   text-align: center;
 }
 /* Scrollable  Gallery */
+
 .HomePage .scroll-container {
   display: flex;
   gap: 1rem;
@@ -135,8 +136,11 @@ body {
   scroll-padding: 1rem;
   margin-bottom: 6rem;
   background-color: var(--btnB);
+  width: 100%;
 }
-
+.HomePage .scroll-container::-webkit-scrollbar {
+  display: none;
+}
 .HomePage .scroll-container img {
   width: 100%;
   max-width: 300px;
@@ -159,7 +163,6 @@ body {
 /* For Large Screens - Show 4 Images */
 @media (min-width: 1200px) {
   .HomePage .scroll-container {
-    max-width: 1200px; /* Set a max width */
   }
 }
 

@@ -15,7 +15,7 @@ import Submissions from "./components/Submissions";
 import "./assignmentPage2.css";
 import { decryptData, encryptData } from "../Controller";
 
-const AssignmentPage2 = ({ assignment }) => {
+const AssignmentPage2 = () => {
   const [assignmentData, setAssignmentData] = useState(null);
   const [assignmentInfo, setAssignmentInfo] = useState({});
   const [categories, setCategories] = useState([]);
@@ -27,7 +27,7 @@ const AssignmentPage2 = ({ assignment }) => {
     minutes: 0,
     seconds: 0,
   });
-  const [state, setState] = useState("");
+  const [state, setState] = useState("loading");
   const [submitted, setSubmitted] = useState(false);
   const [update, setUpdate] = useState(0);
 
@@ -39,13 +39,12 @@ const AssignmentPage2 = ({ assignment }) => {
   // Store assignment data securely in session storage
 
   useEffect(() => {
-    if (assignment) {
-      const encryptedAssignment = encryptData(assignment);
-      sessionStorage.setItem("AssignmentData", encryptedAssignment);
-      setAssignmentData(assignment);
+    if (decryptData(sessionStorage.getItem("AssignmentData"))) {
+      sessionStorage.getItem("AssignmentData");
+      setAssignmentData(decryptData(sessionStorage.getItem("AssignmentData")));
     }
-    return () => sessionStorage.removeItem("AssignmentData");
-  }, [assignment]);
+    // return () => sessionStorage.removeItem("AssignmentData");
+  }, []);
 
   // Load encrypted data and states from session storage
   useEffect(() => {
@@ -241,6 +240,12 @@ const AssignmentPage2 = ({ assignment }) => {
 
   const renderSubmissionState = () => {
     switch (state) {
+      case "loading":
+        return {
+          buttonLabel: "Loading...",
+          isClosed: true,
+          message: "Loading...",
+        };
       case "inprogress":
         return { buttonLabel: "Upload", isClosed: false, message: "Time left" };
       case "upcoming":

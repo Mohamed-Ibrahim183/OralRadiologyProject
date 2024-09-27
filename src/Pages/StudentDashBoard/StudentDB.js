@@ -18,21 +18,17 @@ import {
   getAssignmentsForUser,
   getSubmissionById,
 } from "../../Slices/StudentSlice";
-import AssignmentPage2 from "../assignment_page2/assignmentPage2";
 import {
-  decryptData,
   encryptData,
   getSession,
   removeSessionKey,
   setSession,
 } from "../Controller";
+
 const StudentDB = () => {
   const studentName = getSession("Name") || "Student";
   const personalImage = getSession("PersonalImage");
   const UserId = getSession("userId");
-  // const studentName = decryptData(sessionStorage["Name"]) || "Student";
-  // const personalImage = decryptData(sessionStorage["PersonalImage"]);
-  // const UserId = decryptData(sessionStorage["userId"]);
 
   const [assignments, setAssignments] = useState([]);
   const [filteredAssignments, setFilteredAssignments] = useState([]);
@@ -102,22 +98,14 @@ const StudentDB = () => {
 
     return processedAssignments;
   };
-  // if (decryptData(sessionStorage.getItem("state"))) {
   if (getSession("state")) {
-    // sessionStorage.removeItem("state");
     removeSessionKey("state");
   }
-  // sessionStorage.removeItem("state");
-  // sessionStorage.removeItem("submitted");
-  // sessionStorage.removeItem("isClosed");
+
   removeSessionKey("state");
   removeSessionKey("submitted");
   removeSessionKey("isClosed");
-  // sessionStorage.removeItem("state");
-  // sessionStorage.removeItem("submitted");
-  // sessionStorage.removeItem("isClosed");
-  // sessionStorage.removeItem("AssignmentData");
-  // sessionStorage.removeItem("assignmentId");
+
   useEffect(() => {
     getAssignmentsForUser({ userId: UserId }).then((res) => {
       if (res.msg["Err"] === 1) {
@@ -195,18 +183,21 @@ const StudentDB = () => {
     // sessionStorage.setItem("assignmentId", encryptData(assignment.Id));
 
     // Create the new search query
-    const searchParams = new URLSearchParams();
-    searchParams.set("userId", UserId);
-    searchParams.set("assignmentId", assignment.Id);
+    // const searchParams = new URLSearchParams();
+    // searchParams.set("userId", UserId);
+    // searchParams.set("assignmentId", assignment.Id);
 
-    // Use pushState to update the URL with both pathname and search params
-    const newUrl = {
-      pathname: "/student/submit2",
-      search: `?${searchParams.toString()}`,
-    };
+    // // Use pushState to update the URL with both pathname and search params
+    // const newUrl = {
+    //   pathname: "/student/submit2",
+    //   search: `?${searchParams.toString()}`,
+    // };
 
-    window.history.pushState(null, "", newUrl.pathname + newUrl.search);
-
+    //window.history.pushState(null, "", newUrl.pathname + newUrl.search);
+    if (assignment) {
+      const encryptedAssignment = encryptData(assignment);
+      sessionStorage.setItem("AssignmentData", encryptedAssignment);
+    }
     setSelectedAssignment(assignment);
   };
 
@@ -252,11 +243,11 @@ const StudentDB = () => {
     return { state: "unknown", col: "grey", remaining: null };
   };
   if (selectedAssignment) {
-    return (
-      <AssignmentPage2
-        assignment={selectedAssignment} // Pass the selected assignment as a prop
-      />
-    );
+    // return (
+    //   <AssignmentPage2
+    //     assignment={selectedAssignment} // Pass the selected assignment as a prop
+    //   />
+    // );
   }
   const putRemaininginSession = (assignment) => {
     const now = new Date();
@@ -402,19 +393,21 @@ const StudentDB = () => {
                 filteredAssignments.map((assignment, i) => {
                   const { state, col, remaining } = getStatusProps(assignment);
                   return (
-                    <div
-                      key={i}
-                      className="assignmentCardWrapper"
-                      onClick={() => handleAssignmentClick(assignment)} // Call the click handler
-                    >
-                      <AssignmentCard
-                        name={assignment.Name}
-                        info={`week ${assignment.week_num} `}
-                        col={col}
-                        state={state}
-                        remaining={remaining ? `${remaining}  remaining` : ""}
-                      ></AssignmentCard>
-                    </div>
+                    <Link to="/Student/submit2">
+                      <div
+                        key={i}
+                        className="assignmentCardWrapper"
+                        onClick={() => handleAssignmentClick(assignment)} // Call the click handler
+                      >
+                        <AssignmentCard
+                          name={assignment.Name}
+                          info={`week ${assignment.week_num} `}
+                          col={col}
+                          state={state}
+                          remaining={remaining ? `${remaining}  remaining` : ""}
+                        ></AssignmentCard>
+                      </div>
+                    </Link>
                   );
                 })}
               {Error !== "" && <p>{Error}</p>}
