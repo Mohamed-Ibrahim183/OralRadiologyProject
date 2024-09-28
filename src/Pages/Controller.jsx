@@ -4,42 +4,13 @@ import axios from "axios";
 export function validArray(array) {
   return Array.isArray(array) && array.length > 0;
 }
-// const SECRET_KEY = "Abo_el_Mana3eeeeeeeem343rfetvrfdncy54erncgfd";
-// const SECRET_KEY = "IIIIHelloWorldThisIsMonemAndMohamedSecretKeyIIII";
-export function removeSessionKey(key, hashKey = false) {
-  if (hashKey) sessionStorage.removeItem(encryptData(key));
-  else sessionStorage.removeItem(key);
-}
-export function getSession(key, hashKey = false) {
-  const sessionValue = hashKey
-    ? sessionStorage.getItem(encryptData(key) ?? "")
-    : sessionStorage.getItem(key) ?? "";
-
-  if (sessionValue) return decryptData(sessionValue); // Add return here
-
-  return null; // Return null if no value is found
-  // return sessionStorage.getItem(key) ?? "";
-}
-
-export function setSession(key, value, hashKey = false) {
-  const encryptedValue = encryptData(value ?? "");
-  // console.log("Encrypted Value:", encryptedValue);
-
-  if (hashKey) {
-    const encryptedKey = encryptData(key ?? "");
-    // console.log("Encrypted Key:", encryptedKey);
-    sessionStorage.setItem(encryptedKey, encryptedValue);
-  } else {
-    sessionStorage.setItem(key, encryptedValue);
-  }
-  // sessionStorage.setItem(key, value);
-}
-
-// Helper functions
+// Encrypt the data with a given secret key
 export const encryptData = (
   data,
   key = "IIIIHelloWorldThisIsMonemAndMohamedSecretKeyIIII"
 ) => CryptoJS.AES.encrypt(JSON.stringify(data), key).toString();
+
+// Decrypt the data with a given secret key
 export const decryptData = (
   encryptedData,
   key = "IIIIHelloWorldThisIsMonemAndMohamedSecretKeyIIII"
@@ -62,6 +33,50 @@ export const decryptData = (
     return null;
   }
 };
+
+// Use hashed key for session storage if hashKey is true
+export function setSession(key, value, hashKey = true) {
+  const encryptedValue = encryptData(value ?? "");
+
+  if (hashKey) {
+    // Encrypt the key ONCE before using it
+    const hashedKey = CryptoJS.SHA256(key).toString(); // Use a hash function like SHA-256
+    sessionStorage.setItem(hashedKey, encryptedValue); // Store the hashed key with encrypted value
+  } else {
+    sessionStorage.setItem(key, encryptedValue); // Store the plain key with encrypted value
+  }
+}
+
+// Retrieve session value using hashed key if hashKey is true
+export function getSession(key, hashKey = true) {
+  let sessionValue;
+
+  if (hashKey) {
+    // Hash the key the same way as in setSession
+    const hashedKey = CryptoJS.SHA256(key).toString();
+    sessionValue = sessionStorage.getItem(hashedKey) ?? "";
+  } else {
+    sessionValue = sessionStorage.getItem(key) ?? "";
+  }
+
+  if (sessionValue) {
+    return decryptData(sessionValue); // Decrypt the stored value
+  }
+
+  return null; // Return null if no value is found
+}
+
+// Remove session value using hashed key if hashKey is true
+export function removeSessionKey(key, hashKey = true) {
+  if (hashKey) {
+    const hashedKey = CryptoJS.SHA256(key).toString(); // Hash the key same way
+    sessionStorage.removeItem(hashedKey); // Remove the hashed key from sessionStorage
+  } else {
+    sessionStorage.removeItem(key); // Remove the plain key from sessionStorage
+  }
+}
+
+// Helper functions
 
 class axiosMethods {
   get(url, params = {}) {
