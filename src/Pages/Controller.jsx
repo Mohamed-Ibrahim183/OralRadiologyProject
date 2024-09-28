@@ -11,30 +11,28 @@ export function removeSessionKey(key, hashKey = false) {
   else sessionStorage.removeItem(key);
 }
 export function getSession(key, hashKey = false) {
-  // const sessionValue = hashKey
-  //   ? sessionStorage.getItem(encryptData(key) ?? "")
-  //   : sessionStorage.getItem(key) ?? "";
+  const sessionValue = hashKey
+    ? sessionStorage.getItem(encryptData(key) ?? "")
+    : sessionStorage.getItem(key) ?? "";
 
-  // if (sessionValue) {
-  //   return decryptData(sessionValue); // Add return here
-  // }
+  if (sessionValue) return decryptData(sessionValue); // Add return here
 
-  // return null; // Return null if no value is found
-  return sessionStorage.getItem(key) ?? "";
+  return null; // Return null if no value is found
+  // return sessionStorage.getItem(key) ?? "";
 }
 
 export function setSession(key, value, hashKey = false) {
-  // const encryptedValue = encryptData(value ?? "");
+  const encryptedValue = encryptData(value ?? "");
   // console.log("Encrypted Value:", encryptedValue);
 
-  // if (hashKey) {
-  //   const encryptedKey = encryptData(key ?? "");
-  //   console.log("Encrypted Key:", encryptedKey);
-  //   sessionStorage.setItem(encryptedKey, encryptedValue);
-  // } else {
-  //   sessionStorage.setItem(key, encryptedValue);
-  // }
-  sessionStorage.setItem(key, value);
+  if (hashKey) {
+    const encryptedKey = encryptData(key ?? "");
+    // console.log("Encrypted Key:", encryptedKey);
+    sessionStorage.setItem(encryptedKey, encryptedValue);
+  } else {
+    sessionStorage.setItem(key, encryptedValue);
+  }
+  // sessionStorage.setItem(key, value);
 }
 
 // Helper functions

@@ -18,12 +18,7 @@ import {
   getAssignmentsForUser,
   getSubmissionById,
 } from "../../Slices/StudentSlice";
-import {
-  encryptData,
-  getSession,
-  removeSessionKey,
-  setSession,
-} from "../Controller";
+import { getSession, removeSessionKey, setSession } from "../Controller";
 
 const StudentDB = () => {
   const studentName = getSession("Name") || "Student";
@@ -180,24 +175,7 @@ const StudentDB = () => {
   const handleAssignmentClick = (assignment) => {
     setSession("assignmentId", assignment.Id);
 
-    // sessionStorage.setItem("assignmentId", encryptData(assignment.Id));
-
-    // Create the new search query
-    // const searchParams = new URLSearchParams();
-    // searchParams.set("userId", UserId);
-    // searchParams.set("assignmentId", assignment.Id);
-
-    // // Use pushState to update the URL with both pathname and search params
-    // const newUrl = {
-    //   pathname: "/student/submit2",
-    //   search: `?${searchParams.toString()}`,
-    // };
-
-    //window.history.pushState(null, "", newUrl.pathname + newUrl.search);
-    if (assignment) {
-      const encryptedAssignment = encryptData(assignment);
-      sessionStorage.setItem("AssignmentData", encryptedAssignment);
-    }
+    if (assignment) setSession("AssignmentData", assignment);
     setSelectedAssignment(assignment);
   };
 
@@ -255,8 +233,7 @@ const StudentDB = () => {
     const closeDate = new Date(assignment.close);
     setSession("openData", openDate);
     setSession("closeData", closeDate);
-    // sessionStorage.setItem("openDate", encryptData(openDate));
-    // sessionStorage.setItem("closeDate", encryptData(closeDate));
+
     if (openDate <= now && closeDate < now) {
       // Time since the task has closed
       let timeSinceClosed = (now - closeDate) / 1000; // time since closed in seconds
@@ -308,7 +285,6 @@ const StudentDB = () => {
     }
   };
 
-  // if (decryptData(sessionStorage["Type"]) !== "Student") {
   if (getSession("Type") !== "Student") {
     return <Navigate to="/" />;
   }

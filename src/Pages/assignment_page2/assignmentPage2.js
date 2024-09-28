@@ -13,7 +13,7 @@ import TimeLeftSection from "./components/TimeLeftSection";
 import CategoriesSection from "./components/CategoriesSection";
 import Submissions from "./components/Submissions";
 import "./assignmentPage2.css";
-import { decryptData, encryptData } from "../Controller";
+import { getSession, removeSessionKey, setSession } from "../Controller";
 
 const AssignmentPage2 = () => {
   const [assignmentData, setAssignmentData] = useState(null);
@@ -31,7 +31,7 @@ const AssignmentPage2 = () => {
   const [submitted, setSubmitted] = useState(false);
   const [update, setUpdate] = useState(0);
 
-  const studentId = sessionStorage.getItem("userId");
+  const studentId = getSession("userId");
   const closeDate = assignmentData ? new Date(assignmentData.close) : null;
   const openDate = assignmentData ? new Date(assignmentData.open) : null;
   const assignmentId = assignmentData?.Id || "N/A";
@@ -39,22 +39,23 @@ const AssignmentPage2 = () => {
   // Store assignment data securely in session storage
 
   useEffect(() => {
-    if (decryptData(sessionStorage.getItem("AssignmentData"))) {
-      sessionStorage.getItem("AssignmentData");
-      setAssignmentData(decryptData(sessionStorage.getItem("AssignmentData")));
+    if (getSession("AssignmentData")) {
+      getSession("AssignmentData");
+      setAssignmentData(getSession("AssignmentData"));
     }
-    // return () => sessionStorage.removeItem("AssignmentData");
+
+    // return () => removeSessionKey("AssignmentData");
   }, []);
 
   // Load encrypted data and states from session storage
   useEffect(() => {
-    const encryptedAssignment = sessionStorage.getItem("AssignmentData");
-    const savedState = sessionStorage.getItem("state");
-    const isClosedStored = sessionStorage.getItem("isClosed") === "true";
-    const submittedStored = sessionStorage.getItem("submitted") === "true";
+    const encryptedAssignment = getSession("AssignmentData");
+    const savedState = getSession("state");
+    const isClosedStored = getSession("isClosed") === "true";
+    const submittedStored = getSession("submitted") === "true";
 
     if (encryptedAssignment) {
-      setAssignmentData(decryptData(encryptedAssignment));
+      setAssignmentData(encryptedAssignment);
     }
     if (savedState) {
       setState(savedState);
@@ -84,6 +85,7 @@ const AssignmentPage2 = () => {
     fetchSubmittedCategories();
 
     return () => clearInterval(timer);
+    // eslint-disable-next-line
   }, [assignmentData, submitted, state]);
 
   // Fetch submission status for the current assignment week
@@ -146,10 +148,8 @@ const AssignmentPage2 = () => {
   const updateState = (newState) => {
     if (state !== newState || (state !== "submitted" && !submitted)) {
       setState(newState);
-      sessionStorage.setItem("state", newState);
-      if (newState === "submitted") {
-        sessionStorage.setItem("submitted", "true");
-      }
+      setSession("state", newState);
+      if (newState === "submitted") setSession("submitted", true);
     }
   };
 
@@ -226,7 +226,7 @@ const AssignmentPage2 = () => {
       );
 
       updateState("submitted");
-      sessionStorage.setItem("isClosed", true);
+      setSession("isClosed", true);
       alert("Files uploaded successfully.");
     } catch (error) {
       console.error("Error uploading files:", error);
@@ -234,7 +234,7 @@ const AssignmentPage2 = () => {
     }
   };
 
-  if (sessionStorage.getItem("Type") !== "Student") {
+  if (getSession("Type") !== "Student") {
     return <Navigate to="/" />;
   }
 

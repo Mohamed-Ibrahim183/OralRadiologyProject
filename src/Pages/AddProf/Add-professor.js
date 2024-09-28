@@ -3,13 +3,12 @@ import "./AddProf.css";
 import { Navigate } from "react-router-dom";
 import { insertByMSAId } from "../../Slices/AdminSlice";
 import toast from "react-hot-toast";
-import { decryptData, getSession } from "../Controller";
+import { getSession } from "../Controller";
 
 export default function AddUser() {
   const [finalData, setFinalData] = useState({ Type: "Student" });
   const inputField = useRef();
 
-  // if (decryptData(sessionStorage["Type"]) !== "Admin") {
   if (getSession("Type") !== "Admin") {
     return <Navigate to="/" />;
   }

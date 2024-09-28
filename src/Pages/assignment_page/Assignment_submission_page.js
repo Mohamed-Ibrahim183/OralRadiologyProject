@@ -15,36 +15,34 @@ import {
   uploadNewAssignmentImage,
 } from "../../Slices/StudentSlice";
 import { getAllCategoriesData } from "../../Slices/PorfessorSlice";
+import { getSession } from "../Controller";
 
 const AssignmentSubmission = () => {
   const [assignmentInfo, setAssignmentInfo] = useState({});
+  // eslint-disable-next-line
   const [searchParams, setSearchParams] = useSearchParams();
   const [files, setFiles] = useState([]);
   const [categories, setCategories] = useState({});
   const [currentIndex, setCurrentIndex] = useState(0);
   const [update, setUpdate] = useState(0);
-  const state = sessionStorage.getItem("state");
+  const state = getSession("state");
 
   useEffect(() => {
     const fetchAssignmentInfo = async () => {
-      const assignmentId = sessionStorage.getItem("assignmentId");
+      const assignmentId = getSession("assignmentId");
       if (!assignmentId) {
         console.error("Assignment ID is not set in session storage.");
         return;
       }
       await getAssignmentData({
         assignmentId: assignmentId,
-      }).then((res) => {
-        setAssignmentInfo(res.msg);
-        //console.log(res.msg);
-      });
+      }).then((res) => setAssignmentInfo(res.msg));
     };
 
     fetchAssignmentInfo();
   }, []);
-  // console.log(assignmentInfo);
 
-  if (sessionStorage["Type"] !== "Student") {
+  if (getSession("Type") !== "Student") {
     return <Navigate to="/" />;
   }
 
@@ -148,7 +146,7 @@ const AssignmentSubmission = () => {
   };
 
   const AssignmentInfo = () => {
-    const remainingTime = sessionStorage.getItem("RemainingTime");
+    const remainingTime = getSession("RemainingTime");
     return (
       <>
         <div className="assignment-info">
@@ -267,8 +265,8 @@ function Submissions({ assignment, update }) {
   const [submissions, setSubmissions] = useState([]);
   useEffect(() => {
     getSubmissionUserAssignment({
-      userId: sessionStorage.getItem("userId"),
-      assignmentId: sessionStorage.getItem("assignmentId"),
+      userId: getSession("userId"),
+      assignmentId: getSession("assignmentId"),
     }).then((res) => setSubmissions(res.msg));
   }, [update]);
 

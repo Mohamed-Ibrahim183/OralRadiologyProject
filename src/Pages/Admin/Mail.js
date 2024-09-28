@@ -9,8 +9,9 @@ import {
   Typography,
   Autocomplete,
 } from "@mui/material";
-import { axiosMethods, decryptData, getSession } from "../Controller";
+import { axiosMethods, getSession } from "../Controller";
 import emailjs from "@emailjs/browser";
+import { serverURL } from "../../Slices/GeneralSlice";
 
 function Mail() {
   const [to, setTo] = useState("");
@@ -26,31 +27,21 @@ function Mail() {
     setFile(e.target.files[0]);
   };
 
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   console.log({ to, message, file });
-  // };
-
   useEffect(() => {
-    new axiosMethods()
-      .get("http://localhost/Projects/OralRadiology/userLogic.php/Users")
-      .then((res) => {
-        const msg = res.msg;
+    new axiosMethods().get(`${serverURL}userLogic.php/Users`).then((res) => {
+      const msg = res.msg;
 
-        const users = msg.map((ele) => {
-          return {
-            ...ele,
-            PersonalImage:
-              "http://localhost/Projects/OralRadiology/" + ele.PersonalImage,
-          };
-        });
-        setUsersData(users);
-        setFilteredUsers(users);
+      const users = msg.map((ele) => {
+        return {
+          ...ele,
+          PersonalImage: serverURL + ele.PersonalImage,
+        };
       });
+      setUsersData(users);
+      setFilteredUsers(users);
+    });
     new axiosMethods()
-      .get(
-        "http://localhost/Projects/OralRadiology/GroupLogic.php/getGroupsNames"
-      )
+      .get(`${serverURL}GroupLogic.php/getGroupsNames`)
       .then((res) => {
         setGroups(res.msg);
       });
@@ -98,7 +89,6 @@ function Mail() {
         {
           to_name: user.Name,
           from_name: getSession("Name"),
-          // from_name: decryptData(sessionStorage["Name"]),
           message: message,
           to_Email: user.Email,
         },
@@ -107,10 +97,7 @@ function Mail() {
     } else {
       // to filed is group
       new axiosMethods()
-        .get(
-          "http://localhost/Projects/OralRadiology/GroupLogic.php/UsersMails/" +
-            user.Id // group id
-        )
+        .get(`${serverURL}GroupLogic.php/UsersMails/${user.Id}`)
         .then((res) => {
           const usersData = res.msg;
 
@@ -121,7 +108,6 @@ function Mail() {
               {
                 to_name: element.Name,
                 from_name: getSession("Name"),
-                // from_name: decryptData(sessionStorage["Name"]),
                 message: message,
                 to_Email: element.Email,
               },

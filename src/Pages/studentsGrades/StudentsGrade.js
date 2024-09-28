@@ -7,7 +7,8 @@ import {
   getGradesRows,
 } from "../../Slices/PorfessorSlice";
 import "./StudentsGrade.css";
-//xsazszmnnn,mbv nmvbnxfdghvjbkl;kbvucxfykchvljbn;
+import { getSession } from "../Controller";
+
 const StudentsGrade = () => {
   const [columns, setColumns] = useState([
     { field: "id", headerName: "ID", flex: 0.5 }, // Use flex for auto-width
@@ -18,9 +19,9 @@ const StudentsGrade = () => {
   // Fetch assignments data and update columns
   useEffect(() => {
     const fetchAssignments = async () => {
-      const storedUserId = sessionStorage.getItem("userId");
+      const storedUserId = getSession("userId");
       if (!storedUserId) {
-        console.error("UserId not found in sessionStorage");
+        console.error("UserId not found in session Storage");
         return;
       }
       try {
