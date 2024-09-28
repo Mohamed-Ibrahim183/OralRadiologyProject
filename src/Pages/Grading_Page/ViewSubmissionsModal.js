@@ -8,7 +8,6 @@ import {
   getAssignmentImages,
 } from "../../Slices/PorfessorSlice";
 import { serverURL } from "../../Slices/GeneralSlice";
-<<<<<<< HEAD
 import toast from "react-hot-toast";
 import { validArray } from "../Controller";
 function ViewSubmissionsModal({
@@ -17,10 +16,6 @@ function ViewSubmissionsModal({
   submission,
   fullSubmission,
 }) {
-=======
-
-const ViewSubmissionsModal = ({ show, handleClose, submission }) => {
->>>>>>> e42daeee1c85d15d332c68f45d6a6632b8f35faf
   const [images, setImages] = useState([]);
   const [openImageModal, setOpenImageModal] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
