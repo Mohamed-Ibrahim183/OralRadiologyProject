@@ -30,9 +30,12 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  -webkit-transition: transform 0.3s, background 0.3s; /* Safari */
   transition: transform 0.3s, background 0.3s;
 }
+
 .AddGroup table td button:hover {
+  -webkit-transform: scale(1.1); /* Safari */
   transform: scale(1.1);
 }
 .AddGroup table .Del {

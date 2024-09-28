@@ -10,7 +10,7 @@ import {
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
 
-import { getAllAssignmentsData } from "../../Slices/PorfessorSlice";
+//import { getAllAssignmentsData } from "../../Slices/PorfessorSlice";
 import { studentReport } from "../../Slices/StudentSlice";
 import { getSession } from "../Controller";
 
@@ -28,12 +28,9 @@ const ChartComponent = () => {
   const [labelColor, setLabelColor] = useState("#283747");
   const [titleColor, setTitleColor] = useState("#5D6D7E");
 
-  const [assignments, setAssignments] = useState([]);
+  //const [assignments, setAssignments] = useState([]);
   const [submissions, setSubmissions] = useState([]);
 
-  useEffect(() => {
-    getAllAssignmentsData().then((res) => setAssignments(res.msg));
-  }, []);
   // useEffect to set the color based on the theme
   useEffect(() => {
     const theme = localStorage.getItem("Theme");

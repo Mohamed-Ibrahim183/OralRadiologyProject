@@ -57,49 +57,69 @@ const Footer = () => {
         </div>
         <ul className="social-icon">
           <li className="social-icon__item">
-            <a className="social-icon__link" href="#">
+            <a
+              className="social-icon__link"
+              href="https://www.facebook.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <ion-icon name="logo-facebook"></ion-icon>
             </a>
           </li>
           <li className="social-icon__item">
-            <a className="social-icon__link" href="#">
+            <a
+              className="social-icon__link"
+              href="https://twitter.com" // Replace with a valid URL
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <ion-icon name="logo-twitter"></ion-icon>
             </a>
           </li>
           <li className="social-icon__item">
-            <a className="social-icon__link" href="#">
+            <a
+              className="social-icon__link"
+              href="https://www.linkedin.com" // Replace with the valid LinkedIn URL
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <ion-icon name="logo-linkedin"></ion-icon>
             </a>
           </li>
           <li className="social-icon__item">
-            <a className="social-icon__link" href="#">
+            <a
+              className="social-icon__link"
+              href="https://www.instagram.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <ion-icon name="logo-instagram"></ion-icon>
             </a>
           </li>
         </ul>
         <ul className="menu">
           <li className="menu__item">
-            <a className="menu__link" href="#">
+            <a className="menu__link" href="#Home">
               Home
             </a>
           </li>
           <li className="menu__item">
-            <a className="menu__link" href="#">
+            <a className="menu__link" href="#About">
               About
             </a>
           </li>
           <li className="menu__item">
-            <a className="menu__link" href="#">
+            <a className="menu__link" href="#Services">
               Services
             </a>
           </li>
           <li className="menu__item">
-            <a className="menu__link" href="#">
+            <a className="menu__link" href="#Team">
               Team
             </a>
           </li>
           <li className="menu__item">
-            <a className="menu__link" href="#">
+            <a className="menu__link" href="#Contact">
               Contact
             </a>
           </li>

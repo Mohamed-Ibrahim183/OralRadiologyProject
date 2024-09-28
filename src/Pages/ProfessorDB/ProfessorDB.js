@@ -353,43 +353,9 @@ const ProfessorDB = () => {
     getstartweeek();
   }, []);
 
-  const getStatusProps = (assignment) => {
-    const now = new Date();
-    const openDate = new Date(assignment.open);
-    const closeDate = new Date(assignment.close);
-
-    if (openDate <= now && closeDate < now) {
-      return { state: "closed", col: "red", remaining: 0 };
-    } else if (openDate <= now && closeDate >= now) {
-      const remainingTime = (closeDate - now) / 60000; // remaining time in minutes
-      let remaining;
-
-      if (remainingTime > 1440) {
-        // more than 24 hours
-        remaining = `${Math.round(remainingTime / 1440)} days remaining`;
-      } else {
-        if (remainingTime > 60) {
-          // more than 60 minutes
-          remaining = `${Math.round(remainingTime / 60)} hours remaining`;
-        } else {
-          if (remainingTime < 60) {
-            // less than 60 minutes
-            remaining = `${Math.round(remainingTime)} minutes remaining`;
-          }
-        }
-      }
-      return { state: "inprogress", col: "blue", remaining };
-    } else if (openDate > now) {
-      return { state: "upcoming", col: "green", remaining: null };
-    }
-    return { state: "unknown", col: "grey", remaining: null };
-  };
-
   const AssignmentsContainer = () => {
     const [categoriesModal, setCategoriesModal] = useState(false);
     const [startWeekModal, setStartWeekModal] = useState(false);
-    const openStartWeekChangeModal = () => setStartWeekModal(true);
-    const closeStartWeekChangeModal = () => setStartWeekModal(false);
 
     if (getSession("Type") !== "Professor") {
       return <Navigate to="/" />;

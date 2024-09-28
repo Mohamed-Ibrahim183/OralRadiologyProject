@@ -29,7 +29,7 @@ import {
 } from "../../Slices/AdminSlice";
 import { resetPassword, serverURL } from "../../Slices/GeneralSlice";
 import toast from "react-hot-toast";
-import { getSession, MainPage, validArray } from "../Controller";
+import { getSession, validArray } from "../Controller";
 
 const initialState = {
   users: [],
