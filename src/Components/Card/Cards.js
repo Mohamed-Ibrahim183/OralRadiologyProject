@@ -2,13 +2,16 @@ import React, { useRef, useState } from "react";
 import "./Card.css";
 import { useReactToPrint } from "react-to-print";
 import { serverURL } from "../../Slices/GeneralSlice";
+import { getSession } from "../../Pages/Controller";
 
 const Cards = ({ submissions }) => {
   const toPrint = useRef();
 
   const handlePrint = useReactToPrint({
     content: () => toPrint.current,
-    documentTitle: "ALL Assignments Report 236671",
+    documentTitle: `ALL Assignments Report for MSAId:${getSession(
+      "MSAId"
+    )} Name:${getSession("Name")} time:${new Date()}`,
   });
 
   return (

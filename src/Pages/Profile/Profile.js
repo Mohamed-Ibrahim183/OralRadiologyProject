@@ -1,12 +1,14 @@
 import React, { useRef, useReducer, useState } from "react";
-import axios from "axios";
 import "./Profile.css";
 import {
   changePassword,
   changesInUserProfile,
+  savePersonalImage,
   serverURL,
 } from "../../Slices/GeneralSlice";
 import { getSession, setSession } from "../Controller";
+import toast from "react-hot-toast";
+import { Navigate } from "react-router-dom";
 
 const initialState = {
   MSAId: getSession("MSAId"),
@@ -27,6 +29,7 @@ function reducer(state, action) {
 }
 
 const Profile = () => {
+  console.log('getSession("PersonalImage"):', getSession("PersonalImage"));
   const [state, dispatch] = useReducer(reducer, initialState);
   const [personalImag, setPersonalImag] = useState(getSession("PersonalImage"));
   const [pass, setPass] = useState("");
@@ -63,24 +66,23 @@ const Profile = () => {
     changePassword({
       password: pass,
       Id: getSession("userId"),
+    }).then((res) => {
+      if (res.error === "" || res.error.message === "")
+        toast.success("Password Changed Successfully");
     });
   }
 
   function settingFile(event) {
-    const url = `${serverURL}userLogic.php/UpdateImage`;
-    let fData = new FormData();
-    fData.append("Id", getSession("userId"));
-
-    fData.append("MSAId", state.MSAId);
-    fData.append("Profile", event.target.files[0]);
-    axios
-      .post(url, fData)
-      .then((res) => {
-        const newImageUrl = `${serverURL}${res.data}?t=${Math.random()}`;
-        setSession("PersonalImage", newImageUrl);
-        setPersonalImag(newImageUrl);
-      })
-      .catch((error) => console.error(error));
+    savePersonalImage(
+      getSession("userId"),
+      state.MSAId,
+      event.target.files[0]
+    ).then((res) => {
+      console.log(res.msg);
+      const newImageUrl = `${serverURL}${res.msg}?t=${Math.random()}`;
+      setSession("PersonalImage", newImageUrl);
+      setPersonalImag(newImageUrl);
+    });
   }
 
   function updateUser(event) {
@@ -89,9 +91,11 @@ const Profile = () => {
       if (res.msg === "UPDATED") {
         setSession("Email", state.Email);
         setSession("Name", state.username);
+        toast.success("User Updated   Successfully");
       }
     });
   }
+  if (!getSession("userId")) return <Navigate to="/" />;
 
   return (
     <div className="Profile">
@@ -99,7 +103,7 @@ const Profile = () => {
         <div className="personalImage">
           <span className="ImageTitle">Profile Image</span>
           <div className="imageContent">
-            <img src={personalImag} alt="Profile" />
+            <img src={`${personalImag}`} alt="Profile" />
             <span className="imageNote">JPG or PNG no larger than 5 MB</span>
             <div className="Uploading">
               <input
@@ -132,7 +136,7 @@ const Profile = () => {
                       name={field.name}
                       id={field.name}
                       placeholder={field.placeholder}
-                      value={state[field.name]}
+                      value={state[field.name] ?? ""}
                       onChange={(e) =>
                         dispatch({
                           type: "SET_FIELD",
@@ -155,7 +159,7 @@ const Profile = () => {
                   className="pass"
                   type="password"
                   placeholder="Write Your New Password"
-                  value={pass}
+                  value={pass ?? ""}
                   onChange={(e) => setPass(e.target.value)}
                 />
                 <button type="submit" className="SubmitData">

@@ -223,7 +223,12 @@ const Navbar = () => {
                 <Link
                   style={{ color: "inherit" }}
                   to={page.link}
-                  onClick={page.fun ? () => page.fun() : null}
+                  onClick={() => {
+                    if (page.fun) page.fun();
+                    handleCloseUserMenu();
+                  }}
+
+                  // onClick={page.fun ? () => page.fun() : null}
                 >
                   {page.Text}
                 </Link>

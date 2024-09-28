@@ -366,7 +366,7 @@ const StudentDB = () => {
                   const { state, col, remaining } = getStatusProps(assignment);
                   console.log(remaining);
                   return (
-                    <Link to="/Student/submit2">
+                    <Link to="/Student/submit2" key={i}>
                       <div
                         key={i}
                         className="assignmentCardWrapper"

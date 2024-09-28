@@ -9,14 +9,19 @@ import {
   Typography,
   Autocomplete,
 } from "@mui/material";
-import { axiosMethods, getSession } from "../Controller";
-import emailjs from "@emailjs/browser";
+import { getSession } from "../Controller";
 import { serverURL } from "../../Slices/GeneralSlice";
+import {
+  getAllGroupsNamesDB,
+  getAllUsersDB,
+  getUsersMails,
+  sendMailAPI,
+} from "../../Slices/AdminSlice";
 
 function Mail() {
   const [to, setTo] = useState("");
   const [subject, setSubject] = useState("");
-  const [message, setMessage] = useState(" ");
+  const [message, setMessage] = useState(""); // Fixed initial value
   const [file, setFile] = useState(null);
   const [usersData, setUsersData] = useState([]);
   const [user, setUser] = useState(null);
@@ -30,10 +35,8 @@ function Mail() {
   };
 
   useEffect(() => {
-    new axiosMethods().get(`${serverURL}userLogic.php/Users`).then((res) => {
-      const msg = res.msg;
-
-      const users = msg.map((ele) => {
+    getAllUsersDB().then((res) => {
+      const users = res.msg.map((ele) => {
         return {
           ...ele,
           PersonalImage: serverURL + ele.PersonalImage,
@@ -42,11 +45,8 @@ function Mail() {
       setUsersData(users);
       setFilteredUsers(users);
     });
-    new axiosMethods()
-      .get(`${serverURL}GroupLogic.php/getGroupsNames`)
-      .then((res) => {
-        setGroups(res.msg);
-      });
+
+    getAllGroupsNamesDB().then((res) => setGroups(res.msg));
   }, []);
 
   const handleUserSelect = (user) => {
@@ -55,7 +55,7 @@ function Mail() {
       setUser(user);
     } else {
       setTo(user.Name);
-      setUser((prev) => ({ ...prev, Email: "", Id: user.Id })); // Destroy User Email
+      setUser((prev) => ({ ...prev, Email: "", Id: user.Id }));
     }
   };
 
@@ -65,58 +65,35 @@ function Mail() {
       setFilteredUsers(usersData);
     } else {
       const filtered = usersData.filter((user) => {
-        const userIdString = user.Id.toString();
+        const userIdString = user.Id ? user.Id.toString() : "";
+        const msaIdString = user.MSAId ? user.MSAId.toString() : "";
+        const userName = user.Name ? user.Name.toLowerCase() : "";
+        const userEmail = user.Email ? user.Email.toLowerCase() : "";
+
         return (
           userIdString.startsWith(value) ||
-          user.MSAId.toString().startsWith(value) ||
-          user.Name.toLowerCase().includes(value.toLowerCase()) ||
-          user.Email.toLowerCase().includes(value.toLowerCase())
+          msaIdString.startsWith(value) ||
+          userName.includes(value.toLowerCase()) ||
+          userEmail.includes(value.toLowerCase())
         );
       });
       setFilteredUsers(filtered);
     }
   };
 
-  if (!groups) return;
   const sendMail = (e) => {
-    e.preventDefault();
+    e.preventDefault(); // Prevent page reload
 
-    // return;
     if (!user) return;
-    if (user.Email) {
-      // to filed is user
-      emailjs.send(
-        "service_i5cp5yq",
-        "template_r8ll4fg",
-        {
-          to_name: user.Name,
-          from_name: getSession("Name"),
-          message: message,
-          to_Email: user.Email,
-        },
-        "p5suXG8zm4KIy7q0l"
-      );
-    } else {
-      // to filed is group
-      new axiosMethods()
-        .get(`${serverURL}GroupLogic.php/UsersMails/${user.Id}`)
-        .then((res) => {
-          const usersData = res.msg;
-
-          usersData.forEach((element) => {
-            emailjs.send(
-              "service_i5cp5yq",
-              "template_r8ll4fg",
-              {
-                to_name: element.Name,
-                from_name: getSession("Name"),
-                message: message,
-                to_Email: element.Email,
-              },
-              "p5suXG8zm4KIy7q0l"
-            );
-          });
-        });
+    if (user.Email)
+      sendMailAPI(user.Name, getSession("Name"), message, user.Email);
+    else {
+      getUsersMails(user.Id).then((res) => {
+        const usersData = res.msg;
+        usersData.forEach((element) =>
+          sendMailAPI(element.Name, getSession("Name"), message, element.Name)
+        );
+      });
     }
     alert("Email Sent Successfully");
   };
@@ -127,19 +104,17 @@ function Mail() {
         <Autocomplete
           id="free-solo-demo"
           freeSolo
-          options={[...filteredUsers, ...groups]}
+          options={[...(filteredUsers || []), ...(groups || [])]} // Added fallback for null
           getOptionLabel={(option) =>
-            `${option.Id} - ${option.MSAId} - ${option.Name} - ${option.Email}`
+            option.Email
+              ? `${option.Id} - ${option.MSAId} - ${option.Name} - ${option.Email}`
+              : `Group ${option.Id} - ${option.Name}`
           }
           inputValue={to}
           onInputChange={handleToChange}
           onChange={(event, newValue) => handleUserSelect(newValue)}
           renderOption={(props, option) => (
-            <li
-              {...props}
-              key={option.Id + option.Name}
-              onClick={() => handleUserSelect(option)}
-            >
+            <li {...props} key={option.Id + option.Name}>
               <Typography variant="body1" color="initial">
                 {option.Email ? option.Id : `G${option.Id}`}
               </Typography>

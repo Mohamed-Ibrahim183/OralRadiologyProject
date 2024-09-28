@@ -1,5 +1,6 @@
 import { axiosMethods } from "../Pages/Controller";
 import { serverURL } from "./GeneralSlice";
+import emailjs from "@emailjs/browser";
 
 const methods = new axiosMethods();
 
@@ -26,14 +27,32 @@ export function getUsersOfType(Type) {
   return methods.get(url, { Type });
 }
 
+export function getAllUsersDB() {
+  return methods.get(serverURL + "userLogic.php/Users");
+}
 export function deleteUserFromDB(userId) {
   return methods.get(serverURL + "userLogic.php/Delete", { userId });
 }
-
-export function insertNewUser(data) {
-  return methods.post(serverURL + "userLogic.php/Insert", data);
+export function getAllGroupsNamesDB() {
+  return methods.get(serverURL + "GroupLogic.php/getGroupsNames");
 }
-
+export function getUsersMails(groupId) {
+  return methods.get(serverURL + "GroupLogic.php/UsersMails/" + groupId);
+}
 export function insertByMSAId(data) {
   return methods.post(serverURL + "userLogic.php/InsertMSAId", data);
+}
+
+export function sendMailAPI(toName, fromName, message, toEmail) {
+  emailjs.send(
+    "service_i5cp5yq",
+    "template_r8ll4fg",
+    {
+      to_name: toName,
+      from_name: fromName,
+      message: message,
+      to_Email: toEmail,
+    },
+    "p5suXG8zm4KIy7q0l"
+  );
 }
