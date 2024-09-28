@@ -103,13 +103,9 @@ const StudentDB = () => {
 
   useEffect(() => {
     getAssignmentsForUser({ userId: UserId }).then((res) => {
-      if (res.msg["Err"] === 1) {
+      if (res.msg["Err"] === 1)
         setError("User is not in a Group. Please contact the Admin.");
-      } else {
-        const processedAssignments = processAssignments(res.msg);
-        setAssignments(res.msg);
-        console.log(res.msg);
-      }
+      else setAssignments(res.msg);
     });
   }, [UserId]);
 

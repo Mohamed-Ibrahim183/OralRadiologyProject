@@ -34,7 +34,6 @@ const ChartComponent = () => {
   useEffect(() => {
     getAllAssignmentsData().then((res) => setAssignments(res.msg));
   }, []);
-  // console.log(assignments);
   // useEffect to set the color based on the theme
   useEffect(() => {
     const theme = localStorage.getItem("Theme");

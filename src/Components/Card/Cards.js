@@ -1,6 +1,7 @@
 import React, { useRef, useState } from "react";
 import "./Card.css";
 import { useReactToPrint } from "react-to-print";
+import { serverURL } from "../../Slices/GeneralSlice";
 
 const Cards = ({ submissions }) => {
   const toPrint = useRef();
@@ -70,9 +71,7 @@ const Card = ({ images, assignmentName, Features, Data }) => {
             ></i>
             <img
               className="image"
-              src={
-                "http://localhost/Projects/OralRadiology/" + AssImage["Path"]
-              }
+              src={`${serverURL}${AssImage["Path"]}`}
               alt={AssImage["Category"]}
             />
             <i

@@ -63,12 +63,11 @@ const Profile = () => {
     changePassword({
       password: pass,
       Id: getSession("userId"),
-    }).then((res) => console.log(res.msg));
+    });
   }
 
   function settingFile(event) {
-    const url =
-      "http://localhost/Projects/OralRadiology/userLogic.php/UpdateImage";
+    const url = `${serverURL}userLogic.php/UpdateImage`;
     let fData = new FormData();
     fData.append("Id", getSession("userId"));
 
@@ -87,7 +86,6 @@ const Profile = () => {
   function updateUser(event) {
     event.preventDefault();
     changesInUserProfile(state).then((res) => {
-      console.log(res.msg);
       if (res.msg === "UPDATED") {
         setSession("Email", state.Email);
         setSession("Name", state.username);

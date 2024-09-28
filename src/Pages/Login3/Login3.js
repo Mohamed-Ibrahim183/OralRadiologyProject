@@ -26,7 +26,6 @@ function Login3() {
       password,
     })
       .then((res) => {
-        // console.log(res.msg);
         if (typeof res.msg === "object") {
           if (res.msg.Id === undefined) throw new Error(res.msg.Error);
 

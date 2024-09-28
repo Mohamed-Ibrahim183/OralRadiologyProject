@@ -21,8 +21,6 @@ const AddGroup2 = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const [lastIndex, setLastIndex] = useState(0);
 
-  // console.log("once");
-
   function reducer(state, action) {
     switch (action.type) {
       case "setGroups":
@@ -95,9 +93,7 @@ const AddGroup2 = () => {
         fData.append(`Slot${index}`, JSON.stringify(ele));
       });
 
-      insertNewGroup(fData)
-        .then((res) => console.log(res.msg))
-        .catch((err) => console.error(err));
+      insertNewGroup(fData);
       dispatch({ type: "clearSlots" });
       document.getElementById("GroupName").value = "";
       toast.success("Group Saved Successfully");
@@ -153,8 +149,6 @@ const AddGroup2 = () => {
       toast.error("You Must Fill In All Fields to Make a New One");
     }
   }
-
-  // console.log("state.slots:", state.slots);
 
   // Function to generate slot rows
   function generateRow(slot, index) {
@@ -430,7 +424,6 @@ function EditSection({ state, dispatch }) {
                 variant="outlined"
                 color="error"
                 onClick={() => {
-                  console.log("will remove row:", row);
                   setOldGroupSlots(
                     (prev) => prev.filter((slot) => slot.id !== row.id) // Use the `id` to remove slots
                   );

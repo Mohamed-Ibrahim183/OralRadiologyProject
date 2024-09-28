@@ -10,7 +10,6 @@ export function getAllAssignmentsNames() {
   return methods.get(serverURL + "AssignmentLogic.php/getAllAssignmentsNames");
 }
 export function getGradesRows() {
-  console.log("getGradesRows");
   return methods.get(serverURL + "AssignmentLogic.php/getGradesRows");
 }
 
@@ -50,7 +49,6 @@ export function insertNewAssignment(data) {
   return methods.post(serverURL + "AssignmentLogic.php/InsertAssignment", data);
 }
 export function UpdateAssignment(data) {
-  console.log(data);
   return methods.post(serverURL + "AssignmentLogic.php/UpdateAssignment", data);
 }
 
