@@ -12,8 +12,6 @@ export async function DeleteGroup(Id) {
 }
 
 export async function insertNewGroup(data) {
-  console.log("from Admin Slice");
-  console.log(data);
   return methods.post(serverURL + `GroupLogic.php/Insert`, data);
 }
 

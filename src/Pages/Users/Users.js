@@ -107,7 +107,6 @@ const Users = () => {
       fData.append(ele, state.editChanges[ele].Group);
     });
     changeUserGroup(fData).then((res) => {
-      console.log(res.msg);
       dispatch({ type: "clearChanges" });
       dispatch({ type: "render" });
     });
@@ -322,10 +321,7 @@ function FinalModalBeforeSubmit({ open, close, changes, handleSaveChanges2 }) {
 
 function DeleteModalContent({ deleteUser, open, close, onFinish }) {
   function deleteUserDB(userId) {
-    deleteUserFromDB(userId).then((res) => {
-      console.log(res.msg);
-      onFinish();
-    });
+    deleteUserFromDB(userId).then((res) => onFinish());
   }
   if (!deleteUser) return;
   return (

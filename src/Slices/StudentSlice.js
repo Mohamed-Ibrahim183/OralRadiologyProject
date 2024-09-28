@@ -19,7 +19,6 @@ export function getAssignmentData(data) {
 }
 
 export function makeNewSubmission(data) {
-  console.log("Dataaaaaaa:" + data);
   return methods.post(server + "AssignmentLogic.php/newSubmission", data);
 }
 
@@ -43,7 +42,6 @@ export function getSubmissionUserAssignmentWeek(data) {
   );
 }
 export function getSubmittedAssignmentCategories(data) {
-  // console.log(data);
   return methods.get(
     server + "AssignmentLogic.php/getSubmittedAssignmentCategories",
     data

@@ -54,7 +54,6 @@ const AssignmentSubmission = () => {
       initialCategories[file.name] = "";
     });
     setCategories(initialCategories);
-    console.log(categories);
   };
 
   const deleteFile = (index) => {
@@ -104,9 +103,6 @@ const AssignmentSubmission = () => {
       }
       await saveSubmission();
       for (let i = 0; i < files.length; i++) {
-        console.log("before");
-        console.log(files[i]);
-
         uploadNewAssignmentImage({
           assignmentId,
           StudentId: studentId,
@@ -114,7 +110,6 @@ const AssignmentSubmission = () => {
           category: categories[files[i].name],
           submission: lastSubmission,
         }).then((res) => {
-          console.log(res.msg);
           setFiles([]);
           setCategories([]);
           setCurrentIndex(0);

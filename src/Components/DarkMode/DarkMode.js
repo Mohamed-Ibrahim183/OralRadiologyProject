@@ -11,16 +11,11 @@ const DarkMode = () => {
     document.querySelector("body").setAttribute("Theme", "Dark");
     localStorage.setItem("Theme", "Dark");
     conData.setMode(true);
-
-    // conData.mode = true;
   };
   const setLightMode = () => {
     document.querySelector("body").setAttribute("Theme", "Light");
     localStorage.setItem("Theme", "Light");
     conData.setMode(false);
-    // conData.mode = false;
-
-    // console.log(conData);
   };
   function handleDarkMode(e) {
     if (e.target.checked) {

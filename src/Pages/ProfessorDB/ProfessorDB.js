@@ -139,8 +139,6 @@ function AddRequirementModal({ isOpen, onClose }) {
   const [categories, setcategories] = useState([]);
   const [selectedCategories, setSelectedCategories] = useState([]);
   const saveAssignment = async () => {
-    console.log(selectedCategories);
-
     if (!assignmentName || !topicName) {
       alert("Please fill in all fields.");
       return;
@@ -151,15 +149,12 @@ function AddRequirementModal({ isOpen, onClose }) {
       Topic: topicName,
       maxLimitImages: parseInt(maxImages, 10),
       ProfessorId: parseInt(userId, 10),
-    }).then((res) => console.log(res.msg));
+    });
     setLoading(false);
     onClose();
   };
   useEffect(() => {
-    getAllCategoriesData().then((res) => {
-      setcategories(res.msg);
-      //console.log(res.msg);
-    });
+    getAllCategoriesData().then((res) => setcategories(res.msg));
   }, []);
 
   if (!isOpen) return null;
@@ -223,7 +218,6 @@ function AddRequirementModal({ isOpen, onClose }) {
                               (selected) => selected.Id === cat.Id
                             )}
                             onChange={(e) => {
-                              // console.log(selectedCategories);
                               if (e.target.checked) {
                                 setSelectedCategories([
                                   ...selectedCategories,
@@ -349,26 +343,17 @@ const ProfessorDB = () => {
   };
 
   const getstartweeek = () => {
-    getstartweek()
-      .then((res) => {
-        setStartWeek(res.msg[0].Day || "");
-        setOldStartWeek(res.msg[0].Day || "");
-      })
-      .catch((err) => console.log(err))
-      .finally(() => {});
+    getstartweek().then((res) => {
+      setStartWeek(res.msg[0].Day || "");
+      setOldStartWeek(res.msg[0].Day || "");
+    });
   };
   const handleStartWeekChange = () => {
-    // console.log("start week changed");
-    updateStartWeek(String(startWeek))
-      .then((res) => console.log(res.msg))
-      .catch((err) => console.error(err));
+    updateStartWeek(String(startWeek));
   };
-  //console.log(startWeek);
   useEffect(() => {
     getstartweeek();
   }, []);
-  console.log("Rendered");
-  console.log(getSession("Type"));
 
   const getStatusProps = (assignment) => {
     const now = new Date();

@@ -13,7 +13,6 @@ const Submissions = ({ assignment, update }) => {
         assignmentId: getSession("assignmentId"),
       });
       setSubmissions(res.msg);
-      console.log(res.msg);
     };
 
     fetchSubmissions();

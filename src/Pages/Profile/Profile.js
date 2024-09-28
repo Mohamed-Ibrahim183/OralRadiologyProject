@@ -63,7 +63,7 @@ const Profile = () => {
     changePassword({
       password: pass,
       Id: getSession("userId"),
-    }).then((res) => console.log(res.msg));
+    });
   }
 
   function settingFile(event) {
@@ -87,7 +87,6 @@ const Profile = () => {
   function updateUser(event) {
     event.preventDefault();
     changesInUserProfile(state).then((res) => {
-      console.log(res.msg);
       if (res.msg === "UPDATED") {
         setSession("Email", state.Email);
         setSession("Name", state.username);

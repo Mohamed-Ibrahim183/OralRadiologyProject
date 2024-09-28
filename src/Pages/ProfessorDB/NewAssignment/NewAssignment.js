@@ -38,7 +38,7 @@ function NewAssignment() {
       ProfessorId: parseInt(userId, 10),
       categories: categoryIds,
       weekNum: selectedWeeks,
-    }).then((res) => console.log(res.msg));
+    });
     setLoading(false);
     toast("Requirement uploaded successfully", {
       type: "success",
