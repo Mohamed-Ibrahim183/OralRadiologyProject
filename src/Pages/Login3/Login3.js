@@ -9,7 +9,7 @@ import { setSession } from "../Controller";
 function Login3() {
   const [identifier, setIdentifier] = useState("");
   const [password, setPassword] = useState("");
-  const [passwordShown, setPasswordShown] = useState(false);
+  const [passwordShown] = useState(false);
   const conData = useContext(ContextData);
   const [userType, setUserType] = useState("");
   const Navigator = useNavigate();

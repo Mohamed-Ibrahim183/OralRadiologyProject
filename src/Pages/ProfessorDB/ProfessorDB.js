@@ -4,9 +4,8 @@ import AssignmentCard from "./AssignmentCard";
 import Chart from "./Chart";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
-import Modal from "react-responsive-modal";
 import "./professor.css";
-import { Link, Navigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import Modal2 from "./Modal2/Modal2";
 import Button from "@mui/material/Button";
 import {
@@ -133,7 +132,7 @@ function GroupsData() {
 function AddRequirementModal({ isOpen, onClose }) {
   const [assignmentName, setAssignmentName] = useState("");
   const [topicName, setTopicName] = useState("");
-  const [maxImages, setMaxImages] = useState("");
+  const [maxImages] = useState("");
   const userId = getSession("userId");
   const [loading, setLoading] = useState(false); // State to handle loading status
   const [categories, setcategories] = useState([]);
@@ -269,10 +268,9 @@ const ProfessorDB = () => {
   const [isModal2Open, setModal2Open] = useState(false);
   const [assignments, setAssignments] = useState([]);
   const [userId, setUserId] = useState(storedUserId);
-  const [showCats, setShowCats] = useState(false);
 
   const [updateAssignments, setUpdateAssignments] = useState(0);
-  const [filter, setFilter] = useState("All");
+  const [filter] = useState("All");
   const [sortingType, setSortingType] = useState("Name");
   const [sortingOrder, setSortingOrder] = useState("asc");
   const [filteredAssignments, setFilteredAssignments] = useState([]);

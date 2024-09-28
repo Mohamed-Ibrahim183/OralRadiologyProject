@@ -27,72 +27,72 @@ const StudentDB = () => {
 
   const [assignments, setAssignments] = useState([]);
   const [filteredAssignments, setFilteredAssignments] = useState([]);
-  const [submissions, setSubmissions] = useState([]);
+  //const [submissions, setSubmissions] = useState([]);
   const [filter, setFilter] = useState("All");
   const [sortingType, setSortingType] = useState("Name");
   const [sortingOrder, setSortingOrder] = useState("asc");
   const [Error, setError] = useState("");
   const [selectedAssignment, setSelectedAssignment] = useState(null); // State to track selected assignment
 
-  const processAssignments = (assignments) => {
-    // Group assignments by Id
-    const groupedAssignments = assignments.reduce((acc, assignment) => {
-      if (!acc[assignment.Id]) {
-        acc[assignment.Id] = [];
-      }
-      acc[assignment.Id].push(assignment);
-      return acc;
-    }, {});
+  // const processAssignments = (assignments) => {
+  //   // Group assignments by Id
+  //   const groupedAssignments = assignments.reduce((acc, assignment) => {
+  //     if (!acc[assignment.Id]) {
+  //       acc[assignment.Id] = [];
+  //     }
+  //     acc[assignment.Id].push(assignment);
+  //     return acc;
+  //   }, {});
 
-    const processedAssignments = Object.values(groupedAssignments).map(
-      (group) => {
-        // Sort by open date (earliest first)
-        group.sort((a, b) => new Date(a.open) - new Date(b.open));
+  //   const processedAssignments = Object.values(groupedAssignments).map(
+  //     (group) => {
+  //       // Sort by open date (earliest first)
+  //       group.sort((a, b) => new Date(a.open) - new Date(b.open));
 
-        // Check for assignments where open has passed but close is in the future
-        const openPassedCloseFuture = group.filter(
-          (assignment) =>
-            new Date(assignment.open) < new Date() &&
-            new Date(assignment.close) > new Date()
-        );
+  //       // Check for assignments where open has passed but close is in the future
+  //       const openPassedCloseFuture = group.filter(
+  //         (assignment) =>
+  //           new Date(assignment.open) < new Date() &&
+  //           new Date(assignment.close) > new Date()
+  //       );
 
-        if (openPassedCloseFuture.length > 0) {
-          // If there's an assignment with open passed and close in the future, keep it
-          return openPassedCloseFuture[0];
-        }
+  //       if (openPassedCloseFuture.length > 0) {
+  //         // If there's an assignment with open passed and close in the future, keep it
+  //         return openPassedCloseFuture[0];
+  //       }
 
-        // Check for assignments with open and close both upcoming
-        const allOpenInFuture = group.filter(
-          (assignment) => new Date(assignment.open) > new Date()
-        );
+  //       // Check for assignments with open and close both upcoming
+  //       const allOpenInFuture = group.filter(
+  //         (assignment) => new Date(assignment.open) > new Date()
+  //       );
 
-        if (allOpenInFuture.length > 0) {
-          // If all opens are in the future, leave the one with the earliest open
-          return allOpenInFuture[0];
-        }
+  //       if (allOpenInFuture.length > 0) {
+  //         // If all opens are in the future, leave the one with the earliest open
+  //         return allOpenInFuture[0];
+  //       }
 
-        // Otherwise, check for assignments where open and close have both passed
-        const passedAssignments = group.filter(
-          (assignment) =>
-            new Date(assignment.open) < new Date() &&
-            new Date(assignment.close) < new Date()
-        );
+  //       // Otherwise, check for assignments where open and close have both passed
+  //       const passedAssignments = group.filter(
+  //         (assignment) =>
+  //           new Date(assignment.open) < new Date() &&
+  //           new Date(assignment.close) < new Date()
+  //       );
 
-        if (passedAssignments.length > 0) {
-          // If there are passed assignments, keep the one with the latest close
-          passedAssignments.sort(
-            (a, b) => new Date(b.close) - new Date(a.close)
-          );
-          return passedAssignments[0];
-        }
+  //       if (passedAssignments.length > 0) {
+  //         // If there are passed assignments, keep the one with the latest close
+  //         passedAssignments.sort(
+  //           (a, b) => new Date(b.close) - new Date(a.close)
+  //         );
+  //         return passedAssignments[0];
+  //       }
 
-        // If there's no other condition met, return the first assignment
-        return group[0];
-      }
-    );
+  //       // If there's no other condition met, return the first assignment
+  //       return group[0];
+  //     }
+  //   );
 
-    return processedAssignments;
-  };
+  //   return processedAssignments;
+  // };
   if (getSession("state")) {
     removeSessionKey("state");
   }
@@ -115,7 +115,7 @@ const StudentDB = () => {
     }).then((res) => {
       res.msg["Err"] === 1
         ? setError("User is not in a Group. Please contact the Admin.")
-        : setSubmissions(Array.isArray(res.msg) ? res.msg : []);
+        : console.log(Array.isArray(res.msg) ? res.msg : []);
     });
   }, [UserId]);
 
@@ -223,63 +223,63 @@ const StudentDB = () => {
     //   />
     // );
   }
-  const putRemaininginSession = (assignment) => {
-    const now = new Date();
-    const openDate = new Date(assignment.open);
-    const closeDate = new Date(assignment.close);
-    setSession("openData", openDate);
-    setSession("closeData", closeDate);
+  // const putRemaininginSession = (assignment) => {
+  //   const now = new Date();
+  //   const openDate = new Date(assignment.open);
+  //   const closeDate = new Date(assignment.close);
+  //   setSession("openData", openDate);
+  //   setSession("closeData", closeDate);
 
-    if (openDate <= now && closeDate < now) {
-      // Time since the task has closed
-      let timeSinceClosed = (now - closeDate) / 1000; // time since closed in seconds
+  //   if (openDate <= now && closeDate < now) {
+  //     // Time since the task has closed
+  //     let timeSinceClosed = (now - closeDate) / 1000; // time since closed in seconds
 
-      const days = Math.floor(timeSinceClosed / (24 * 60 * 60));
-      timeSinceClosed %= 24 * 60 * 60;
+  //     const days = Math.floor(timeSinceClosed / (24 * 60 * 60));
+  //     timeSinceClosed %= 24 * 60 * 60;
 
-      const hours = Math.floor(timeSinceClosed / (60 * 60));
-      timeSinceClosed %= 60 * 60;
+  //     const hours = Math.floor(timeSinceClosed / (60 * 60));
+  //     timeSinceClosed %= 60 * 60;
 
-      const minutes = Math.floor(timeSinceClosed / 60);
-      const seconds = Math.floor(timeSinceClosed % 60);
+  //     const minutes = Math.floor(timeSinceClosed / 60);
+  //     const seconds = Math.floor(timeSinceClosed % 60);
 
-      let closedTime;
+  //     let closedTime;
 
-      if (days > 0) {
-        closedTime = `closed from ${days} days`;
-      } else if (hours > 0) {
-        closedTime = `closed from ${hours} hours, ${minutes} minutes`;
-      } else if (minutes > 0) {
-        closedTime = `closed from ${minutes} minutes`;
-      } else {
-        closedTime = `closed from ${seconds} seconds`;
-      }
-    } else if (openDate <= now && closeDate > now) {
-      let remainingTime = (closeDate - now) / 1000; // remaining time in seconds
+  //     if (days > 0) {
+  //       closedTime = `closed from ${days} days`;
+  //     } else if (hours > 0) {
+  //       closedTime = `closed from ${hours} hours, ${minutes} minutes`;
+  //     } else if (minutes > 0) {
+  //       closedTime = `closed from ${minutes} minutes`;
+  //     } else {
+  //       closedTime = `closed from ${seconds} seconds`;
+  //     }
+  //   } else if (openDate <= now && closeDate > now) {
+  //     let remainingTime = (closeDate - now) / 1000; // remaining time in seconds
 
-      const days = Math.floor(remainingTime / (24 * 60 * 60));
-      remainingTime %= 24 * 60 * 60;
+  //     const days = Math.floor(remainingTime / (24 * 60 * 60));
+  //     remainingTime %= 24 * 60 * 60;
 
-      const hours = Math.floor(remainingTime / (60 * 60));
-      remainingTime %= 60 * 60;
+  //     const hours = Math.floor(remainingTime / (60 * 60));
+  //     remainingTime %= 60 * 60;
 
-      const minutes = Math.floor(remainingTime / 60);
-      const seconds = Math.floor(remainingTime % 60);
+  //     const minutes = Math.floor(remainingTime / 60);
+  //     const seconds = Math.floor(remainingTime % 60);
 
-      let remaining;
+  //     let remaining;
 
-      if (days > 0) {
-        remaining = `${days} days`;
-      } else if (hours > 0) {
-        remaining = `${hours} hours, ${minutes} minutes`;
-      } else if (minutes > 0) {
-        remaining = `${minutes} minutes`;
-      } else {
-        remaining = `${seconds} seconds`;
-      }
-    } else {
-    }
-  };
+  //     if (days > 0) {
+  //       remaining = `${days} days`;
+  //     } else if (hours > 0) {
+  //       remaining = `${hours} hours, ${minutes} minutes`;
+  //     } else if (minutes > 0) {
+  //       remaining = `${minutes} minutes`;
+  //     } else {
+  //       remaining = `${seconds} seconds`;
+  //     }
+  //   } else {
+  //   }
+  // };
 
   if (getSession("Type") !== "Student") {
     return <Navigate to="/" />;
@@ -364,6 +364,7 @@ const StudentDB = () => {
                 Array.isArray(filteredAssignments) &&
                 filteredAssignments.map((assignment, i) => {
                   const { state, col, remaining } = getStatusProps(assignment);
+                  console.log(remaining);
                   return (
                     <Link to="/Student/submit2">
                       <div

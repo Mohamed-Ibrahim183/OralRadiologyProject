@@ -13,6 +13,7 @@ import {
 import { getAssignmentData } from "../../Slices/StudentSlice";
 import ViewSubmissionsModal from "./ViewSubmissionsModal";
 import { TableHeaderGradingPage, TableRowGradingPage } from "./table";
+
 const initialState = {
   submissions: [],
   assignmentData: {},
@@ -23,8 +24,10 @@ const initialState = {
   viewSubmissionModal: false,
   fullSubmissionData: {},
 };
+
 function GradingPage() {
   const [state, dispatch] = useReducer(reducer, initialState);
+
   function reducer(state, action) {
     switch (action.type) {
       case "setSubmissions":
@@ -57,7 +60,8 @@ function GradingPage() {
         return { ...state };
     }
   }
-  const [searchParams, setSearchParams] = useSearchParams();
+
+  const [searchParams] = useSearchParams(); // Removed unused setSearchParams
   const assignmentId = searchParams.get("assignmentId");
 
   const [data, setData] = useState([]);
@@ -87,7 +91,6 @@ function GradingPage() {
     });
 
     return () => removeSessionKey("submissionData");
-    // return () => removeSessionKey("submissionData");
   }, [assignmentId, state.render]);
 
   useEffect(() => {
