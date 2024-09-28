@@ -1,14 +1,13 @@
-import React, { Suspense } from "react";
+import React, { lazy, Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
+import Loader from "../Pages/Loader";
+import NotFound from "../Pages/NotFound";
 
-import AddGroup from "../Pages/Groups/AddGroup";
-import AddProf from "../Pages/AddProf";
-import Users from "../Pages/Users/Users";
-import Dashboard from "../Pages/Dashboard";
-
-// const AddProf = lazy(() => import("./AddProf"));
-// const Users = lazy(() => import("./Users/Users"));
-// const Dashboard = lazy(() => import("./Dashboard"));
+// Lazy Loading Pages
+const AddGroup = lazy(() => import("../Pages/Groups/AddGroup"));
+const AddProf = lazy(() => import("../Pages/AddProf"));
+const Users = lazy(() => import("../Pages/Users/Users"));
+const Dashboard = lazy(() => import("../Pages/Dashboard"));
 
 function AdminPages() {
   return (
@@ -16,7 +15,7 @@ function AdminPages() {
       <Route
         path="AddProf"
         element={
-          <Suspense fallback={<div>Loading...</div>}>
+          <Suspense fallback={<Loader />}>
             <AddProf />
           </Suspense>
         }
@@ -24,7 +23,7 @@ function AdminPages() {
       <Route
         path="users"
         element={
-          <Suspense fallback={<div>Loading...</div>}>
+          <Suspense fallback={<Loader />}>
             <Users />
           </Suspense>
         }
@@ -33,7 +32,7 @@ function AdminPages() {
       <Route
         path="AddGroup"
         element={
-          <Suspense fallback={<div>Loading...</div>}>
+          <Suspense fallback={<Loader />}>
             <AddGroup />
           </Suspense>
         }
@@ -41,8 +40,16 @@ function AdminPages() {
       <Route
         path="Dashboard"
         element={
-          <Suspense fallback={<div>Loading...</div>}>
+          <Suspense fallback={<Loader />}>
             <Dashboard />
+          </Suspense>
+        }
+      />
+      <Route
+        path="*"
+        element={
+          <Suspense fallback={<Loader />}>
+            <NotFound />
           </Suspense>
         }
       />

@@ -3,9 +3,10 @@ import ProfessorDB from "./ProfessorDB/ProfessorDB";
 import StudentDB from "./StudentDashBoard/StudentDB";
 import AdminPage from "./Admin/admin_page";
 import App from "./Home/Home";
+import { getSession } from "./Controller";
 
 const Dashboard = () => {
-  const userType = sessionStorage["Type"];
+  const userType = getSession("Type");
   switch (userType) {
     case "Admin":
       return <AdminPage />;

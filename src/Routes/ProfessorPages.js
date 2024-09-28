@@ -1,19 +1,28 @@
-import React, { Suspense } from "react";
+import React, { lazy, Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
-// import GradingPage from "../Pages/Grading_Page/Grading_Page";
-// const GradingPage = lazy(() => import("./Grading_Page/Grading_Page"));
-import Dashboard from "../Pages/Dashboard";
-import GradingPage from "../Pages/Grading_Page/Grading_Page";
-import NewAssignment from "../Pages/ProfessorDB/NewAssignment/NewAssignment";
-import EditAssignment from "../Pages/ProfessorDB/EditAssignment/EditAssignment";
-import StudentsGrade from "../Pages/studentsGrades/StudentsGrade";
+import Loader from "../Pages/Loader";
+import NotFound from "../Pages/NotFound";
+
+// Lazy Loading Pages
+const Dashboard = lazy(() => import("../Pages/Dashboard"));
+const GradingPage = lazy(() => import("../Pages/Grading_Page/Grading_Page"));
+const NewAssignment = lazy(() =>
+  import("../Pages/ProfessorDB/NewAssignment/NewAssignment")
+);
+const EditAssignment = lazy(() =>
+  import("../Pages/ProfessorDB/EditAssignment/EditAssignment")
+);
+const StudentsGrade = lazy(() =>
+  import("../Pages/studentsGrades/StudentsGrade")
+);
+
 function ProfessorPages() {
   return (
     <Routes>
       <Route
         path="Grading_Page"
         element={
-          <Suspense fallback={<div>Loading...</div>}>
+          <Suspense fallback={<Loader />}>
             <GradingPage />
           </Suspense>
         }
@@ -21,7 +30,7 @@ function ProfessorPages() {
       <Route
         path="Dashboard"
         element={
-          <Suspense fallback={<div>Loading...</div>}>
+          <Suspense fallback={<Loader />}>
             <Dashboard />
           </Suspense>
         }
@@ -29,7 +38,7 @@ function ProfessorPages() {
       <Route
         path="NewAssignment"
         element={
-          <Suspense fallback={<div>Loading...</div>}>
+          <Suspense fallback={<Loader />}>
             <NewAssignment />
           </Suspense>
         }
@@ -37,7 +46,7 @@ function ProfessorPages() {
       <Route
         path="EditAssignment"
         element={
-          <Suspense fallback={<div>Loading...</div>}>
+          <Suspense fallback={<Loader />}>
             <EditAssignment />
           </Suspense>
         }
@@ -45,8 +54,16 @@ function ProfessorPages() {
       <Route
         path="studentsgrades"
         element={
-          <Suspense fallback={<div>Loading...</div>}>
+          <Suspense fallback={<Loader />}>
             <StudentsGrade />
+          </Suspense>
+        }
+      />
+      <Route
+        path="*"
+        element={
+          <Suspense fallback={<Loader />}>
+            <NotFound />
           </Suspense>
         }
       />
