@@ -78,7 +78,7 @@ export function removeSessionKey(key, hashKey = true) {
 
 // Helper functions
 
-class axiosMethods {
+export class axiosMethods {
   get(url, params = {}) {
     return axios
       .get(url, { params })
@@ -115,19 +115,3 @@ class axiosMethods {
       .catch((error) => ({ msg: "", error: error.message }));
   }
 }
-class DBMethods {
-  constructor() {
-    this.API = new axiosMethods();
-  }
-  // getAllGroupsData() {
-  //   const url = "http://localhost/Projects/OralRadiology/GroupLogic.php/Groups";
-  //   return this.API.get(url).then((res) => res.msg);
-  // }
-  // getType(type) {
-  //   const url = `http://localhost/Projects/OralRadiology/userLogic.php/Users/${type}`;
-  //   return this.API.get(url);
-  // }
-}
-
-// export default Controller;
-export { axiosMethods, DBMethods };

@@ -503,10 +503,7 @@ function EditUser({ open, close, selectedUser, addNewChange }) {
         >
           Editing{" "}
           <Avatar
-            src={
-              "http://localhost/Projects/OralRadiology/" +
-              selectedUser.PersonalImage
-            }
+            src={`${serverURL}${selectedUser.PersonalImage}`}
             alt={selectedUser.Name}
           />
           {selectedUser.Name}

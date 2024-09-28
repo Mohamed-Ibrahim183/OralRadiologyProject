@@ -8,6 +8,7 @@ import {
   evaluateAssignmentImage,
   getAssignmentImages,
 } from "../../Slices/PorfessorSlice";
+import { serverURL } from "../../Slices/GeneralSlice";
 
 const ViewSubmissionsModal = ({ show, handleClose, submission }) => {
   const [images, setImages] = useState([]);
@@ -58,7 +59,7 @@ const ViewSubmissionsModal = ({ show, handleClose, submission }) => {
               images.map((img, index) => (
                 <img
                   key={index}
-                  src={`http://localhost/Projects/OralRadiology/${img.Path}`}
+                  src={`${serverURL}${img.Path}`}
                   alt={`Submission ${index + 1}`}
                   className="submission-image"
                   onClick={() => openImageViewer(index)}
@@ -89,7 +90,7 @@ const ViewSubmissionsModal = ({ show, handleClose, submission }) => {
                 </button>
 
                 <img
-                  src={`http://localhost/Projects/OralRadiology/${images[currentImageIndex].Path}`}
+                  src={`${serverURL}${images[currentImageIndex].Path}`}
                   alt={`Submission ${currentImageIndex + 1}`}
                   className="large-image"
                 />

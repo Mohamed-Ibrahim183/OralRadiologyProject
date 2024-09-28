@@ -67,8 +67,7 @@ const Profile = () => {
   }
 
   function settingFile(event) {
-    const url =
-      "http://localhost/Projects/OralRadiology/userLogic.php/UpdateImage";
+    const url = `${serverURL}userLogic.php/UpdateImage`;
     let fData = new FormData();
     fData.append("Id", getSession("userId"));
 
