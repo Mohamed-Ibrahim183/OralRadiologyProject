@@ -1,4 +1,4 @@
-@use '../../_Variables.scss' as *;
+@use "../../_Variables.scss" as *;
 $breakpoint-mobile: 480px;
 $breakpoint-tablet: 768px;
 $breakpoint-desktop: 1024px;
@@ -8,206 +8,216 @@ $text-color: #8d8d8d;
 $hover-color: #13008f;
 $background-color: var(--mainBackGround);
 $border-color: #ddd;
-$header-background-color:var(--headerColor);
-$btn-color:var(--btnB);
-$btn-hover:var(--btnB-hover);
+$header-background-color: var(--headerColor);
+$btn-color: var(--btnB);
+$btn-hover: var(--btnB-hover);
+
 .monem2_admin {
-    width: 90%;
-    margin: auto;
-    overflow: hidden;
-    h1, h2{
-        color: var(--textColor);
+  width: 90%;
+  margin: auto;
+  overflow: hidden;
+  h1,
+  h2 {
+    color: var(--textColor);
+  }
+  #searchh,
+  .grade_num,
+  .FeedBack {
+    background-color: #dddddd6a;
+  }
+  #searchhh {
+    color: var(--text-monem);
+    color: var(--text-monem);
+    font-weight: bold;
+    font-size: 25px;
+  }
+  .table-responsive {
+    overflow-x: auto; // Allow horizontal scrolling
+
+    @media (max-width: $breakpoint-mobile) {
+      -webkit-overflow-scrolling: touch; // Improve scrolling on mobile devices
     }
-    #searchh, .grade_num,.FeedBack{
-        background-color: #dddddd6a;
+  }
+  .table {
+    // box-shadow: 3px 19px 133px 5px rgba(0,0,0,0.51);
+    // -webkit-box-shadow: 3px 19px 133px 5px rgba(0,0,0,0.51);
+    // -moz-box-shadow: 3px 19px 133px 5px rgba(0,0,0,0.51);
+    width: 100%;
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    background: $background-color;
+    text-align: left;
+    color: $text-color;
+    color: var(--text-monem);
+    min-width: 600px;
+    thead tr {
+      background-color: $header-background-color;
+      color: white;
+      text-align: left;
     }
-    #searchhh{
-        color: var(--text-monem);
-        color: var(--text-monem);
-        font-weight: bold;
-        font-size: 25px;
+
+    th,
+    td {
+      padding: 12px 15px;
     }
-    .table-responsive {
-        overflow-x: auto; // Allow horizontal scrolling
-        
-        @media (max-width: $breakpoint-mobile) {
-          -webkit-overflow-scrolling: touch; // Improve scrolling on mobile devices
+
+    tbody tr {
+      border-bottom: 1px solid $border-color;
+
+      &:nth-of-type(even) {
+        background-color: $background-color;
+      }
+
+      &:last-of-type {
+        border-bottom: 2px solid $border-color;
+      }
+    }
+    @media (max-width: $breakpoint-mobile) {
+      .thead {
+        display: none; // Hide table headers on small screens
+      }
+      .table tbody,
+      .table tr,
+      .table td {
+        display: block;
+        width: 100%;
+      }
+      .tr {
+        margin-bottom: 15px;
+      }
+      .td {
+        text-align: right;
+        padding-left: 50%;
+        position: relative;
+        &::before {
+          content: attr(data-label);
+          position: absolute;
+          left: 0;
+          width: 50%;
+          padding-left: 15px;
+          font-weight: bold;
+          text-align: left;
         }
       }
-    .table {
-        // box-shadow: 3px 19px 133px 5px rgba(0,0,0,0.51);
-        // -webkit-box-shadow: 3px 19px 133px 5px rgba(0,0,0,0.51);
-        // -moz-box-shadow: 3px 19px 133px 5px rgba(0,0,0,0.51);
-        width: 100%;
-        border-collapse: collapse;
-        margin: 25px 0;
-        font-size: 0.9em;
-        background: $background-color;
-        ;
-        text-align: left;
-        color:$text-color;
-        color:var(--text-monem);
-        min-width: 600px;
-        thead tr {
-            background-color: $header-background-color;
-            color: white;
-            text-align: left;
-        }
-
-        th, td {
-            padding: 12px 15px;
-        }
-
-        tbody tr {
-            border-bottom: 1px solid $border-color;
-
-            &:nth-of-type(even) {
-                background-color: $background-color;
-            }
-
-            &:last-of-type {
-                border-bottom: 2px solid $border-color;
-            }
-        }
-        @media (max-width: $breakpoint-mobile) {
-            .thead {
-              display: none; // Hide table headers on small screens
-            }     
-            .table tbody, .table tr, .table td {
-              display: block;
-              width: 100%;
-            }   
-            .tr {
-              margin-bottom: 15px;
-            }
-            .td {
-              text-align: right;
-              padding-left: 50%; 
-              position: relative;
-              &::before {
-                content: attr(data-label); 
-                position: absolute;
-                left: 0;
-                width: 50%;
-                padding-left: 15px;
-                font-weight: bold;
-                text-align: left;
-              }
-            }
-          }
-          
     }
-    .profile-pic {
-        border-radius: 50%;
-        height: 40px;
-        width: 40px;
-        &:hover {
-            cursor: pointer;
-        }
+  }
+  .profile-pic {
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+    &:hover {
+      cursor: pointer;
     }
-    .icon {
-        margin-left: 10px;
-        display: inline-block;
+  }
+  .icon {
+    margin-left: 10px;
+    display: inline-block;
+  }
+  .pen,
+  .basket {
+    width: 20px;
+    height: 20px;
+    border-radius: 20%;
+    color: white;
+    &.pen {
+      background-color: #1c37d0;
     }
-    .pen, .basket {
-        width: 20px;
-        height: 20px;
-        border-radius: 20%;
-        color: white;
-        &.pen {
-            background-color: #1c37d0;
-        }
-        &.basket {
-            background-color: red;
-        }
+    &.basket {
+      background-color: red;
     }
-    .oooo {
-        display: flex;
+  }
+  .oooo {
+    display: flex;
 
-        h2 {
-            float: left;
-            margin-right: 65rem;
-            margin-top: 3rem;
-            margin-bottom: 3rem;
-            // color: $main-color;
-            font-size: 32px;
-        }
+    h2 {
+      float: left;
+      margin-right: 65rem;
+      margin-top: 3rem;
+      margin-bottom: 3rem;
+      // color: $main-color;
+      font-size: 32px;
     }
+  }
+  #searchh {
+    height: 2rem;
+    border: 1px solid $border-color;
+  }
+  // #searchhh {
+  //     color: $text-color;
+  // }
+  .grade_num {
+    width: 60px;
+    height: 40%;
+    margin-bottom: 5px;
+    margin-right: 10px;
+  }
+  // h1 {
+  //     color: $main-color;
+  // }
+  .right {
+    display: grid;
+    float: right;
+    margin-top: -8rem;
+    button {
+      background-color: $btn-color;
+    }
+    button:hover {
+      background-color: $btn-hover;
+    }
+  }
+
+  .grade_button {
+    margin: 0;
+    // margin-left: 10px;
+    width: 60px;
+    background-color: $btn-color;
+    font-weight: bold;
+
+    &:hover {
+      background-color: $btn-hover;
+      color: white;
+    }
+    &:focus {
+      outline: none;
+    }
+  }
+
+  @media (max-width: $breakpoint-mobile) {
+    h1,
+    h2 {
+      font-size: 20px;
+    }
+
+    .oooo h2 {
+      margin-right: 1rem;
+    }
+
+    .table,
+    .right,
     #searchh {
-        height: 2rem;
-        border: 1px solid $border-color;
+      width: 100%;
     }
-    // #searchhh {
-    //     color: $text-color;
-    // }
-    .grade_num {
-        width: 60px;
-        height: 40%;
-        margin-bottom: 5px;
-        margin-right: 10px;
-        
+
+    .grade_num,
+    .FeedBack {
+      width: 100%;
     }
-    // h1 {
-    //     color: $main-color;
-    // }
+
     .right {
-        display: grid;
-        float: right;
-        margin-top: -8rem;
-        button{
-            background-color:$btn-color ;
-        }
-        button:hover {
-            background-color: $btn-hover;
-        }
+      margin-top: 1rem;
+      float: none;
+    }
+  }
+
+  @media (min-width: $breakpoint-tablet) and (max-width: $breakpoint-desktop) {
+    h1,
+    h2 {
+      font-size: 24px;
     }
 
-    .grade_button {
-        margin: 0;
-        // margin-left: 10px;
-        width: 60px;
-        background-color:$btn-color ;
-        font-weight: bold;
-
-        &:hover {
-            background-color: $btn-hover;
-            color: white;
-        }
-        &:focus {
-            outline: none;
-        }
+    .oooo h2 {
+      margin-right: 2rem;
     }
-
-    @media(max-width: $breakpoint-mobile) {
-        h1, h2 {
-            font-size: 20px; 
-        }
-
-        .oooo h2 {
-            margin-right: 1rem;
-        }
-
-        .table, .right, #searchh {
-            width: 100%; 
-        }
-
-        .grade_num, .FeedBack {
-            width: 100%; 
-        }
-
-        .right {
-            margin-top: 1rem;
-            float: none;
-        }
-    }
-  
-    @media(min-width: $breakpoint-tablet) and (max-width: $breakpoint-desktop) {
-        h1, h2 {
-            font-size: 24px; 
-        }
-
-        .oooo h2 {
-            margin-right: 2rem; 
-        }
-    }
+  }
 }

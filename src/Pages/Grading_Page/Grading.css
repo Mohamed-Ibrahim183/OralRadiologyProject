@@ -11,6 +11,7 @@
   --sidebar-default-margin: 70px;
   --mainText: black;
   --secondaryText: #777;
+  --Gridfooter: #2450f1;
 }
 
 [theme="Dark"] {
@@ -24,6 +25,7 @@
   --btnB-hover: #356981;
   --mainText: white;
   --secondaryText: #a9a9a9;
+  --Gridfooter: #284d5e;
 }
 
 .monem2_admin {
@@ -49,6 +51,7 @@
 .monem2_admin .table-responsive {
   overflow-x: auto;
 }
+
 @media (max-width: 480px) {
   .monem2_admin .table-responsive {
     -webkit-overflow-scrolling: touch;
@@ -194,6 +197,7 @@
 .GradingViewSumbissionBtn:hover {
   background-color: var(--btnB-hover);
 }
+
 @media (max-width: 480px) {
   .monem2_admin h1,
   .monem2_admin h2 {

@@ -8,6 +8,7 @@ import {
 } from "../../Slices/PorfessorSlice";
 import "./StudentsGrade.css";
 import { getSession } from "../Controller";
+import "../DataGrid.css";
 
 const StudentsGrade = () => {
   const [columns, setColumns] = useState([

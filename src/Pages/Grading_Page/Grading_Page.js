@@ -1,18 +1,17 @@
 import React, { useState, useEffect, useReducer } from "react";
 import { Navigate, useSearchParams } from "react-router-dom";
 import "./ViewSubmissionsModal.css";
-import "./Grading.css";
+import Button from "@mui/material/Button";
+import BasicModalComp from "../../Components/BasicModal/BasicModalComp";
+
 import { getSubmissionByAssignment } from "../../Slices/PorfessorSlice";
 import { serverURL } from "../../Slices/GeneralSlice";
-import {
-  getSession,
-  removeSessionKey,
-  setSession,
-  validArray,
-} from "../Controller";
-import { getAssignmentData } from "../../Slices/StudentSlice";
+import { getSession, removeSessionKey, validArray } from "../Controller";
 import ViewSubmissionsModal from "./ViewSubmissionsModal";
-import { TableHeaderGradingPage, TableRowGradingPage } from "./table";
+import { getAssignmentData } from "../../Slices/StudentSlice";
+import { DataGrid } from "@mui/x-data-grid";
+import "./Grading.css";
+import "../DataGrid.css";
 
 const initialState = {
   submissions: [],
@@ -24,7 +23,6 @@ const initialState = {
   viewSubmissionModal: false,
   fullSubmissionData: {},
 };
-
 function GradingPage() {
   const [state, dispatch] = useReducer(reducer, initialState);
 
@@ -61,11 +59,13 @@ function GradingPage() {
     }
   }
 
-  const [searchParams] = useSearchParams(); // Removed unused setSearchParams
+  const [searchParams, setSearchParams] = useSearchParams();
   const assignmentId = searchParams.get("assignmentId");
 
   const [data, setData] = useState([]);
   const [error, setError] = useState("");
+  const [rows, setrows] = useState([]);
+  const [fullrows, setfullrows] = useState([]);
 
   useEffect(() => {
     if (!assignmentId) {
@@ -75,59 +75,174 @@ function GradingPage() {
     }
 
     getSubmissionByAssignment(assignmentId).then((res) => {
+      setfullrows(res.msg);
       console.log(res.msg);
-      validArray(res.msg)
-        ? dispatch({
-            type: "setSubmissions",
-            payload: res.msg.map((record) => {
-              return { ...record, Comment: record.Comment ?? "" };
-            }),
-          })
-        : dispatch({
-            type: "setSubmissions",
-            payload: [],
-            Error: res.msg,
-          });
+      if (validArray(res.msg)) {
+        const mappedRows = res.msg.map((record) => ({
+          personalImage: serverURL + record.PersonalImage,
+          name: record.Name,
+          id: record.MSAId,
+          email: record.Email,
+          grade: `${record.Grade.Total}/${record.Grade.count * 10}`,
+          submissionTime: timeAgo(record.submitTime),
+          weekNumber: record.weekNum,
+          comment: record.Comment ?? "",
+          submission: record.submission,
+        }));
+
+        setrows(mappedRows);
+
+        dispatch({
+          type: "setSubmissions",
+          payload: mappedRows,
+        });
+      } else {
+        dispatch({
+          type: "setSubmissions",
+          payload: [],
+          Error: res.msg,
+        });
+      }
     });
 
     return () => removeSessionKey("submissionData");
-  }, [assignmentId, state.render]);
-
-  useEffect(() => {
-    getAssignmentData({ assignmentId }).then((res) =>
-      dispatch({ type: "setAssignment", payload: res.msg })
-    );
   }, [assignmentId]);
 
-  const handleGradeChange = (studentId, newGrade) => {
-    setData((prevData) =>
-      prevData.map((record) =>
-        record.MSAId === studentId ? { ...record, Grade: newGrade } : record
-      )
-    );
-    updateSessionData(studentId, { grade: newGrade });
+  const timeAgo = (inputTime) => {
+    const now = new Date();
+    const past = new Date(inputTime);
+    const diffInMs = now - past;
+
+    const seconds = Math.floor(diffInMs / 1000);
+    const minutes = Math.floor(seconds / 60);
+    const hours = Math.floor(minutes / 60);
+    const days = Math.floor(hours / 24);
+    const weeks = Math.floor(days / 7);
+    const months = Math.floor(days / 30);
+    const years = Math.floor(days / 365);
+
+    if (seconds < 60) return `${seconds} seconds ago`;
+    else if (minutes < 60) return `${minutes} minutes ago`;
+    else if (hours < 24) return `${hours} hours ago`;
+    else if (days < 7) return `${days} days ago`;
+    else if (weeks < 4) return `${weeks} weeks ago`;
+    else if (months < 12) return `${months} months ago`;
+    else return `${years} years ago`;
   };
 
-  const handleCommentChange = (studentId, newComment) => {
-    setData((prevData) =>
-      prevData.map((record) =>
-        record.MSAId === studentId ? { ...record, Comment: newComment } : record
-      )
-    );
-    updateSessionData(studentId, { comment: newComment });
-  };
-
-  const updateSessionData = (studentId, newData) => {
-    const sessionData = JSON.parse(getSession("submissionData")) || {};
-
-    sessionData[studentId] = { ...sessionData[studentId], ...newData };
-
-    setSession("submissionData", JSON.stringify(sessionData));
-  };
+  useEffect(() => {
+    getAssignmentData({ assignmentId }).then((res) => {
+      dispatch({ type: "setAssignment", payload: res.msg });
+    });
+  }, [assignmentId]);
 
   if (getSession("Type") !== "Professor") return <Navigate to="/" />;
 
   if (error) return <p>Error: {error}</p>;
+
+  const columns = [
+    {
+      field: "personalImage",
+      headerName: "Profile",
+      headerAlign: "center",
+      align: "center",
+      renderCell: (params) => (
+        <img
+          src={params.row.personalImage}
+          alt="Profile"
+          style={{ width: "50px", height: "50px", borderRadius: "50%" }}
+        />
+      ),
+    },
+    {
+      field: "name",
+      headerName: "Name",
+      flex: 1,
+      headerAlign: "center",
+      align: "center",
+    },
+    {
+      field: "id",
+      headerName: "ID",
+      flex: 0.5,
+      headerAlign: "center",
+      align: "center",
+    },
+    {
+      field: "email",
+      headerName: "Email",
+      flex: 1,
+      headerAlign: "center",
+      align: "center",
+    },
+    {
+      field: "grade",
+      headerName: "Grade",
+      flex: 0.5,
+      headerAlign: "center",
+      align: "center",
+    },
+    {
+      field: "submissionTime",
+      headerName: "Submission Time",
+      flex: 1,
+      headerAlign: "center",
+      align: "center",
+    },
+    {
+      field: "weekNumber",
+      headerName: "Week Number",
+      flex: 1,
+      headerAlign: "center",
+      align: "center",
+    },
+    {
+      field: "fileSubmissions",
+      headerName: "File Submissions",
+      flex: 2,
+      headerAlign: "center",
+      align: "center",
+      renderCell: (params) => {
+        const fullSubmission = fullrows.find(
+          (fullrow) => fullrow.submission === params.row.submission
+        );
+
+        return (
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={() =>
+              dispatch({
+                type: "openViewSubmissionModal",
+                payload: fullSubmission.submission,
+                fullSubmission: fullSubmission, // Send the full submission data
+              })
+            }
+          >
+            View Submissions
+          </Button>
+        );
+      },
+    },
+    {
+      field: "comment",
+      headerName: "Comment",
+      flex: 1,
+      headerAlign: "center",
+      align: "center",
+      renderCell: (params) => {
+        return (
+          <input
+            type="text"
+            style={{ width: "100%", padding: "10px" }}
+            onChange={(e) => {
+              params.row.comment = e.target.value;
+            }}
+          />
+        );
+      },
+    },
+  ];
 
   return (
     <>
@@ -139,42 +254,15 @@ function GradingPage() {
         </h1>
         <hr />
         <div className="table-responsive">
-          {validArray(state.submissions) ? (
-            <table className="table">
-              <TableHeaderGradingPage />
-              <tbody>
-                {validArray(state.submissions) &&
-                  state.submissions.map((record, index) => (
-                    <TableRowGradingPage
-                      key={index}
-                      record={{
-                        profilePic: `${serverURL}${record.PersonalImage}`,
-                        name: record.Name,
-                        ID: record.Id,
-                        IDD: record.MSAId,
-                        email: record.Email,
-                        status: record.Type,
-                        Time: record.submitTime,
-                        Grade: record.Grade,
-                        Comment: record.Comment,
-                        weekNum: record.weekNum,
-                        openModal: () =>
-                          dispatch({
-                            type: "openViewSubmissionModal",
-                            payload: record.submission,
-                            fullSubmission: record,
-                          }),
-                        ...data,
-                      }}
-                      onGradeChange={handleGradeChange}
-                      onCommentChange={handleCommentChange}
-                    />
-                  ))}
-              </tbody>
-            </table>
-          ) : (
-            <p>There Is No Submissions Yet</p>
-          )}
+          {console.log("mappedRows")}
+          {console.log(rows)}
+          <DataGrid
+            rows={rows}
+            columns={columns}
+            autoHeight={true}
+            getRowId={(row) => row.submission}
+            disableSelectionOnClick
+          />
         </div>
       </div>
       <ViewSubmissionsModal
