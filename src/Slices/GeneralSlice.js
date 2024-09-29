@@ -18,3 +18,11 @@ export function resetPassword(user) {
     userId: user,
   });
 }
+
+export function savePersonalImage(Id, MSAId, Profile) {
+  return methods.post(serverURL + "userLogic.php/UpdateImage", {
+    Id,
+    MSAId,
+    Profile,
+  });
+}

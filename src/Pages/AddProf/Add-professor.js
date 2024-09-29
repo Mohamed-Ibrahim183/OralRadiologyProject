@@ -9,9 +9,8 @@ export default function AddUser() {
   const [finalData, setFinalData] = useState({ Type: "Student" });
   const inputField = useRef();
 
-  if (getSession("Type") !== "Admin") {
-    return <Navigate to="/" />;
-  }
+  if (getSession("Type") !== "Admin") return <Navigate to="/" />;
+  
 
   function handleInputChange(name) {
     setFinalData((prev) => ({
@@ -25,6 +24,7 @@ export default function AddUser() {
     if (finalData.MSAId) {
       insertByMSAId(finalData);
       inputField.current.value = "";
+      inputField.current.focus();
       toast(`User with MSAId:${finalData.MSAId} Inserted Successfully!`, {
         type: "success",
         icon: "👍",

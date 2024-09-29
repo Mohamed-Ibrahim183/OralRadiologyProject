@@ -365,7 +365,7 @@ const StudentDB = () => {
                 filteredAssignments.map((assignment, i) => {
                   const { state, col, remaining } = getStatusProps(assignment);
                   return (
-                    <Link to="/Student/submit2">
+                    <Link to="/Student/submit2" key={i}>
                       <div
                         key={i}
                         className="assignmentCardWrapper"

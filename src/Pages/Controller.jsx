@@ -1,5 +1,6 @@
 import CryptoJS from "crypto-js";
 import axios from "axios";
+import toast from "react-hot-toast";
 
 export function validArray(array) {
   return Array.isArray(array) && array.length > 0;
@@ -71,9 +72,7 @@ export function removeSessionKey(key, hashKey = true) {
   if (hashKey) {
     const hashedKey = CryptoJS.SHA256(key).toString(); // Hash the key same way
     sessionStorage.removeItem(hashedKey); // Remove the hashed key from sessionStorage
-  } else {
-    sessionStorage.removeItem(key); // Remove the plain key from sessionStorage
-  }
+  } else sessionStorage.removeItem(key); // Remove the plain key from sessionStorage
 }
 
 // Helper functions
@@ -83,7 +82,10 @@ export class axiosMethods {
     return axios
       .get(url, { params })
       .then((res) => ({ msg: res.data, error: "" }))
-      .catch((error) => ({ msg: "", error: error.message }));
+      .catch((error) => {
+        toast.error(error.message);
+        return { msg: "", error: error };
+      });
   }
 
   post(url, data) {
@@ -98,20 +100,29 @@ export class axiosMethods {
     return axios
       .post(url, data)
       .then((res) => ({ msg: res.data, error: "" }))
-      .catch((error) => ({ msg: "", error: error.message }));
+      .catch((error) => {
+        toast.error(error.message);
+        return { msg: "", error: error };
+      });
   }
 
   put(url, data) {
     return axios
       .put(url, data)
       .then((res) => ({ msg: res.data, error: "" }))
-      .catch((error) => ({ msg: "", error: error.message }));
+      .catch((error) => {
+        toast.error(error.message);
+        return { msg: "", error: error };
+      });
   }
 
   delete(url, params = {}) {
     return axios
       .delete(url, { params })
       .then((res) => ({ msg: res.data, error: "" }))
-      .catch((error) => ({ msg: "", error: error.message }));
+      .catch((error) => {
+        toast.error(error.message);
+        return { msg: "", error: error };
+      });
   }
 }

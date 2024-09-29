@@ -39,7 +39,9 @@ function Login3() {
             Email: res.msg.Email,
             Type: res.msg.Type,
             PersonalImage: serverURL + res.msg.PersonalImage,
+            Group: res.msg.Group,
           };
+
           Object.keys(data).forEach((key) => setSession(key, data[key]));
           setUserType(res.msg.Type);
           // setSession("full", JSON.stringify(res.msg));
