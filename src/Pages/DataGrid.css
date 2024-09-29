@@ -28,26 +28,26 @@
   --Gridfooter: #284d5e;
 }
 
-.MuiDataGrid-columnHeader {
+.grid-container .MuiDataGrid-columnHeader {
   background-color: var(--Gridfooter);
   border-bottom: none;
   color: white;
 }
-.MuiDataGrid-footerContainer {
+.grid-container .MuiDataGrid-footerContainer {
   background-color: var(--Gridfooter);
 }
-.MuiTablePagination-displayedRows {
+.grid-container .MuiTablePagination-displayedRows {
   color: white;
 }
-.MuiButtonBase-root {
+.grid-container .MuiButtonBase-root {
   color: white;
 }
-.MuiSvgIcon-root {
+.grid-container .MuiSvgIcon-root {
   color: white;
 }
-.MuiTablePagination-selectLabel {
+.grid-container .MuiTablePagination-selectLabel {
   color: white;
 }
-.MuiSelect-select {
+.grid-container .MuiSelect-select {
   color: white;
 }

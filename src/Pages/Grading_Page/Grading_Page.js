@@ -254,7 +254,7 @@ function GradingPage() {
             : "Grading Assignment"}
         </h1>
         <hr />
-        <div className="table-responsive">
+        <div className="table-responsive grid-container">
           {console.log("mappedRows")}
           {console.log(rows)}
           <DataGrid
