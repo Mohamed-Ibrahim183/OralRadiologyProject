@@ -11,6 +11,7 @@ import "./ADDGroup.css";
 import toast from "react-hot-toast";
 import { Navigate } from "react-router-dom";
 
+const timeToWait = 500;
 const initialState = {
   groups: [],
   editingGroup: {},
@@ -111,7 +112,9 @@ const AddGroup2 = () => {
 
   function DeleteSelectedGroup(index) {
     DeleteGroup(index);
-    dispatch({ type: "render" });
+    setTimeout(() => {
+      dispatch({ type: "render" });
+    }, timeToWait);
   }
 
   // Function to add a new slot
@@ -350,7 +353,9 @@ function EditSection({ state, dispatch }) {
         fData.append(`Slot${index}`, JSON.stringify(ele))
       );
       insertNewGroup(fData);
-      dispatch({ type: "clearEdit" });
+      setTimeout(() => {
+        dispatch({ type: "clearEdit" });
+      }, timeToWait);
       toast.success("The Group Updated Successfully");
     } else toast.error("Please Fill In ALl Fields");
   }

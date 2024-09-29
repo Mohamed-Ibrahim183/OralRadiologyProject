@@ -98,3 +98,10 @@ export function deleteCategory(categoryId) {
     Id: categoryId,
   });
 }
+
+export function saveDoctorComment(submissionId, doctorComment) {
+  return methods.post(serverURL + "AssignmentLogic.php/setDoctorsComment", {
+    submissionId,
+    doctorComment,
+  });
+}
