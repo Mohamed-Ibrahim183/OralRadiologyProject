@@ -13,7 +13,7 @@ import TimeLeftSection from "./components/TimeLeftSection";
 import CategoriesSection from "./components/CategoriesSection";
 import Submissions from "./components/Submissions";
 import "./assignmentPage2.css";
-import { getSession, removeSessionKey, setSession } from "../Controller";
+import { getSession, setSession } from "../Controller";
 
 const AssignmentPage2 = () => {
   const [assignmentData, setAssignmentData] = useState(null);

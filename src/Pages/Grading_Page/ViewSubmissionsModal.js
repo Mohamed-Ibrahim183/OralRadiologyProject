@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-
 import "./ViewSubmissionsModal.css";
 // import { axiosMethods } from "../Controller";
 import Button from "@mui/material/Button";
@@ -9,15 +8,24 @@ import {
   getAssignmentImages,
 } from "../../Slices/PorfessorSlice";
 import { serverURL } from "../../Slices/GeneralSlice";
-
-const ViewSubmissionsModal = ({ show, handleClose, submission }) => {
+import toast from "react-hot-toast";
+import { validArray } from "../Controller";
+function ViewSubmissionsModal({
+  show,
+  handleClose,
+  submission,
+  fullSubmission,
+}) {
   const [images, setImages] = useState([]);
   const [openImageModal, setOpenImageModal] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  console.log("fullSubmission:", fullSubmission);
 
   useEffect(() => {
     if (!submission) return;
-    getAssignmentImages({ submission }).then((res) => setImages(res.msg));
+    getAssignmentImages({ submission: submission }).then((res) => {
+      setImages(res.msg);
+    });
   }, [submission]);
 
   const openImageViewer = (index) => {
@@ -43,6 +51,7 @@ const ViewSubmissionsModal = ({ show, handleClose, submission }) => {
       ImageId: images[currentImageIndex].Id,
       Grade: images[currentImageIndex].Grade,
     });
+    toast.success("Image Evaluated Successfully");
   }
 
   if (!show) {
@@ -53,9 +62,12 @@ const ViewSubmissionsModal = ({ show, handleClose, submission }) => {
     <BasicModalComp openModal={show} closeModal={handleClose}>
       <div className="modal-backdrop">
         <div className="modal-content">
-          <h2>Submissions for Submission ID: {submission}</h2>
+          <h2>
+            Submissions for {fullSubmission.Name} MSAId:{fullSubmission.MSAId}{" "}
+            Week:{fullSubmission.weekNum}
+          </h2>
           <div className="image-container">
-            {Array.isArray(images) && images.length > 0 ? (
+            {validArray(images) ? (
               images.map((img, index) => (
                 <img
                   key={index}
@@ -72,7 +84,6 @@ const ViewSubmissionsModal = ({ show, handleClose, submission }) => {
           <button onClick={handleClose}>Close</button>
 
           {openImageModal && (
-            // <Modal open={openImageModal} onClose={closeImageViewer} center>
             <BasicModalComp
               openModal={openImageModal}
               closeModal={closeImageViewer}
@@ -135,15 +146,14 @@ const ViewSubmissionsModal = ({ show, handleClose, submission }) => {
                   >
                     Grade
                   </Button>
+                  <p>{images[currentImageIndex].CategoryName}</p>
                 </div>
               </div>
             </BasicModalComp>
-            // </Modal>
           )}
         </div>
       </div>
     </BasicModalComp>
   );
-};
-
+}
 export default ViewSubmissionsModal;
