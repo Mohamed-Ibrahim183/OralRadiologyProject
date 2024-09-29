@@ -43,7 +43,7 @@ const StudentsGrade = () => {
       const assignmentColumns = assignments.map((assignment) => ({
         field: assignment.Id.toString(), // Ensure the field matches the assignmentId
         headerName: assignment.Name,
-        flex: 1, // Auto-adjust width based on available space
+        width: 180, // Auto-adjust width based on available space
         headerAlign: "center",
         align: "center",
       }));

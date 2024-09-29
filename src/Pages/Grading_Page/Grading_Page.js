@@ -153,55 +153,56 @@ function GradingPage() {
           style={{ width: "50px", height: "50px", borderRadius: "50%" }}
         />
       ),
+      width: 120, // Fixed width for image
     },
     {
       field: "name",
       headerName: "Name",
-      flex: 1,
       headerAlign: "center",
       align: "center",
+      width: 150, // Fixed width
     },
     {
       field: "id",
       headerName: "ID",
-      flex: 0.5,
       headerAlign: "center",
       align: "center",
+      width: 100, // Fixed width
     },
     {
       field: "email",
       headerName: "Email",
-      flex: 1,
       headerAlign: "center",
       align: "center",
+      width: 200, // Fixed width
     },
     {
       field: "grade",
       headerName: "Grade",
-      flex: 0.5,
       headerAlign: "center",
       align: "center",
+      width: 120, // Fixed width
     },
     {
       field: "submissionTime",
       headerName: "Submission Time",
-      flex: 1,
       headerAlign: "center",
       align: "center",
+      width: 185, // Fixed width
     },
     {
       field: "weekNumber",
       headerName: "Week Number",
-      flex: 1,
       headerAlign: "center",
       align: "center",
+      width: 150, // Fixed width
     },
     {
       field: "fileSubmissions",
       headerName: "File Submissions",
-      flex: 2,
       headerAlign: "center",
       align: "center",
+      width: 200, // Fixed width
       renderCell: (params) => {
         const fullSubmission = fullrows.find(
           (fullrow) => fullrow.submission === params.row.submission
@@ -227,9 +228,9 @@ function GradingPage() {
     {
       field: "comment",
       headerName: "Comment",
-      flex: 1,
       headerAlign: "center",
       align: "center",
+      width: 200, // Fixed width
       renderCell: (params) => {
         return (
           <input
