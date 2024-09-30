@@ -205,12 +205,18 @@ const AssignmentPage2 = () => {
       alert("Please upload files for all categories.");
       return;
     }
-    if (categories.length > uploadedFiles.length) {
-      toast.error(
-        "You Must Upload Film For Each Category to Finish upload the Requirement"
-      );
+    // if (categories.length > uploadedFiles.length) {
+    //   toast.error(
+    //     "You Must Upload Film For Each Category to Finish upload the Requirement"
+    //   );
+    //   return;
+    // }
+    if (
+      !window.confirm(
+        "Do You Want to submit the assignment not completed the categories"
+      )
+    )
       return;
-    }
 
     try {
       const { msg: lastSubmission } = await makeNewSubmission({
