@@ -76,7 +76,8 @@ function GradingPage() {
 
     getSubmissionByAssignment(assignmentId).then((res) => {
       setfullrows(res.msg);
-      console.log(res.msg);
+      console.log("res.msg:", res.msg);
+      // console.log(res.msg);
       if (validArray(res.msg)) {
         const mappedRows = res.msg.map((record) => ({
           personalImage: serverURL + record.PersonalImage,
@@ -88,6 +89,7 @@ function GradingPage() {
           weekNumber: record.weekNum,
           comment: record.Comment ?? "",
           submission: record.submission,
+          graded: record.graded,
         }));
 
         setrows(mappedRows);
@@ -106,7 +108,7 @@ function GradingPage() {
     });
 
     return () => removeSessionKey("submissionData");
-  }, [assignmentId]);
+  }, [assignmentId, state.render]);
 
   const timeAgo = (inputTime) => {
     const now = new Date();
@@ -243,6 +245,16 @@ function GradingPage() {
         );
       },
     },
+    {
+      field: "graded", // New column
+      headerName: "Graded",
+      headerAlign: "center",
+      align: "center",
+      width: 120, // Fixed width
+      renderCell: (params) => {
+        return <span>{params.row.graded ? "Yes" : "No"}</span>;
+      },
+    },
   ];
 
   return (
@@ -255,8 +267,8 @@ function GradingPage() {
         </h1>
         <hr />
         <div className="table-responsive grid-container">
-          {console.log("mappedRows")}
-          {console.log(rows)}
+          {/* {console.log("mappedRows")}
+          {console.log(rows)} */}
           <DataGrid
             rows={rows}
             columns={columns}
