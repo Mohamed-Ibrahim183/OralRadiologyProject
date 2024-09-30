@@ -22,7 +22,7 @@ function Mail() {
   const [to, setTo] = useState("");
   const [subject, setSubject] = useState("");
   const [message, setMessage] = useState(""); // Fixed initial value
-  const [file, setFile] = useState(null);
+  const [setFile] = useState(null);
   const [usersData, setUsersData] = useState([]);
   const [user, setUser] = useState(null);
   const [filteredUsers, setFilteredUsers] = useState([]);

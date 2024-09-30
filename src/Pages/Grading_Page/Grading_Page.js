@@ -2,7 +2,7 @@ import React, { useState, useEffect, useReducer } from "react";
 import { Navigate, useSearchParams } from "react-router-dom";
 import "./ViewSubmissionsModal.css";
 import Button from "@mui/material/Button";
-import BasicModalComp from "../../Components/BasicModal/BasicModalComp";
+//import BasicModalComp from "../../Components/BasicModal/BasicModalComp";
 
 import { getSubmissionByAssignment } from "../../Slices/PorfessorSlice";
 import { serverURL } from "../../Slices/GeneralSlice";
@@ -59,10 +59,10 @@ function GradingPage() {
     }
   }
 
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const assignmentId = searchParams.get("assignmentId");
 
-  const [data, setData] = useState([]);
+  //const [data, setData] = useState([]);
   const [error, setError] = useState("");
   const [rows, setrows] = useState([]);
   const [fullrows, setfullrows] = useState([]);

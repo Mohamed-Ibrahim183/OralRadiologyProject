@@ -14,7 +14,6 @@ import CategoriesSection from "./components/CategoriesSection";
 import Submissions from "./components/Submissions";
 import "./assignmentPage2.css";
 import { getSession, setSession } from "../Controller";
-import toast from "react-hot-toast";
 
 const AssignmentPage2 = () => {
   const [assignmentData, setAssignmentData] = useState(null);
