@@ -3,6 +3,7 @@ import {
   DeleteGroup,
   getAllGroupsData,
   insertNewGroup,
+  updateGroup,
 } from "../../Slices/AdminSlice";
 import { getSession, validArray } from "../Controller";
 import { Button } from "@mui/material";
@@ -332,7 +333,6 @@ function EditSection({ state, dispatch }) {
     return isValid;
   }
   function handleSubmitEditedGroup() {
-    DeleteGroup(state.editingGroup.Id);
     let isValid = true;
     let formDataCopy = [];
     for (let i = 0; i < oldGroupSlots.length; i++) {
@@ -349,10 +349,10 @@ function EditSection({ state, dispatch }) {
     if (isValid && oldGroupSlots.length > 0) {
       let fData = new FormData();
       fData.append("Name", state.editingGroup.Name);
-      formDataCopy.forEach((ele, index) =>
-        fData.append(`Slot${index}`, JSON.stringify(ele))
-      );
-      insertNewGroup(fData);
+      fData.append("GroupId", state.editingGroup.Id);
+      fData.append("Slots", JSON.stringify(formDataCopy));
+
+      updateGroup(fData);
       setTimeout(() => {
         dispatch({ type: "clearEdit" });
       }, timeToWait);
@@ -451,9 +451,25 @@ function EditSection({ state, dispatch }) {
           className="MainButton sub"
           onClick={() => {
             if (checkValidInputs()) {
+              const currentTime = new Date();
+              const hoursToAdd = 1;
+
+              // Format current time as "HH:MM" (24-hour format)
+              const startTime = currentTime.toTimeString().slice(0, 5);
+
+              // Add `hoursToAdd` to the current time to get the end time
+              const endTime = new Date(
+                currentTime.getTime() + hoursToAdd * 60 * 60 * 1000
+              )
+                .toTimeString()
+                .slice(0, 5);
               setOldGroupSlots((prev) => [
                 ...prev,
-                { id: new Date().getTime() },
+                {
+                  id: new Date().getTime(),
+                  StartTime: startTime,
+                  EndTime: endTime,
+                },
               ]); // Ensure new slots get unique id
             } else toast.error("Please Fill In All Fields To Create a New One");
           }}

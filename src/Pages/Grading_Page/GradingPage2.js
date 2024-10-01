@@ -75,7 +75,6 @@ function GradingPage2() {
     }
 
     getSubmissionByAssignment(assignmentId).then((res) => {
-      console.log(res.msg);
       validArray(res.msg)
         ? dispatch({
             type: "setSubmissions",

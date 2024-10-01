@@ -115,7 +115,7 @@ const StudentDB = () => {
     }).then((res) => {
       res.msg["Err"] === 1
         ? setError("User is not in a Group. Please contact the Admin.")
-        : console.log(Array.isArray(res.msg) ? res.msg : []);
+        : setError("");
     });
   }, [UserId]);
 
@@ -364,7 +364,6 @@ const StudentDB = () => {
                 Array.isArray(filteredAssignments) &&
                 filteredAssignments.map((assignment, i) => {
                   const { state, col, remaining } = getStatusProps(assignment);
-                  console.log(remaining);
                   return (
                     <Link to="/Student/submit2" key={i}>
                       <div

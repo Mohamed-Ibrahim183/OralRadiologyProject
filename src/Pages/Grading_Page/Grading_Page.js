@@ -76,8 +76,7 @@ function GradingPage() {
 
     getSubmissionByAssignment(assignmentId).then((res) => {
       setfullrows(res.msg);
-      console.log("res.msg:", res.msg);
-      // console.log(res.msg);
+
       if (validArray(res.msg)) {
         const mappedRows = res.msg.map((record) => ({
           personalImage: serverURL + record.PersonalImage,
@@ -267,8 +266,6 @@ function GradingPage() {
         </h1>
         <hr />
         <div className="table-responsive grid-container">
-          {/* {console.log("mappedRows")}
-          {console.log(rows)} */}
           <DataGrid
             rows={rows}
             columns={columns}

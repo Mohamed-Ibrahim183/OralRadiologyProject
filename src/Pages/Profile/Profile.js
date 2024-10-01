@@ -29,7 +29,6 @@ function reducer(state, action) {
 }
 
 const Profile = () => {
-  console.log('getSession("PersonalImage"):', getSession("PersonalImage"));
   const [state, dispatch] = useReducer(reducer, initialState);
   const [personalImag, setPersonalImag] = useState(getSession("PersonalImage"));
   const [pass, setPass] = useState("");
@@ -78,7 +77,6 @@ const Profile = () => {
       state.MSAId,
       event.target.files[0]
     ).then((res) => {
-      console.log(res.msg);
       const newImageUrl = `${serverURL}${res.msg}?t=${Math.random()}`;
       setSession("PersonalImage", newImageUrl);
       setPersonalImag(newImageUrl);

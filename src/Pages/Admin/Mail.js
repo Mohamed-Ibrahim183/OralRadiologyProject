@@ -30,8 +30,6 @@ function Mail() {
 
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
-    console.log("file changed");
-    console.log(file);
   };
 
   useEffect(() => {

@@ -43,6 +43,10 @@ export function insertByMSAId(data) {
   return methods.post(serverURL + "userLogic.php/InsertMSAId", data);
 }
 
+export function updateGroup(data) {
+  return methods.post(serverURL + `GroupLogic.php/Update`, data);
+}
+
 export function sendMailAPI(toName, fromName, message, toEmail) {
   emailjs.send(
     "service_i5cp5yq",
