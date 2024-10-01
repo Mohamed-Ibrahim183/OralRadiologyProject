@@ -6,6 +6,7 @@ import BasicModalComp from "../../Components/BasicModal/BasicModalComp";
 import {
   evaluateAssignmentImage,
   getAssignmentImages,
+  saveDoctorComment,
 } from "../../Slices/PorfessorSlice";
 import { serverURL } from "../../Slices/GeneralSlice";
 import toast from "react-hot-toast";
@@ -19,7 +20,7 @@ function ViewSubmissionsModal({
   const [images, setImages] = useState([]);
   const [openImageModal, setOpenImageModal] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  console.log("fullSubmission:", fullSubmission);
+  const [doctorNote, setDoctorNote] = useState("");
 
   useEffect(() => {
     if (!submission) return;
@@ -27,6 +28,9 @@ function ViewSubmissionsModal({
       setImages(res.msg);
     });
   }, [submission]);
+  useEffect(() => {
+    if (fullSubmission.DoctorsNote) setDoctorNote(fullSubmission.DoctorsNote);
+  }, [fullSubmission.DoctorsNote]);
 
   const openImageViewer = (index) => {
     setCurrentImageIndex(index);
@@ -81,7 +85,28 @@ function ViewSubmissionsModal({
               <p>No Films available</p>
             )}
           </div>
-          <button onClick={handleClose}>Close</button>
+          <div>
+            <button onClick={handleClose}>Close</button>
+            <div>
+              <input
+                type="text"
+                value={doctorNote}
+                onChange={(e) => setDoctorNote(e.target.value)}
+              />
+              <button
+                onClick={() =>
+                  saveDoctorComment(fullSubmission.submission, doctorNote).then(
+                    (res) => {
+                      if (res.msg === "UPDATED")
+                        toast.success("The note saved successfully");
+                    }
+                  )
+                }
+              >
+                Save Note
+              </button>
+            </div>
+          </div>
 
           {openImageModal && (
             <BasicModalComp
